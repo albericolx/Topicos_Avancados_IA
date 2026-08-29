@@ -1,0 +1,30 @@
+{
+  "name": "topicos-avancados-ia-workspace",
+  "version": "1.0.0",
+  "discipline": "Tópicos Avançados em Inteligência Artificial",
+  "institution": "UFRPE",
+  "author": "José Albérico Rocha da Silva",
+  "harnesses": {
+    "primary": {
+      "name": "Antigravity",
+      "engine": "Gemini",
+      "entrypoint": "AGENTS.md"
+    },
+    "backup": {
+      "name": "VS Code / Claude Code / Copilot",
+      "engine": "Multi-Provider",
+      "entrypoint": "AGENTS.md"
+    }
+  },
+  "modules": {
+    "code": "code/CONTEXT.md",
+    "papers": "papers/CONTEXT.md",
+    "core": "core/CONTEXT.md"
+  },
+  "gitflow": {
+    "enabled": true,
+    "production_branch": "main",
+    "develop_branch": "develop",
+    "feature_prefix": "feature/"
+  }
+}
