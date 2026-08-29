@@ -18,6 +18,14 @@ import urllib.request
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
+# Suporte a caracteres UTF-8 no terminal Windows
+if sys.stdout.encoding != 'utf-8':
+    try:
+        sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+        sys.stderr.reconfigure(encoding='utf-8', errors='replace')
+    except Exception:
+        pass
+
 DEFAULT_BIB_PATH = Path(__file__).resolve().parent.parent.parent / "papers" / "artigo-final" / "references.bib"
 
 
