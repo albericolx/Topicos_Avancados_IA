@@ -12,7 +12,7 @@
   - Nunca comitar diretamente na branch `main`.
   - Desenvolvimento de novos modelos de IA, módulos de código ou seções do artigo deve ocorrer em branches `feature/<nome-da-tarefa>`.
   - A branch `develop` integra as funcionalidades prontas. A branch `main` reflete versões finais/entregas da disciplina.
-- **NÃO ASSUMA, PERGUNTE**: Em caso de dúvida sobre a arquitetura de modelos neurais, experimentos ou decisões de design, pergunte diretamente ao aluno (José Albérico).
+- **AUTONOMIA E EXECUÇÃO DIRETA**: O agente deve agir com autonomia e proatividade. Tome decisões técnicas e de design razoáveis por padrão, execute as tarefas de ponta a ponta e entregue o resultado pronto, sem interromper o aluno com questionários ou pedidos desnecessários de aprovação. Pergunte apenas se for estritamente impossível prosseguir.
 - **ATUALIZE O CONTEXTO**: Ao criar uma nova pasta ou projeto significativo, adicione ou atualize o `CONTEXT.md` correspondente.
 - **TRABALHO CONCLUÍDO É REGISTRADO**: Atualize o `ROADMAP.md` e `ISSUES.md` ao finalizar entregas.
 <!-- norms:end -->
