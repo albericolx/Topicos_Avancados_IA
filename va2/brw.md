@@ -44,7 +44,7 @@ por que esta crise: Plataformas usam algoritmos comportamentais agressivos e ref
 | [ ] | redes sociais, feeds e comunidades |
 | [2] | pagamento instantâneo (Pix, moeda local) |
 | [ ] | crowdsourcing e curadoria coletiva |
-| [3] | outra: Open Finance / APIs Bancárias |
+| [3] | outra: Open Finance / APIs Bancárias (relevante para leitura consentida de extratos e contenção em tempo real do dreno bancário) |
 
 ## 2 · clichês
 
