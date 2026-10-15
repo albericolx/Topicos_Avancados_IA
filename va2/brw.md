@@ -51,8 +51,10 @@ por que esta crise: Plataformas usam algoritmos comportamentais agressivos e ref
 | clichê | o que acerta | onde fica raso |
 |:--|:--|:--|
 | Chatbot de conselhos financeiros no WhatsApp ("Amigo Virtual") | Acesso imediato, sem fricção de novo app e linguagem empática. | Ignora a neurobiologia do vício; sob impulso agudo o usuário ignora ou bloqueia o bot. |
+| App punitivo de bloqueio de tela e cartões | Impõe barreira mecânica imediata na tentativa do gasto. | Gera revolta e *bypass*; o usuário desinstala o app, troca de aparelho ou usa a conta de terceiros. |
 | Dashboard de métricas e perdas acumuladas | Dá transparência factual e choque de realidade sobre o dinheiro total perdido. | Dispara o efeito *loss chasing* (apostar mais para recuperar) ou paralisia por culpa. |
 | IA preditiva de apostas "responsáveis" | Conecta com o interesse direto do apostador de auferir renda. | Valida a falácia do ganho; a banca vence estatisticamente e a lógica do vício é perpetuada. |
+| Gamificação de dias sóbrios com medalhas virtuais | Tenta criar reforço positivo e senso de progresso para quem busca parar de apostar. | Recompensas simbólicas abstratas não competem com a descarga de dopamina nem com a ilusão do ganho financeiro real. |
 
 ## 3 · matriz 3 × 3 e a minha ideia
 
