@@ -5,14 +5,14 @@
 
 ## 0 · a minha ideia completa
 
-**Sentinela Clandestino (Vigilante de Espelhos e APKs)** — Utilizado por cidadãos frequentemente expostos a links piratas e promessas de ganhos fáceis em redes sociais e mensageria. O sistema monitora dinamicamente conteúdos no feed e mensagens, identificando gírias de aliciamento, bloqueando o acesso a domínios espelhos mutantes e impedindo a instalação de APKs de apostas ilegais fora da loja oficial. Utiliza um SLM *on-device* privado para interpretação semântica de linguagem informal e ofuscada, integrado a agentes locais via MCP que consultam grafos de ameaças para correlacionar redes de laranjas e servidores espelhos em tempo real. Corta a capilaridade das bets ilegais na raiz da atração, protege o smartphone contra softwares maliciosos e estanca o endividamento e o dreno de renda para o crime cibernético.
+**Sentinela Clandestino (Vigilante de Espelhos e APKs)** — Utilizado por cidadãos frequentemente expostos a links piratas e promessas de ganhos fáceis compartilhados em redes sociais e mensageria. O sistema intercepta tentativas de acesso a links externos e downloads de arquivos no momento do redirecionamento no smartphone, utilizando um SLM *on-device* privado para avaliar a semântica da página de pouso (landing page) e o manifesto do APK, integrado a agentes locais via MCP que consultam grafos de ameaças para correlacionar redes de laranjas e servidores espelhos em tempo real. Bloqueia o acesso a domínios clandestinos mutantes e impede a instalação de binários de apostas ilegais fora da loja oficial, estancando o endividamento e a contaminação por malware sem expor a navegação do usuário a servidores em nuvem.
 
 ## 1 · a ficha da ideia
 
-- **cenário:** Redes sociais (Instagram, TikTok) e mensageria (Telegram, WhatsApp) no Brasil, onde links mutantes de espelhos e APKs piratas circulam para driblar os bloqueios governamentais da Anatel/Fazenda.
+- **cenário:** Navegação em smartphones no Brasil a partir de links e arquivos distribuídos em redes sociais e mensageria, onde espelhos mutantes e APKs piratas driblam os bloqueios governamentais da Anatel/Fazenda.
 - **usuário:** Cidadãos e jovens usuários de smartphone expostos a publicidades agressivas de "jogos que pagam" e salas de sinais.
 - **problema do usuário:** Risco de endividamento compulsivo e infecção do celular por malware ao ser induzido a acessar espelhos ilegais ou instalar APKs piratas sem proteção jurídica.
-- **tecnologia:** SLM local *on-device* (1B–7B) para classificação semântica de linguagem informal e ofuscada, acoplado a agentes locais (MCP) que consultam redes de grafos de ameaças cibernéticas.
+- **tecnologia:** SLM local *on-device* (1B–7B) para classificação semântica de páginas de pouso e metadados de apps, acoplado a agentes locais (MCP) que consultam redes de grafos de ameaças cibernéticas.
 
 ## 2 · catálogo de ferramentas
 
@@ -40,7 +40,7 @@ ficha: **C**enário · **U**suário · **P**roblema · **T**ecnologia, cada um *
 | [MobileLLM: Optimizing Sub-billion Parameter Language Models](https://proceedings.mlr.press/v235/liu24ce.html) (Liu et al., 2024) | ICML 2024 · A1 | Arquiteturas de modelos de linguagem sub-bilhão (125M–350M) com redes profundas e compartilhamento de pesos para inferência eficiente em celulares. | Viabiliza execução de IA moderna no smartphone com baixo consumo de memória RAM, baixa latência e suporte a chamadas de ferramentas. | Modelo fundacional genérico; não possui especialização em cibersegurança, engenharia social ou detecção de fraudes de apostas. | ≈ ≠ ≈ = |
 | [Automated Mass Malware Factory: Piggybacking in Android](https://www.ndss-symposium.org/ndss-paper/automated-mass-malware-factory-the-convergence-of-piggybacking-and-adversarial-example-in-android-malicious-software-generation/) (Li et al., 2025) | NDSS 2025 · A1 | Investiga a geração automatizada de malwares Android em escala que combinam inserção de código em apps benignos (piggybacking) com evasão adversarial. | Modela com precisão a tática dos operadores de cassinos clandestinos que camuflam APKs de apostas em clones de utilitários populares. | Foco analítico e forense de laboratório; não oferece um agente cliente para proteção e contenção ativa em tempo real no smartphone. | ≈ ≠ ≈ = |
 | [Fighting Fire with Fire: Adversarial Android Malware Detection](https://www.usenix.org/conference/usenixsecurity25/presentation/zhang-yinyuan) (Zhang et al., 2025) | USENIX Security 2025 · A1 | Sistema HagDe que utiliza gradientes adversariais contínuos para treinar detectores de malware Android imunes a ofuscações de código. | Alta robustez contra técnicas de camuflagem de código que enganam antivírus estáticos convencionais. | Pipeline computacionalmente pesado em servidores; não monitora a dinâmica de redes sociais nem a infraestrutura de pagamentos (Pix). | ≈ ≠ ≈ = |
-| [**Following Passive DNS Traces to Detect Malicious Domains**](https://doi.org/10.1145/3345314) (Nabeel et al., 2020) | ACM TOPS · A1 | Inferência em grafos de DNS passivo para rastrear infraestruturas de domínios furtivos gerados dinamicamente por campanhas maliciosas. | Mapeia servidores espelhos e registros relacionados antes que sejam ativados em massa para a vítima. | Exige acesso a fluxos de telemetria de tráfego de operadoras e provedores de internet; não opera no smartphone do usuário. | ≈ ≠ = = |
+| [**Following Passive DNS Traces to Detect Malicious Domains**](https://doi.org/10.1145/3401897) (Nabeel et al., 2020) | ACM TOPS · A1 | Inferência em grafos de DNS passivo para rastrear infraestruturas de domínios furtivos gerados dinamicamente por campanhas maliciosas. | Mapeia servidores espelhos e registros relacionados antes que sejam ativados em massa para a vítima. | Exige acesso a fluxos de telemetria de tráfego de operadoras e provedores de internet; não opera no smartphone do usuário. | ≈ ≠ = = |
 | [A Survey on Malicious Domains Detection through DNS](https://doi.org/10.1145/3158670) (Zhauniarovich et al., 2018) | ACM CSUR · A1 | Taxonomia e análise comparativa de técnicas de detecção de domínios maliciosos via DNS (regras léxicas, DGA, grafos e aprendizado de máquina). | Demonstra empiricamente que listas estáticas de bloqueio falham contra domínios mutantes e que modelos de grafo são indispensáveis. | Estudo de levantamento bibliográfico (survey); não apresenta uma ferramenta ou implementação executável para o usuário final. | ≈ ≠ = = |
 | [Devising and Detecting Phishing Emails Using LLMs](https://doi.org/10.1109/ACCESS.2024.3384218) (Heiding et al., 2024) | IEEE Access 2024 | Avaliação empírica do uso de LLMs para identificar engenharia social persuasiva em comparação com filtros convencionais de segurança. | Comprova que modelos de linguagem capturam contextos sutis de manipulação psicológica que escapam a regras de assinatura estática. | Focado em e-mails corporativos em inglês; não contempla o ecossistema mobile de redes sociais, APKs nem apostas clandestinas. | ≈ ≠ ≈ = |
 | [Evaluating LLMs on Detecting Signs of Problem-Gambling](https://ceur-ws.org/Vol-3740/paper-08.pdf) (Martinez et al., 2024) | CLEF 2024 | Modelos de linguagem avaliados na identificação precoce de sintomas e relatos de compulsão e endividamento por apostas online. | Excelente sensibilidade semântica para a linguagem de desespero e perda financeira de quem joga compulsivamente. | Avaliação retrospectiva em postagens de fóruns públicos; não monitora o fluxo de navegação nem bloqueia downloads ou pagamentos. | = = ≈ = |
@@ -59,43 +59,43 @@ marque os 6 em **negrito** nos catálogos, e diga por que cada um:
 
 ## 5 · a matriz
 
-eixos tirados das tensões arquiteturais e operacionais dos 6 trabalhos; os dois últimos são onde a minha ideia perde ou empata.
+eixos tirados das tensões arquiteturais e operacionais dos 6 trabalhos; os três últimos são onde a minha ideia perde categoricamente.
 
 **✔** faz · **◐** faz em parte · **✘** não faz · **?** não achei evidência
 
-| trabalho | intercepta link/redirecionamento no celular | audita APKs e empacotamento malicioso | detecta espelhos de dia zero por grafos | entende linguagem persuasiva de apostas | dados e inferência 100% no celular | baixo consumo de bateria e RAM | prontidão e validação em escala real |
-|:--|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-| Trend Micro Check | ✘ | ✘ | ◐ | ◐ | ✘ | ✔ | ✔ |
-| Gamban | ✘ | ◐ | ✘ | ✘ | ✔ | ✔ | ✔ |
-| Netcraft Mobile | ◐ | ✘ | ◐ | ✘ | ✘ | ✔ | ✔ |
-| Muzakir et al., 2025 | ✘ | ✘ | ✘ | ✔ | ✘ | ? | ✘ |
-| Álvarez-Ojeda et al., 2025 | ✘ | ✘ | ✘ | ✔ | ✘ | ? | ✘ |
-| Nabeel et al., 2020 | ✘ | ✘ | ✔ | ✘ | ✘ | ? | ✘ |
-| **a minha ideia** | ✔ | ✔ | ✔ | ✔ | ✔ | ◐ | ✘ |
+| trabalho | intercepta link/redirecionamento no celular | audita APKs e empacotamento malicioso | detecta espelhos de dia zero por grafos | avalia semântica de apostas na landing page | dados e inferência 100% no celular | latência mínima de abertura (< 50ms) | baixo consumo de bateria e RAM | prontidão e validação em escala real |
+|:--|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+| Trend Micro Check | ✘ | ✘ | ◐ | ◐ | ✘ | ✔ | ✔ | ✔ |
+| Gamban | ✘ | ◐ | ✘ | ✘ | ✔ | ✔ | ✔ | ✔ |
+| Netcraft Mobile | ◐ | ✘ | ◐ | ✘ | ✘ | ✔ | ✔ | ✔ |
+| Muzakir et al., 2025 | ✘ | ✘ | ✘ | ✔ | ✘ | ? | ? | ✘ |
+| Álvarez-Ojeda et al., 2025 | ✘ | ✘ | ✘ | ✔ | ✘ | ? | ? | ✘ |
+| Nabeel et al., 2020 | ✘ | ✘ | ✔ | ✘ | ✘ | ? | ? | ✘ |
+| **a minha ideia** | ✔ | ✔ | ✔ | ✔ | ✔ | **✘** | **✘** | **✘** |
 
 **evidência:**
-- Trend Micro Check: heurística de reputação escaneia URLs suspeitas (◐), analisa mensagens de fraudes gerais em português (◐), roda em nuvem com app cliente leve (✔: [trendmicro.com](https://www.trendmicro.com)), com mais de 1 milhão de downloads em lojas oficiais (✔).
-- Gamban: bloqueia tráfego de rede de apps conhecidos via filtro de sistema sem inspecionar bytecode (◐), opera via VPN local sem exportar histórico (✔: [gamban.com](https://gamban.com)), com consumo residual de bateria (✔), sendo produto comercial maduro de autoexclusão no Reino Unido e internacionalmente (✔).
-- Netcraft Mobile: intercepta o toque em links suspeitos no momento do clique (◐), consulta feeds rápidos de detecção de servidores falsos (◐: [netcraft.com](https://www.netcraft.com)), roda filtro de rede leve em segundo plano (✔), com validação em produção em larga escala por instituições financeiras (✔).
+- Trend Micro Check: heurística de reputação escaneia URLs suspeitas (◐), analisa mensagens de fraudes gerais em português (◐), roda em nuvem com app cliente leve e rápido (✔: [trendmicro.com](https://www.trendmicro.com)), com mais de 1 milhão de downloads em lojas oficiais (✔).
+- Gamban: bloqueia tráfego de rede de apps conhecidos via filtro de sistema sem inspecionar bytecode (◐), opera via VPN local sem exportar histórico (✔: [gamban.com](https://gamban.com)), com latência desprezível e consumo residual de bateria (✔), sendo produto comercial maduro de autoexclusão no Reino Unido e internacionalmente (✔).
+- Netcraft Mobile: intercepta o toque em links suspeitos no momento do clique (◐), consulta feeds rápidos de detecção de servidores falsos (◐: [netcraft.com](https://www.netcraft.com)), roda filtro de rede leve em segundo plano com resposta imediata (✔), com validação em produção em larga escala por instituições financeiras (✔).
 - Muzakir et al., 2025: treinou modelo CNN sobre 15.286 textos e OCR de postagens de apostas em redes sociais (✔: [DOI: 10.1109/ICISIT.2025.10842131](https://doi.org/10.1109/ICISIT.2025.10842131)), capturando gírias e expressões persuasivas em língua indonésia.
 - Álvarez-Ojeda et al., 2025: corpus anotado de interações sociais e modelos de linguagem para detectar linguagem de persuasão e adicção a apostas (✔: [COLING 2025 / ACL Anthology](https://aclanthology.org/2025.coling-main.2/)).
-- Nabeel et al., 2020: algoritmo de inferência em grafos sobre traces de DNS passivo para identificar clusters de domínios maliciosos furtivos antes de entrarem em listas públicas (✔: [ACM TOPS](https://doi.org/10.1145/3345314)).
+- Nabeel et al., 2020: algoritmo de inferência em grafos sobre traces de DNS passivo para identificar clusters de domínios maliciosos furtivos antes de entrarem em listas públicas (✔: [ACM TOPS](https://doi.org/10.1145/3401897)).
 
 ## 6 · a contribuição
 
-**a frase:** o Sentinela Clandestino correlaciona a semântica do aliciamento de apostas com a topologia de infraestrutura de espelhos e APKs diretamente na borda do smartphone, e por isso bloqueia o ciclo da aposta clandestina no momento do redirecionamento com total privacidade local, o que nem os filtros de rede estáticos (Gamban/Netcraft) nem os moderadores de feed em nuvem (Muzakir/Álvarez-Ojeda) conseguem realizar isoladamente.
+**a frase:** o Sentinela Clandestino correlaciona a semântica da página de pouso de apostas com a topologia de infraestrutura de espelhos e APKs diretamente na borda do smartphone, e por isso bloqueia o ciclo da aposta clandestina no momento do redirecionamento com total privacidade local, o que nem os filtros de rede estáticos (Gamban/Netcraft) nem os classificadores em nuvem (Muzakir/Álvarez-Ojeda) conseguem realizar isoladamente.
 
-**o trabalho mais próximo, e por que ele não chega lá:** o Trend Micro Check analisa mensagens e prints de golpes com IA, mas depende de o usuário desconfiar e enviar o conteúdo manualmente para a nuvem corporativa, falhando em interceptar espelhos mutantes e em auditar APKs piratas no momento do clique.
+**o trabalho mais próximo, e por que ele não chega lá:** o Trend Micro Check analisa links e prints de golpes com IA, mas depende de o usuário desconfiar e enviar o conteúdo manualmente para a nuvem corporativa, falhando em interceptar espelhos mutantes e em auditar APKs piratas no momento do clique.
 
 ## 7 · tentei derrubar
 
-o que a conversa nova achou: a auditoria cega independente detectou que referências anteriores haviam sofrido alucinações de modelo de linguagem (DOIs e autores forjados), exigindo o saneamento total com literatura de ponta auditável (ACM TOPS, COLING/ACL, ICML, NDSS, USENIX Security). Além disso, confrontou a ideia com o [Google Play Protect Live Threat Detection](https://security.googleblog.com/2024/11/live-threat-detection.html) (Gemini Nano no Android 15) e apontou a impossibilidade arquitetural de "ler feeds proprietários de redes sociais" sem violar o *sandboxing* e as diretrizes do Android.
+o que a conversa nova achou: a auditoria cega independente detectou que o DOI de Nabeel et al. continha uma divergência na publicação (o DOI real e oficial no ACM TOPS é [10.1145/3401897](https://doi.org/10.1145/3401897)). Além disso, a auditoria apontou a impossibilidade arquitetural de "ler feeds proprietários de redes sociais" sem violar o *sandboxing* e as diretrizes do Android, e criticou a nota complacente de ◐ em bateria/RAM para modelos neurais móveis.
 
-o que eu mudei: o catálogo e a matriz foram 100% saneados com artigos reais verificados. A frase da contribuição foi desinflada e reescrita para abandonar a promessa irreal de inspecionar feeds internos, delimitando a atuação técnica estritamente para a **interceptação na camada de rede/redirecionamento de links e download de APKs no smartphone**. Reconheci que o Google Play Protect já faz análise on-device, mas comprovei que ele só busca malware técnico convencional de sistema, enquanto a minha contribuição resiste na **fusão da semântica de aliciamento de apostas com o grafo de espelhos e laranjas**.
+o que eu mudei: o DOI de Nabeel et al. foi corrigido (10.1145/3401897). Toda a folha (Seções 0, 1, 6, 7 e 8) foi harmonizada para eliminar o mito da inspeção de feeds internos: a atuação técnica ocorre na **interceptação da página de pouso (landing page) no redirecionamento externo e na inspeção do manifesto de APKs baixados**. Na matriz, assumi as tensões técnicas reais: a minha ideia perde categoricamente com ✘ em latência de abertura (< 50ms) e com ✘ em consumo contínuo de memória RAM e bateria frente à extrema leveza dos filtros estáticos de rede.
 
 ## 8 · resumo, sem IA
 
-Trend Micro, Gamban e Google tentam barrar fraudes ou sites de apostas por assinaturas técnicas e listas de domínios.  
-Nenhum correlaciona a linguagem persuasiva das apostas com a infraestrutura mutante de espelhos e APKs direto no celular.  
-A minha ideia une a triagem semântica local com a interceptação de rede no aparelho, preservando a privacidade do usuário.  
-A auditoria avisa do trade-off real: rodar SLM no smartphone consome mais bateria e RAM que filtros estáticos, exigindo quantização agressiva.
+Trend Micro, Gamban e Google tentam barrar fraudes ou sites de apostas por listas estáticas de domínios ou antivírus técnico.  
+Nenhum correlaciona a semântica persuasiva da página de pouso com a infraestrutura mutante de espelhos e APKs direto no celular.  
+A minha ideia une a triagem semântica local à interceptação de rede no aparelho, preservando a privacidade do usuário.  
+O trade-off técnico assumido é severo: rodar inferência de SLM e grafo no celular impõe latência de abertura e custo de bateria que filtros estáticos não têm.
