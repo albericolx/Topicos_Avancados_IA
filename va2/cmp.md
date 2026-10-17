@@ -83,10 +83,9 @@ eixos tirados da análise comparativa com os 6 trabalhos; os dois últimos são 
 
 ## 6 · a contribuição
 
-**a frase:** [preencha: "[minha ideia] faz [o quê], que não foi feito antes (ou faz de um jeito
-que não foi feito: [como]), e por isso alcança [benefício], que os trabalhos existentes não alcançam."]
+**a frase:** o Sentinela Clandestino detecta aliciamento de apostas ilegais no feed de redes sociais e barra espelhos mutantes e APKs piratas, fazendo essa análise semântica e técnica inteiramente dentro do smartphone do usuário, e por isso protege o cidadão em tempo real contra perdas financeiras e infecção por malware sem depender de listas estáticas de bloqueio e sem enviar seus prints ou histórico para servidores externos.
 
-**o trabalho mais próximo, e por que ele não chega lá:** [preencha]
+**o trabalho mais próximo, e por que ele não chega lá:** o Trend Micro Check analisa mensagens e prints de golpes com IA, mas depende de o usuário desconfiar e enviar o conteúdo manualmente para um servidor na nuvem, falhando em proteger o feed em tempo real e em auditar APKs piratas.
 
 ## 7 · tentei derrubar
 
