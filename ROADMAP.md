@@ -25,4 +25,5 @@
 
 ### Avaliação VA2: Ideação de Disciplina (IA for Good)
 - [x] Estruturação e ideação completa de brainwriting ([`va2/brw.md`](file:///c:/Users/Windows%2010/OneDrive/Documentos/UFRPE/2026.2/Topicos%20Avancados%20IA/va2/brw.md))
+- [x] Competidores e contribuição validada por auditoria cega ([`va2/cmp.md`](file:///c:/Users/Windows%2010/OneDrive/Documentos/UFRPE/2026.2/Topicos%20Avancados%20IA/va2/cmp.md))
 
