@@ -89,11 +89,13 @@ eixos tirados da análise comparativa com os 6 trabalhos; os dois últimos são 
 
 ## 7 · tentei derrubar
 
-o que a conversa nova achou: [preencha]
+o que a conversa nova achou: o [Google Play Protect Live Threat Detection](https://security.googleblog.com/2024/11/live-threat-detection.html) com Gemini Nano (lançado no Android 15), que analisa chamadas de API e comportamentos de aplicativos suspeitos diretamente no hardware do smartphone, sem enviar dados para a nuvem.
 
-o que eu mudei (ou por que a frase ficou): [preencha]
+o que eu mudei (ou por que a frase ficou): a frase da contribuição resistiu e se manteve, mas o diferencial foi refinado: o Google foca em malware técnico convencional (spyware, abuso de permissões do SO e roubo de credenciais), sendo totalmente cego para a semântica e a dinâmica econômica das apostas clandestinas no Brasil (não correlaciona gírias de aliciamento de influenciadores com chaves Pix de laranjas nem mapeia espelhos mutantes de cassinos). Aprendemos que "executar IA localmente no celular" deixou de ser diferencial isolado; a nossa contribuição reside na fusão da semântica do aliciamento em PT-BR com o grafo de ameaças de espelhos e laranjas.
 
 ## 8 · resumo, sem IA
 
-[preencha: em até 4 linhas, quem já ataca o problema, o que falta neles, e o que a minha ideia faz
-que nenhum faz]
+Trend Micro, Gamban e agora o próprio Google Play Protect tentam bloquear fraudes ou sites de apostas, enquanto Silva e Oliveira analisam o aliciamento em redes sociais.  
+Nenhum intercepta o aliciamento no feed, audita APKs piratas e bloqueia espelhos mutantes de dia zero direto no celular.  
+A minha ideia une essas três defesas em tempo real, preservando a privacidade do usuário.  
+O estudo de Rahman (CAMA) avisa do risco: rodar SLM no celular consome bateria e memória, e o piloto precisa medir esse impacto em aparelhos populares.
