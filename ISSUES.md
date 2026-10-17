@@ -13,5 +13,6 @@
 
 ## Histórico de Decisões
 - **2026-08-28**: Criação do Workspace OS para Tópicos Avançados de IA integrado com o repositório Overleaf (Springer LNCS) e autoria de José Albérico Rocha da Silva.
-
-- [x] Concluir Atividade 03: Loop de Agentes (Utopia vs Distopia) e integrar relat�rios.
+- **2026-10-17**: Conclusão do Artefato 1 de VA2 (`va2/brw.md` - Brainwriting Híbrido).
+- **2026-10-17**: Conclusão e aprovação com distinção na auditoria cega independente do Artefato 2 de VA2 (`va2/cmp.md` - Competidores e Contribuição).
+- [x] Concluir Atividade 03: Loop de Agentes (Utopia vs Distopia) e integrar relatórios.
