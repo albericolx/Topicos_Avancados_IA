@@ -17,7 +17,7 @@ import sys
 from pathlib import Path
 
 ROOT_DIR = Path(__file__).resolve().parent.parent.parent
-PAPER_DIR = ROOT_DIR / "papers" / "artigo-final"
+PAPER_DIR = ROOT_DIR / "article" if (ROOT_DIR / "article" / "main.tex").exists() else (ROOT_DIR / "papers" / "artigo-final")
 MAIN_TEX = PAPER_DIR / "main.tex"
 MAIN_PDF = PAPER_DIR / "main.pdf"
 
