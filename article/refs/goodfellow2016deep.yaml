@@ -1,0 +1,23 @@
+key: goodfellow2016deep
+title: "Deep Learning"
+type: book
+year: 2016
+venue: "MIT Press"
+url: "https://www.deeplearningbook.org"
+doi: "~"
+authors:
+  - "Ian Goodfellow"
+  - "Yoshua Bengio"
+  - "Aaron Courville"
+pdf_local: "~"
+ocr_extract: "~"
+ocr_zero_token_method: "metadata_verified"
+citations: "~75000"
+contributions:
+  - "Sistematiza a teoria moderna de aprendizado profundo, incluindo grafos de computacao, regularizacao, otimizacao estocastica e arquiteturas convolucionais/recorrentes."
+  - "Apresenta a diferenciacao automatica sobre grafos aciclicos direcionados (DAGs) de operacoes simbolicas e numericas."
+gaps:
+  - "Livro-texto de base teorica; nao aborda arquiteturas de agentes autonomos com MCP nem restricoes de SLMs quantizados em smartphones."
+tags: [foundational, survey, deep-learning, computation-graph]
+relevance: "Sustenta a introducao teorica sobre redes neurais profundas e a modelagem de grafos computacionais explicitos nas Secoes 1 e 3."
+notes: ~

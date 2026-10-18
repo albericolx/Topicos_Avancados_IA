@@ -1,0 +1,158 @@
+Investigação e Implementação de Modelos
+Neurais em Tópicos Avançados de Inteligência
+Articial
+José Albérico Rocha da Silva1
+Universidade Federal Rural de Pernambuco (UFRPE)
+Recife - PE, Brasil
+jose.alberico@ufrpe.br
+
+Este trabalho apresenta o estudo, projeto e implementação
+de arquiteturas neurais avançadas no âmbito da disciplina de Tópicos
+Avançados em Inteligência Articial. Através de uma abordagem baseada
+em grafo explícito e experimentação empírica, investigam-se os impactos
+de hiperparâmetros, dinâmicas de treinamento e convergência de gradientes. Os resultados obtidos demonstram a consistência dos métodos
+propostos, validando a integração entre o ambiente de experimentação
+prática e a análise técnica formal.
+Abstract.
+
+Inteligência Articial · Redes Neurais · Multi-Layer Perceptron · Grafo Explícito · Aprendizado Profundo.
+Keywords:
+
+1
+
+Introdução
+
+O avanço contínuo das técnicas de Inteligência Articial (IA) e Aprendizado
+Profundo (Deep Learning ) tem impulsionado transformações signicativas em
+diversas áreas do conhecimento [2]. No entanto, a compreensão detalhada das
+dinâmicas internas de treinamento, uxos de propagação direta (forward propagation ) e retropropagação de gradientes (backpropagation ) permanece fundamental para o desenvolvimento e depuração de novos modelos.
+Este artigo propõe e avalia a implementação de modelos neurais sob a perspectiva de grafos explícitos, permitindo a inspeção detalhada de estados internos e a visualização dinâmica da arquitetura. O objetivo central é fornecer uma
+base empírica e analítica sólida para as atividades desenvolvidas na disciplina
+de Tópicos Avançados em Inteligência Articial.
+
+2
+
+Trabalhos Relacionados
+
+Os fundamentos do treinamento de redes neurais multicamadas através da descida de gradiente e retropropagação foram consolidados no trabalho seminal de
+Rumelhart et al. [5] e sistematizados de forma abrangente por Goodfellow et al.
+[2]. Desde então, diversos arcabouços computacionais e arquiteturas modernas,
+
+2
+
+J. A. R. da Silva
+
+incluindo modelos baseados em mecanismos de autoatenção [6], foram propostos
+para escalar o cálculo automático de gradientes e a construção de topologias
+profundas.
+Na literatura contemporânea, o aprendizado de representações e a inferência
+estruturada demonstram ampla versatilidade em domínios complexos, abrangendo
+desde a inferência em grafos sobre rastros de rede [4] até a classicação textual
+com redes neurais e aprendizado de máquina automatizado [3] e a construção de
+corpora anotados para detecção de padrões em mídias sociais [1]. Tais avanços
+reforçam a importância de compreender com rigor analítico e experimental os
+mecanismos internos de propagação direta e reversa de gradientes investigados
+neste estudo.
+
+3
+
+Metodologia
+
+A metodologia adotada divide-se em duas frentes complementares: formulação
+teórica do modelo neural e implementação em código modular.
+3.1
+
+Modelo Matemático
+
+Dado um vetor de entrada x ∈ Rd , a saída de um neurônio j em uma camada l
+é expressa por:
+X (l) (l−1)
+(l)
+(l)
+zj =
+wij ai
++ bj
+(1)
+i
+
+ 
+(l)
+(l)
+aj = σ zj
+
+(2)
+
+(l)
+onde wij
+denota o peso sináptico da conexão, b(l)
+j representa o termo de viés
+(bias ) e σ(·) é a função de ativação não linear aplicada elemento a elemento.
+
+3.2
+
+Arquitetura em Grafo Explícito
+
+Diferentemente de implementações baseadas exclusivamente em operações matriciais opacas, a arquitetura foi concebida como um grafo direcionado G = (V, E),
+onde os vértices V correspondem aos neurônios individuais e as arestas E armazenam os pesos sinápticos e os respectivos gradientes acumulados em cada
+passo de otimização.
+
+4
+
+Resultados e Discussão
+
+Esta seção detalha os experimentos empíricos conduzidos com a arquitetura
+proposta, avaliando convergência de função de perda, taxa de acerto (accuracy )
+e estabilidade numérica.
+
+Modelos Neurais em Tópicos Avançados de IA
+
+3
+
+Table 1. Resumo dos hiperparâmetros utilizados nos ensaios experimentais.
+
+Parâmetro
+
+Valor Adotado
+
+Taxa de Aprendizado (η ) 0.01  0.1
+Otimizador
+Descida do Gradiente Estocástico (SGD)
+Função de Custo
+Erro Quadrático Médio (MSE) / Entropia Cruzada
+Épocas de Treinamento 500
+
+4.1
+
+Ambiente Experimental
+
+Os experimentos foram executados utilizando o ambiente integrado em Python,
+com dados normalizados e divisão entre conjuntos de treino e validação.
+Os resultados preliminares evidenciam a convergência monótona da perda e
+a consistência dos gradientes calculados através da estrutura em grafo.
+
+5
+
+Conclusão e Trabalhos Futuros
+
+Este trabalho apresentou uma abordagem integrada para o estudo e implementação de modelos neurais em inteligência articial. A representação explícita
+como grafo facilitou a depuração algorítmica e a inspeção dos gradientes durante a etapa de treinamento.
+Como trabalhos futuros, planeja-se a extensão para arquiteturas baseadas
+em mecanismos de atenção [6], bem como a automatização da exportação de
+métricas experimentais diretamente para o relatório acadêmico.
+
+References
+1. Álvarez-Ojeda, P., Cantero-Romero, M.V., Semikozova, A., Montejo-Ráez, A.: The
+precom-sm corpus: Gambling in spanish social media. In: Proceedings of the 31st
+International Conference on Computational Linguistics (COLING 2025). pp. 1528
+(2025), https://aclanthology.org/2025.coling-main.2/
+2. Goodfellow, I., Bengio, Y., Courville, A.: Deep Learning. MIT Press (2016), https:
+//www.deeplearningbook.org
+3. Muzakir, A., Syaputra, H., Fathoni, Kusnadi: Text-based detection of online gambling advertisements on social media using automl and cnn. In: 2025 2nd International Conference on Information System and Information Technology (ICISIT).
+IEEE (2025). https://doi.org/10.1109/ICISIT.2025.10842131
+4. Nabeel, M., Khalil, I.M., Guan, B., Yu, T.: Following passive dns traces to detect
+stealthy malicious domains via graph inference. ACM Transactions on Privacy and
+Security (TOPS) 23(4), 136 (2020). https://doi.org/10.1145/3401897
+5. Rumelhart, D.E., Hinton, G.E., Williams, R.J.: Learning representations by backpropagating errors. Nature 323(6088), 533536 (1986). https://doi.org/10.1038/
+323533a0
+6. Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A.N., Kaiser,
+., Polosukhin, I.: Attention is all you need. Advances in Neural Information Processing Systems 30 (2017)

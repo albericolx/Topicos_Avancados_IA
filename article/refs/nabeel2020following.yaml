@@ -1,0 +1,24 @@
+key: nabeel2020following
+title: "Following Passive DNS Traces to Detect Stealthy Malicious Domains Via Graph Inference"
+type: article
+year: 2020
+venue: "ACM Transactions on Privacy and Security (TOPS), Vol. 23, No. 4, Article 17"
+url: "https://doi.org/10.1145/3401897"
+doi: "10.1145/3401897"
+authors:
+  - "Mohamed Nabeel"
+  - "Issa M. Khalil"
+  - "Bei Guan"
+  - "Ting Yu"
+pdf_local: "~"
+ocr_extract: "~"
+ocr_zero_token_method: "metadata_verified"
+citations: "~85"
+contributions:
+  - "Constroi grafos de associacao entre dominios e IPs a partir de dados de DNS passivo aplicando algoritmos de propagacao de crenca (belief propagation)."
+  - "Detecta dominios maliciosos furtivos e espelhos recem-criados antes de sua inclusao em listas estaticas de bloqueio."
+gaps:
+  - "Opera exclusivamente na camada de infraestrutura de rede (DNS), sendo cego para a semantica de aliciamento na pagina de destino e para inspecao de APKs."
+tags: [competing-work, method-source, graph-inference, mobile-security]
+relevance: "Trabalhos Relacionados e Matriz Comparativa (va2/cmp.md): fundamenta o modulo de correlacao de grafos de infraestrutura mutante."
+notes: "DOI 10.1145/3401897 verificado na auditoria cega."
