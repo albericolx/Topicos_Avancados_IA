@@ -142,18 +142,21 @@ def main():
     print(f"\n[Iniciando Compilação] Alvo: {MAIN_TEX}")
     success = False
 
-    if compilers["latexmk"]:
+    if compilers["latexmk"] and shutil.which("perl"):
         success = compile_with_latexmk(compilers["latexmk"])
-    elif compilers["tectonic"]:
+    if not success and compilers["tectonic"]:
         success = compile_with_tectonic(compilers["tectonic"])
-    elif compilers["pdflatex"] or compilers["xelatex"]:
+    if not success and (compilers["pdflatex"] or compilers["xelatex"]):
         engine = compilers["pdflatex"] or compilers["xelatex"]
         success = compile_with_pdflatex(engine)
-    else:
+    elif not success:
         show_install_guide()
         return
 
     if success and MAIN_PDF.exists():
+        mirror_pdf = ROOT_DIR / "papers" / "artigo-final" / "main.pdf"
+        if PAPER_DIR != mirror_pdf.parent and mirror_pdf.parent.exists():
+            shutil.copy2(MAIN_PDF, mirror_pdf)
         print(f"\n[SUCESSO] PDF gerado com êxito em:\n=> {MAIN_PDF}\n")
     else:
         print(f"\n[Atenção] A compilação terminou. Verifique o arquivo main.log para detalhes.")

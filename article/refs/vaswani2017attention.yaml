@@ -1,0 +1,28 @@
+key: vaswani2017attention
+title: "Attention Is All You Need"
+type: conference
+year: 2017
+venue: "Advances in Neural Information Processing Systems (NeurIPS), Vol. 30"
+url: "https://arxiv.org/abs/1706.03762"
+doi: "10.48550/arXiv.1706.03762"
+authors:
+  - "Ashish Vaswani"
+  - "Noam Shazeer"
+  - "Niki Parmar"
+  - "Jakob Uszkoreit"
+  - "Llion Jones"
+  - "Aidan N. Gomez"
+  - "Lukasz Kaiser"
+  - "Illia Polosukhin"
+pdf_local: "refs/pdfs/vaswani2017attention.pdf"
+ocr_extract: "refs/ocr/vaswani2017attention.txt"
+ocr_zero_token_method: "native_pdftotext"
+citations: "~130000"
+contributions:
+  - "Introduz a arquitetura Transformer baseada exclusivamente em mecanismos de autoatencao (self-attention), dispensando recorrencia e convolucao."
+  - "Permite paralelizacao massiva no treinamento e fundamenta os modernos LLMs e SLMs on-device."
+gaps:
+  - "Custo quadratico na extensao do contexto e necessidade de quantizacao/destilacao para operacao embarcada em smartphones."
+tags: [foundational, method-source, transformers, on-device-slm]
+relevance: "Sustenta a evolucao arquitetural discutida na Secao 5 (Conclusao e Trabalhos Futuros) e a base dos SLMs locais empregados no projeto da disciplina."
+notes: "PDF baixado e processado via pipeline zero-token (core/tools/pdf_ocr_parser.py)."

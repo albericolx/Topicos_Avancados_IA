@@ -1,23 +1,26 @@
 #!/usr/bin/env python3
 """
-Overleaf Synchronization Assistant - Sincronização com o Overleaf
-Suporta contas com Git nativo (Overleaf Premium/Institucional) e contas gratuitas via exportação/importação ZIP.
+Overleaf Synchronization Assistant - Sincronização Bidirecional com o Overleaf
+Suporta Git nativo do Overleaf (https://git.overleaf.com/6a92242dbaaa2c6b6833bab0)
+e exportação/importação de pacote ZIP a partir de article/ e papers/artigo-final/.
 
 Uso:
-    py core/tools/overleaf_sync.py --zip           # Gera o pacote ZIP pronto para o Overleaf
-    py core/tools/overleaf_sync.py --git-setup     # Configura o Git remote do Overleaf
+    py core/tools/overleaf_sync.py --status        # Verifica conexão bidirecional e histórico Git Overleaf
+    py core/tools/overleaf_sync.py --zip           # Gera pacote ZIP pronto para o Overleaf
+    py core/tools/overleaf_sync.py --git-setup     # Exibe instruções de configuração do remote Overleaf
     py core/tools/overleaf_sync.py --import-zip    # Importa alterações baixadas do Overleaf
 """
 
 import argparse
 import os
-import shutil
+import re
 import subprocess
 import sys
 import zipfile
 from pathlib import Path
 
 ROOT_DIR = Path(__file__).resolve().parent.parent.parent
+ARTICLE_DIR = ROOT_DIR / "article"
 PAPER_DIR = ROOT_DIR / "papers" / "artigo-final"
 ZIP_OUTPUT = ROOT_DIR / "papers" / "overleaf-export.zip"
 
@@ -28,53 +31,71 @@ EXCLUDE_EXTS = {
 }
 
 
+def sanitize_token(text: str) -> str:
+    """Remove qualquer token olp_... de saídas de log por segurança."""
+    return re.sub(r"olp_[A-Za-z0-9]+@", "***TOKEN_REDACTED***@", text)
+
+
+def check_overleaf_status():
+    """Verifica a conexão bidirecional com o Overleaf via Git e exibe os commits registrados."""
+    print(f"[Overleaf Sync] Verificando repositório espelho em: {PAPER_DIR}")
+    if not (PAPER_DIR / ".git").exists():
+        print("[Aviso] Sub-repositório Git do Overleaf não encontrado localmente.", file=sys.stderr)
+        return False
+
+    res_remote = subprocess.run(
+        ["git", "-C", str(PAPER_DIR), "remote", "-v"],
+        capture_output=True, text=True, encoding="utf-8", errors="replace"
+    )
+    print("\n[Remoto Configurado (Token Sanitizado)]:")
+    print(sanitize_token(res_remote.stdout.strip()))
+
+    res_log = subprocess.run(
+        ["git", "-C", str(PAPER_DIR), "log", "--all", "-n", "12", "--oneline"],
+        capture_output=True, text=True, encoding="utf-8", errors="replace"
+    )
+    print("\n[Histórico de Contribuições Sincronizadas com Overleaf]:")
+    print(sanitize_token(res_log.stdout.strip()))
+    return True
+
+
 def create_overleaf_zip():
-    print(f"\n[Empacotando] Criando arquivo ZIP para o Overleaf a partir de: {PAPER_DIR}")
-    
-    if not PAPER_DIR.exists():
-        print(f"[Erro] Diretório {PAPER_DIR} não encontrado!", file=sys.stderr)
+    source_dir = ARTICLE_DIR if ARTICLE_DIR.exists() else PAPER_DIR
+    print(f"\n[Empacotando] Criando arquivo ZIP para o Overleaf a partir de: {source_dir}")
+
+    if not source_dir.exists():
+        print(f"[Erro] Diretório {source_dir} não encontrado!", file=sys.stderr)
         return False
 
     with zipfile.ZipFile(ZIP_OUTPUT, "w", zipfile.ZIP_DEFLATED) as zipf:
-        for root, dirs, files in os.walk(PAPER_DIR):
-            if ".git" in root:
+        for root, dirs, files in os.walk(source_dir):
+            if ".git" in root or "refs" in Path(root).parts:
                 continue
             for file in files:
                 file_path = Path(root) / file
                 if file_path.suffix.lower() in EXCLUDE_EXTS:
                     continue
-                # Caminho relativo dentro do zip
-                arcname = file_path.relative_to(PAPER_DIR)
+                arcname = file_path.relative_to(source_dir)
                 zipf.write(file_path, arcname)
                 print(f" + Adicionado: {arcname}")
 
-    print(f"\n=> SUCESSO! Pacote gerado em:\n   {ZIP_OUTPUT}")
-    print("\nComo usar no Overleaf:")
-    print(" 1. Abra o https://www.overleaf.com no seu navegador.")
-    print(" 2. Clique em 'Novo Projeto' -> 'Carregar Projeto'.")
-    print(f" 3. Selecione o arquivo: {ZIP_OUTPUT}")
-    print(" 4. Seu artigo estará pronto para editar e compilar na nuvem!\n")
+    print(f"\n=> SUCESSO! Pacote gerado em:\n   {ZIP_OUTPUT}\n")
     return True
 
 
 def setup_overleaf_git():
     print("""
 ========================================================================
-Conexão Git com Overleaf (Já Configurada em papers/artigo-final)
+Conexão Git Bidirecional com Overleaf (Configurada em papers/artigo-final)
 ========================================================================
 
-A pasta papers/artigo-final já é um clone direto do repositório Overleaf:
+Projeto Overleaf vinculado:
   https://git.overleaf.com/6a92242dbaaa2c6b6833bab0
 
-Para enviar alterações locais diretamente para o Overleaf:
-   cd "papers/artigo-final"
-   git add .
-   git commit -m "Minhas alteracoes no artigo"
-   git push origin main
-
-Para puxar alterações feitas no Overleaf:
-   cd "papers/artigo-final"
-   git pull origin main
+Comandos de sincronização via Harness:
+   py core/tools/overleaf_sync.py --status
+   git -C "papers/artigo-final" fetch origin
+   git -C "papers/artigo-final" push origin main
 ========================================================================
 """)
 
@@ -85,28 +106,32 @@ def import_overleaf_zip(zip_path_str: str):
         print(f"[Erro] Arquivo ZIP não encontrado: {zip_path}", file=sys.stderr)
         return False
 
-    print(f"\n[Importando] Extraindo alterações de {zip_path} para {PAPER_DIR}...")
+    print(f"\n[Importando] Extraindo alterações de {zip_path} para {ARTICLE_DIR}...")
     with zipfile.ZipFile(zip_path, "r") as zipf:
-        zipf.extractall(PAPER_DIR)
-    print("=> Importação concluída com sucesso! Verifique as alterações com 'git status'.\n")
+        zipf.extractall(ARTICLE_DIR)
+    print("=> Importação concluída com sucesso!\n")
     return True
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Assistente de Sincronização com o Overleaf")
+    parser = argparse.ArgumentParser(description="Assistente de Sincronização Bidirecional com o Overleaf")
+    parser.add_argument("--status", action="store_true", help="Verifica status e histórico do repositório Overleaf")
     parser.add_argument("--zip", action="store_true", help="Gera arquivo .zip para carregar no Overleaf")
     parser.add_argument("--git-setup", action="store_true", help="Exibe guia de configuração do Git com Overleaf")
     parser.add_argument("--import-zip", type=str, help="Caminho do arquivo .zip baixado do Overleaf para importar")
 
     args = parser.parse_args()
 
-    if args.zip:
+    if args.status:
+        check_overleaf_status()
+    elif args.zip:
         create_overleaf_zip()
     elif args.git_setup:
         setup_overleaf_git()
     elif args.import_zip:
         import_overleaf_zip(args.import_zip)
     else:
+        check_overleaf_status()
         create_overleaf_zip()
 
 

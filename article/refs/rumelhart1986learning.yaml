@@ -1,0 +1,23 @@
+key: rumelhart1986learning
+title: "Learning representations by back-propagating errors"
+type: article
+year: 1986
+venue: "Nature, Vol. 323, pp. 533-536"
+url: "https://doi.org/10.1038/323533a0"
+doi: "10.1038/323533a0"
+authors:
+  - "David E. Rumelhart"
+  - "Geoffrey E. Hinton"
+  - "Ronald J. Williams"
+pdf_local: "~"
+ocr_extract: "~"
+ocr_zero_token_method: "metadata_verified"
+citations: "~45000"
+contributions:
+  - "Formaliza o algoritmo de retropropagacao de erros (backpropagation) para treinamento de redes neurais multicamadas."
+  - "Demonstra que camadas ocultas aprendem representacoes internas distribuidas capazes de resolver problemas nao linearmente separaveis."
+gaps:
+  - "Formula a atualizacao em termos de camadas sequenciais classicas, sem explorar abstracoes modernas de grafos computacionais explicitos ou inferencia em borda."
+tags: [foundational, backpropagation, computation-graph, deep-learning]
+relevance: "Fundamenta a formulacao matematica da regra da cadeia e da retropropagacao de gradientes na Secao 2 (Trabalhos Relacionados) e Secao 3 (Metodologia) do artigo."
+notes: "Trabalho seminal obrigatorio para qualquer discussao sobre propagacao reversa em grafos neurais."
