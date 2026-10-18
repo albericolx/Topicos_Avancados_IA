@@ -1,0 +1,24 @@
+key: muzakir2025text
+title: "Text-Based Detection of Online Gambling Advertisements on Social Media Using AutoML and CNN"
+type: conference
+year: 2025
+venue: "2025 2nd International Conference on Information System and Information Technology (ICISIT), IEEE"
+url: "https://doi.org/10.1109/ICISIT.2025.10842131"
+doi: "10.1109/ICISIT.2025.10842131"
+authors:
+  - "Ari Muzakir"
+  - "Hadi Syaputra"
+  - "Fathoni"
+  - "Kusnadi"
+pdf_local: "~"
+ocr_extract: "~"
+ocr_zero_token_method: "metadata_verified"
+citations: "~5"
+contributions:
+  - "Compara pipelines de AutoML (TF-IDF) e Redes Neurais Convolucionais (CNN com Word2Vec) sobre 15.286 sentencas para detectar anuncios de apostas ilegais."
+  - "Alcancou 92.80% de acuracia com CNN superando filtros baseados em palavras-chave estaticas."
+gaps:
+  - "Processamento centralizado em servidor para o idioma indonesio, sem interceptacao em tempo real no smartphone nem analise de APKs ou grafos de rede."
+tags: [competing-work, baseline, gambling-detection, deep-learning]
+relevance: "Trabalhos Relacionados (va2/cmp.md): demonstra a eficacia de modelos neurais na classificacao de propagandas de apostas ofuscadas."
+notes: "DOI 10.1109/ICISIT.2025.10842131 verificado no IEEE Xplore."

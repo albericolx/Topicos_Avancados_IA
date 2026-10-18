@@ -6,7 +6,7 @@
 - **ARMAZENAMENTO AGNOSTIC DE PROVEDOR (MULTI-HARNESS)**: O workspace pertence ao aluno e aos arquivos locais, nunca a um provedor específico de IA. Se a IA atual (Antigravity, Claude, Copilot, Cursor, etc.) atingir limite de cota, a próxima IA deve poder assumir a tarefa lendo este arquivo e os arquivos `CONTEXT.md`.
 - **SEGREDOS FORA DO GIT**: Senhas, tokens de API ou chaves pessoais devem ficar em arquivos `.env` ignorados no `.gitignore`.
 - **PESQUISA E RIGOR ACADÊMICO**:
-  - Proibido inventar/alucinar citações, autores ou métricas. Toda citação deve existir em `article/references.bib` (e `papers/artigo-final/references.bib`) ou ser validada via `core/tools/academic_search.py`.
+  - Proibido inventar/alucinar citações, autores ou métricas. Toda citação deve existir em `article/references.bib`, estar catalogada em `refs/REFS.md` + `refs/<key>.yaml` e ser validada via `core/tools/academic_search.py`.
   - Terminologia técnica e acadêmica consistente em todas as seções do artigo de Tópicos Avançados de IA.
 - **DISCIPLINA DE GITFLOW**:
   - Nunca comitar diretamente na branch `main`.
@@ -22,10 +22,12 @@
 | Pasta | Arquivo Contextual | Descrição |
 |---|---|---|
 | [`code/`](code/CONTEXT.md) | [`code/CONTEXT.md`](code/CONTEXT.md) · [`code/src/CONTEXT.md`](code/src/CONTEXT.md) | Modelos neurais, grafos computacionais, experimentos práticos e scripts de IA |
-| [`article/`](article/CONTEXT.md) | [`article/CONTEXT.md`](article/CONTEXT.md) · [`article/sections/CONTEXT.md`](article/sections/CONTEXT.md) · [`article/figures/CONTEXT.md`](article/figures/CONTEXT.md) | Projeto LaTeX unificado no repositório (padrão Springer LNCS) |
-| [`papers/`](papers/CONTEXT.md) | [`papers/CONTEXT.md`](papers/CONTEXT.md) | Espelho de sincronização direta com o projeto Overleaf |
-| [`core/`](core/CONTEXT.md) | [`core/CONTEXT.md`](core/CONTEXT.md) · [`core/tools/CONTEXT.md`](core/tools/CONTEXT.md) | Utilitários, scripts de pesquisa acadêmica, compilação de LaTeX e sincronização |
-| [`artefatos/`](artefatos/CONTEXT.md) | [`artefatos/CONTEXT.md`](artefatos/CONTEXT.md) | Documentação de evidências e pontos de verificação da disciplina (`3-base-git-repo.md`) |
+| [`article/`](article/CONTEXT.md) | [`article/CONTEXT.md`](article/CONTEXT.md) · [`article/sections/CONTEXT.md`](article/sections/CONTEXT.md) · [`article/figures/CONTEXT.md`](article/figures/CONTEXT.md) · [`article/refs/CONTEXT.md`](article/refs/CONTEXT.md) | Projeto LaTeX unificado no repositório com PDF compilado (`article/main.pdf`) |
+| [`refs/`](refs/CONTEXT.md) | [`refs/CONTEXT.md`](refs/CONTEXT.md) · [`refs/REFS.md`](refs/REFS.md) · [`refs/pdfs/CONTEXT.md`](refs/pdfs/CONTEXT.md) · [`refs/ocr/CONTEXT.md`](refs/ocr/CONTEXT.md) | Pipeline de referências acadêmicas, fichas `.yaml`, PDFs e OCR zero-token |
+| [`papers/`](papers/CONTEXT.md) | [`papers/CONTEXT.md`](papers/CONTEXT.md) | Espelho de sincronização bidirecional com o projeto Overleaf |
+| [`core/`](core/CONTEXT.md) | [`core/CONTEXT.md`](core/CONTEXT.md) · [`core/tools/CONTEXT.md`](core/tools/CONTEXT.md) · [`core/skills/CONTEXT.md`](core/skills/CONTEXT.md) · [`core/flows/CONTEXT.md`](core/flows/CONTEXT.md) · [`core/agents/CONTEXT.md`](core/agents/CONTEXT.md) | Ferramentas CLI, *skills* de pesquisa, fluxos operacionais e agentes especialistas |
+| [`.agents/`](.agents/CONTEXT.md) | [`.agents/CONTEXT.md`](.agents/CONTEXT.md) · [`.agents/skills/CONTEXT.md`](.agents/skills/CONTEXT.md) · [`.agents/skills/research/SKILL.md`](.agents/skills/research/SKILL.md) | Habilidades nativas descobertas automaticamente pelo harness |
+| [`artefatos/`](artefatos/CONTEXT.md) | [`artefatos/CONTEXT.md`](artefatos/CONTEXT.md) | Documentação de evidências da disciplina ([`3-base-git-repo.md`](artefatos/3-base-git-repo.md), [`4-latex-project.md`](artefatos/4-latex-project.md)) |
 | [`va2/`](va2/CONTEXT.md) | [`va2/CONTEXT.md`](va2/CONTEXT.md) | Artefatos da 2ª Verificação de Aprendizagem (`brw.md`, `cmp.md`) |
 
 ---

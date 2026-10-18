@@ -1,0 +1,23 @@
+key: alvarezojeda2025precom
+title: "The PRECOM-SM Corpus: Gambling in Spanish Social Media"
+type: conference
+year: 2025
+venue: "Proceedings of the 31st International Conference on Computational Linguistics (COLING 2025), ACL"
+url: "https://aclanthology.org/2025.coling-main.2/"
+doi: "~"
+authors:
+  - "Pablo Alvarez-Ojeda"
+  - "Maria Victoria Cantero-Romero"
+  - "Anastasia Semikozova"
+  - "Arturo Montejo-Raez"
+pdf_local: "~"
+ocr_extract: "~"
+ocr_zero_token_method: "metadata_verified"
+citations: "~8"
+contributions:
+  - "Apresenta o corpus PRECOM-SM e modelos baseados em Transformers para identificacao precoce de marcadores linguisticos de vicio e aliciamento em apostas."
+gaps:
+  - "Focado em analise retrospectiva de corpus em espanhol, sem bloqueio proativo on-device de redirecionamentos para cassinos clandestinos ou APKs."
+tags: [competing-work, gambling-detection, transformers]
+relevance: "Fundamenta a modelagem semantica de linguagem de apostas em redes sociais e mensageria no manuscrito e em va2/cmp.md."
+notes: "ACL Anthology ID 2025.coling-main.2 verificado."
