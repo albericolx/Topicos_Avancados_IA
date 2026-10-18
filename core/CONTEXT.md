@@ -1,6 +1,9 @@
 # Módulo de Ferramentas e Utilitários (`core/`)
 > Scripts agnósticos de provedor para suporte a pesquisa acadêmica, compilação de LaTeX e sincronização.
 
+## Estrutura da Pasta
+* [`tools/`](tools/CONTEXT.md): Diretório de utilitários de automação do workspace (documentado em [`tools/CONTEXT.md`](tools/CONTEXT.md)).
+
 ## Roteamento de Ferramentas (`core/tools/`)
 
 | Script | Função | Exemplo de Execução |
