@@ -18,8 +18,15 @@
   },
   "modules": {
     "code": "code/CONTEXT.md",
+    "code_src": "code/src/CONTEXT.md",
+    "article": "article/CONTEXT.md",
+    "article_sections": "article/sections/CONTEXT.md",
+    "article_figures": "article/figures/CONTEXT.md",
     "papers": "papers/CONTEXT.md",
-    "core": "core/CONTEXT.md"
+    "core": "core/CONTEXT.md",
+    "core_tools": "core/tools/CONTEXT.md",
+    "artefatos": "artefatos/CONTEXT.md",
+    "va2": "va2/CONTEXT.md"
   },
   "gitflow": {
     "enabled": true,

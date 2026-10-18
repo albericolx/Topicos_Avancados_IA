@@ -1,7 +1,7 @@
 # Módulo de Código (`code/`)
 > Modelos neurais, algoritmos de retropropagação, grafos computacionais e experimentos de IA.
 
-Esta pasta abriga todo o desenvolvimento prático da disciplina de Tópicos Avançados de Inteligência Artificial. O código desenvolvido aqui alimenta os experimentos, dados e resultados apresentados no artigo científico em [`papers/`](../papers/CONTEXT.md).
+Esta pasta abriga todo o desenvolvimento prático da disciplina de Tópicos Avançados de Inteligência Artificial. O código desenvolvido aqui alimenta os experimentos, dados e resultados apresentados no artigo científico em [`article/`](../article/CONTEXT.md) e [`papers/`](../papers/CONTEXT.md).
 
 ## Diretrizes de Desenvolvimento
 1. **Pequenos módulos**: Mantenha o código coeso e bem documentado.
@@ -10,4 +10,4 @@ Esta pasta abriga todo o desenvolvimento prático da disciplina de Tópicos Avan
 
 ## Estrutura da Pasta
 * [`SPECS-git.md`](SPECS-git.md): Regras de branches, convenções de commits e GitFlow.
-* `src/`: Diretório de código-fonte dos modelos neurais, camadas e funções de perda.
+* [`src/`](src/CONTEXT.md): Diretório de código-fonte dos modelos neurais, camadas e funções de perda (documentado em [`src/CONTEXT.md`](src/CONTEXT.md)).
