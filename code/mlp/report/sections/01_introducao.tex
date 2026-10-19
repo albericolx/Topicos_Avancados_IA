@@ -1,0 +1,15 @@
+\section{Introdução e Fundamentação Conceitual}
+\label{sec:introducao}
+
+O desenvolvimento de Redes Neurais Artificiais Multicamadas (\textit{Multi-Layer Perceptrons} -- MLPs) consolidou-se a partir da formulação do algoritmo de retropropagação de erros (\textit{backpropagation}) por Rumelhart, Hinton e Williams \cite{rumelhart1986learning} e da sistematização teórica do aprendizado profundo por Goodfellow, Bengio e Courville \cite{goodfellow2016deep}. Na prática contemporânea, todavia, o uso exclusivo de bibliotecas de alto nível com diferenciação automática oculta os detalhes algébricos e topológicos que governam o fluxo de ativações e gradientes.
+
+O presente trabalho documenta a implementação \textbf{do zero (\textit{from scratch})} do artefato \texttt{[5] mlp git repo} (\texttt{mlp$\cdot$c}), na qual uma rede neural multicamadas completa é modelada explicitamente sobre um \textbf{grafo direcionado ponderado (\texttt{networkx.DiGraph})} com operações numéricas em \texttt{NumPy} e interface interativa em tempo real construída em \texttt{Streamlit}.
+
+\subsection{Domínio Clínico e Particionamento Explícito 80/20}
+O problema abordado consiste na predição diagnóstica de Doença Arterial Coronariana a partir da base \textit{Heart Disease} \cite{detrano1989international}, composta por $N = 1.025$ registros clínicos e $d = 13$ atributos fisiológicos e laboratoriais (\texttt{age}, \texttt{sex}, \texttt{cp}, \texttt{trestbps}, \texttt{chol}, \texttt{fbs}, \texttt{restecg}, \texttt{thalach}, \texttt{exang}, \texttt{oldpeak}, \texttt{slope}, \texttt{ca} e \texttt{thal}), além do alvo binário \texttt{target} ($0$ = saudável, $1$ = presença de cardiopatia).
+
+Para assegurar rigor metodológico e ausência total de vazamento de dados (\textit{zero data leakage}), o módulo \texttt{code/mlp/core\_mlp/dataset.py} executa:
+\begin{enumerate}
+    \item \textbf{Particionamento Explícito Estratificado (80\% Treino / 20\% Teste):} divisão determinística (\texttt{seed=42}) em $820$ amostras de treinamento ($80\%$, exportadas em \texttt{train\_80\_standardized.csv}) e $205$ amostras de teste ($20\%$, exportadas em \texttt{test\_20\_standardized.csv}), preservando a proporção de classes ($51{,}3\%$ positivos).
+    \item \textbf{Padronização Pós-Particionamento:} o estimador estatístico (\texttt{StandardScaler} $z = (x - \mu_{\text{treino}})/\sigma_{\text{treino}}$ ou \texttt{MinMaxScaler}) é ajustado (\texttt{fit\_transform}) exclusivamente sobre as $820$ amostras de treino e aplicado (\texttt{transform}) sobre as $205$ amostras de teste.
+\end{enumerate}
