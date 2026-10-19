@@ -1,6 +1,6 @@
 {
   "name": "topicos-avancados-ia-workspace",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "discipline": "Tópicos Avançados em Inteligência Artificial",
   "institution": "UFRPE",
   "author": "José Albérico Rocha da Silva",
@@ -18,6 +18,12 @@
   },
   "modules": {
     "code": "code/CONTEXT.md",
+    "code_mlp": "code/mlp/CONTEXT.md",
+    "code_mlp_core": "code/mlp/core_mlp/CONTEXT.md",
+    "code_mlp_data": "code/mlp/data/CONTEXT.md",
+    "code_mlp_figs": "code/mlp/figs/CONTEXT.md",
+    "code_mlp_results": "code/mlp/results/CONTEXT.md",
+    "code_mlp_report": "code/mlp/report/CONTEXT.md",
     "code_src": "code/src/CONTEXT.md",
     "article": "article/CONTEXT.md",
     "article_sections": "article/sections/CONTEXT.md",

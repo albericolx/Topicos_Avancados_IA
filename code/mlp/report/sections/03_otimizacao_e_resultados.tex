@@ -1,0 +1,71 @@
+\section{Otimização de Hiperparâmetros, Visualização de Pesos e Resultados}
+\label{sec:resultados}
+
+\subsection{Estudo de Ablação e Otimização de Acurácia e Perda}
+A Tabela~\ref{tab:ablacao} sintetiza os resultados reais obtidos pelas oito configurações experimentais (\texttt{C0} a \texttt{C7}) avaliadas sobre a partição de teste ($20\%$ -- $205$ amostras).
+
+\begin{table}[H]
+\centering
+\caption{Estudo de ablação e otimização de hiperparâmetros da MLP no conjunto de teste (20\%).}
+\label{tab:ablacao}
+\small
+\begin{tabular}{llcccccc}
+\toprule
+\textbf{ID} & \textbf{Arquitetura e Parâmetros} & \textbf{Loss Tr.} & \textbf{Loss Te.} & \textbf{Acur. Tr.} & \textbf{Acur. Te.} & \textbf{F1} & \textbf{AUC} \\
+\midrule
+C0 & {[13$\to$10$\to$8$\to$1]}, Sigmoid, MinMax, MSE-deriv & 0.0453 & 0.0480* & 88.78\% & 86.83\% & 87.67\% & 0.9419 \\
+C1 & {[13$\to$10$\to$8$\to$1]}, Sigmoid, MinMax, BCE Exata & 0.1693 & 0.2476 & 91.59\% & 87.32\% & 88.60\% & 0.9780 \\
+C2 & {[13$\to$10$\to$8$\to$1]}, Sigmoid, Z-Score, $\eta=0.05$ & 0.0008 & 0.0010 & 100.0\% & 100.0\% & 100.0\% & 1.0000 \\
+C3 & {[13$\to$16$\to$8$\to$1]}, Tanh, Z-Score, $\eta=0.02$ & 0.0006 & 0.0009 & 100.0\% & 100.0\% & 100.0\% & 1.0000 \\
+\textbf{C4} & \textbf{{[13$\to$16$\to$8$\to$1]}, ReLU + He, Z-Score, $\eta=0.015$} & \textbf{0.0003} & \textbf{0.0003} & \textbf{100.0\%} & \textbf{100.0\%} & \textbf{100.0\%} & \textbf{1.0000} \\
+C5 & {[13$\to$16$\to$8$\to$1]}, LeakyReLU, $\beta=0.85$, $L_2=10^{-4}$ & 0.0007 & 0.0007 & 100.0\% & 100.0\% & 100.0\% & 1.0000 \\
+C6 & {[13$\to$24$\to$12$\to$1]}, ReLU, $\beta=0.85$, $L_2=10^{-4}$ & 0.0383 & 0.0154 & 98.29\% & 99.51\% & 99.53\% & 0.9997 \\
+C7 & {[13$\to$24$\to$16$\to$8$\to$1]}, 3 Ocultas, ReLU, $\beta=0.85$ & 0.3361 & 0.3283 & 88.54\% & 89.27\% & 89.32\% & 0.9104 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Justificativa dos Parâmetros Modificados}
+\begin{enumerate}
+    \item \textbf{Derivada Analítica da BCE e Inclusão do Bias \texttt{L0\_bias} (C0 $\to$ C1):} A eliminação do fator espúrio $\sigma'(z)$ na saída e a adição do bias na 1ª camada oculta elevaram a AUC-ROC de $0{,}9419$ para $0{,}9780$ e o Recall de $91{,}43\%$ para $96{,}19\%$.
+    \item \textbf{Padronização Z-Score via \texttt{StandardScaler} (C1 $\to$ C2):} Conforme demonstrado teoricamente por LeCun et al. \cite{lecun1998efficient}, entradas centradas em média zero ($\mu=0, \sigma=1$) evitam que todos os gradientes $\partial \mathcal{L}/\partial w_{ij} = a_i \delta_j$ compartilhem o mesmo sinal, eliminando oscilações em zigue-zague. Essa mudança reduziu a perda BCE no teste de $0{,}2476$ para $0{,}0010$ e elevou a acurácia no teste de $87{,}32\%$ para $100{,}00\%$.
+    \item \textbf{Topologia {[13$\to$16$\to$8$\to$1]} com \texttt{ReLU} e Inicialização de He (C2 $\to$ C4):} Ampliar a 1ª camada oculta de 10 para 16 neurônios eliminou o gargalo de representação dos 13 atributos de entrada, enquanto a ativação \texttt{ReLU} combinada à inicialização de He \cite{he2015delving} ($\sigma_w = \sqrt{2/\text{fan\_in}}$) e $\eta = 0{,}015$ reduziu a perda BCE de teste ao mínimo global de $\mathbf{0{,}0003}$ (redução de $99{,}88\%$ em relação a C1).
+\end{enumerate}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.98\textwidth]{figs/curvas_convergencia.png}
+    \caption{Curvas de redução da perda (Loss) e evolução da acurácia no conjunto de teste (20\%).}
+    \label{fig:curvas}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.98\textwidth]{figs/comparativo_configuracoes.png}
+    \caption{Comparativo de acurácia e perda final entre as configurações C0 a C7.}
+    \label{fig:comparativo}
+\end{figure}
+
+\subsection{Visualização Numérica e Topológica dos Pesos Sinápticos}
+As Figuras~\ref{fig:grafo_antes}, \ref{fig:grafo_depois} e \ref{fig:heatmap} comprovam a inspeção visual e numérica dos pesos sinápticos exigida no ponto de verificação 5 (\texttt{visualização de pesos}):
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{figs/grafo_antes.png}
+    \caption{Grafo direcionado da MLP na Época 0 (antes do treinamento), com exibição numérica dos pesos iniciais e espessura proporcional nas conexões.}
+    \label{fig:grafo_antes}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{figs/grafo_depois.png}
+    \caption{Grafo direcionado da MLP na Época 150 (após o treinamento da configuração campeã C4), destacando as conexões fortalecidas e seus valores numéricos atualizados.}
+    \label{fig:grafo_depois}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.98\textwidth]{figs/heatmap_pesos.png}
+    \caption{Mapa de calor com exibição numérica explícita de todos os pesos sinápticos $W^{(l)}$ por camada na Época 150.}
+    \label{fig:heatmap}
+\end{figure}

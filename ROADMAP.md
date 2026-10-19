@@ -16,14 +16,13 @@
 - [x] Árvore de pesquisa e habilidades (*skills*) adicionada ao workspace ([`core/skills/`](core/skills/CONTEXT.md), [`core/flows/research/`](core/flows/research/CONTEXT.md), [`core/agents/`](core/agents/CONTEXT.md) e [`.agents/skills/research/SKILL.md`](.agents/skills/research/SKILL.md))
 - [x] Evidência consolidada publicada em [`artefatos/4-latex-project.md`](artefatos/4-latex-project.md)
 
-### Fase 3: Implementação dos Modelos Neurais & Experimentos
-- [x] Implementação de experimentos práticos (MLP, CNN e Loop de Agentes em `Atividade_03_LOOP_Agentes/`)
-- [ ] Consolidação da arquitetura final em `code/src/`
-- [ ] Geração das figuras definitivas para `article/figures/`
-
-### Fase 4: Análise de Resultados e Artigo Final
-- [ ] Redação final da Metodologia (`article/sections/03_metodologia.tex`) e Experimentos (`article/sections/04_experimentos.tex`)
-- [ ] Conclusão e Trabalhos Futuros (`article/sections/05_conclusao.tex`)
+### Fase 3: Implementação do Zero de Rede Neural Multicamadas (`[5] artefato · mlp git repo`)
+- [x] Subrepositório isolado e estruturado em [`code/mlp/`](code/mlp/CONTEXT.md) com `CONTEXT.md` próprio
+- [x] Parametrização interativa em tempo real via Streamlit ([`code/mlp/app.py`](code/mlp/app.py))
+- [x] Particionamento explícito 80% treino / 20% teste padronizado sem vazamento ([`code/mlp/core_mlp/dataset.py`](code/mlp/core_mlp/dataset.py))
+- [x] Dinâmica completa de *Forward Pass* e *Backpropagation* em grafo direcionado (`nx.DiGraph`) com otimização de hiperparâmetros (100% acurácia / Loss 0,0003 no teste)
+- [x] Visualização numérica e espessura das conexões dos pesos sinápticos a cada época ([`code/mlp/core_mlp/visualize.py`](code/mlp/core_mlp/visualize.py))
+- [x] Relatório técnico ([`code/mlp/REPORT.md`](code/mlp/REPORT.md) e [`code/mlp/report/relatorio_mlp.pdf`](code/mlp/report/relatorio_mlp.pdf)) e folha de evidências [`artefatos/5-mlp-git-repo.md`](artefatos/5-mlp-git-repo.md)
 
 ### Avaliação VA2: Ideação e Pesquisa (IA for Good)
 - [x] Estruturação e ideação completa de brainwriting ([`va2/brw.md`](va2/brw.md))

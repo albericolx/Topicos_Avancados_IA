@@ -1,0 +1,59 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage{geometry}
+\geometry{left=3cm,top=3cm,right=2cm,bottom=2cm}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage{caption}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue!60!black,
+    citecolor=blue!60!black,
+    urlcolor=blue!60!black
+}
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+    \textbf{\large UNIVERSIDADE FEDERAL RURAL DE PERNAMBUCO (UFRPE)}\\
+    \textbf{\normalsize DEPARTAMENTO DE COMPUTAÇÃO}\\
+    \textbf{\normalsize TÓPICOS AVANÇADOS EM INTELIGÊNCIA ARTIFICIAL (2026.2)}\\[3.5cm]
+
+    \textbf{\normalsize JOSÉ ALBÉRICO ROCHA DA SILVA}\\[3.5cm]
+
+    \textbf{\Large IMPLEMENTAÇÃO DO ZERO DE REDE NEURAL MULTICAMADAS (MLP) EM GRAFO DIRECIONADO: ARQUITETURA, DINÂMICA DE RETROPROPAGAÇÃO E OTIMIZAÇÃO DE HIPERPARÂMETROS}\\[1.5cm]
+    \textbf{\normalsize Artefato [5] $\cdot$ \texttt{mlp git repo} (\texttt{mlp$\cdot$c})}\\[3.5cm]
+
+    \begin{flushright}
+        \begin{minipage}{0.6\textwidth}
+            \small
+            Relatório técnico apresentado ao Prof. Dr. Lucas Silva na disciplina de Tópicos Avançados em Inteligência Artificial da UFRPE, contemplando os 5 pontos de verificação do artefato \texttt{mlp$\cdot$c}.
+        \end{minipage}
+    \end{flushright}
+
+    \vfill
+    \textbf{Recife -- PE}\\
+    \textbf{2026}
+\end{titlepage}
+
+\onehalfspacing
+\tableofcontents
+\newpage
+
+\input{sections/01_introducao}
+\input{sections/02_arquitetura_e_metodo}
+\input{sections/03_otimizacao_e_resultados}
+
+\newpage
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}
