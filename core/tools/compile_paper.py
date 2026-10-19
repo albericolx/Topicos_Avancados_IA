@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """
-LaTeX Paper Compiler - Compilador inteligente de artigos para Windows/Linux
+LaTeX Paper Compiler - Compilador inteligente de artigos e relatórios para Windows/Linux
 Detecta o motor LaTeX instalado (latexmk, pdflatex, xelatex, tectonic) e gera o PDF final.
 
 Uso:
-    py core/tools/compile_paper.py           # Compila o artigo papers/artigo-final/main.tex
-    py core/tools/compile_paper.py --clean   # Limpa arquivos temporários (.aux, .log, etc.)
-    py core/tools/compile_paper.py --check   # Verifica se há compiladores LaTeX instalados
+    py core/tools/compile_paper.py                        # Compila main.tex e report-mlp.tex
+    py core/tools/compile_paper.py --target report-mlp.tex # Compila apenas report-mlp.tex
+    py core/tools/compile_paper.py --clean                # Limpa arquivos temporários (.aux, .log, etc.)
+    py core/tools/compile_paper.py --check                # Verifica se há compiladores LaTeX instalados
 """
 
 import argparse
@@ -18,8 +19,6 @@ from pathlib import Path
 
 ROOT_DIR = Path(__file__).resolve().parent.parent.parent
 PAPER_DIR = ROOT_DIR / "article" if (ROOT_DIR / "article" / "main.tex").exists() else (ROOT_DIR / "papers" / "artigo-final")
-MAIN_TEX = PAPER_DIR / "main.tex"
-MAIN_PDF = PAPER_DIR / "main.pdf"
 
 TEMP_EXTENSIONS = [
     ".aux", ".bbl", ".blg", ".brf", ".fdb_latexmk", ".fls",
@@ -29,6 +28,10 @@ TEMP_EXTENSIONS = [
 
 
 def check_compilers():
+    miktex_bin = Path(os.path.expanduser("~")) / "AppData" / "Local" / "Programs" / "MiKTeX" / "miktex" / "bin" / "x64"
+    if miktex_bin.exists() and str(miktex_bin) not in os.environ.get("PATH", ""):
+        os.environ["PATH"] = os.environ.get("PATH", "") + os.pathsep + str(miktex_bin)
+
     compilers = {
         "latexmk": shutil.which("latexmk"),
         "pdflatex": shutil.which("pdflatex"),
@@ -51,72 +54,70 @@ def clean_auxiliary_files():
     print(f"=> {removed} arquivo(s) temporário(s) removido(s).\n")
 
 
-def compile_with_latexmk(latexmk_path: str):
-    print("\n[Compilador] Usando latexmk para compilação automatizada...")
-    cmd = [latexmk_path, "-pdf", "-interaction=nonstopmode", "-halt-on-error", "main.tex"]
+def compile_with_latexmk(latexmk_path: str, tex_name: str):
+    print(f"\n[Compilador] Usando latexmk para compilar {tex_name}...")
+    cmd = [latexmk_path, "-pdf", "-interaction=nonstopmode", "-halt-on-error", tex_name]
     result = subprocess.run(cmd, cwd=PAPER_DIR)
     return result.returncode == 0
 
 
-def compile_with_pdflatex(pdflatex_path: str):
+def compile_with_pdflatex(pdflatex_path: str, tex_name: str):
     bibtex_path = shutil.which("bibtex")
-    print("\n[Compilador] Executando ciclo pdflatex + bibtex...")
-    
-    # 1. Primeira passada do pdflatex
+    stem = Path(tex_name).stem
+    print(f"\n[Compilador] Executando ciclo pdflatex + bibtex para {tex_name}...")
+
     print("Passo 1/4: pdflatex...")
-    p1 = subprocess.run([pdflatex_path, "-interaction=nonstopmode", "main.tex"], cwd=PAPER_DIR, stdout=subprocess.DEVNULL)
-    
-    # 2. BibTeX se disponível
+    subprocess.run([pdflatex_path, "-interaction=nonstopmode", tex_name], cwd=PAPER_DIR, stdout=subprocess.DEVNULL)
+
     if bibtex_path:
         print("Passo 2/4: bibtex...")
-        subprocess.run([bibtex_path, "main"], cwd=PAPER_DIR, stdout=subprocess.DEVNULL)
-    
-    # 3. Segunda passada
+        subprocess.run([bibtex_path, stem], cwd=PAPER_DIR, stdout=subprocess.DEVNULL)
+
     print("Passo 3/4: pdflatex (resolvendo referências)...")
-    subprocess.run([pdflatex_path, "-interaction=nonstopmode", "main.tex"], cwd=PAPER_DIR, stdout=subprocess.DEVNULL)
-    
-    # 4. Terceira passada
+    subprocess.run([pdflatex_path, "-interaction=nonstopmode", tex_name], cwd=PAPER_DIR, stdout=subprocess.DEVNULL)
+
     print("Passo 4/4: pdflatex final...")
-    p4 = subprocess.run([pdflatex_path, "-interaction=nonstopmode", "main.tex"], cwd=PAPER_DIR)
+    p4 = subprocess.run([pdflatex_path, "-interaction=nonstopmode", tex_name], cwd=PAPER_DIR)
     return p4.returncode == 0
 
 
-def compile_with_tectonic(tectonic_path: str):
-    print("\n[Compilador] Usando Tectonic (modern TeX engine)...")
-    cmd = [tectonic_path, "main.tex"]
+def compile_with_tectonic(tectonic_path: str, tex_name: str):
+    print(f"\n[Compilador] Usando Tectonic para compilar {tex_name}...")
+    cmd = [tectonic_path, tex_name]
     result = subprocess.run(cmd, cwd=PAPER_DIR)
     return result.returncode == 0
 
 
-def show_install_guide():
-    print("""
-========================================================================
-[Aviso] Nenhum compilador LaTeX local foi encontrado no seu computador.
-========================================================================
+def compile_target(tex_name: str, compilers: dict):
+    tex_path = PAPER_DIR / tex_name
+    pdf_path = PAPER_DIR / f"{Path(tex_name).stem}.pdf"
+    if not tex_path.exists():
+        print(f"[Erro] Arquivo não encontrado: {tex_path}", file=sys.stderr)
+        return False
 
-Você tem duas opções excelentes para compilar seus artigos:
+    print(f"\n[Iniciando Compilação] Alvo: {tex_path}")
+    success = False
+    if compilers["latexmk"] and shutil.which("perl"):
+        success = compile_with_latexmk(compilers["latexmk"], tex_name)
+    if not success and compilers["tectonic"]:
+        success = compile_with_tectonic(compilers["tectonic"], tex_name)
+    if not success and (compilers["pdflatex"] or compilers["xelatex"]):
+        engine = compilers["pdflatex"] or compilers["xelatex"]
+        success = compile_with_pdflatex(engine, tex_name)
 
-Opção 1: Compilar na Nuvem via Overleaf (Já Sincronizado!)
----------------------------------------------------------
-1. No diretório papers/artigo-final, você pode enviar alterações direto:
-   cd "papers/artigo-final" && git push origin main
-2. Ou gerar um zip para importação:
-   py core/tools/overleaf_sync.py --zip
-3. O Overleaf compila instantaneamente online!
-
-Opção 2: Instalar o MiKTeX no Windows (Para compilar localmente offline)
-----------------------------------------------------------------------
-No terminal PowerShell como Administrador, execute:
-    winget install MiKTeX.MiKTeX
-
-Após a instalação, feche e reabra o terminal e execute novamente:
-    py core/tools/compile_paper.py
-========================================================================
-""")
+    if success and pdf_path.exists():
+        mirror_dir = ROOT_DIR / "papers" / "artigo-final"
+        if PAPER_DIR != mirror_dir and mirror_dir.exists():
+            shutil.copy2(tex_path, mirror_dir / tex_name)
+            shutil.copy2(pdf_path, mirror_dir / pdf_path.name)
+        print(f"\n[SUCESSO] PDF gerado com êxito em:\n=> {pdf_path}\n")
+        return True
+    return False
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Compilador do Artigo Científico em LaTeX")
+    parser = argparse.ArgumentParser(description="Compilador do Artigo Científico e Relatórios em LaTeX")
+    parser.add_argument("--target", type=str, default=None, help="Arquivo .tex alvo (ex.: main.tex ou report-mlp.tex)")
     parser.add_argument("--clean", action="store_true", help="Limpa arquivos temporários de compilação")
     parser.add_argument("--check", action="store_true", help="Verifica disponibilidade dos compiladores")
     args = parser.parse_args()
@@ -126,7 +127,7 @@ def main():
         return
 
     compilers = check_compilers()
-    
+
     if args.check:
         print("\n--- Status dos Compiladores LaTeX ---")
         for name, path in compilers.items():
@@ -135,31 +136,10 @@ def main():
         print("-------------------------------------\n")
         return
 
-    if not MAIN_TEX.exists():
-        print(f"[Erro] Arquivo principal não encontrado: {MAIN_TEX}", file=sys.stderr)
-        sys.exit(1)
-
-    print(f"\n[Iniciando Compilação] Alvo: {MAIN_TEX}")
-    success = False
-
-    if compilers["latexmk"] and shutil.which("perl"):
-        success = compile_with_latexmk(compilers["latexmk"])
-    if not success and compilers["tectonic"]:
-        success = compile_with_tectonic(compilers["tectonic"])
-    if not success and (compilers["pdflatex"] or compilers["xelatex"]):
-        engine = compilers["pdflatex"] or compilers["xelatex"]
-        success = compile_with_pdflatex(engine)
-    elif not success:
-        show_install_guide()
-        return
-
-    if success and MAIN_PDF.exists():
-        mirror_pdf = ROOT_DIR / "papers" / "artigo-final" / "main.pdf"
-        if PAPER_DIR != mirror_pdf.parent and mirror_pdf.parent.exists():
-            shutil.copy2(MAIN_PDF, mirror_pdf)
-        print(f"\n[SUCESSO] PDF gerado com êxito em:\n=> {MAIN_PDF}\n")
-    else:
-        print(f"\n[Atenção] A compilação terminou. Verifique o arquivo main.log para detalhes.")
+    targets = [args.target] if args.target else [t for t in ["main.tex", "report-mlp.tex"] if (PAPER_DIR / t).exists()]
+    for tgt in targets:
+        compile_target(tgt, compilers)
+    clean_auxiliary_files()
 
 
 if __name__ == "__main__":
