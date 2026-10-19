@@ -1,7 +1,9 @@
 # Seções do Relatório Técnico LaTeX (`code/mlp/report/sections/`)
-> Capítulos modulares do relatório técnico da Rede Neural Multicamadas (MLP).
+> Capítulos modulares do relatório técnico completo da Rede Neural Multicamadas (MLP).
 
-## Seções
-* [`01_introducao.tex`](01_introducao.tex): Fundamentação teórica, domínio clínico (*Heart Disease*) e objetivos.
-* [`02_arquitetura_e_metodo.tex`](02_arquitetura_e_metodo.tex): Desenho detalhado da arquitetura em grafo direcionado (`nx.DiGraph`), equações de *Forward Pass* e *Backpropagation*, correções matemáticas e particionamento 80/20 sem vazamento.
-* [`03_otimizacao_e_resultados.tex`](03_otimizacao_e_resultados.tex): Estudo de ablação (`C0` a `C7`), justificativa dos hiperparâmetros modificados para otimização da acurácia e redução da perda, e inspeção visual/numérica dos pesos sinápticos.
+## Seções Modulares
+* [`01_introducao.tex`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/code/mlp/report/sections/01_introducao.tex): Fundamentação teórica (Teorema da Aproximação Universal, separabilidade não linear), contexto epidemiológico da Doença Arterial Coronariana e tabela completa dos 13 atributos clínicos do dataset *Heart Disease*.
+* [`02_arquitetura_e_metodo.tex`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/code/mlp/report/sections/02_arquitetura_e_metodo.tex): Desenho detalhado da arquitetura em grafo direcionado (`nx.DiGraph`), tabela comparativa das 7 funções de ativação ($f(z)$ e $f'(z)$), equações de *Forward Pass* e *Backpropagation*, correções matemáticas e particionamento 80/20 sem vazamento.
+* [`03_otimizacao_e_resultados.tex`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/code/mlp/report/sections/03_otimizacao_e_resultados.tex): Estudo de ablação (`C0` a `C7`), justificativa detalhada dos hiperparâmetros modificados para otimização da acurácia e redução da perda, e análise das matrizes de confusão.
+* [`04_interpretabilidade_e_streamlit.tex`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/code/mlp/report/sections/04_interpretabilidade_e_streamlit.tex): Interpretabilidade clínica dos pesos sinápticos aprendidos na camada `L0 -> L1` (`ca`, `thal`, `cp`, `oldpeak`, `thalach`), mapas de calor e dinâmica de interação em tempo real no Streamlit.
+* [`05_conclusao.tex`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/code/mlp/report/sections/05_conclusao.tex): Conclusão, análise de limitações metodológicas (base completa de 1.025 registros vs. subconjunto deduplicado de 302 pacientes únicos) e direções de trabalhos futuros.

@@ -1,15 +1,41 @@
-\section{Introdução e Fundamentação Conceitual}
+\section{Introdução, Fundamentação Teórica e Domínio Clínico}
 \label{sec:introducao}
 
-O desenvolvimento de Redes Neurais Artificiais Multicamadas (\textit{Multi-Layer Perceptrons} -- MLPs) consolidou-se a partir da formulação do algoritmo de retropropagação de erros (\textit{backpropagation}) por Rumelhart, Hinton e Williams \cite{rumelhart1986learning} e da sistematização teórica do aprendizado profundo por Goodfellow, Bengio e Courville \cite{goodfellow2016deep}. Na prática contemporânea, todavia, o uso exclusivo de bibliotecas de alto nível com diferenciação automática oculta os detalhes algébricos e topológicos que governam o fluxo de ativações e gradientes.
+\subsection{Do Perceptron às Redes Neurais Multicamadas (MLP)}
+Os classificadores lineares de camada única possuem capacidade representacional restrita a problemas linearmente separáveis em $\mathbb{R}^d$. As Redes Neurais Artificiais Multicamadas (\textit{Multi-Layer Perceptrons} -- MLPs) superam essa barreira mediante a composição hierárquica de transformações afins e funções de ativação não lineares diferenciáveis \cite{goodfellow2016deep}. Pelo Teorema da Aproximação Universal \cite{cybenko1989approximation}, uma rede \textit{feedforward} dotada de camadas ocultas não lineares é capaz de aproximar qualquer função contínua em um domínio compacto com precisão arbitrária, sendo treinada por meio do algoritmo de retropropagação de erros (\textit{backpropagation}) \cite{rumelhart1986learning}.
 
-O presente trabalho documenta a implementação \textbf{do zero (\textit{from scratch})} do artefato \texttt{[5] mlp git repo} (\texttt{mlp$\cdot$c}), na qual uma rede neural multicamadas completa é modelada explicitamente sobre um \textbf{grafo direcionado ponderado (\texttt{networkx.DiGraph})} com operações numéricas em \texttt{NumPy} e interface interativa em tempo real construída em \texttt{Streamlit}.
+Este relatório documenta a concepção, correção matemática, otimização e validação do artefato \texttt{[5] mlp git repo} (\texttt{mlp$\cdot$c}), no qual a MLP é implementada \textbf{do zero (\textit{from scratch})} sobre um \textbf{grafo direcionado ponderado (\texttt{networkx.DiGraph})} com operações em \texttt{NumPy} e interface interativa em tempo real em \texttt{Streamlit} (\texttt{code/mlp/app.py}).
 
-\subsection{Domínio Clínico e Particionamento Explícito 80/20}
-O problema abordado consiste na predição diagnóstica de Doença Arterial Coronariana a partir da base \textit{Heart Disease} \cite{detrano1989international}, composta por $N = 1.025$ registros clínicos e $d = 13$ atributos fisiológicos e laboratoriais (\texttt{age}, \texttt{sex}, \texttt{cp}, \texttt{trestbps}, \texttt{chol}, \texttt{fbs}, \texttt{restecg}, \texttt{thalach}, \texttt{exang}, \texttt{oldpeak}, \texttt{slope}, \texttt{ca} e \texttt{thal}), além do alvo binário \texttt{target} ($0$ = saudável, $1$ = presença de cardiopatia).
+\subsection{Domínio Clínico e Catálogo de Atributos (\textit{Heart Disease})}
+O modelo é aplicado ao diagnóstico de Doença Arterial Coronariana utilizando o conjunto de dados \textit{Heart Disease} \cite{detrano1989international} (\texttt{code/mlp/data/heart.csv}), composto por $N = 1.025$ registros clínicos ($302$ prontuários únicos) e $d = 13$ atributos preditivos detalhados na Tabela~\ref{tab:atributos}.
 
-Para assegurar rigor metodológico e ausência total de vazamento de dados (\textit{zero data leakage}), o módulo \texttt{code/mlp/core\_mlp/dataset.py} executa:
-\begin{enumerate}
-    \item \textbf{Particionamento Explícito Estratificado (80\% Treino / 20\% Teste):} divisão determinística (\texttt{seed=42}) em $820$ amostras de treinamento ($80\%$, exportadas em \texttt{train\_80\_standardized.csv}) e $205$ amostras de teste ($20\%$, exportadas em \texttt{test\_20\_standardized.csv}), preservando a proporção de classes ($51{,}3\%$ positivos).
-    \item \textbf{Padronização Pós-Particionamento:} o estimador estatístico (\texttt{StandardScaler} $z = (x - \mu_{\text{treino}})/\sigma_{\text{treino}}$ ou \texttt{MinMaxScaler}) é ajustado (\texttt{fit\_transform}) exclusivamente sobre as $820$ amostras de treino e aplicado (\texttt{transform}) sobre as $205$ amostras de teste.
-\end{enumerate}
+\begin{table}[H]
+\centering
+\caption{Descrição clínica e fisiopatológica dos 13 atributos de entrada e variável alvo.}
+\label{tab:atributos}
+\footnotesize
+\begin{tabular}{clllp{7.4cm}}
+\toprule
+\textbf{\#} & \textbf{Atributo} & \textbf{Tipo} & \textbf{Faixa} & \textbf{Significado Clínico} \\
+\midrule
+1 & \texttt{age} & Num. & 29--77 anos & Idade do paciente (fator de risco aterosclerótico basal). \\
+2 & \texttt{sex} & Bin. & 0=F, 1=M & Sexo biológico do paciente. \\
+3 & \texttt{cp} & Cat. & 0, 1, 2, 3 & Tipo de dor torácica (0: típica, 1: atípica, 2: não-anginosa, 3: assintomática). \\
+4 & \texttt{trestbps} & Num. & 94--200 mmHg & Pressão arterial sistólica em repouso na admissão. \\
+5 & \texttt{chol} & Num. & 126--564 mg/dl & Colesterol sérico total (marcador de dislipidemia). \\
+6 & \texttt{fbs} & Bin. & 0/1 ($>120$) & Glicemia de jejum $> 120$ mg/dl (indicador metabólico/diabetes). \\
+7 & \texttt{restecg} & Cat. & 0, 1, 2 & ECG em repouso (0: normal, 1: anomalia ST-T, 2: hipertrofia VE). \\
+8 & \texttt{thalach} & Num. & 71--202 bpm & Frequência cardíaca máxima alcançada no teste ergométrico. \\
+9 & \texttt{exang} & Bin. & 0=Não, 1=Sim & Angina induzida diretamente pelo esforço físico. \\
+10 & \texttt{oldpeak} & Num. & 0.0--6.2 mm & Depressão do segmento ST induzida pelo exercício vs.\ repouso. \\
+11 & \texttt{slope} & Cat. & 0, 1, 2 & Inclinação do segmento ST no pico do exercício. \\
+12 & \texttt{ca} & Ord. & 0--4 vasos & Número de vasos coronários principais coloridos por fluoroscopia. \\
+13 & \texttt{thal} & Cat. & 0, 1, 2, 3 & Cintilografia com tálio (1: defeito fixo, 2: normal, 3: reversível). \\
+\midrule
+-- & \texttt{target} & Bin. & 0 ou 1 & Diagnóstico angiográfico (0: saudável, 1: doença cardíaca). \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Particionamento Explícito 80/20 Sem Vazamento de Dados}
+No módulo \texttt{code/mlp/core\_mlp/dataset.py}, os dados passam por divisão estratificada determinística (\texttt{seed=42}) em \textbf{80\% Treino ($820$ amostras, exportadas em \texttt{train\_80\_standardized.csv})} e \textbf{20\% Teste ($205$ amostras, exportadas em \texttt{test\_20\_standardized.csv})}. O padronizador (\texttt{StandardScaler} $\mu=0, \sigma=1$ ou \texttt{MinMaxScaler}) é ajustado (\texttt{fit\_transform}) exclusivamente sobre a partição de treino, eliminando qualquer vazamento de informação estatística (\textit{data leakage}).
