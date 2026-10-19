@@ -1,11 +1,22 @@
 # Workspace: Tópicos Avançados de IA (UFRPE 2026.2)
-> Ambiente unificado de desenvolvimento de modelos neurais, experimentação empírica, gerenciamento automatizado de literatura e confecção de artigo científico em LaTeX.
+> Ambiente unificado de desenvolvimento de modelos neurais, experimentação empírica, gerenciamento automatizado de literatura e confecção de artigos e relatórios científicos em LaTeX.
 
-Este workspace segue a filosofia de **Workspace OS** inspirada em [`lsfcin/workspace`](https://github.com/lsfcin/workspace), integrando na raiz o desenvolvimento prático de redes neurais ([`code/`](code/CONTEXT.md)), a confecção e compilação local do artigo científico no padrão **Springer LNCS** ([`article/`](article/CONTEXT.md) e [`papers/`](papers/CONTEXT.md)), o pipeline de referências com OCR zero-token ([`refs/`](refs/CONTEXT.md)), o módulo de habilidades e fluxos de pesquisa ([`core/`](core/CONTEXT.md) e [`.agents/`](.agents/CONTEXT.md)) e os artefatos de verificação da disciplina ([`artefatos/`](artefatos/CONTEXT.md) e [`va2/`](va2/CONTEXT.md)).
+Este workspace segue a filosofia de **Workspace OS** inspirada em [`lsfcin/workspace`](https://github.com/lsfcin/workspace), integrando na raiz o desenvolvimento prático de redes neurais ([`code/`](code/CONTEXT.md)), a confecção e compilação local de artigos e relatórios científicos no padrão **Springer LNCS** ([`article/`](article/CONTEXT.md) e [`papers/`](papers/CONTEXT.md)), o pipeline de referências com OCR zero-token ([`refs/`](refs/CONTEXT.md)), o módulo de habilidades e fluxos de pesquisa ([`core/`](core/CONTEXT.md) e [`.agents/`](.agents/CONTEXT.md)) e os artefatos de verificação da disciplina ([`artefatos/`](artefatos/CONTEXT.md) e [`va2/`](va2/CONTEXT.md)).
 
 ---
 
 ## Evidências de Verificação dos Artefatos
+
+### `[5] artefato · mlp tech report` (`mlp·p` · 10 pontos)
+> Folha consolidada de evidências: **[`artefatos/5-mlp-tech-report.md`](artefatos/5-mlp-tech-report.md)** · Código-Fonte LaTeX: **[`article/report-mlp.tex`](article/report-mlp.tex)** · PDF Compilado: **[`article/report-mlp.pdf`](article/report-mlp.pdf)** · Espelho Overleaf: **[`papers/artigo-final/report-mlp.tex`](papers/artigo-final/report-mlp.tex)**
+
+1. **Estrutura LaTeX (`2 pts`):** Documento dedicado [`article/report-mlp.tex`](article/report-mlp.tex) no padrão Springer LNCS (`llncs.cls` + `splncs04.bst`), compilado sem erros em [`article/report-mlp.pdf`](article/report-mlp.pdf) (14 páginas) e sincronizado com o Overleaf em [`papers/artigo-final/report-mlp.tex`](papers/artigo-final/report-mlp.tex) e [`papers/overleaf-export.zip`](papers/overleaf-export.zip).
+2. **Fundamentação Teórica (`2 pts`):** Introdução ao aprendizado de máquina supervisionado (ERM), formulação matricial da regressão linear ($\hat{\mathbf{y}} = \mathbf{X}\tilde{\mathbf{w}}$), cálculo de erro (MSE e BCE) e prova matemática da equivalência assintótica entre **Mínimos Quadrados Ordinários (OLS)** ($\tilde{\mathbf{w}}^\star = (\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{X}^\top\mathbf{y}$) e **Gradiente Descendente**.
+3. **Mecanismo Sináptico (`2 pts`):** Equações completas de *Forward Pass* e *Backpropagation* e exemplo numérico real passo a passo em um neurônio artificial com dados do Paciente #1 do *Heart Disease* ([`code/mlp/results/numerical_neuron_example.json`](code/mlp/results/numerical_neuron_example.json) e [`code/mlp/figs/neuronio_exemplo_numerico.png`](code/mlp/figs/neuronio_exemplo_numerico.png)), demonstrando queda de $14,11\%$ no $\mathcal{L}_{\text{BCE}}$ ($0,367812 \to 0,315903$) e de $22,53\%$ no $\mathcal{L}_{\text{MSE}}$ ($0,047356 \to 0,036685$) em uma única atualização.
+4. **Curvas e Métricas (`2 pts`):** Gráficos de evolução de perda e acurácia ao longo das 150 épocas para treino (80%) e teste (20%) ([`code/mlp/figs/curvas_convergencia.png`](code/mlp/figs/curvas_convergencia.png) e [`code/mlp/figs/comparativo_configuracoes.png`](code/mlp/figs/comparativo_configuracoes.png)) e tabela consolidada de resultados finais (`C0` a `C7` em [`code/mlp/results/benchmark_results.csv`](code/mlp/results/benchmark_results.csv)).
+5. **Análise Crítica (`2 pts`):** Discussão dos resultados obtidos, experimento controlado do comportamento da taxa de aprendizado ($\eta \in \{0,001, 0,015, 0,100, 0,500\}$ em [`code/mlp/results/learning_rate_study.csv`](code/mlp/results/learning_rate_study.csv) e [`code/mlp/figs/taxa_aprendizado_estudo.png`](code/mlp/figs/taxa_aprendizado_estudo.png)) e limitações estruturais do modelo em dados complexos e na coorte estritamente deduplicada ($302$ pacientes únicos de Cleveland).
+
+---
 
 ### `[5] artefato · mlp git repo` (`mlp·c` · 10 pontos)
 > Folha consolidada de evidências: **[`artefatos/5-mlp-git-repo.md`](artefatos/5-mlp-git-repo.md)** · Relatório Técnico: **[`code/mlp/REPORT.md`](code/mlp/REPORT.md)** · PDF Compilado: **[`code/mlp/report/relatorio_mlp.pdf`](code/mlp/report/relatorio_mlp.pdf)**

@@ -1,0 +1,50 @@
+{
+  "patient_index_in_train": 0,
+  "target_y": 0.0,
+  "learning_rate_eta": 0.1,
+  "features": [
+    {
+      "index": 0,
+      "name": "age",
+      "x_standardized": 0.8116,
+      "w_init": 0.35,
+      "wx_product": 0.28406,
+      "grad_w_bce": 0.249772,
+      "grad_w_mse": 0.053212,
+      "w_new_bce": 0.325023
+    },
+    {
+      "index": 7,
+      "name": "thalach",
+      "x_standardized": -1.9212,
+      "w_init": 0.48,
+      "wx_product": -0.922176,
+      "grad_w_bce": -0.591255,
+      "grad_w_mse": -0.125962,
+      "w_new_bce": 0.539125
+    },
+    {
+      "index": 9,
+      "name": "oldpeak",
+      "x_standardized": 0.6965,
+      "w_init": -0.42,
+      "wx_product": -0.29253,
+      "grad_w_bce": 0.21435,
+      "grad_w_mse": 0.045665,
+      "w_new_bce": -0.441435
+    }
+  ],
+  "bias_init": 0.12,
+  "z_pre_activation": -0.810646,
+  "a_sigmoid_output": 0.307753,
+  "dsig_dz": 0.213041,
+  "loss_mse_before": 0.047356,
+  "loss_bce_before": 0.367812,
+  "delta_bce": 0.307753,
+  "delta_mse": 0.065564,
+  "bias_new_bce": 0.089225,
+  "z_post_update": -0.990213,
+  "a_sigmoid_post_update": 0.27087,
+  "loss_bce_after": 0.315903,
+  "loss_mse_after": 0.036685
+}
