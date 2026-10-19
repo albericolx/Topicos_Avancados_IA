@@ -1,0 +1,5 @@
+lr,regime,train_loss,test_loss,train_acc,test_acc,test_f1,test_auc
+0.001,η = 0.001 (Sub-convergência Lenta),0.0769,0.0937,97.8,98.05,98.13,0.9948
+0.015,η = 0.015 (Convergência Ótima C4),0.0003,0.0003,100.0,100.0,100.0,1.0
+0.1,η = 0.100 (Oscilação Moderada),0.6871,0.6832,51.71,51.71,67.96,0.5144
+0.5,η = 0.500 (Saturação / Instabilidade),0.7618,0.7628,51.34,51.22,67.74,0.5
