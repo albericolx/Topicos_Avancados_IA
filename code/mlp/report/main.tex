@@ -3,7 +3,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[brazil]{babel}
 \usepackage{geometry}
-\geometry{left=3cm,top=3cm,right=2cm,bottom=2cm}
+\geometry{left=2.5cm,top=2.5cm,right=2cm,bottom=2cm}
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{amsmath,amssymb}
@@ -11,6 +11,8 @@
 \usepackage{hyperref}
 \usepackage{setspace}
 \usepackage{caption}
+\usepackage{array}
+\usepackage{xcolor}
 
 \hypersetup{
     colorlinks=true,
@@ -25,17 +27,17 @@
     \centering
     \textbf{\large UNIVERSIDADE FEDERAL RURAL DE PERNAMBUCO (UFRPE)}\\
     \textbf{\normalsize DEPARTAMENTO DE COMPUTAÇÃO}\\
-    \textbf{\normalsize TÓPICOS AVANÇADOS EM INTELIGÊNCIA ARTIFICIAL (2026.2)}\\[3.5cm]
+    \textbf{\normalsize TÓPICOS AVANÇADOS EM INTELIGÊNCIA ARTIFICIAL (2026.2)}\\[3.0cm]
 
-    \textbf{\normalsize JOSÉ ALBÉRICO ROCHA DA SILVA}\\[3.5cm]
+    \textbf{\normalsize JOSÉ ALBÉRICO ROCHA DA SILVA}\\[3.0cm]
 
-    \textbf{\Large IMPLEMENTAÇÃO DO ZERO DE REDE NEURAL MULTICAMADAS (MLP) EM GRAFO DIRECIONADO: ARQUITETURA, DINÂMICA DE RETROPROPAGAÇÃO E OTIMIZAÇÃO DE HIPERPARÂMETROS}\\[1.5cm]
-    \textbf{\normalsize Artefato [5] $\cdot$ \texttt{mlp git repo} (\texttt{mlp$\cdot$c})}\\[3.5cm]
+    \textbf{\Large IMPLEMENTAÇÃO DO ZERO DE REDE NEURAL MULTICAMADAS (MLP) EM GRAFO DIRECIONADO: ARQUITETURA, DINÂMICA DE RETROPROPAGAÇÃO, INTERPRETABILIDADE SINÁPTICA E OTIMIZAÇÃO DE HIPERPARÂMETROS}\\[1.2cm]
+    \textbf{\normalsize Artefato [5] $\cdot$ \texttt{mlp git repo} (\texttt{mlp$\cdot$c} $\cdot$ 10 pontos)}\\[3.0cm]
 
     \begin{flushright}
-        \begin{minipage}{0.6\textwidth}
+        \begin{minipage}{0.65\textwidth}
             \small
-            Relatório técnico apresentado ao Prof. Dr. Lucas Silva na disciplina de Tópicos Avançados em Inteligência Artificial da UFRPE, contemplando os 5 pontos de verificação do artefato \texttt{mlp$\cdot$c}.
+            Relatório técnico completo apresentado ao Prof. Dr. Lucas Silva na disciplina de Tópicos Avançados em Inteligência Artificial da UFRPE, contemplando os 5 pontos de verificação do artefato \texttt{mlp$\cdot$c}, estudo de ablação experimental, interpretabilidade clínica dos pesos sinápticos e análise de generalização.
         \end{minipage}
     \end{flushright}
 
@@ -51,6 +53,8 @@
 \input{sections/01_introducao}
 \input{sections/02_arquitetura_e_metodo}
 \input{sections/03_otimizacao_e_resultados}
+\input{sections/04_interpretabilidade_e_streamlit}
+\input{sections/05_conclusao}
 
 \newpage
 \bibliographystyle{plain}

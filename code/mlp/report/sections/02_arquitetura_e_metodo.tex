@@ -2,7 +2,7 @@
 \label{sec:arquitetura}
 
 \subsection{Representação Explícita em Grafo Direcionado (\texttt{nx.DiGraph})}
-Diferentemente de implementações matriciais opacas, a classe \texttt{MLPGraph} (\texttt{code/mlp/core\_mlp/graph.py}) instancia cada neurônio e cada sinapse como entidades explícitas de um grafo direcionado $G = (V, E)$, conforme ilustrado no desenho arquitetural da Figura~\ref{fig:arquitetura_diagrama}.
+A classe \texttt{MLPGraph} (\texttt{code/mlp/core\_mlp/graph.py}) instancia cada neurônio, nó de \textit{bias} e sinapse como elementos explícitos de um grafo direcionado $G = (V, E)$, conforme ilustrado na Figura~\ref{fig:arquitetura_diagrama}.
 
 \begin{figure}[H]
     \centering
@@ -13,34 +13,48 @@ Diferentemente de implementações matriciais opacas, a classe \texttt{MLPGraph}
 
 O funcionamento estrutural do grafo organiza-se em três componentes:
 \begin{itemize}
-    \item \textbf{Vértices Neurais (\texttt{L\{l\}\_N\{j\}}):} cada neurônio $j$ da camada $l \in \{0, \dots, L-1\}$ armazena os atributos \texttt{z} (potencial pré-ativação $z_j^{(l)}$), \texttt{value} (ativação $a_j^{(l)}$) e \texttt{delta} (erro retropropagado $\delta_j^{(l)}$).
-    \item \textbf{Vértices de Bias (\texttt{L\{l\}\_bias}):} cada camada $l \in \{0, \dots, L-2\}$ possui um nó de bias explícito com ativação constante $a_{\text{bias}}^{(l)} = +1$, conectado a todos os neurônios da camada $l+1$. Essa modelagem corrige uma limitação da versão preliminar, na qual a primeira camada oculta carecia de termo de bias.
-    \item \textbf{Arestas Sinápticas (\texttt{(u, v)}):} cada aresta direcionada armazena o peso sináptico atual \texttt{weight} ($w_{uv}$), o peso no início da época \texttt{prev\_weight} ($w_{uv}^{(t-1)}$), a variação líquida na época \texttt{delta\_weight} ($\Delta w_{uv}$), o gradiente instantâneo \texttt{gradient} ($\partial \mathcal{L}/\partial w_{uv}$) e a velocidade de momento \texttt{velocity} ($v_{uv}$).
+    \item \textbf{Vértices Neurais (\texttt{L\{l\}\_N\{j\}}):} armazenam o potencial pós-sináptico \texttt{z} ($z_j^{(l)}$), a ativação \texttt{value} ($a_j^{(l)}$) e o erro retropropagado \texttt{delta} ($\delta_j^{(l)}$).
+    \item \textbf{Vértices de Bias (\texttt{L\{l\}\_bias}):} cada camada $l \in \{0, \dots, L-2\}$ possui um nó de bias explícito com ativação constante $a_{\text{bias}}^{(l)} = +1$, conectado a todos os neurônios da camada $l+1$. Essa estrutura corrige a limitação da versão preliminar (\texttt{C0}), na qual a Camada Oculta 1 não possuía termo de bias.
+    \item \textbf{Arestas Sinápticas (\texttt{(u, v)}):} armazenam \texttt{weight} ($w_{uv}$), \texttt{prev\_weight} ($w_{uv}^{(t-1)}$), \texttt{delta\_weight} ($\Delta w_{uv}$), \texttt{gradient} ($\partial \mathcal{L}/\partial w_{uv}$) e \texttt{velocity} ($v_{uv}$). Na topologia campeã \texttt{[13$\to$16$\to$8$\to$1]}, o grafo gerencia $(14\times 16) + (17\times 8) + (9\times 1) = 369$ conexões sinápticas.
 \end{itemize}
 
-\subsection{Propagação Direta (\textit{Forward Pass})}
-Para cada amostra $\mathbf{x} \in \mathbb{R}^{13}$, os nós de entrada recebem $a_i^{(0)} = x_i$. Em seguida, para cada camada $l = 1, \dots, L-1$, calcula-se o potencial pós-sináptico e a ativação não linear:
-\begin{equation}
-    z_j^{(l)} = \sum_{i=1}^{N_{l-1}} w_{ij}^{(l)} a_i^{(l-1)} + b_j^{(l)}, \qquad a_j^{(l)} = f^{(l)}\!\left(z_j^{(l)}\right)
-\end{equation}
-Nas camadas ocultas, o sistema suporta sete funções de ativação configuráveis em tempo real (\texttt{ReLU}, \texttt{Leaky ReLU}, \texttt{Tanh}, \texttt{Sigmoide}, \texttt{ELU}, \texttt{SELU} e \texttt{ReLU6}). Na camada de saída ($L-1$), emprega-se a função sigmoide $\hat{y} = \sigma(z_{\text{out}}) = (1 + e^{-z_{\text{out}}})^{-1}$.
+\subsection{Catálogo das 7 Funções de Ativação Implementadas}
+A Tabela~\ref{tab:ativacoes} apresenta as sete funções de ativação implementadas do zero na classe \texttt{MLPGraph}, juntamente com suas derivadas analíticas e propriedades de condicionamento de gradiente \cite{glorot2010understanding,he2015delving,klambauer2017self}.
 
-\subsection{Retropropagação (\textit{Backpropagation}) e Correção Analítica do Gradiente BCE}
-A função objetivo adotada é a Entropia Cruzada Binária (\textit{Binary Cross-Entropy} -- BCE) com regularização $L_2$:
+\begin{table}[H]
+\centering
+\caption{Funções de ativação implementadas do zero em \texttt{MLPGraph} e suas derivadas analíticas.}
+\label{tab:ativacoes}
+\footnotesize
+\begin{tabular}{llllp{5.8cm}}
+\toprule
+\textbf{Função} & \textbf{Expressão $f(z)$} & \textbf{Derivada $f'(z)$} & \textbf{Imagem} & \textbf{Propriedades Numéricas} \\
+\midrule
+Sigmoide & $(1 + e^{-z})^{-1}$ & $f(z)(1-f(z))$ & $(0,1)$ & Derivada máx.\ $0{,}25$; sofre \textit{vanishing gradient} para $|z|>4$. \\
+Tanh & $\tanh(z)$ & $1 - \tanh^2(z)$ & $(-1,1)$ & Centrada em zero; derivada máx.\ $1{,}0$ em $z=0$. \\
+ReLU & $\max(0,z)$ & $1$ se $z>0$; $0$ c.c. & $[0,\infty)$ & Sem saturação para $z>0$; exige inicialização de He. \\
+Leaky ReLU & $z$ ($z>0$); $0{,}01z$ c.c. & $1$ ($z>0$); $0{,}01$ c.c. & $(-\infty,\infty)$ & Previne neurônios mortos (\textit{dying ReLU}) para $z\le 0$. \\
+ReLU6 & $\min(6, \max(0,z))$ & $1$ ($0<z<6$); $0$ c.c. & $[0,6]$ & Limita ativações excessivas em camadas profundas. \\
+ELU & $z$ ($z>0$); $e^z-1$ c.c. & $1$ ($z>0$); $e^z$ c.c. & $(-1,\infty)$ & Transição suave em $z=0$ e média próxima de zero. \\
+SELU & $\lambda_s z$ ou $\lambda_s\alpha_s(e^z-1)$ & $\lambda_s$ ou $\lambda_s\alpha_s e^z$ & $(-\lambda_s\alpha_s,\infty)$ & Auto-normalizante ($\lambda_s\approx 1{,}0507, \alpha_s\approx 1{,}6733$). \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Propagação Direta (\textit{Forward Pass}) e Retropropagação (\textit{Backpropagation})}
+No \textit{Forward Pass}, cada neurônio $j$ da camada $l = 1, \dots, L-1$ computa:
+\begin{equation}
+    z_j^{(l)} = \sum_{i=0}^{N_{l-1}-1} w_{ij}^{(l)} a_i^{(l-1)} + b_j^{(l)}, \qquad a_j^{(l)} = f^{(l)}\!\left(z_j^{(l)}\right)
+\end{equation}
+sendo a saída $\hat{y} = \sigma(z_{\text{out}})$. Na retropropagação sob perda \textit{Binary Cross-Entropy} (BCE) com regularização $L_2$:
 \begin{equation}
     \mathcal{L}(\hat{y}, y) = -\Big[y \ln(\hat{y}) + (1 - y)\ln(1 - \hat{y})\Big] + \frac{\lambda}{2}\sum_{l,i,j}\left(w_{ij}^{(l)}\right)^2
 \end{equation}
-
-Na revisão da versão preliminar, constatou-se que o sinal de erro na saída estava implementado como $(\hat{y} - y)\sigma'(z_{\text{out}})$, expressão correspondente à perda quadrática (MSE) que introduz saturação prematura quando $\hat{y} \to 0$ ou $\hat{y} \to 1$. Pela regra da cadeia aplicada à BCE, o termo $\hat{y}(1-\hat{y})$ cancela-se exatamente:
+o termo $\hat{y}(1-\hat{y})$ da derivada da sigmoide cancela-se analiticamente com o denominador de $\partial \mathcal{L}/\partial \hat{y}$, resultando em:
 \begin{equation}
-    \delta^{(L-1)} = \frac{\partial \mathcal{L}}{\partial z_{\text{out}}} = \left(\frac{\hat{y} - y}{\hat{y}(1 - \hat{y})}\right)\hat{y}(1 - \hat{y}) = \hat{y} - y
+    \delta^{(L-1)} = \frac{\partial \mathcal{L}}{\partial z_{\text{out}}} = \hat{y} - y, \qquad \delta_j^{(l)} = \left(\sum_{k} w_{jk}^{(l+1)} \delta_k^{(l+1)}\right) f'^{(l)}\!\left(z_j^{(l)}\right)
 \end{equation}
-
-Para as camadas ocultas $l = L-2, \dots, 1$, o erro é retropropagado pelas arestas sucessoras de cada nó:
-\begin{equation}
-    \delta_j^{(l)} = \left(\sum_{k=1}^{N_{l+1}} w_{jk}^{(l+1)} \delta_k^{(l+1)}\right) f'^{(l)}\!\left(z_j^{(l)}\right)
-\end{equation}
-Por fim, os pesos são atualizados por Gradiente Descendente com \textit{Momentum} ($\beta$) e decaimento $L_2$ ($\lambda$):
+Por fim, os pesos sinápticos são atualizados com \textit{Momentum} ($\beta$) e decaimento $L_2$ ($\lambda$):
 \begin{equation}
     g_{ij}^{(l)} = a_i^{(l-1)}\delta_j^{(l)} + \lambda w_{ij}^{(l)}, \qquad v_{ij}^{(l)} \leftarrow \beta v_{ij}^{(l)} + g_{ij}^{(l)}, \qquad w_{ij}^{(l)} \leftarrow w_{ij}^{(l)} - \eta_t v_{ij}^{(l)}
 \end{equation}
