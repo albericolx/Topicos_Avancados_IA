@@ -73,6 +73,7 @@ Thumbs.db
 *.tmp
 *~
 
-# Overleaf exports & Temporary Zips
+# Overleaf local git metadata & Temporary Zips
+.overleaf-git/
 *.zip
-papers/overleaf-export.zip
+!papers/overleaf-export.zip
