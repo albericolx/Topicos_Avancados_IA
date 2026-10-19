@@ -39,19 +39,21 @@ def sanitize_token(text: str) -> str:
 def check_overleaf_status():
     """Verifica a conexão bidirecional com o Overleaf via Git e exibe os commits registrados."""
     print(f"[Overleaf Sync] Verificando repositório espelho em: {PAPER_DIR}")
-    if not (PAPER_DIR / ".git").exists():
+    git_dir = PAPER_DIR / ".overleaf-git" if (PAPER_DIR / ".overleaf-git").exists() else (PAPER_DIR / ".git")
+    if not git_dir.exists():
         print("[Aviso] Sub-repositório Git do Overleaf não encontrado localmente.", file=sys.stderr)
         return False
 
+    git_base = ["git", f"--git-dir={git_dir}", f"--work-tree={PAPER_DIR}"]
     res_remote = subprocess.run(
-        ["git", "-C", str(PAPER_DIR), "remote", "-v"],
+        git_base + ["remote", "-v"],
         capture_output=True, text=True, encoding="utf-8", errors="replace"
     )
     print("\n[Remoto Configurado (Token Sanitizado)]:")
     print(sanitize_token(res_remote.stdout.strip()))
 
     res_log = subprocess.run(
-        ["git", "-C", str(PAPER_DIR), "log", "--all", "-n", "12", "--oneline"],
+        git_base + ["log", "--all", "-n", "12", "--oneline"],
         capture_output=True, text=True, encoding="utf-8", errors="replace"
     )
     print("\n[Histórico de Contribuições Sincronizadas com Overleaf]:")
