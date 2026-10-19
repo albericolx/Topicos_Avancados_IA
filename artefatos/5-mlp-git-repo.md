@@ -17,17 +17,17 @@
 
 ## Quadro-Resumo dos 5 Pontos de Verificação (10 pontos)
 
-| # | Ponto de Verificação | Pontuação | Status | Evidência Principal no Repositório |
+| # | Ponto de Verificação | Pontuação | Status | Evidência Principal no Repositório (Links Diretos GitHub) |
 |---|---|---:|---|---|
-| **1** | **Subrepositório Estruturado** | 2 pts | Concluído | Diretório isolado [`code/mlp/`](https://github.com/albericolx/Topicos_Avancados_IA/tree/main/code/mlp) com seu próprio [`code/mlp/CONTEXT.md`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/code/mlp/CONTEXT.md) e `CONTEXT.md` em cada subpasta (`core_mlp/`, `data/`, `figs/`, `results/`, `report/`) |
+| **1** | **Subrepositório Estruturado** | 2 pts | Concluído | Diretório isolado [`code/mlp/`](https://github.com/albericolx/Topicos_Avancados_IA/tree/main/code/mlp) com [`code/mlp/README.md`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/code/mlp/README.md), [`code/mlp/CONTEXT.md`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/code/mlp/CONTEXT.md) e `CONTEXT.md` em cada subpasta (`core_mlp/`, `data/`, `figs/`, `results/`, `report/`) |
 | **2** | **Parametrização Interativa** | 2 pts | Concluído | Interface Streamlit [`code/mlp/app.py`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/code/mlp/app.py) configurável em tempo real (1 a 4 camadas ocultas, neurônios por camada, 7 funções de ativação, taxa de aprendizagem $\eta$, momentum $\beta$, L2 $\lambda$ e épocas) |
 | **3** | **Particionamento de Dados** | 2 pts | Concluído | Módulo [`code/mlp/core_mlp/dataset.py`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/code/mlp/core_mlp/dataset.py) + partições explícitas padronizadas em **80% Treino** ([`train_80_standardized.csv`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/code/mlp/data/train_80_standardized.csv), 820 amostras) e **20% Teste** ([`test_20_standardized.csv`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/code/mlp/data/test_20_standardized.csv), 205 amostras) |
 | **4** | **Dinâmica de Treinamento** | 2 pts | Concluído | Rotina completa do zero em [`code/mlp/core_mlp/graph.py`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/code/mlp/core_mlp/graph.py) e [`code/mlp/core_mlp/train.py`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/code/mlp/core_mlp/train.py) executando `forward()` e `backward()` com gradiente descendente sobre `nx.DiGraph` |
 | **5** | **Visualização de Pesos** | 2 pts | Concluído | Módulo [`code/mlp/core_mlp/visualize.py`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/code/mlp/core_mlp/visualize.py) + abas em [`code/mlp/app.py`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/code/mlp/app.py) com exibição numérica dos pesos e espessura das conexões no grafo ([`grafo_depois.png`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/code/mlp/figs/grafo_depois.png)), mapas de calor ([`heatmap_pesos.png`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/code/mlp/figs/heatmap_pesos.png)) e tabela por época ([`best_model_synaptic_weights.csv`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/code/mlp/results/best_model_synaptic_weights.csv)) |
 
-> 📄 **Relatório Técnico Completo (Markdown e PDF Compilado):**
-> - Relatório Markdown: **[`code/mlp/REPORT.md`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/code/mlp/REPORT.md)**
-> - Relatório PDF Compilado (LaTeX): **[`code/mlp/report/relatorio_mlp.pdf`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/code/mlp/report/relatorio_mlp.pdf)** (Código-fonte LaTeX em [`code/mlp/report/main.tex`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/code/mlp/report/main.tex))
+> 📄 **Relatório Técnico Completo e Expandido (9 Seções — Markdown e PDF Compilado):**
+> - Relatório Técnico Markdown (com Fundamentação, Arquitetura, 7 Funções de Ativação, Ablação C0–C7, Interpretabilidade Clínica de Pesos Sinápticos, Dinâmica Streamlit, Conclusão, Limitações Metodológicas e Trabalhos Futuros): **[`code/mlp/REPORT.md`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/code/mlp/REPORT.md)**
+> - Relatório Técnico PDF Compilado (LaTeX IEEEtran): **[`code/mlp/report/relatorio_mlp.pdf`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/code/mlp/report/relatorio_mlp.pdf)** (Código-fonte LaTeX em [`code/mlp/report/main.tex`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/code/mlp/report/main.tex))
 
 ---
 
@@ -38,12 +38,13 @@
 ### Evidências Instrumentais
 O projeto foi isolado sob [`code/mlp/`](https://github.com/albericolx/Topicos_Avancados_IA/tree/main/code/mlp) seguindo a especificação modular do workspace:
 - [`code/CONTEXT.md`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/code/CONTEXT.md): Roteamento da pasta `code/` apontando para o subrepositório `code/mlp/`.
+- [`code/mlp/README.md`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/code/mlp/README.md): Visão geral automática ao acessar a pasta `code/mlp/` no GitHub.
 - [`code/mlp/CONTEXT.md`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/code/mlp/CONTEXT.md): Especificação completa dos objetivos, arquitetura do grafo direcionado, estrutura de diretórios e instruções de execução.
 - [`code/mlp/core_mlp/CONTEXT.md`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/code/mlp/core_mlp/CONTEXT.md): Documentação dos módulos internos (`dataset.py`, `graph.py`, `train.py`, `visualize.py`).
 - [`code/mlp/data/CONTEXT.md`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/code/mlp/data/CONTEXT.md): Documentação do dataset e das partições 80/20 padronizadas.
 - [`code/mlp/figs/CONTEXT.md`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/code/mlp/figs/CONTEXT.md): Catálogo das figuras geradas.
 - [`code/mlp/results/CONTEXT.md`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/code/mlp/results/CONTEXT.md): Catálogo dos resultados experimentais e pesos exportados.
-- [`code/mlp/report/CONTEXT.md`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/code/mlp/report/CONTEXT.md): Documentação do relatório LaTeX/PDF da MLP.
+- [`code/mlp/report/CONTEXT.md`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/code/mlp/report/CONTEXT.md) e [`code/mlp/report/sections/CONTEXT.md`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/code/mlp/report/sections/CONTEXT.md): Documentação do relatório LaTeX/PDF da MLP.
 
 ---
 
@@ -117,9 +118,9 @@ O projeto foi isolado sob [`code/mlp/`](https://github.com/albericolx/Topicos_Av
 
 ---
 
-## 6. Resumo da Otimização de Acurácia e Redução de Perdas
+## 6. Resumo da Otimização de Acurácia, Interpretabilidade Clínica e Conclusão
 
-O estudo experimental completo executado por [`code/mlp/run_experiments.py`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/code/mlp/run_experiments.py) (resultados em [`code/mlp/results/benchmark_results.csv`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/code/mlp/results/benchmark_results.csv)) comprova o ganho obtido pelas modificações arquiteturais e de hiperparâmetros:
+O estudo experimental completo executado por [`code/mlp/run_experiments.py`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/code/mlp/run_experiments.py) (resultados em [`code/mlp/results/benchmark_results.csv`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/code/mlp/results/benchmark_results.csv) e detalhado na íntegra em [`code/mlp/REPORT.md`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/code/mlp/REPORT.md)) comprova o ganho obtido pelas modificações arquiteturais e de hiperparâmetros:
 
 | ID | Configuração / Hiperparâmetros | Loss Treino | Loss Teste | Acur. Treino | Acur. Teste | F1-Score | AUC-ROC |
 |---|---|---:|---:|---:|---:|---:|---:|
@@ -133,3 +134,7 @@ O estudo experimental completo executado por [`code/mlp/run_experiments.py`](htt
 | **C7** | `[13→24→16→8→1]`, 3 Ocultas, ReLU, $\eta=0.015$, $\beta=0.85$ | 0.3361 | 0.3283 | 88.54% | **89.27%** | 89.32% | 0.9104 |
 
 ![Curvas de Convergência](../code/mlp/figs/curvas_convergencia.png)
+
+### Interpretabilidade Clínica e Análise Crítica (Resumo da Seção 6 e Seção 8 do Relatório)
+- **Atributos Clínicos Dominantes na Camada `L0 -> L1`:** A inspeção das normas $\sum_{j=0}^{15} |w_{ij}^{(1)}|$ demonstra que a rede atribuiu maior saliência sináptica a `restecg` ($\sum |w| = 10,898$), `ca` ($\sum |w| = 10,781$, com o maior peso individual da camada de entrada $w = -2,2440$ em `L0_N11 -> L1_N12`), `exang` ($\sum |w| = 9,201$), `sex` ($\sum |w| = 9,034$), `thalach` ($\sum |w| = 8,399$), `thal` ($\sum |w| = 8,283$) e `slope` ($\sum |w| = 8,015$, segundo maior peso individual $+1,9171$ em `L0_N10 -> L1_N2`), alinhando-se à fisiopatologia da doença arterial coronariana.
+- **Limitações Metodológicas (1.025 Registros vs. 302 Pacientes Únicos de Cleveland):** Conforme detalhado na Seção 8 de [`code/mlp/REPORT.md`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/code/mlp/REPORT.md), a acurácia de $100,00\%$ no dataset padrão de $1.025$ registros reflete a presença de perfis clínicos replicados entre treino e teste. No conjunto estritamente deduplicado ($302$ pacientes únicos, $241$ treino / $61$ teste), o controle de capacidade (`[13 -> 8 -> 1]`) combinado à regularização $L_2$ ($\lambda = 0,02$) e Momentum ($\beta = 0,5$) eleva a acurácia de teste em pacientes inéditos de $75,41\%$ para **$80,33\%$** (`AUC-ROC = 0,8658`, `Loss = 0,4671`), demonstrando a importância do controle de complexidade em coortes clínicas reais.

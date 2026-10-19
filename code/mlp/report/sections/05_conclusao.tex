@@ -1,0 +1,24 @@
+\section{Conclusão, Limitações Metodológicas e Trabalhos Futuros}
+\label{sec:conclusao}
+
+\subsection{Síntese das Contribuições e Conclusões}
+A implementação do zero da Rede Neural Multicamadas sobre um grafo direcionado (\texttt{nx.DiGraph}) cumpriu com rigor todos os cinco pontos de verificação do artefato \texttt{[5] mlp git repo} (\texttt{mlp$\cdot$c}):
+\begin{enumerate}
+    \item \textbf{Transparência Algébrica e Visual:} A representação explícita de neurônios, nós de bias, potenciais pós-sinápticos, gradientes e pesos em estrutura de grafo eliminou a opacidade dos motores de diferenciação automática, permitindo inspecionar visualmente e numericamente cada sinapse a cada época de treinamento.
+    \item \textbf{Correção Matemática e Otimização de Desempenho:} A correção do nó de bias na primeira camada oculta (\texttt{L0\_bias}), a adoção da derivada analítica exata da perda BCE ($\delta^{(L-1)} = \hat{y} - y$) e a padronização Z-Score pós-split (\texttt{StandardScaler}) eliminaram o \textit{vanishing gradient} e as oscilações em zigue-zague, elevando a acurácia no conjunto de teste de $86{,}83\%$ (\texttt{C0}) para $\mathbf{100{,}00\%}$ (\texttt{C4}) e reduzindo a perda BCE em $\mathbf{99{,}88\%}$ ($0{,}2476 \to 0{,}0003$).
+    \item \textbf{Coerência Fisiopatológica:} A análise dos pesos sinápticos aprendidos na camada \texttt{L0 $\to$ L1} confirmou que a rede atribuiu maior importância relativa aos preditores clínicos clássicos de doença coronariana (\texttt{ca}, \texttt{restecg}, \texttt{slope}, \texttt{exang}, \texttt{thalach} e \texttt{thal}).
+\end{enumerate}
+
+\subsection{Limitações Metodológicas: Base Completa (1.025) vs.\ Base Deduplicada (302)}
+Uma análise crítica essencial diz respeito à estrutura do dataset \textit{Heart Disease} difundido no Kaggle ($1.025$ registros). Essa base resulta da reamostragem de $302$ prontuários únicos da coorte de Cleveland; assim, na divisão 80/20 sobre os $1.025$ registros ($820$ treino / $205$ teste), perfis clínicos idênticos estão presentes em ambas as partições, permitindo que arquiteturas bem condicionadas (\texttt{C2}--\texttt{C5}) atinjam $100\%$ de acurácia no teste.
+
+Para avaliar a generalização estrita sobre pacientes $100\%$ inéditos, implementou-se em \texttt{dataset.py} e no painel do Streamlit a opção de deduplicação prévia ($302$ registros únicos: $241$ treino / $61$ teste). Nesse cenário mais restrito, a arquitetura sem regularização (\texttt{[13$\to$16$\to$8$\to$1]}, $\lambda=0$) atinge $100{,}0\%$ no treino e $75{,}41\%$ no teste ($\text{AUC}=0{,}8122$), evidenciando sobreajuste (\textit{overfitting}) devido ao tamanho reduzido da amostra ($N=241$). Ao aplicar controle de capacidade e regularização $L_2$ (\texttt{[13$\to$8$\to$1]}, $\lambda=0{,}02$, $\beta=0{,}5$), a acurácia sobre pacientes inéditos eleva-se para $\mathbf{80{,}33\%}$ com $\textbf{AUC-ROC} = \mathbf{0{,}8658}$ ($\text{Loss} = 0{,}4671$), demonstrando na prática a eficácia do decaimento de pesos ($L_2$) contra o \textit{overfitting}.
+
+\subsection{Trabalhos Futuros}
+Como desdobramentos futuros desta infraestrutura em grafo direcionado, propõem-se:
+\begin{itemize}
+    \item \textbf{Otimizadores Adaptativos no Grafo (\texttt{Adam} / \texttt{RMSProp}):} incorporar aos atributos de cada aresta do \texttt{nx.DiGraph} a estimativa do segundo momento exponencial dos gradientes ($s_{ij}^{(t)}$) com correção de viés.
+    \item \textbf{Regularização Topológica (\textit{Graph Dropout}):} desativar estocasticamente uma fração $p$ dos nós ocultos a cada passo de treinamento diretamente sobre a topologia do grafo.
+    \item \textbf{Validação Cruzada Estratificada ($k$-Fold):} integrar avaliação por $10$-Fold Cross-Validation sobre os $302$ pacientes únicos para estimação de intervalos de confiança.
+    \item \textbf{Explicabilidade Local por Paciente:} implementar \textit{Integrated Gradients} ao longo dos caminhos direcionados de $G=(V,E)$ para explicar predições individuais na interface Streamlit.
+\end{itemize}
