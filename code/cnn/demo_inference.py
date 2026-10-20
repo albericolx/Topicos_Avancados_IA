@@ -1,10 +1,10 @@
-"""
+﻿"""
 demo_inference.py
 =================
-Comprova o Ponto de Verificação 3: 'Inferência Funcional'
-Executa inferência com pesos treinados (ou inicializados deterministicamente)
+Comprova o Ponto de VerificaÃ§Ã£o 3: 'InferÃªncia Funcional'
+Executa inferÃªncia com pesos treinados (ou inicializados deterministicamente)
 sobre uma amostra de 10 imagens reais do CIFAR-10, exibindo classe real, classe prevista,
-confiança percentual e tempo de inferência por amostra.
+confianÃ§a percentual e tempo de inferÃªncia por amostra.
 Gera a figura `code/cnn/figs/amostras_inferencia.png`.
 """
 import os
@@ -29,11 +29,14 @@ def run_demo(checkpoint_path: str = None):
     device = torch.device("cpu")
     model = BaselineCNN().to(device)
     if checkpoint_path and os.path.exists(checkpoint_path):
-        state = torch.load(checkpoint_path, map_location=device)
+        try:
+            state = torch.load(checkpoint_path, map_location=device, weights_only=False)
+        except Exception:
+            state = torch.load(checkpoint_path, map_location=device)
         model.load_state_dict(state.get("model_state", state))
-        print(f"[inferência] Carregado checkpoint: {checkpoint_path}")
+        print(f"[inferÃªncia] Carregado checkpoint: {checkpoint_path}")
     else:
-        print("[inferência] Executando com pesos base determinísticos.")
+        print("[inferÃªncia] Executando com pesos base determinÃ­sticos.")
     model.eval()
 
     data_dir = os.path.join(BASE_DIR, "data")
@@ -48,7 +51,7 @@ def run_demo(checkpoint_path: str = None):
     axes = axes.flatten()
 
     results = []
-    print("\n=== RESULTADOS DA INFERÊNCIA AMOSTRAL (CIFAR-10) ===")
+    print("\n=== RESULTADOS DA INFERÃŠNCIA AMOSTRAL (CIFAR-10) ===")
     for k, idx in enumerate(indices):
         img_pil, target = raw_test[idx]
         x = transform(img_pil).unsqueeze(0).to(device)
@@ -80,12 +83,12 @@ def run_demo(checkpoint_path: str = None):
                           fontsize=9, fontweight="bold", color=title_color)
         axes[k].axis("off")
 
-    fig.suptitle("Inferência Funcional sobre Amostras Reais do CIFAR-10 (Baseline CNN)", fontsize=12, fontweight="bold")
+    fig.suptitle("InferÃªncia Funcional sobre Amostras Reais do CIFAR-10 (Baseline CNN)", fontsize=12, fontweight="bold")
     fig.tight_layout()
     out_img = os.path.join(FIGS_DIR, "amostras_inferencia.png")
     fig.savefig(out_img, dpi=180, bbox_inches="tight")
     plt.close(fig)
-    print(f"\n[inferência] Gráfico salvo em: {out_img}")
+    print(f"\n[inferÃªncia] GrÃ¡fico salvo em: {out_img}")
 
     out_json = os.path.join(BASE_DIR, "results", "amostras_inferencia.json")
     os.makedirs(os.path.dirname(out_json), exist_ok=True)
@@ -94,5 +97,10 @@ def run_demo(checkpoint_path: str = None):
     return results
 
 
-if __name__ == "__main__":
-    run_demo()
+if __name__ == '__main__':
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--checkpoint', type=str, default='results/checkpoints/baseline_model.pth')
+    args = parser.parse_args()
+    run_demo(checkpoint_path=args.checkpoint)
+

@@ -1,0 +1,212 @@
+[
+  {
+    "id": "baseline",
+    "name": "Baseline (Artigo)",
+    "history": {
+      "epoch": [
+        1,
+        2
+      ],
+      "train_loss": [
+        1.6478033826446534,
+        1.3077083187103271
+      ],
+      "train_acc": [
+        0.39108,
+        0.52668
+      ],
+      "test_loss": [
+        1.3706523487091065,
+        1.095808424758911
+      ],
+      "test_acc": [
+        0.5084,
+        0.599
+      ],
+      "epoch_time": [
+        590.7134506702423,
+        624.7631280422211
+      ]
+    },
+    "metrics": {
+      "ID": "baseline",
+      "Configuração": "Baseline (Artigo)",
+      "Épocas": 2,
+      "Parâmetros Treináveis": 551722,
+      "Parâmetros Totais (c/ BN)": 552881,
+      "Acurácia Teste (%)": 59.9,
+      "Loss Teste": 1.0958,
+      "F1-Score Macro (%)": 60.22,
+      "Tempo Treino (s)": 1215.5,
+      "Throughput (amostras/s)": 190.5
+    }
+  },
+  {
+    "id": "mod1_residual",
+    "name": "Mod 1: Conexões Residuais",
+    "history": {
+      "epoch": [
+        1,
+        2
+      ],
+      "train_loss": [
+        1.655474294090271,
+        1.3199283126068115
+      ],
+      "train_acc": [
+        0.39068,
+        0.519
+      ],
+      "test_loss": [
+        1.5459456356048584,
+        1.1505366558074952
+      ],
+      "test_acc": [
+        0.4404,
+        0.593
+      ],
+      "epoch_time": [
+        540.1231207847595,
+        504.8022463321686
+      ]
+    },
+    "metrics": {
+      "ID": "mod1_residual",
+      "Configuração": "Mod 1: Conexões Residuais",
+      "Épocas": 2,
+      "Parâmetros Treináveis": 562506,
+      "Parâmetros Totais (c/ BN)": 564116,
+      "Acurácia Teste (%)": 59.3,
+      "Loss Teste": 1.1505,
+      "F1-Score Macro (%)": 60.12,
+      "Tempo Treino (s)": 1044.9,
+      "Throughput (amostras/s)": 235.7
+    }
+  },
+  {
+    "id": "mod2_augment",
+    "name": "Mod 2: Data Augmentation",
+    "history": {
+      "epoch": [
+        1,
+        2
+      ],
+      "train_loss": [
+        1.7870818796157837,
+        1.4338103701019287
+      ],
+      "train_acc": [
+        0.342,
+        0.47924
+      ],
+      "test_loss": [
+        1.47344013671875,
+        1.2014492744445802
+      ],
+      "test_acc": [
+        0.4722,
+        0.5586
+      ],
+      "epoch_time": [
+        502.7160556316376,
+        475.9941680431366
+      ]
+    },
+    "metrics": {
+      "ID": "mod2_augment",
+      "Configuração": "Mod 2: Data Augmentation",
+      "Épocas": 2,
+      "Parâmetros Treináveis": 551722,
+      "Parâmetros Totais (c/ BN)": 552881,
+      "Acurácia Teste (%)": 55.86,
+      "Loss Teste": 1.2014,
+      "F1-Score Macro (%)": 54.85,
+      "Tempo Treino (s)": 978.7,
+      "Throughput (amostras/s)": 258.9
+    }
+  },
+  {
+    "id": "mod3_se",
+    "name": "Mod 3: Squeeze-and-Excitation",
+    "history": {
+      "epoch": [
+        1,
+        2
+      ],
+      "train_loss": [
+        1.6385671381759643,
+        1.2441448848724366
+      ],
+      "train_acc": [
+        0.3976,
+        0.55216
+      ],
+      "test_loss": [
+        1.3219147357940675,
+        1.134853519821167
+      ],
+      "test_acc": [
+        0.5148,
+        0.5926
+      ],
+      "epoch_time": [
+        500.5446979999542,
+        477.1243987083435
+      ]
+    },
+    "metrics": {
+      "ID": "mod3_se",
+      "Configuração": "Mod 3: Squeeze-and-Excitation",
+      "Épocas": 2,
+      "Parâmetros Treináveis": 554538,
+      "Parâmetros Totais (c/ BN)": 555697,
+      "Acurácia Teste (%)": 59.26,
+      "Loss Teste": 1.1349,
+      "F1-Score Macro (%)": 59.77,
+      "Tempo Treino (s)": 977.7,
+      "Throughput (amostras/s)": 227.4
+    }
+  },
+  {
+    "id": "combined",
+    "name": "Modelo Combinado (Res+SE+Aug)",
+    "history": {
+      "epoch": [
+        1,
+        2
+      ],
+      "train_loss": [
+        1.783041063156128,
+        1.4841138748931886
+      ],
+      "train_acc": [
+        0.33492,
+        0.45372
+      ],
+      "test_loss": [
+        1.6159496479034423,
+        1.3791127878189087
+      ],
+      "test_acc": [
+        0.4046,
+        0.514
+      ],
+      "epoch_time": [
+        541.8486981391907,
+        520.6579341888428
+      ]
+    },
+    "metrics": {
+      "ID": "combined",
+      "Configuração": "Modelo Combinado (Res+SE+Aug)",
+      "Épocas": 2,
+      "Parâmetros Treináveis": 565322,
+      "Parâmetros Totais (c/ BN)": 566932,
+      "Acurácia Teste (%)": 51.4,
+      "Loss Teste": 1.3791,
+      "F1-Score Macro (%)": 51.8,
+      "Tempo Treino (s)": 1062.5,
+      "Throughput (amostras/s)": 237.1
+    }
+  }
+]
