@@ -52,6 +52,8 @@
    - 2.3 Regularização Estocástica e Expansão do Suporte Amostral (Data Augmentation, AutoAugment, Mixup, Dropout).
 4. **Seção 3: Metodologia Experimental e Arquiteturas Propostas:**
    - **Diagramas Visuais das Arquiteturas (Figura 1):** Painel ilustrativo completo contendo (a) Baseline CNN, (b) Conexões Residuais, (c) Data Augmentation, (d) Módulo SE-Attention e (e) Modelo Combinado.
+   
+     ![Diagramas Estruturais das Arquiteturas](../article/figures/diagramas_arquiteturas.png)
    - 3.1 Gestão de Dados e Particionamento Sem Vazamento (25.000 treino / 5.000 teste, seed=42, normalização z-score com zero data leakage).
    - 3.2 Formalização Matemática do Baseline (`BaselineCNN`), incluindo a Tabela 1 com fluxo de tensores camada por camada e contagem paramétrica exata.
    - 3.3 Modificação 1: Conexões Residuais (`Mod1_ResidualCNN`).

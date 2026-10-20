@@ -115,6 +115,15 @@ Avan\c{c}os como o AutoAugment de Cubuk et al.~\cite{cubuk2019autoaugment}, t\'{
 \label{sec:metodologia}
 % ============================================================================
 
+A Figura~\ref{fig:diagramas_arquiteturas} sintetiza visualmente o fluxo estrutural da arquitetura basal de refer\^{e}ncia (Dizabadi, 2026) e o princ\'{i}pio construtivo de cada uma das tr\^{e}s modifica\c{c}\~{o}es arquiteturais implementadas, al\'{e}m da sua integra\c{c}\~{a}o sin\'{e}rgica no Modelo Combinado.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.98\textwidth]{figures/diagramas_arquiteturas.png}
+\caption{Diagramas estruturais das arquiteturas desenvolvidas e avaliadas: (a) Fluxo completo do \texttt{BaselineCNN} com 6 camadas convolucionais em 3 blocos duplos, Batch Normalization, Max Pooling e Dropout (552.874 par\^{a}metros); (b) Bloco Convolucional com Conex\~{o}es Residuais aditivas (\textit{Skip Connections}) e proje\c{c}\~{a}o $1 \times 1$ (Mod 1); (c) Pipeline de \textit{Data Augmentation} estoc\'{a}stico din\^{a}mico em tempo de execu\c{c}\~{a}o (Mod 2); (d) Mecanismo de Aten\c{c}\~{a}o \textit{Squeeze-and-Excitation} com recalibra\c{c}\~{a}o adaptativa de canal (Mod 3); e (e) S\'{i}ntese integrada do Modelo Combinado.}
+\label{fig:diagramas_arquiteturas}
+\end{figure*}
+
 \subsection{Gest\~{a}o de Dados e Particionamento Sem Vazamento}
 O conjunto de dados utilizado \'{e} o CIFAR-10 can\^{o}nico~\cite{krizhevsky2009learning}, composto por $60.000$ imagens coloridas $32 \times 32$ em 10 categorias mutuamente exclusivas: \texttt{airplane}, \texttt{automobile}, \texttt{bird}, \texttt{cat}, \texttt{deer}, \texttt{dog}, \texttt{frog}, \texttt{horse}, \texttt{ship} e \texttt{truck}.
 
