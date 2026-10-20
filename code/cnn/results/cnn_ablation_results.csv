@@ -1,0 +1,6 @@
+ID,Configuração,Épocas,Parâmetros Treináveis,Parâmetros Totais (c/ BN),Acurácia Teste (%),Loss Teste,F1-Score Macro (%),Tempo Treino (s),Throughput (amostras/s)
+baseline,Baseline (Artigo),2,551722,552881,59.9,1.0958,60.22,1215.5,190.5
+mod1_residual,Mod 1: Conexões Residuais,2,562506,564116,59.3,1.1505,60.12,1044.9,235.7
+mod2_augment,Mod 2: Data Augmentation,2,551722,552881,55.86,1.2014,54.85,978.7,258.9
+mod3_se,Mod 3: Squeeze-and-Excitation,2,554538,555697,59.26,1.1349,59.77,977.7,227.4
+combined,Modelo Combinado (Res+SE+Aug),2,565322,566932,51.4,1.3791,51.8,1062.5,237.1
