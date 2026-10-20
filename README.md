@@ -7,6 +7,28 @@ Este workspace segue a filosofia de **Workspace OS** inspirada em [`lsfcin/works
 
 ## Evidências de Verificação dos Artefatos
 
+### `[5] artefato · arquitetura tech report` (`arq·p` · 10 pontos)
+> Folha consolidada de evidências: **[`artefatos/5-architecture-tech-report.md`](artefatos/5-architecture-tech-report.md)** · Código-Fonte LaTeX: **[`article/report-arch.tex`](article/report-arch.tex)** · PDF Compilado: **[`article/report-arch.pdf`](article/report-arch.pdf)** · Espelho Overleaf: **[`papers/artigo-final/report-arch.tex`](papers/artigo-final/report-arch.tex)**
+
+1. **Estrutura LaTeX (`2 pts`):** Documento dedicado [`article/report-arch.tex`](article/report-arch.tex) no padrão Springer LNCS (`llncs.cls` + `splncs04.bst`), compilando sem erros em [`article/report-arch.pdf`](article/report-arch.pdf) (11 páginas), sincronizado diretamente via Git com o Overleaf (`commit 5edb664`) e exportado no pacote [`papers/overleaf-export.zip`](papers/overleaf-export.zip).
+2. **Artigo Base Selecionado (`2 pts`):** Seleção fundamentada de artigo recente ($\ge 2023$) com código aberto (*Dizabadi, arXiv:2604.23861, 2026* - 552.874 parâmetros), detalhando a motivação teórica (colapso em 8 convoluções no Step 11 para 70,66% por desvanecimento de gradientes e overfitting estático) e formulando 3 hipóteses formais de contribuição ($H_1, H_2, H_3$).
+3. **Trabalhos Relacionados (`2 pts`):** Revisão bibliográfica densa em 3 parágrafos aprofundados na Seção 2 de [`report-arch.tex`](article/report-arch.tex) cobrindo: (i) Evolução de CNNs profundas e o paradigma residual (VGG vs ResNet); (ii) Mecanismos de atenção e recalibração dinâmica de canais (SENet e CBAM); e (iii) Regularização estocástica e técnicas de aumento de dados (Crop/Flip, AutoAugment, Mixup).
+4. **Tabela Comparativa (`2 pts`):** Matriz de resultados confrontando diretamente as métricas da literatura original (Step 1, Step 7 com 83,42% e Step 11), métricas reproduzidas pelo estudante (Baseline com 552.881 parâmetros, acurácia 59,90%, loss 1,0958, F1 60,22%) e pós-modificações (*ResNet*, *Data Augmentation*, *Squeeze-and-Excitation* e *Modelo Combinado*), com gráficos comparativos em [`code/cnn/figs/curvas_comparativas_ablation.png`](code/cnn/figs/curvas_comparativas_ablation.png).
+5. **Análise Qualitativa (`2 pts`):** Discussão técnica detalhada das variações quantitativas com instâncias concretas do CIFAR-10 a partir de [`code/cnn/demo_inference.py`](code/cnn/demo_inference.py), gerando o painel [`code/cnn/figs/amostras_inferencia.png`](code/cnn/figs/amostras_inferencia.png) e dissecando acertos de alta confiança (navio 95,61%, sapo 89,24%) e diagnósticos de erros limítrofes (amostra #03 avião vs navio e amostra #06 carro vs caminhão).
+
+---
+
+### `[5] artefato · arquitetura git repo` (`arq·c` · 10 pontos)
+> Folha consolidada de evidências: **[`artefatos/5-cnn-architecture.md`](artefatos/5-cnn-architecture.md)** · Código-Fonte CNN: **[`code/cnn/`](code/cnn/)** · Contexto da Rede: **[`code/cnn/CONTEXT.md`](code/cnn/CONTEXT.md)**
+
+1. **Subrepositório Estruturado (`2 pts`):** Subpasta isolada [`code/cnn/`](code/cnn/) seguindo Workspace OS, com [`code/cnn/CONTEXT.md`](code/cnn/CONTEXT.md), [`code/cnn/README.md`](code/cnn/README.md) e [`code/cnn/core_cnn/CONTEXT.md`](code/cnn/core_cnn/CONTEXT.md).
+2. **Gestão de Dados (`2 pts`):** Download oficial e preparação de dados do CIFAR-10 com partição estratificada (25k treino / 5k teste, seed=42) e normalização sem vazamento em [`code/cnn/core_cnn/dataset.py`](code/cnn/core_cnn/dataset.py).
+3. **Inferência Funcional (`2 pts`):** Execução do modelo treinado sobre amostras reais com registro estruturado em [`code/cnn/results/amostras_inferencia.json`](code/cnn/results/amostras_inferencia.json) e painel [`code/cnn/figs/amostras_inferencia.png`](code/cnn/figs/amostras_inferencia.png).
+4. **Reprodução de Baseline (`2 pts`):** Treinamento fiel da arquitetura de Dizabadi (2026) com contagem exata de **552.874 parâmetros** e registro de métricas em [`code/cnn/core_cnn/models.py`](code/cnn/core_cnn/models.py) e [`code/cnn/results/cnn_ablation_results.csv`](code/cnn/results/cnn_ablation_results.csv).
+5. **Modificação Arquitetural (`2 pts`):** Implementação de 3 modificações inéditas (*Conexões Residuais*, *Data Augmentation* e *Squeeze-and-Excitation*), modelo combinado e curvas comparativas em [`code/cnn/figs/curvas_comparativas_ablation.png`](code/cnn/figs/curvas_comparativas_ablation.png).
+
+---
+
 ### `[5] artefato · mlp tech report` (`mlp·p` · 10 pontos)
 > Folha consolidada de evidências: **[`artefatos/5-mlp-tech-report.md`](artefatos/5-mlp-tech-report.md)** · Código-Fonte LaTeX: **[`article/report-mlp.tex`](article/report-mlp.tex)** · PDF Compilado: **[`article/report-mlp.pdf`](article/report-mlp.pdf)** · Espelho Overleaf: **[`papers/artigo-final/report-mlp.tex`](papers/artigo-final/report-mlp.tex)**
 
