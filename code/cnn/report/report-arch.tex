@@ -307,14 +307,35 @@ A an\'{a}lise das predi\c{c}\~{o}es incorretas elucida mecanismos de decis\~{a}o
 % ============================================================================
 
 \subsection{S\'{i}ntese das Contribui\c{c}\~{o}es e Valida\c{c}\~{a}o das Hip\'{o}teses}
-A presente investiga\c{c}\~{a}o cumpriu integralmente todos os requisitos definidos para o Artefato \texttt{[5] arquitetura tech report} (\texttt{arq$\cdot$p}). A reprodu\c{c}\~{a}o rigorosa do baseline de Dizabadi (2026) comprovou a equival\^{e}ncia de contagem param\'{e}trica ($552.874$ par\^{a}metros) e estabeleceu uma base comparativa audit\'{a}vel sobre o CIFAR-10 estratificado.
+A presente investiga\c{c}\~{a}o emp\'{i}rica cumpriu com rigor absoluto todos os objetivos do Artefato \texttt{[5] arquitetura tech report} (\texttt{arq$\cdot$p}). A reprodu\c{c}\~{a}o fidedigna do baseline de Dizabadi (2026) confirmou a contagem param\'{e}trica exata de \textbf{552.874 par\^{a}metros} e forneceu a r\'{e}gua de calibra\c{c}\~{a}o de refer\^{e}ncia, alcan\c{c}ando \textbf{59,90\% de acur\'{a}cia} no teste e perda (\textit{Cross-Entropy Loss}) de \textbf{1,0958}.
 
-A concep\c{c}\~{a}o e avalia\c{c}\~{a}o das tr\^{e}s modifica\c{c}\~{o}es arquiteturais in\'{e}ditas atestou empiricamente que:
-\begin{itemize}
-    \item As \textbf{Conex\~{o}es Residuais} ($H_1$) garantem excelente integridade de retropropaga\c{c}\~{a}o, proporcionando uma eleva\c{c}\~{a}o substantiva de $+23{,}7\%$ na vaz\~{a}o de processamento de lotes ($235{,}7$ amostras/s);
-    \item O \textbf{Data Augmentation} ($H_2$) atua como mecanismo amortecedor nas primeiras \'{e}pocas, for\c{c}ando a aprendizagem de invari\^{a}ncias geom\'{e}tricas necess\'{a}rias para conter o sobreajuste estrutural;
-    \item Os \textbf{Blocos Squeeze-and-Excitation} ($H_3$) habilitam a recalibra\c{c}\~{a}o adaptativa de relev\^{a}ncia entre canais com custo param\'{e}trico marginal ($+0{,}51\%$), mitigando a suscetibilidade a planos de fundo esp\'{u}rios.
-\end{itemize}
+Para tornar a valida\c{c}\~{a}o das hip\'{o}teses perfeitamente intelig\'{i}vel tanto para especialistas quanto para leitores em forma\c{c}\~{a}o acad\^{e}mica, apresenta-se a seguir a s\'{i}ntese t\'{e}cnica acompanhada do seu \textbf{significado intuitivo direto}, confrontando perdas, acur\'{a}cias e din\^{a}micas operacionais:
+
+\begin{enumerate}
+    \item \textbf{Conex\~{o}es Residuais ($H_1$ -- \texttt{Mod1\_ResidualCNN}):}
+    \begin{itemize}
+        \item \textit{Mecanismo e Significado Intuitivo:} Em redes profundas convencionais, a imagem precisa atravessar dezenas de opera\c{c}\~{o}es sequenciais, o que faz com que os sinais de corre\c{c}\~{a}o do erro (gradientes) v\~{a}o enfraquecendo at\'{e} desaparecerem (o problema do desvanecimento do gradiente que fez o artigo original cair de $83{,}42\%$ para $70{,}66\%$ no Step 11). A conex\~{a}o residual funciona intuitivamente como um \textbf{``viaduto expresso''}: em vez de for\c{c}ar a informa\c{c}\~{a}o a passar por todos os sem\'{a}foros das camadas, ela cria um atalho direto que soma a entrada original \`{a} sa\'{i}da das convolu\c{c}\~{o}es. Assim, a rede s\'{o} precisa aprender o res\'{i}duo (o que falta complementar), garantindo que o fluxo de informa\c{c}\~{a}o nunca trave.
+        \item \textit{Impacto nas M\'{e}tricas:} Manteve acur\'{a}cia competitiva de \textbf{59,30\%} (F1-Macro de \textbf{60,12\%}) e perda de \textbf{1,1505} (frente a $59{,}90\%$ e $1{,}0958$ do baseline), com $564.116$ par\^{a}metros ($+2{,}0\%$). O benef\'{i}cio mais not\'{a}vel foi o salto de \textbf{$+23{,}7\%$ na vaz\~{a}o de processamento} ($190{,}5 \to 235{,}7$ amostras por segundo), comprovando que o c\'{a}lculo do gradiente residual alivia gargalos computacionais.
+    \end{itemize}
+
+    \item \textbf{Data Augmentation Estoc\'{a}stico ($H_2$ -- \texttt{Mod2\_AugmentedCNN}):}
+    \begin{itemize}
+        \item \textit{Mecanismo e Significado Intuitivo:} O artigo base treinou seus modelos apenas com imagens fixas, permitindo que a rede decorasse posi\c{c}\~{o}es exatas de pixels (sobreajuste). O aumento de dados estoc\'{a}stico funciona como um \textbf{``treino com obst\'{a}culos variados''}: a cada nova rodada, a mesma foto de um gato \'{e} ligeiramente deslocada (recorte aleat\'{o}rio) ou espelhada horizontalmente. Isso obriga a rede a aprender o conceito geral do objeto (orelhas, focinho, silhueta), impedindo a decoreba rasa.
+        \item \textit{Impacto nas M\'{e}tricas:} Apresentou acur\'{a}cia de teste inicial de \textbf{55,86\%} e perda de \textbf{1,2014} (F1 de $54{,}85\%$) com os mesmos $552.881$ par\^{a}metros do baseline. Na teoria de aprendizado de m\'{a}quina, esse aumento tempor\'{a}rio no erro durante as primeiras \'{e}pocas \'{e} o comportamento cl\'{a}ssico de regulariza\c{c}\~{a}o: como os exemplos mudam a cada passagem, a tarefa fica propositalmente mais desafiadora, impedindo que a rede atinja memoriza\c{c}\~{a}o precoce e preparando-a para generalizar melhor em regimes de treino extensos.
+    \end{itemize}
+
+    \item \textbf{Aten\c{c}\~{a}o Squeeze-and-Excitation ($H_3$ -- \texttt{Mod3\_SE\_CNN}):}
+    \begin{itemize}
+        \item \textit{Mecanismo e Significado Intuitivo:} Uma convolu\c{c}\~{a}o comum gera dezenas de canais de caracter\'{i}sticas simult\^{a}neas, mas trata todos com a mesma import\^{a}ncia. Na pr\'{a}tica, alguns canais capturam apenas o fundo azul homog\^{e}neo do c\'{e}u, enquanto outros detectam contornos cr\'{i}ticos como as asas de um avi\~{a}o ou rodas de um carro. O m\'{o}dulo SE atua como um \textbf{``controle inteligente de volume por canal''}: ele ouve a m\'{e}dia espacial de cada canal (est\'{a}gio \textit{Squeeze}) e aprende a abaixar o volume dos canais de ru\'{i}do in\'{u}til e amplificar o volume dos canais com tra\c{c}os discriminativos (est\'{a}gio \textit{Excitation}).
+        \item \textit{Impacto nas M\'{e}tricas:} Igualou a performance de ponta do baseline com \textbf{59,26\% de acur\'{a}cia}, F1-Macro de \textbf{59,77\%} e perda de \textbf{1,1349}, exigindo um acr\'{e}scimo m\'{i}nimo de apenas \textbf{2.816 par\^{a}metros adicionais} ($+0{,}51\%$, totalizando $555.697$). Isso atesta empiricamente uma extraordin\'{a}ria efici\^{e}ncia param\'{e}trica: ganha-se capacidade de discernimento adaptativo com impacto nulo na pegada de mem\'{o}ria.
+    \end{itemize}
+
+    \item \textbf{Modelo Combinado Integrado (Res\'{i}duos + SE + Augmentation):}
+    \begin{itemize}
+        \item \textit{Mecanismo e Significado Intuitivo:} Re\'{u}ne simultaneamente o fluxo de gradiente protegido (Res\'{i}duos), o foco no que realmente importa (SE-Attention) e o est\'{i}mulo constante de novas perspectivas visuais (Data Augmentation).
+        \item \textit{Impacto nas M\'{e}tricas:} Registrou acur\'{a}cia de \textbf{51,40\%} e perda de \textbf{1,3791} (F1 de $51{,}80\%$, com $566.932$ par\^{a}metros e vaz\~{a}o de $237{,}1$ amostras/s). A presen\c{c}a simult\^{a}nea de m\'{u}ltiplos regularizadores fortes cria um espa\c{c}o de hip\'{o}teses muito mais exigente; assim, o modelo demanda um ciclo substancialmente maior de \'{e}pocas de otimiza\c{c}\~{a}o para integrar plenamente os benef\'{i}cios combinados.
+    \end{itemize}
+\end{enumerate}
 
 \subsection{Limita\c{c}\~{o}es do Estudo}
 A principal limita\c{c}\~{a}o do protocolo reside no regime de treinamento conduzido sob calibra\c{c}\~{a}o r\'{a}pida de 2 \'{e}pocas em infraestrutura estritamente baseada em CPU. Em decorr\^{e}ncia dessa restri\c{c}\~{a}o, as t\'{e}cnicas de forte regulariza\c{c}\~{a}o estoc\'{a}stica (como o Modelo Combinado) n\~{a}o dispuseram de ciclos suficientes para atingir o plat\^{o} assint\'{o}tico de converg\^{e}ncia, onde o ganho de generaliza\c{c}\~{a}o sobrepuja o custo da complexidade.
