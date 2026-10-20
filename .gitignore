@@ -77,3 +77,5 @@ Thumbs.db
 .overleaf-git/
 *.zip
 !papers/overleaf-export.zip
+code/cnn/data/
+*.tar.gz
