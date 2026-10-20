@@ -7,6 +7,9 @@
 - **Discente:** José Albérico Rocha da Silva
 - **Harness Operacional:** Antigravity (Google DeepMind — Agente Inteligente de Codificação)
 - **Repositório Canônico:** [`https://github.com/albericolx/Topicos_Avancados_IA`](https://github.com/albericolx/Topicos_Avancados_IA)
+- **Artigo Técnico Completo (Tech Report `arq·p`):** [`artefatos/5-architecture-tech-report.md`](5-architecture-tech-report.md) · [PDF Compilado (14 págs)](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/article/report-arch.pdf) · [Diagrama Estrutural](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/article/figures/diagramas_arquiteturas.png)
+
+> 💡 **Nota de Integração:** O relatório técnico científico formal com a introdução completa, trabalhos relacionados, diagramas visuais das arquiteturas, matriz comparativa de resultados, análise qualitativa de instâncias e validação didática das hipóteses ($H_1, H_2, H_3$) está documentado em **[`artefatos/5-architecture-tech-report.md`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/artefatos/5-architecture-tech-report.md)** e compilado em **[`article/report-arch.pdf`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/article/report-arch.pdf)**.
 
 ---
 
