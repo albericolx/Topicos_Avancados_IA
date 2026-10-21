@@ -11,4 +11,6 @@ Esta pasta abriga todo o desenvolvimento prático da disciplina de **Tópicos Av
 ## Estrutura da Pasta (`code/`)
 * [`SPECS-git.md`](SPECS-git.md): Regras de branches, convenções de commits e GitFlow.
 * [`mlp/`](mlp/CONTEXT.md): **Subrepositório do Artefato `[5] · mlp git repo` (`mlp·c`)** — Implementação do zero de Rede Neural Multicamadas (MLP) sobre grafo direcionado (`nx.DiGraph` + `NumPy`), interface interativa em `Streamlit` (`code/mlp/app.py`), particionamento 80/20 sem vazamento (`code/mlp/data/`), inspeção visual e numérica dos pesos sinápticos (`code/mlp/figs/`) e relatório técnico (`code/mlp/REPORT.md` e `code/mlp/report/relatorio_mlp.pdf`).
+* [`cnn/`](cnn/CONTEXT.md): **Subrepositório do Artefato `[5] · arquitetura git repo` (`arq·c`)** — Reprodução empírica da CNN para CIFAR-10 (Dizabadi, 2026, 552.874 parâmetros), 3 modificações arquiteturais inéditas (ResNet, Data Augmentation, SE-Block) e modelo combinado integrado.
+* [`arena/`](arena/CONTEXT.md): **Subrepositório do Artefato `[5] · arena git repo` (`arn·c`)** — Ambiente experimental de múltiplos agentes em arena dialética hierárquica (Nanda, Claudio e Ariel) debatendo impactos de IA em cenários de Utopia e Distopia com 40 rodadas automatizadas, busca web em tempo real e raciocínio em cadeia.
 * [`src/`](src/CONTEXT.md): Diretório base de protótipos e utilitários compartilhados.

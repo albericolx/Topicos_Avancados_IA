@@ -7,6 +7,17 @@ Este workspace segue a filosofia de **Workspace OS** inspirada em [`lsfcin/works
 
 ## Evidências de Verificação dos Artefatos
 
+### `[5] artefato · arena git repo` (`arn·c` · 10 pontos)
+> Folha consolidada de evidências: **[`artefatos/5-arena-git-repo.md`](artefatos/5-arena-git-repo.md)** · Subrepositório em Código: **[`code/arena/`](code/arena/)** · Documentação da Arena: **[`code/arena/README.md`](code/arena/README.md)** · Contexto: **[`code/arena/CONTEXT.md`](code/arena/CONTEXT.md)**
+
+1. **Subrepositório Estruturado (`2 pts`):** Diretório isolado em código [`code/arena/`](code/arena/) (espelhos [`Atividade_03_LOOP_Agentes/`](Atividade_03_LOOP_Agentes/) e [`artefatos/Atividade_03_LOOP_Agentes/`](artefatos/Atividade_03_LOOP_Agentes/)) com [`CONTEXT.md`](code/arena/CONTEXT.md) detalhando o propósito do experimento multiagente no domínio de cidades inteligentes e impactos da IA, e dependências em [`requirements.txt`](code/arena/requirements.txt).
+2. **Diagrama e Fluxo (`2 pts`):** Documento [`README.md`](code/arena/README.md) contendo diagramas de blocos e sequência em Mermaid detalhando papéis (Nanda = tese, Claudio = antítese, Ariel = síntese), responsabilidades e protocolo de comunicação na arena dialética.
+3. **Especificação de Prompts (`2 pts`):** Calibração explícita de prompts de sistema e parâmetros de temperatura e contexto em [`code/arena/multi_agent_sim.py`](code/arena/multi_agent_sim.py): Nanda (Temp 0.8), Claudio (Temp 0.2, Contexto 4.096) e Ariel (Temp 0.5).
+4. **Capacidade de Busca (`2 pts`):** Integração funcional com ferramentas de pesquisa em tempo de execução via `google_search` e injeção dinâmica de literatura científica com DOIs reais das APIs públicas da Wikipedia e da CrossRef.
+5. **Capacidade de Raciocínio (`2 pts`):** Modelos atuando com cadeia de raciocínio (*Chain-of-Thought*) em blocos `<think>...</think>` auditáveis em [`code/arena/logs/transcript_distopia.txt`](code/arena/logs/transcript_distopia.txt), reflexão crítica de Claudio sobre falhas humanas/orçamentárias e síntese periódica de *Pontos Sensíveis*.
+
+---
+
 ### `[6] artefato · loop de agentes` (`loop` / `agt` · 10 pontos)
 > Folha consolidada de evidências: **[`artefatos/6-loop-agentes.md`](artefatos/6-loop-agentes.md)** (ou [`artefatos/6-multi-agent-loop.md`](artefatos/6-multi-agent-loop.md)) · Código e Execuções: **[`Atividade_03_LOOP_Agentes/`](Atividade_03_LOOP_Agentes/)** (espelho em [`artefatos/Atividade_03_LOOP_Agentes/`](artefatos/Atividade_03_LOOP_Agentes/)) · Artigo Científico: **[`Artigo_Atividade03_Utopia_Distopia.pdf`](Atividade_03_LOOP_Agentes/Artigo_Atividade03_Utopia_Distopia.pdf)**
 
