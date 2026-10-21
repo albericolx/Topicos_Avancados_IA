@@ -7,6 +7,17 @@ Este workspace segue a filosofia de **Workspace OS** inspirada em [`lsfcin/works
 
 ## Evidências de Verificação dos Artefatos
 
+### `[6] artefato · loop de agentes` (`loop` / `agt` · 10 pontos)
+> Folha consolidada de evidências: **[`artefatos/6-loop-agentes.md`](artefatos/6-loop-agentes.md)** (ou [`artefatos/6-multi-agent-loop.md`](artefatos/6-multi-agent-loop.md)) · Código e Execuções: **[`Atividade_03_LOOP_Agentes/`](Atividade_03_LOOP_Agentes/)** (espelho em [`artefatos/Atividade_03_LOOP_Agentes/`](artefatos/Atividade_03_LOOP_Agentes/)) · Artigo Científico: **[`Artigo_Atividade03_Utopia_Distopia.pdf`](Atividade_03_LOOP_Agentes/Artigo_Atividade03_Utopia_Distopia.pdf)**
+
+1. **Subrepositório Estruturado (`2 pts`):** Subpasta isolada [`Atividade_03_LOOP_Agentes/`](Atividade_03_LOOP_Agentes/) com [`CONTEXT.md`](Atividade_03_LOOP_Agentes/CONTEXT.md), [`README.md`](Atividade_03_LOOP_Agentes/README.md), dependências em [`requirements.txt`](Atividade_03_LOOP_Agentes/requirements.txt) e separação estrita de `logs/`, `reports/`, `artigo/` e `exemplos/`.
+2. **Arquitetura Híbrida e Diagramas (`2 pts`):** Orquestração distribuída entre nuvem (`gemini-3.7-flash` com chaves segregadas) e inferência local via Ollama (`llama3.2`), com diagramas formais de blocos e sequência em [`DOCUMENTO_ARQUITETURA.md`](Atividade_03_LOOP_Agentes/DOCUMENTO_ARQUITETURA.md) e no artigo científico em TikZ.
+3. **Tríade de Agentes, Papéis e Temperatura (`2 pts`):** Ciclo dialético de tese-antítese-síntese implementado em [`multi_agent_sim.py`](Atividade_03_LOOP_Agentes/multi_agent_sim.py): Nanda (Visionária Criativa, Temp 0.8), Claudio (Crítico Realista Local, Temp 0.2) e Ariel (Coordenador Sintetizador, Temp 0.5).
+4. **Busca em Tempo Real e Raciocínio Explícito (`2 pts`):** Injeção dinâmica de literatura científica com DOIs reais via Wikipedia e CrossRef API, associada ao raciocínio explícito em cadeia (*Chain-of-Thought*) delimitado por tags `<think>...</think>` auditáveis em [`logs/transcript_distopia.txt`](Atividade_03_LOOP_Agentes/logs/transcript_distopia.txt).
+5. **Automação do Loop, Persistência e Artigo LNCS (`2 pts`):** Execução autônoma de **40 rodadas completas** (20 da Utopia e 20 da Distopia, 120 chamadas de LLMs), síntese periódica de pontos sensíveis, persistência com checkpoints JSON e artigo científico formal de 6 páginas no padrão Springer LNCS compilado sem erros em [`Artigo_Atividade03_Utopia_Distopia.pdf`](Atividade_03_LOOP_Agentes/Artigo_Atividade03_Utopia_Distopia.pdf) com pacote Overleaf [`artigo/overleaf-atividade03.zip`](Atividade_03_LOOP_Agentes/artigo/overleaf-atividade03.zip).
+
+---
+
 ### `[5] artefato · arquitetura tech report` (`arq·p` · 10 pontos)
 > Folha consolidada de evidências: **[`artefatos/5-architecture-tech-report.md`](artefatos/5-architecture-tech-report.md)** · Código-Fonte LaTeX: **[`article/report-arch.tex`](article/report-arch.tex)** · PDF Compilado: **[`article/report-arch.pdf`](article/report-arch.pdf)** · Espelho Overleaf: **[`papers/artigo-final/report-arch.tex`](papers/artigo-final/report-arch.tex)**
 
