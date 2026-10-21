@@ -1,4 +1,4 @@
-# Contexto: Atividade 03 - Loop de Agentes (`Atividade_03_LOOP_Agentes/`)
+# Contexto: Atividade 03 - Loop de Agentes (`artefatos/Atividade_03_LOOP_Agentes/`)
 
 Esta pasta contém o projeto desenvolvido para a atividade prática de simulação de interação entre múltiplos agentes de Inteligência Artificial (cenários de Utopia e Distopia).
 

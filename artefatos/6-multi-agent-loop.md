@@ -7,7 +7,7 @@
 - **Discente:** José Albérico Rocha da Silva
 - **Harness Operacional:** Antigravity (Google DeepMind — Agente Inteligente de Codificação)
 - **Repositório Canônico:** [`https://github.com/albericolx/Topicos_Avancados_IA`](https://github.com/albericolx/Topicos_Avancados_IA)
-- **Subdiretórios da Atividade:** [`Atividade_03_LOOP_Agentes/`](https://github.com/albericolx/Topicos_Avancados_IA/tree/main/Atividade_03_LOOP_Agentes) e [`artefatos/Atividade_03_LOOP_Agentes/`](https://github.com/albericolx/Topicos_Avancados_IA/tree/main/artefatos/Atividade_03_LOOP_Agentes)
+- **Subdiretório da Atividade:** [`artefatos/Atividade_03_LOOP_Agentes/`](https://github.com/albericolx/Topicos_Avancados_IA/tree/main/artefatos/Atividade_03_LOOP_Agentes)
 
 ---
 
@@ -20,11 +20,11 @@
 
 | # | Ponto de Verificação | Pontuação | Status | Evidência Principal no Repositório (Links Diretos GitHub) |
 |---|---|---:|---|---|
-| **1** | **Subrepositório Estruturado e Contexto** | 2 pts | Concluído | Subdiretório modular dedicado [`Atividade_03_LOOP_Agentes/`](https://github.com/albericolx/Topicos_Avancados_IA/tree/main/Atividade_03_LOOP_Agentes) (e espelhado em [`artefatos/Atividade_03_LOOP_Agentes/`](https://github.com/albericolx/Topicos_Avancados_IA/tree/main/artefatos/Atividade_03_LOOP_Agentes)), contendo especificação formal de contexto em [`CONTEXT.md`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/Atividade_03_LOOP_Agentes/CONTEXT.md), documentação operacional em [`README.md`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/Atividade_03_LOOP_Agentes/README.md), dependências isoladas em [`requirements.txt`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/Atividade_03_LOOP_Agentes/requirements.txt) e separação estrita de artefatos (`logs/`, `reports/`, `artigo/`, `exemplos/`). |
-| **2** | **Arquitetura Híbrida e Diagramas de Fluxo** | 2 pts | Concluído | Especificação completa da topologia em [`DOCUMENTO_ARQUITETURA.md`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/Atividade_03_LOOP_Agentes/DOCUMENTO_ARQUITETURA.md) e Seção 2 do artigo com diagramas formais de blocos e sequência: orquestração híbrida distribuindo 2 agentes na nuvem via Google Gemini API (`gemini-3.7-flash` com chaves segregadas) e 1 agente em servidor local Ollama (`llama3.2` em `localhost:11434`), eliminando gargalos de cota e garantindo soberania computacional. |
-| **3** | **Tríade de Agentes, Papéis e Temperatura** | 2 pts | Concluído | Implementação da dinâmica dialética tese-antítese-síntese com especialização paramétrica rigorosa em [`multi_agent_sim.py`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/Atividade_03_LOOP_Agentes/multi_agent_sim.py): **Nanda** (Visionária Criativa, $\text{Temp}=0.8$, foco em disrupção), **Claudio** (Crítico Realista Local, $\text{Temp}=0.2$, ceticismo analítico e identificação de falhas lógicas e de dependência da bondade humana) e **Ariel** (Coordenador Sintetizador, $\text{Temp}=0.5$, conciliação e redação do passo oficial). |
+| **1** | **Subrepositório Estruturado e Contexto** | 2 pts | Concluído | Subdiretório modular dedicado [`artefatos/Atividade_03_LOOP_Agentes/`](https://github.com/albericolx/Topicos_Avancados_IA/tree/main/artefatos/Atividade_03_LOOP_Agentes) (e [`code/arena/`](https://github.com/albericolx/Topicos_Avancados_IA/tree/main/code/arena)), contendo especificação formal de contexto em [`CONTEXT.md`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/artefatos/Atividade_03_LOOP_Agentes/CONTEXT.md), documentação operacional em [`README.md`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/artefatos/Atividade_03_LOOP_Agentes/README.md), dependências isoladas em [`requirements.txt`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/artefatos/Atividade_03_LOOP_Agentes/requirements.txt) e separação estrita de artefatos (`logs/`, `reports/`, `artigo/`, `exemplos/`). |
+| **2** | **Arquitetura Híbrida e Diagramas de Fluxo** | 2 pts | Concluído | Especificação completa da topologia em [`DOCUMENTO_ARQUITETURA.md`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/artefatos/Atividade_03_LOOP_Agentes/DOCUMENTO_ARQUITETURA.md) e Seção 2 do artigo com diagramas formais de blocos e sequência: orquestração híbrida distribuindo 2 agentes na nuvem via Google Gemini API (`gemini-3.7-flash` com chaves segregadas) e 1 agente em servidor local Ollama (`llama3.2` em `localhost:11434`), eliminando gargalos de cota e garantindo soberania computacional. |
+| **3** | **Tríade de Agentes, Papéis e Temperatura** | 2 pts | Concluído | Implementação da dinâmica dialética tese-antítese-síntese com especialização paramétrica rigorosa em [`multi_agent_sim.py`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/artefatos/Atividade_03_LOOP_Agentes/multi_agent_sim.py): **Nanda** (Visionária Criativa, $\text{Temp}=0.8$, foco em disrupção), **Claudio** (Crítico Realista Local, $\text{Temp}=0.2$, ceticismo analítico e identificação de falhas lógicas e de dependência da bondade humana) e **Ariel** (Coordenador Sintetizador, $\text{Temp}=0.5$, conciliação e redação do passo oficial). |
 | **4** | **Busca em Tempo Real e Raciocínio Explícito** | 2 pts | Concluído | Suporte ativo à ferramenta de busca na web (`google_search` e injeção dinâmica de fontes abertas da Wikipedia e CrossRef com DOIs científicos verificáveis) integrado às chamadas de Nanda e Ariel. Todos os três agentes implementam instrução obrigatória de *Chain-of-Thought* com blocos de raciocínio prévio demarcados por tags `<think>...</think>`, auditáveis nas transcrições integrais. |
-| **5** | **Automação do Loop, Persistência e Artigo LNCS** | 2 pts | Concluído | Execução autônoma de **40 rodadas completas** (20 da Utopia *"Cidade Autônoma Verde"* e 20 da Distopia *"Vigilância Preditiva Urbana"*), totalizando 120 invocações de agentes. Sistema tolerante a falhas com checkpoints JSON (`logs/checkpoint_*.json`), transcrições brutas (`logs/transcript_*.txt`), relatórios finais (`reports/plano_final_*.md`), síntese periódica de pontos sensíveis nas rodadas 1, 5, 10, 15 e 20, e **artigo científico completo em LaTeX Springer LNCS** compilado em [`Artigo_Atividade03_Utopia_Distopia.pdf`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/Atividade_03_LOOP_Agentes/Artigo_Atividade03_Utopia_Distopia.pdf). |
+| **5** | **Automação do Loop, Persistência e Artigo LNCS** | 2 pts | Concluído | Execução autônoma de **40 rodadas completas** (20 da Utopia *"Cidade Autônoma Verde"* e 20 da Distopia *"Vigilância Preditiva Urbana"*), totalizando 120 invocações de agentes. Sistema tolerante a falhas com checkpoints JSON (`logs/checkpoint_*.json`), transcrições brutas (`logs/transcript_*.txt`), relatórios finais (`reports/plano_final_*.md`), síntese periódica de pontos sensíveis nas rodadas 1, 5, 10, 15 e 20, e **artigo científico completo em LaTeX Springer LNCS** compilado em [`Artigo_Atividade03_Utopia_Distopia.pdf`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/artefatos/Atividade_03_LOOP_Agentes/Artigo_Atividade03_Utopia_Distopia.pdf). |
 
 ---
 
@@ -32,10 +32,10 @@
 
 > **Requisito:** *"Subpasta modular em código seguindo convenções do Workspace OS com documentação de contexto, separação limpa de scripts, logs, relatórios e artigo científico."*
 
-A atividade foi totalmente organizada no subrepositório dedicado [`Atividade_03_LOOP_Agentes/`](https://github.com/albericolx/Topicos_Avancados_IA/tree/main/Atividade_03_LOOP_Agentes) (e espelhado em [`artefatos/Atividade_03_LOOP_Agentes/`](https://github.com/albericolx/Topicos_Avancados_IA/tree/main/artefatos/Atividade_03_LOOP_Agentes)), contendo:
+A atividade foi totalmente organizada no subrepositório dedicado [`artefatos/Atividade_03_LOOP_Agentes/`](https://github.com/albericolx/Topicos_Avancados_IA/tree/main/artefatos/Atividade_03_LOOP_Agentes) (e [`code/arena/`](https://github.com/albericolx/Topicos_Avancados_IA/tree/main/code/arena)), contendo:
 
 ```text
-Atividade_03_LOOP_Agentes/
+artefatos/Atividade_03_LOOP_Agentes/
 ├── CONTEXT.md                               # Especificação formal do módulo segundo Workspace OS
 ├── README.md                                # Guia de execução rápida e checklist de entrega
 ├── DOCUMENTO_ARQUITETURA.md                 # Arquitetura completa, diagramas Mermaid e síntese das rodadas
@@ -60,8 +60,8 @@ Atividade_03_LOOP_Agentes/
     └── plano_final_distopia.md              # Plano de Red Teaming da Vigilância Preditiva (40 KB)
 ```
 
-- **Mapeamento de Contexto:** [`CONTEXT.md`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/Atividade_03_LOOP_Agentes/CONTEXT.md) documenta a função de cada componente, o protocolo de tolerância a falhas e a política de segregação de credenciais.
-- **Ambiente Limpo:** Arquivos de credenciais sensíveis (`.env`) foram devidamente ignorados via [`.gitignore`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/Atividade_03_LOOP_Agentes/.gitignore), com disponibilização de template público [`.env.example`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/Atividade_03_LOOP_Agentes/.env.example).
+- **Mapeamento de Contexto:** [`CONTEXT.md`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/artefatos/Atividade_03_LOOP_Agentes/CONTEXT.md) documenta a função de cada componente, o protocolo de tolerância a falhas e a política de segregação de credenciais.
+- **Ambiente Limpo:** Arquivos de credenciais sensíveis (`.env`) foram devidamente ignorados via [`.gitignore`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/artefatos/Atividade_03_LOOP_Agentes/.gitignore), com disponibilização de template público [`.env.example`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/artefatos/Atividade_03_LOOP_Agentes/.env.example).
 
 ---
 
@@ -103,7 +103,7 @@ flowchart LR
 
 ### 2.2. Protocolo de Interação Rodada a Rodada
 
-A interação entre os agentes segue rigorosamente o ciclo dialético estruturado em [`multi_agent_sim.py`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/Atividade_03_LOOP_Agentes/multi_agent_sim.py):
+A interação entre os agentes segue rigorosamente o ciclo dialético estruturado em [`multi_agent_sim.py`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/artefatos/Atividade_03_LOOP_Agentes/multi_agent_sim.py):
 
 ```mermaid
 sequenceDiagram
@@ -196,7 +196,7 @@ Em cada ciclo, o orquestrador consulta dinamicamente fontes abertas na Wikipedia
 
 ### 4.2. Evidência Concreta de Raciocínio em Cadeia (*Chain-of-Thought*)
 
-Trecho extraído do log oficial [`logs/transcript_distopia.txt`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/Atividade_03_LOOP_Agentes/logs/transcript_distopia.txt) comprovando a execução do bloco `<think>` antes da emissão da resposta:
+Trecho extraído do log oficial [`logs/transcript_distopia.txt`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/artefatos/Atividade_03_LOOP_Agentes/logs/transcript_distopia.txt) comprovando a execução do bloco `<think>` antes da emissão da resposta:
 
 ```markdown
 <think>
@@ -230,7 +230,7 @@ O Gêmeo Digital metropolitano passa a operar comportas de macrodrenagem e válv
 | **Modelos Utilizados** | `gemini-3.7-flash` + `llama3.2` | `gemini-3.7-flash` + `llama3.2` | **Arquitetura Híbrida** |
 | **Pontos Sensíveis Auditados** | Rodadas 1, 5, 10, 15, 20 | Rodadas 1, 5, 10, 15, 20 | **10 marcos estratégicos** |
 | **Tamanho do Relatório Final** | **42.125 bytes** (`plano_final_utopia.md`) | **39.887 bytes** (`plano_final_distopia.md`) | **~82 KB de planos técnicos** |
-| **Registro de Checkpoints** | [`checkpoint_utopia.json`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/Atividade_03_LOOP_Agentes/logs/checkpoint_utopia.json) | [`checkpoint_distopia.json`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/Atividade_03_LOOP_Agentes/logs/checkpoint_distopia.json) | **100% Auditável** |
+| **Registro de Checkpoints** | [`checkpoint_utopia.json`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/artefatos/Atividade_03_LOOP_Agentes/logs/checkpoint_utopia.json) | [`checkpoint_distopia.json`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/artefatos/Atividade_03_LOOP_Agentes/logs/checkpoint_distopia.json) | **100% Auditável** |
 
 ### 5.2. Marcos Estratégicos (Resumo das Rodadas 1, 5 e 20)
 
@@ -248,9 +248,9 @@ O Gêmeo Digital metropolitano passa a operar comportas de macrodrenagem e válv
 Um dos achados científicos de maior relevância experimental documentados no artigo ocorreu nas rodadas finais da Distopia ($k \in \{14, 17, 18, 19, 20\}$): diante do extremismo das propostas de racionamento forçado e confinamento biométrico, os filtros de segurança e alinhamento (*RLHF safety guardrails*) do modelo local `llama3.2` (Claudio) dispararam recusas e alertas éticos explícitos contra violação de direitos humanos. O sintetizador Ariel absorveu essas recusas como **alertas formais de fronteira sociotécnica**, registrando-os nos *Pontos Sensíveis*.
 
 ### 5.4. Artigo Científico Publicado (Springer LNCS)
-* **Documento LaTeX:** [`Atividade_03_LOOP_Agentes/artigo/main.tex`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/Atividade_03_LOOP_Agentes/artigo/main.tex)
-* **PDF Oficial Compilado:** [`Atividade_03_LOOP_Agentes/Artigo_Atividade03_Utopia_Distopia.pdf`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/Atividade_03_LOOP_Agentes/Artigo_Atividade03_Utopia_Distopia.pdf) (6 páginas, Springer LNCS com TikZ, tabelas, 8 referências indexadas, compilando com código 0 via MiKTeX).
-* **Pacote ZIP para Overleaf:** [`Atividade_03_LOOP_Agentes/artigo/overleaf-atividade03.zip`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/Atividade_03_LOOP_Agentes/artigo/overleaf-atividade03.zip).
+* **Documento LaTeX:** [`artefatos/Atividade_03_LOOP_Agentes/artigo/main.tex`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/artefatos/Atividade_03_LOOP_Agentes/artigo/main.tex)
+* **PDF Oficial Compilado:** [`artefatos/Atividade_03_LOOP_Agentes/Artigo_Atividade03_Utopia_Distopia.pdf`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/artefatos/Atividade_03_LOOP_Agentes/Artigo_Atividade03_Utopia_Distopia.pdf) (6 páginas, Springer LNCS com TikZ, tabelas, 8 referências indexadas, compilando com código 0 via MiKTeX).
+* **Pacote ZIP para Overleaf:** [`artefatos/Atividade_03_LOOP_Agentes/artigo/overleaf-atividade03.zip`](https://github.com/albericolx/Topicos_Avancados_IA/blob/main/artefatos/Atividade_03_LOOP_Agentes/artigo/overleaf-atividade03.zip).
 
 ---
 
@@ -259,7 +259,7 @@ Um dos achados científicos de maior relevância experimental documentados no ar
 ```bash
 # 1. Clonar repositório
 git clone https://github.com/albericolx/Topicos_Avancados_IA.git
-cd Topicos_Avancados_IA/Atividade_03_LOOP_Agentes
+cd Topicos_Avancados_IA/artefatos/Atividade_03_LOOP_Agentes
 
 # 2. Instalar dependências
 pip install -r requirements.txt

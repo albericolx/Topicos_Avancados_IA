@@ -7,7 +7,7 @@
 - **Discente:** José Albérico Rocha da Silva
 - **Harness Operacional:** Antigravity (Google DeepMind — Agente Inteligente de Codificação)
 - **Repositório Canônico:** [`https://github.com/albericolx/Topicos_Avancados_IA`](https://github.com/albericolx/Topicos_Avancados_IA)
-- **Subrepositório Isolado em Código:** [`code/arena/`](https://github.com/albericolx/Topicos_Avancados_IA/tree/main/code/arena) (espelhado em [`Atividade_03_LOOP_Agentes/`](https://github.com/albericolx/Topicos_Avancados_IA/tree/main/Atividade_03_LOOP_Agentes) e [`artefatos/Atividade_03_LOOP_Agentes/`](https://github.com/albericolx/Topicos_Avancados_IA/tree/main/artefatos/Atividade_03_LOOP_Agentes))
+- **Subrepositório Isolado em Código:** [`code/arena/`](https://github.com/albericolx/Topicos_Avancados_IA/tree/main/code/arena) (espelhado em [`artefatos/Atividade_03_LOOP_Agentes/`](https://github.com/albericolx/Topicos_Avancados_IA/tree/main/artefatos/Atividade_03_LOOP_Agentes))
 
 ---
 
@@ -33,7 +33,7 @@
 > **Requisito:** *"diretório isolado em código com CONTEXT.md detalhando o propósito do experimento multiagente."*
 
 ### Evidências Instrumentais
-A arena multiagente foi devidamente integrada à arquitetura canônica de código do repositório no subdiretório isolado [`code/arena/`](https://github.com/albericolx/Topicos_Avancados_IA/tree/main/code/arena) (mantendo também os caminhos canônicos [`Atividade_03_LOOP_Agentes/`](https://github.com/albericolx/Topicos_Avancados_IA/tree/main/Atividade_03_LOOP_Agentes) e [`artefatos/Atividade_03_LOOP_Agentes/`](https://github.com/albericolx/Topicos_Avancados_IA/tree/main/artefatos/Atividade_03_LOOP_Agentes)), seguindo o padrão Workspace OS:
+A arena multiagente foi devidamente integrada à arquitetura canônica de código do repositório no subdiretório isolado [`code/arena/`](https://github.com/albericolx/Topicos_Avancados_IA/tree/main/code/arena) (mantendo também [`artefatos/Atividade_03_LOOP_Agentes/`](https://github.com/albericolx/Topicos_Avancados_IA/tree/main/artefatos/Atividade_03_LOOP_Agentes)), seguindo o padrão Workspace OS:
 
 ```text
 code/arena/

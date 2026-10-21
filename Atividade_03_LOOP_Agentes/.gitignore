@@ -1,9 +1,0 @@
-.env
-__pycache__/
-*.pyc
-logs/invalidos/
-artigo/*.aux
-artigo/*.bbl
-artigo/*.blg
-artigo/*.log
-artigo/*.out
