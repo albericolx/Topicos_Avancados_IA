@@ -1,0 +1,52 @@
+\documentclass[runningheads]{llncs}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue!60!black,
+    citecolor=blue!60!black,
+    urlcolor=blue!60!black
+}
+\renewcommand\UrlFont{\color{blue}\rmfamily}
+\urlstyle{rm}
+
+\begin{document}
+
+\title{Sentinela Clandestino: Detec\c{c}\~{a}o de Aliciamento de Apostas Ilegais e Mitiga\c{c}\~{a}o de Espelhos Mutantes na Borda via SLMs e Grafos de Amea\c{c}as}
+\titlerunning{Sentinela Clandestino: Vigilante On-Device de Espelhos e APKs}
+
+\author{Jos\'{e} Alb\'{e}rico Rocha da Silva\inst{1}}
+\authorrunning{J. A. R. da Silva}
+
+\institute{Universidade Federal Rural de Pernambuco (UFRPE)\\
+Departamento de Computa\c{c}\~{a}o -- T\'{o}picos Avan\c{c}ados em Intelig\^{e}ncia Artificial (2026.2)\\
+Recife - PE, Brasil\\
+\email{jose.alberico@ufrpe.br}\\
+\url{https://github.com/albericolx/Topicos_Avancados_IA}}
+
+\maketitle
+
+\begin{abstract}
+Este relat\'{o}rio t\'{e}cnico formaliza a concep\c{c}\~{a}o, fundamenta\c{c}\~{a}o bibliogr\'{a}fica e an\'{a}lise comparativa do projeto \textbf{Sentinela Clandestino (Vigilante de Espelhos e APKs)}, correspondente \`{a}s etapas de Brainwriting H\'{i}brido (\texttt{brw}) e Competidores e Contribui\c{c}\~{a}o (\texttt{cmp}) da Segunda Verifica\c{c}\~{a}o de Aprendizagem (VA2) na disciplina T\'{o}picos Avan\c{c}ados em Intelig\^{e}ncia Artificial (UFRPE 2026.2). Diante da crise cr\^{o}nica de endividamento financeiro e prolifera\c{c}\~{a}o de plataformas de apostas ilegais que burlam bloqueios governamentais via dom\'{i}nios espelhos mutantes e distribui\c{c}\~{a}o clandestina de APKs nas redes sociais, prop\~{o}e-se uma arquitetura de prote\c{c}\~{a}o reativa na borda (\textit{on-device}). O sistema intercepta tentativas de redirecionamento para URLs externas e transfer\^{e}ncias de execut\'{a}veis no momento do clique, empregando um Modelo de Linguagem de Pequeno Porte (SLM) quantizado localmente para an\'{a}lise sem\^{a}ntica da p\'{a}gina de pouso e inspe\c{c}\~{a}o de manifestos de aplica\c{c}\~{a}o, orquestrado por agentes locais via \textit{Model Context Protocol} (MCP) que consultam resumos de grafos de DNS passivo. A contribui\c{c}\~{a}o \'{e} rigorosamente delimitada frente a dez ferramentas comerciais e dez artigos cient\'{i}ficos de ponta, assumindo honestamente perdas operacionais categ\'{o}ricas em lat\^{e}ncia de redirecionamento ($100\text{--}300\text{ms}$), consumo cont\'{i}nuo de mem\'{o}ria e escala de produ\c{c}\~{a}o frente a filtros est\'{a}ticos leves.
+
+\keywords{Apostas Clandestinas \and Engenharia Social \and Small Language Models \and On-Device AI \and Grafos de DNS Passivo \and Seguran\c{c}a Mobile \and AI for Good.}
+\end{abstract}
+
+\input{sections/01_introducao}
+\input{sections/02_trabalhos_relacionados}
+\input{sections/03_arquitetura_e_metodologia}
+\input{sections/04_conclusao_e_tradeoffs}
+
+\bibliographystyle{splncs04}
+\bibliography{references}
+
+\end{document}

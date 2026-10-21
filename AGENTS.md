@@ -28,7 +28,7 @@
 | [`core/`](core/CONTEXT.md) | [`core/CONTEXT.md`](core/CONTEXT.md) · [`core/tools/CONTEXT.md`](core/tools/CONTEXT.md) · [`core/skills/CONTEXT.md`](core/skills/CONTEXT.md) · [`core/flows/CONTEXT.md`](core/flows/CONTEXT.md) · [`core/agents/CONTEXT.md`](core/agents/CONTEXT.md) | Ferramentas CLI, *skills* de pesquisa, fluxos operacionais e agentes especialistas |
 | [`.agents/`](.agents/CONTEXT.md) | [`.agents/CONTEXT.md`](.agents/CONTEXT.md) · [`.agents/skills/CONTEXT.md`](.agents/skills/CONTEXT.md) · [`.agents/skills/research/SKILL.md`](.agents/skills/research/SKILL.md) | Habilidades nativas descobertas automaticamente pelo harness |
 | [`artefatos/`](artefatos/CONTEXT.md) | [`artefatos/CONTEXT.md`](artefatos/CONTEXT.md) | Documentação de evidências da disciplina ([`3-base-git-repo.md`](artefatos/3-base-git-repo.md), [`4-latex-project.md`](artefatos/4-latex-project.md), [`5-mlp-git-repo.md`](artefatos/5-mlp-git-repo.md)) |
-| [`va2/`](va2/CONTEXT.md) | [`va2/CONTEXT.md`](va2/CONTEXT.md) | Artefatos da 2ª Verificação de Aprendizagem (`brw.md`, `cmp.md`) |
+| [`va2/`](va2/CONTEXT.md) | [`va2/CONTEXT.md`](va2/CONTEXT.md) | Módulo autocontido da 2ª Verificação de Aprendizagem: folhas (`brw.md`, `cmp.md`), projeto LaTeX (`main.tex`, `sections/`) e PDF compilado (`main.pdf`) |
 
 ---
 
