@@ -5,14 +5,14 @@
 
 ## 0 · a minha ideia completa
 
-**Sentinela Clandestino (Vigilante de Espelhos e APKs)** — Utilizado por cidadãos frequentemente expostos a links piratas e promessas de ganhos fáceis compartilhados em redes sociais e mensageria. O sistema intercepta tentativas de acesso a links externos e downloads de arquivos no momento do redirecionamento no smartphone, utilizando um SLM *on-device* privado para avaliar a semântica da página de pouso (landing page) e o manifesto do APK, integrado a agentes locais via MCP que consultam grafos de ameaças para correlacionar redes de laranjas e servidores espelhos em tempo real. Bloqueia o acesso a domínios clandestinos mutantes e impede a instalação de binários de apostas ilegais fora da loja oficial, estancando o endividamento e a contaminação por malware sem expor a navegação do usuário a servidores em nuvem.
+**Sentinela Clandestino (Vigilante de Espelhos e APKs)** — Uma ferramenta de proteção na borda voltada a cidadãos e apostadores frequentemente expostos a links piratas e promessas de ganhos fáceis em redes sociais e mensageria. Ao clicar em um link externo ou iniciar o download de um aplicativo fora da loja oficial, o sistema desperta um SLM quantizado local (1B–3B) que avalia a semântica da página de pouso (identificando promessas fraudulentas e cláusulas predatórias de retenção de saque) e audita o manifesto do APK, orquestrado por agentes locais via MCP que consultam grafos de ameaças de DNS passivo para correlacionar redes de laranjas e servidores espelhos em tempo real. Em vez de impor uma censura moral cega, o sistema expõe evidências técnicas de golpe (risco de saque travado, trojan bancário e operadores fantasmas), protegendo o patrimônio do usuário pelo seu próprio interesse de não sofrer calote, sem violar sua privacidade e sem depender de listas estáticas ineficazes.
 
 ## 1 · a ficha da ideia
 
-- **cenário:** Navegação em smartphones no Brasil a partir de links e arquivos distribuídos em redes sociais e mensageria, onde espelhos mutantes e APKs piratas driblam os bloqueios governamentais da Anatel/Fazenda.
-- **usuário:** Cidadãos e jovens usuários de smartphone expostos a publicidades agressivas de "jogos que pagam" e salas de sinais.
-- **problema do usuário:** Risco de endividamento compulsivo e infecção do celular por malware ao ser induzido a acessar espelhos ilegais ou instalar APKs piratas sem proteção jurídica.
-- **tecnologia:** SLM local *on-device* (1B–7B) para classificação semântica de páginas de pouso e metadados de apps, acoplado a agentes locais (MCP) que consultam redes de grafos de ameaças cibernéticas.
+- **cenário:** Navegação em smartphones no Brasil a partir de links externos e arquivos distribuídos em redes sociais e mensageria, onde espelhos mutantes e gateways dinâmicos de Pix driblam os bloqueios governamentais da Fazenda/Anatel.
+- **usuário:** Cidadãos e apostadores expostos a publicidades agressivas de "jogos que pagam" e salas de sinais, que desejam evitar golpes de cassinos falsos e roubo de saldos.
+- **problema do usuário:** Risco de calote financeiro por plataformas clandestinas que aceitam depósitos mas bloqueiam saques (*honeypots*), infecção do smartphone por APKs com trojans bancários e risco de bloqueio preventivo do próprio CPF no Mecanismo Especial de Devolução (MED) por transacionar com contas de laranjas investigadas.
+- **tecnologia:** SLM local *on-device* (1B–3B em INT4) para classificação semântica de páginas de pouso e termos de saque, acoplado a agentes locais via MCP que consultam redes de grafos de ameaças de DNS passivo.
 
 ## 2 · catálogo de ferramentas
 
@@ -63,7 +63,7 @@ eixos tirados das tensões arquiteturais e operacionais dos 6 trabalhos; os trê
 
 **✔** faz · **◐** faz em parte · **✘** não faz · **?** não achei evidência
 
-| trabalho | intercepta link/redirecionamento no celular | audita APKs e empacotamento malicioso | detecta espelhos de dia zero por grafos | avalia semântica de apostas na landing page | dados e inferência 100% no celular | latência mínima de abertura (< 50ms) | baixo consumo de bateria e RAM | prontidão e validação em escala real |
+| trabalho | intercepta link/redirecionamento no celular | audita APKs e empacotamento malicioso | detecta espelhos de dia zero por grafos | avalia cláusulas de calote e regras de saque na landing page | dados e inferência 100% no celular | latência mínima de abertura (< 50ms) | baixo consumo de bateria e RAM | prontidão e validação em escala real |
 |:--|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
 | Trend Micro Check | ✘ | ✘ | ◐ | ◐ | ✘ | ✔ | ✔ | ✔ |
 | Gamban | ✘ | ◐ | ✘ | ✘ | ✔ | ✔ | ✔ | ✔ |
@@ -83,19 +83,22 @@ eixos tirados das tensões arquiteturais e operacionais dos 6 trabalhos; os trê
 
 ## 6 · a contribuição
 
-**a frase:** o Sentinela Clandestino correlaciona a semântica da página de pouso de apostas com a topologia de infraestrutura de espelhos e APKs diretamente na borda do smartphone, e por isso bloqueia o ciclo da aposta clandestina no momento do redirecionamento com total privacidade local, o que nem os filtros de rede estáticos (Gamban/Netcraft) nem os classificadores em nuvem (Muzakir/Álvarez-Ojeda) conseguem realizar isoladamente.
+**a frase:** o Sentinela Clandestino correlaciona a semântica de persuasão e regras de saque da página de pouso com a topologia de infraestrutura de espelhos e APKs diretamente na borda do smartphone, e por isso expõe fraudes de calote e malwares no momento do redirecionamento com total privacidade local, o que nem os filtros de rede estáticos (Gamban/Netcraft) nem os classificadores em nuvem (Muzakir/Álvarez-Ojeda) conseguem realizar isoladamente.
 
-**o trabalho mais próximo, e por que ele não chega lá:** o Trend Micro Check analisa links e prints de golpes com IA, mas depende de o usuário desconfiar e enviar o conteúdo manualmente para a nuvem corporativa, falhando em interceptar espelhos mutantes e em auditar APKs piratas no momento do clique.
+**o trabalho mais próximo, e por que ele não chega lá:** o Trend Micro Check analisa links e prints de golpes com IA na nuvem, mas depende de envio manual proativo pelo usuário e avalia apenas reputação genérica, falhando em auditar cláusulas de retenção de saque em espelhos mutantes e em inspecionar manifestos de APKs piratas no momento do clique.
 
 ## 7 · tentei derrubar
 
-o que a conversa nova achou: a auditoria cega independente detectou que o DOI de Nabeel et al. continha uma divergência na publicação (o DOI real e oficial no ACM TOPS é [10.1145/3401897](https://doi.org/10.1145/3401897)). Além disso, a auditoria apontou a impossibilidade arquitetural de "ler feeds proprietários de redes sociais" sem violar o *sandboxing* e as diretrizes do Android, e criticou a nota complacente de ◐ em bateria/RAM para modelos neurais móveis.
+o que a conversa nova achou: na auditoria adversária e confronto com alternativas sem IA, foi levantada a hipótese de que *"uma lista atualizada de chaves Pix e de domínios de bets ilegais bloqueada no teclado já resolveria o problema"*. Além disso, apontou-se que se o sistema apenas atuasse como um bloqueador autoritário tradicional, o apostador simplesmente o desinstalaria para continuar jogando.
 
-o que eu mudei: o DOI de Nabeel et al. foi corrigido (10.1145/3401897). Toda a folha (Seções 0, 1, 6, 7 e 8) foi harmonizada para eliminar o mito da inspeção de feeds internos: a atuação técnica ocorre na **interceptação da página de pouso (landing page) no redirecionamento externo e na inspeção do manifesto de APKs baixados**. Na matriz, assumi as tensões técnicas reais: a minha ideia perde categoricamente com ✘ em latência de abertura (< 50ms) e com ✘ em consumo contínuo de memória RAM e bateria frente à extrema leveza dos filtros estáticos de rede.
+o que eu mudei: refinei a contribuição demonstrando por que **a alternativa sem IA perde categoricamente para a realidade do crime organizado**:
+1. **Listas estáticas e bloqueios de teclado falham:** operadores clandestinos geram espelhos de dia zero via DGA sob novas extensões (.xyz, .top) a cada hora, e utilizam APIs de gateways (PSPs) que emitem QR Codes dinâmicos de Pix com CPFs rotativos de laranjas. Não existe lista estática capaz de prever chaves e domínios criados há minutos;
+2. **Canalização do interesse próprio do apostador:** a solução não é um bloqueador moralizante (que o usuário rejeitaria), mas um **auditor de calote e de risco**: o apostador quer lucrar e usa o Sentinela para descobrir se o cassino é um golpe que aceita depósito mas congela o saque (*honeypot*), ou se o APK possui trojan para roubar seu saldo bancário;
+3. **Decisões baseadas em IA na borda:** eliminei qualquer regra heurística estática (como bloqueio genérico de APKs ou whitelists rígidas de CNPJs) em favor de inferência semântica contrastiva no SLM on-device e agentes MCP que consultam grafos de DNS passivo. A ideia mantém suas 3 perdas honestas na matriz (latência < 50ms, dreno de bateria/RAM e escala de produção).
 
 ## 8 · resumo, sem IA
 
-Trend Micro, Gamban e Google tentam barrar fraudes ou sites de apostas por listas estáticas de domínios ou antivírus técnico.  
-Nenhum correlaciona a semântica persuasiva da página de pouso com a infraestrutura mutante de espelhos e APKs direto no celular.  
-A minha ideia une a triagem semântica local à interceptação de rede no aparelho, preservando a privacidade do usuário.  
+Trend Micro, Gamban e filtros de teclado tentam conter fraudes por listas de domínios ou assinaturas estáticas.  
+Nenhum audita a semântica de calote de saque em espelhos mutantes nem inspeciona APKs polimórficos direto no celular.  
+A minha ideia une triagem semântica local a grafos de DNS na borda, protegendo o apostador do calote com privacidade total.  
 O trade-off técnico assumido é severo: rodar inferência de SLM e grafo no celular impõe latência de abertura e custo de bateria que filtros estáticos não têm.
