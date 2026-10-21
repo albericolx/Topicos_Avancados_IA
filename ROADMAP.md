@@ -27,3 +27,4 @@
 ### Avaliação VA2: Ideação e Pesquisa (IA for Good)
 - [x] Estruturação e ideação completa de brainwriting ([`va2/brw.md`](va2/brw.md))
 - [x] Competidores e contribuição validada por auditoria cega ([`va2/cmp.md`](va2/cmp.md))
+- [x] Centralização autocontida do módulo VA2: fontes LaTeX Springer LNCS ([`va2/main.tex`](va2/main.tex), [`va2/sections/`](va2/sections/)) e PDF compilado ([`va2/main.pdf`](va2/main.pdf))

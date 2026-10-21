@@ -1,0 +1,52 @@
+\section{Trabalhos Relacionados e Matriz de Contribui\c{c}\~{a}o}
+\label{sec:trabalhos_relacionados}
+
+A delimita\c{c}\~{a}o da fronteira tecnol\'{o}gica do Sentinela Clandestino fundamenta-se na an\'{a}lise comparativa de dez ferramentas de mercado e dez artigos cient\'{i}ficos recentes, avaliados segundo as dimens\~{o}es de Cen\'{a}rio, Usu\'{a}rio, Problema e Tecnologia (CUPT). A partir desse levantamento, selecionaram-se os tr\^{e}s competidores de mercado e as tr\^{e}s refer\^{e}ncias bibliogr\'{a}ficas mais pr\'{o}ximas.
+
+\subsection{Competidores de Mercado e Literatura Mais Pr\'{o}ximos}
+
+\begin{itemize}
+    \item \textbf{Trend Micro Check:} Constitui o concorrente mais direto na intera\c{c}\~{a}o móvel, utilizando IA para analisar prints e mensagens suspeitas. Entretanto, depende de a\c{c}\~{a}o volunt\'{a}ria e manual do usu\'{a}rio, processa dados na nuvem corporativa e n\~{a}o intercepta ativamente espelhos mutantes no ato do redirecionamento;
+    \item \textbf{Gamban:} Refer\^{e}ncia global em autoexclus\~{a}o de apostas digitais com bloqueio r\'{i}gido em n\'{i}vel de rede local (via VPN loopback). Contudo, opera estritamente sobre listas est\'{a}ticas de dom\'{i}nios consolidados, sendo totalmente ineficaz contra dom\'{i}nios ef\^{e}meros e APKs clandestinos;
+    \item \textbf{Netcraft Mobile:} Solu\c{c}\~{a}o l\'{i}der em prote\c{c}\~{a}o contra ataques de \textit{phishing} e \textit{smishing} com inspe\c{c}\~{a}o no momento do toque, mas sem compreens\~{a}o de engenharia social focada na linguagem informal de aliciamento de apostas no Brasil;
+    \item \textbf{Muzakir et al. (2025)~\cite{muzakir2025text}:} Empregam CNNs e AutoML sobre 15.286 senten\c{c}as extra\'{i}das de an\'{u}ncios de apostas em redes sociais (92,80\% de acur\'{a}cia). Contudo, o sistema foi desenhado para modera\c{c}\~{a}o centralizada na nuvem voltada \`{a} l\'{i}ngua indon\'{e}sia, n\~{a}o atuando no terminal m\'{o}vel;
+    \item \textbf{The PRECOM-SM Corpus (\'{A}lvarez-Ojeda et al., 2025)~\cite{alvarezojeda2025precom}:} Primeiro corpus de refer\^{e}ncia no COLING 2025 para identificar marcadores de depend\^{e}ncia de apostas em redes sociais hisp\^{a}nicas, limitando-se \`{a} an\'{a}lise descritiva de comunidades sem mecanismo ativo de conten\c{c}\~{a}o de rede ou APKs;
+    \item \textbf{Nabeel et al. (2020)~\cite{nabeel2020following}:} Prop\~{o}em algoritmos de infer\^{e}ncia em grafos de DNS passivo (pDNS) no \textit{ACM TOPS} para rastrear infraestruturas de dom\'{i}nios maliciosos antes de ativa\c{c}\~{a}o massiva. O m\'{e}todo depende de telemetria corporativa de provedores de internet, n\~{a}o operando no smartphone do cidad\~{a}o.
+\end{itemize}
+
+\subsection{Matriz Comparativa de Eixos e Evid\^{e}ncias Emp\'{i}ricas}
+
+A Tabela~\ref{tab:matriz_concorrentes} formaliza a matriz comparativa de 8 eixos operacionais, confrontando a proposta do Sentinela Clandestino com os seis trabalhos mais pr\'{o}ximos. Seguindo o princ\'{i}pio de rigor metodol\'{o}gico da disciplina, o modelo proposto assume honestamente a perda em tr\^{e}s eixos cr\'{i}ticos de engenharia.
+
+\begin{table*}[t]
+\centering
+\caption{Matriz comparativa de competidores e contribui\c{c}\~{a}o ($\checkmark$: faz integralmente; $\blacktriangleright$: faz em parte; $\times$: n\~{a}o faz; ?: n\~{a}o reportado). Os tr\^{e}s \'{u}ltimos eixos evidenciam onde a nossa proposta perde categoricamente ($\times$).}
+\label{tab:matriz_concorrentes}
+\setlength{\tabcolsep}{4pt}
+\scriptsize
+\begin{tabular}{lcccccccc}
+\toprule
+\textbf{Trabalho / Solu\c{c}\~{a}o} & \textbf{Eixo 1} & \textbf{Eixo 2} & \textbf{Eixo 3} & \textbf{Eixo 4} & \textbf{Eixo 5} & \textbf{Eixo 6} & \textbf{Eixo 7} & \textbf{Eixo 8} \\
+& Intercep. & Audita & Espelhos & Sem\^{a}ntica & Dados & Lat\^{e}ncia & Baixo Cons. & Prontid\~{a}o \\
+& Redirec. & APK & Grafos & Landing & Celular & $< 50\text{ms}$ & Bat/RAM & Produ\c{c}\~{a}o \\
+\midrule
+Trend Micro Check & $\times$ & $\times$ & $\blacktriangleright$ & $\blacktriangleright$ & $\times$ & $\checkmark$ & $\checkmark$ & $\checkmark$ \\
+Gamban & $\times$ & $\blacktriangleright$ & $\times$ & $\times$ & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ \\
+Netcraft Mobile & $\blacktriangleright$ & $\times$ & $\blacktriangleright$ & $\times$ & $\times$ & $\checkmark$ & $\checkmark$ & $\checkmark$ \\
+Muzakir et al. (2025)~\cite{muzakir2025text} & $\times$ & $\times$ & $\times$ & $\checkmark$ & $\times$ & ? & ? & $\times$ \\
+\'{A}lvarez-Ojeda et al. (2025)~\cite{alvarezojeda2025precom} & $\times$ & $\times$ & $\times$ & $\checkmark$ & $\times$ & ? & ? & $\times$ \\
+Nabeel et al. (2020)~\cite{nabeel2020following} & $\times$ & $\times$ & $\checkmark$ & $\times$ & $\times$ & ? & ? & $\times$ \\
+\midrule
+\textbf{Sentinela Clandestino} & $\mathbf{\checkmark}$ & $\mathbf{\checkmark}$ & $\mathbf{\checkmark}$ & $\mathbf{\checkmark}$ & $\mathbf{\checkmark}$ & $\mathbf{\times}$ & $\mathbf{\times}$ & $\mathbf{\times}$ \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\subsection{Declara\c{c}\~{a}o Can\^{o}nica da Contribui\c{c}\~{a}o}
+
+Com base na combina\c{c}\~{a}o \'{u}nica de quadrantes em que a solu\c{c}\~{a}o atua de forma diferenciada, a contribui\c{c}\~{a}o cient\'{i}fico-tecnol\'{o}gica \'{e} expressa formalmente como:
+\begin{quote}
+    \textit{``O Sentinela Clandestino correlaciona a sem\^{a}ntica da p\'{a}gina de pouso de apostas com a topologia de infraestrutura de espelhos e APKs diretamente na borda do smartphone, e por isso bloqueia o ciclo da aposta clandestina no momento do redirecionamento com total privacidade local, o que nem os filtros de rede est\'{a}ticos (Gamban/Netcraft) nem os classificadores em nuvem (Muzakir/{\'A}lvarez-Ojeda) conseguem realizar isoladamente.''}
+\end{quote}
+
+O trabalho mais pr\'{o}ximo \'{e} o \textbf{Trend Micro Check}, que analisa links e capturas de tela com modelos de IA na nuvem; todavia, ele falha porque depende da proatividade manual da v\'{i}tima em enviar o conte\'{u}do e n\~{a}o audita manifestos de APKs piratas nem correlaciona grafos de espelhos no momento do clique.

@@ -1,0 +1,12 @@
+\section{Considera\c{c}\~{o}es Finais e Trade-offs de Engenharia}
+\label{sec:conclusao}
+
+A viabiliza\c{c}\~{a}o do Sentinela Clandestino imp\~{o}e a aceita\c{c}\~{a}o expl\'{i}cita de compromissos t\'{e}cnicos de engenharia de software e sistemas operacionais, evitando concess\~{o}es complacentes:
+
+\begin{enumerate}
+    \item \textbf{Lat\^{e}ncia de Redirecionamento ($100\text{--}300\text{ms}$ vs. $< 50\text{ms}$):} Filtros est\'{a}ticos de DNS ou VPN (como Gamban e Netcraft) operam com descarte quase instant\^{a}neo de pacotes ($< 10\text{ms}$). A execu\c{c}\~{a}o de uma passagem direta (\textit{forward pass}) de um SLM quantizado e a consulta ao grafo local introduzem uma lat\^{e}ncia percept\'{i}vel de at\'{e} 300~milissegundos durante o clique externo, configurando um custo deliberado em prol da an\'{a}lise contextual profunda;
+    \item \textbf{Consumo Energ\'{e}tico e Aloca\c{c}\~{a}o de Mem\'{o}ria:} Manter um modelo de linguagem residente na mem\'{o}ria de smartphones de entrada causaria o encerramento do processo pelo \textit{Low Memory Killer} (LMK) do Android. Portanto, a arquitetura adota ativa\c{c}\~{a}o estritamente orientada a eventos, permanecendo inativa durante a navega\c{c}\~{a}o cotidiana e ativando o processador neural (NPU/CPU) apenas em eventos de clique externo ou download;
+    \item \textbf{Maturidade de Valida\c{c}\~{a}o em Escala:} Enquanto produtos comerciais possuem bases de milh\~{o}es de usu\'{a}rios e certifica\c{c}\~{a}o regulat\'{o}ria, o Sentinela Clandestino posiciona-se como uma investiga\c{c}\~{a}o tecnol\'{o}gica de vanguarda voltada para o bem social (\textit{AI for Good}).
+\end{enumerate}
+
+Em s\'{i}ntese, enquanto as solu\c{c}\~{o}es existentes tentam conter o avan\c{c}o das fraudes mediante tabelas fixas de endere\c{c}os ou delegando a privacidade a servidores corporativos na nuvem, o Sentinela Clandestino articula a triagem sem\^{a}ntica no aparelho com a intelig\^{e}ncia de grafos de infraestrutura criminosa, oferecendo prote\c{c}\~{a}o em tempo real sem comprometer a soberania dos dados do cidad\~{a}o.
