@@ -28,3 +28,10 @@
 - [x] Estruturação e ideação completa de brainwriting ([`va2/brw.md`](va2/brw.md))
 - [x] Competidores e contribuição validada por auditoria cega e alinhada com feedback de incentivos/calote ([`va2/cmp.md`](va2/cmp.md))
 - [x] Centralização autocontida do módulo VA2: fontes LaTeX Springer LNCS ([`va2/main.tex`](va2/main.tex), [`va2/sections/`](va2/sections/)) e PDF compilado ([`va2/main.pdf`](va2/main.pdf))
+- [x] **Auditoria Reforçada e Governança do CMP (`va2/cmp.md`):**
+  - **Sessão 1 (Auditoria Cega por Subagente):** Itens 1, 2 e 3 aprovados com distinção; 0 preprints arXiv; 6 artigos A1; links e DOIs de Muzakir et al. (2025), Nabeel et al. (2020) e Trend Micro validados na web; conformidade estrita com o padrão `cmp-excelente.md` e rejeição das 6 armadilhas do `cmp-raso.md`.
+  - **Sessão 2 (Decisões de Design Deliberadas pelo Aluno):**
+    - *Privacidade Local vs Grafo:* MCP consulta *digest* comprimido local (filtros de Bloom/Cuckoo) de pDNS na borda, garantindo o "✔ em dados 100% no celular" sem telemetria externa.
+    - *Estrutura da Matriz:* Preservação dos 6 concorrentes fundamentais com 3 perdas categóricas honestas (✘ em latência < 50ms, ✘ em bateria/RAM e ✘ em escala comercial), contextualizando Google Play Protect e alternativas sem IA no Passo 7.
+  - **Sessão 3 (Saneamento e Evidências):** Inclusão da linha explícita de evidências da "minha ideia" na Seção 5 e blindagem da frase canônica de contribuição.
+  - **Sessão 4 (Sincronização e GitFlow):** Sincronização com `va2/sections/02_trabalhos_relacionados.tex`, compilação autônoma do `va2/main.pdf` (295 KB) e commit/push em branch isolada integrada na `develop` e `main`.
