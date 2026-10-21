@@ -5,14 +5,14 @@
 
 ## 0 · a minha ideia completa
 
-**Sentinela Clandestino (Vigilante de Espelhos e APKs)** — Uma ferramenta de proteção na borda voltada a cidadãos e apostadores frequentemente expostos a links piratas e promessas de ganhos fáceis em redes sociais e mensageria. Ao clicar em um link externo ou iniciar o download de um aplicativo fora da loja oficial, o sistema desperta um SLM quantizado local (1B–3B) que avalia a semântica da página de pouso (identificando promessas fraudulentas e cláusulas predatórias de retenção de saque) e audita o manifesto do APK, orquestrado por agentes locais via MCP que consultam grafos de ameaças de DNS passivo para correlacionar redes de laranjas e servidores espelhos em tempo real. Em vez de impor uma censura moral cega, o sistema expõe evidências técnicas de golpe (risco de saque travado, trojan bancário e operadores fantasmas), protegendo o patrimônio do usuário pelo seu próprio interesse de não sofrer calote, sem violar sua privacidade e sem depender de listas estáticas ineficazes.
+**Sentinela Clandestino (Vigilante de Espelhos e APKs)** — Uma ferramenta de proteção na borda voltada a cidadãos e apostadores frequentemente expostos a links piratas e promessas de ganhos fáceis em redes sociais e mensageria. Ao clicar em um link externo ou iniciar o download de um aplicativo fora da loja oficial, o sistema desperta um SLM quantizado local (1B–3B) que avalia a semântica da página de pouso (identificando promessas fraudulentas e cláusulas predatórias de retenção de saque) e audita o manifesto do APK, orquestrado por agentes locais via MCP que consultam representações comprimidas locais (filtros de Bloom/Cuckoo) de grafos de DNS passivo para correlacionar redes de laranjas e servidores espelhos em tempo real, sem expor nenhum dado de tráfego para fora do aparelho. Em vez de impor uma censura moral cega, o sistema expõe evidências técnicas de golpe (risco de saque travado, trojan bancário e operadores fantasmas), protegendo o patrimônio do usuário pelo seu próprio interesse de não sofrer calote, sem violar sua privacidade e sem depender de listas estáticas ineficazes.
 
 ## 1 · a ficha da ideia
 
 - **cenário:** Navegação em smartphones no Brasil a partir de links externos e arquivos distribuídos em redes sociais e mensageria, onde espelhos mutantes e gateways dinâmicos de Pix driblam os bloqueios governamentais da Fazenda/Anatel.
 - **usuário:** Cidadãos e apostadores expostos a publicidades agressivas de "jogos que pagam" e salas de sinais, que desejam evitar golpes de cassinos falsos e roubo de saldos.
 - **problema do usuário:** Risco de calote financeiro por plataformas clandestinas que aceitam depósitos mas bloqueiam saques (*honeypots*), infecção do smartphone por APKs com trojans bancários e risco de bloqueio preventivo do próprio CPF no Mecanismo Especial de Devolução (MED) por transacionar com contas de laranjas investigadas.
-- **tecnologia:** SLM local *on-device* (1B–3B em INT4) para classificação semântica de páginas de pouso e termos de saque, acoplado a agentes locais via MCP que consultam redes de grafos de ameaças de DNS passivo.
+- **tecnologia:** SLM local *on-device* (1B–3B em INT4) para classificação semântica de páginas de pouso e termos de saque, acoplado a agentes locais via MCP que consultam um *digest* comprimido na borda (filtros de Bloom/Cuckoo) de grafos de ameaças de DNS passivo, operando com zero vazamento de telemetria.
 
 ## 2 · catálogo de ferramentas
 
@@ -80,6 +80,7 @@ eixos tirados das tensões arquiteturais e operacionais dos 6 trabalhos; os trê
 - Muzakir et al., 2025: treinou modelo CNN sobre 15.286 textos e OCR de postagens de apostas em redes sociais (✔: [DOI: 10.1109/ICISIT.2025.10842131](https://doi.org/10.1109/ICISIT.2025.10842131)), capturando gírias e expressões persuasivas em língua indonésia.
 - Álvarez-Ojeda et al., 2025: corpus anotado de interações sociais e modelos de linguagem para detectar linguagem de persuasão e adicção a apostas (✔: [COLING 2025 / ACL Anthology](https://aclanthology.org/2025.coling-main.2/)).
 - Nabeel et al., 2020: algoritmo de inferência em grafos sobre traces de DNS passivo para identificar clusters de domínios maliciosos furtivos antes de entrarem em listas públicas (✔: [ACM TOPS](https://doi.org/10.1145/3401897)).
+- a minha ideia: intercepta redirecionamento e downloads no SO móvel (✔), audita manifestos de APKs e bytecode Dex (✔), correlaciona clusters de espelhos via grafo pDNS comprimido (✔), avalia promessas e regras predatórias de saque via SLM (✔), processamento e dados 100% on-device via filtros de Bloom locais sem tráfego externo (✔), perde em latência de abertura (< 50ms) por exigir 150–300ms de inferência neural (✘), perde em bateria/RAM por mobilizar NPU/CPU local frente a tabelas estáticas de rede (✘), e perde em prontidão de validação em escala por se tratar de investigação científica ainda em fase laboratorial (✘).
 
 ## 6 · a contribuição
 
