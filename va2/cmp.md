@@ -7,6 +7,15 @@
 
 **Sentinela Clandestino (Vigilante de Espelhos e APKs)** — Uma ferramenta de proteção na borda voltada a cidadãos e apostadores frequentemente expostos a links piratas e promessas de ganhos fáceis em redes sociais e mensageria. Ao clicar em um link externo ou iniciar o download de um aplicativo fora da loja oficial, o sistema aciona um pipeline híbrido na borda: um modelo de decisão rápida de Sistema 1 (*LAYA* open-source, < 35ms) executa a triagem probabilística imediata da página de pouso e manifesto de APK, acoplado a agentes locais via MCP que consultam representações comprimidas locais (filtros de Bloom) de grafos de DNS passivo; em casos limítrofes, desperta sob demanda um SLM local quantizado (1B–3B) para auditoria detalhada de cláusulas predatórias de retenção de saque. Em vez de impor uma censura moral cega, o sistema expõe evidências técnicas de golpe (risco de saque travado, trojan bancário e operadores fantasmas), protegendo o patrimônio do usuário pelo seu próprio interesse de não sofrer calote, com latência quase nula e sem violar sua privacidade.
 
+```mermaid
+flowchart TD
+    A["Toque no Link / APK"] --> B["Fast-Path LAYA (< 35ms)"]
+    B --> C{"Risco Flagrante > 90%?"}
+    C -- "Sim" --> D["🚨 Alerta Instantâneo de Risco"]
+    C -- "Não / Detalhes" --> E["Deep-Path SLM (INT4) + Grafo pDNS"]
+    E --> F["📊 Painel com Evidências de Calote e Saque Travado"]
+```
+
 ## 1 · a ficha da ideia
 
 - **cenário:** Navegação em smartphones no Brasil a partir de links externos e arquivos distribuídos em redes sociais e mensageria, onde espelhos mutantes e gateways dinâmicos de Pix driblam os bloqueios governamentais da Fazenda/Anatel.
