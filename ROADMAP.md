@@ -37,3 +37,7 @@
   - **Sessão 4 (Sincronização e GitFlow):** Sincronização com `va2/sections/02_trabalhos_relacionados.tex`, compilação autônoma do `va2/main.pdf` (295 KB) e commit/push em branch isolada integrada na `develop` e `main`.
 - [x] **Detalhamento da Indispensabilidade da IA (`va2/brw.md` & `va2/cmp.md`):** Fundamentação minuciosa e direta ("Como a IA resolve") para as 3 falhas de alternativas sem IA (DGA, Pix dinâmico via PSPs e MAMF), harmonizando os artefatos com a introdução do artigo LaTeX e PDF.
 - [x] **Evolução Arquitetural LAYA vs JEV (Opção 1):** Adoção de pipeline híbrido de dois estágios na borda com modelo de decisão rápida de Sistema 1 (*LAYA*, < 35ms) para triagem instantânea no redirecionamento e SLM sob demanda para auditoria profunda, descartando o *JEV* para assegurar soberania local de dados. Matriz calibrada tecnicamente (Latência < 50ms = ✔, Bateria/RAM = ◐ e Escala = ✘) e PDF compilado ([`va2/main.pdf`](va2/main.pdf), 300 KB).
+- [x] **Consolidação Proativa de Excelência (Recomendações 1, 2 e 3):**
+  - Citação formal e indexação no BibTeX de LAYA (`convai2026laya`) e ModernBERT (`warner2024modernbert`), com recompilação do relatório Springer LNCS ([`va2/main.pdf`](va2/main.pdf), 303 KB);
+  - Inserção de diagramas de fluxo Mermaid nos artefatos [`va2/brw.md`](va2/brw.md) e [`va2/cmp.md`](va2/cmp.md);
+  - Publicação do guia de sustentação oral sem a tela em [`va2/PITCH.md`](va2/PITCH.md).
