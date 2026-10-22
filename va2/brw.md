@@ -147,6 +147,18 @@ por que sem ela não roda:
    **Como a IA resolve (direto ao ponto):** O SLM *on-device* analisa semanticamente a discrepância funcional entre o manifesto do aplicativo e o fluxo de bytecode Dex descompilado na borda, identificando anomalias estruturais críticas (como um suposto jogo requisitar permissões de acessibilidade, sobreposição de tela bancária e leitura de SMS para interceptar tokens de 2FA), neutralizando o cavalo de Troia independentemente do seu hash binário.  
 Somente a IA avançada é capaz de ler a semântica da página em tempo real, desmascarar promessas enganosas e cláusulas predatórias de saque, e inferir o risco do domínio novo conectando-o em grafos de infraestrutura passiva.
 
+**fluxo do pipeline híbrido na borda:**
+```mermaid
+flowchart TD
+    A["Toque no Link Externo ou Download de APK"] --> B["Interceptação do SO (Intent Filter / DownloadManager)"]
+    B --> C["ESTÁGIO 1: Fast-Path On-Device (LAYA < 35ms)"]
+    C --> D{"Probabilidade de Fraude > 90%?"}
+    D -- "Sim (Flagrante de Golpe/Honeypot)" --> E["🚨 Alerta Imediato na Borda: Exibe Provas de Calote e Malware"]
+    D -- "Dúvida / Análise Contratual Solicitada" --> F["ESTÁGIO 2: Deep-Path On-Device (SLM INT4 + MCP pDNS)"]
+    F --> G["Auditoria Semântica de Termos de Saque & Grafo Local de Espelhos"]
+    G --> H["📊 Painel de Risco Transparente e Liberação Consciente"]
+```
+
 **c · críticas de quem está de fora**
 
 | crítica | saída 1 | saída 2 | minha decisão |
