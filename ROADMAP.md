@@ -35,3 +35,4 @@
     - *Estrutura da Matriz:* Preservação dos 6 concorrentes fundamentais com 3 perdas categóricas honestas (✘ em latência < 50ms, ✘ em bateria/RAM e ✘ em escala comercial), contextualizando Google Play Protect e alternativas sem IA no Passo 7.
   - **Sessão 3 (Saneamento e Evidências):** Inclusão da linha explícita de evidências da "minha ideia" na Seção 5 e blindagem da frase canônica de contribuição.
   - **Sessão 4 (Sincronização e GitFlow):** Sincronização com `va2/sections/02_trabalhos_relacionados.tex`, compilação autônoma do `va2/main.pdf` (295 KB) e commit/push em branch isolada integrada na `develop` e `main`.
+- [x] **Detalhamento da Indispensabilidade da IA (`va2/brw.md` & `va2/cmp.md`):** Fundamentação minuciosa e direta ("Como a IA resolve") para as 3 falhas de alternativas sem IA (DGA, Pix dinâmico via PSPs e MAMF), harmonizando os artefatos com a introdução do artigo LaTeX e PDF.
