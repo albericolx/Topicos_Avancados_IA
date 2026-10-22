@@ -10,8 +10,12 @@ Em vez de tentar violar o isolamento de processos de redes sociais propriet\'{a}
     \item \textbf{Gatilho de Download de Bin\'{a}rios:} Detecta o in\'{i}cio de transfer\^{e}ncias de arquivos execut\'{a}veis com extens\~{a}o \texttt{.apk} provenientes de fontes desconhecidas fora da loja Google Play.
 \end{enumerate}
 
-\subsection{Infer\^{e}ncia Sem\^{a}ntica On-Device via SLM Quantizado}
-Ao interceptar a p\'{a}gina de destino (\textit{landing page}), o texto textual renderizado \'{e} submetido a um modelo de linguagem de pequeno porte quantizado em 4-bit (INT4) baseado na arquitetura MobileLLM~\cite{liu2024mobilellm}. O modelo avalia a presen\c{c}a de padr\~{o}es de linguagem persuasiva, promessas de ganhos f\'{a}ceis (e.g., termos como ``banca'', ``alavancagem'', ``bug do tigrinho'') e audita as cl\'{a}usulas contratuais de pagamento em busca de armadilhas de \textbf{reten\c{c}\~{a}o il\'{i}cita de saques} (\textit{rollovers} abusivos e cobran\c{c}a de taxas pr\'{e}vias para libera\c{c}\~{a}o de pr\^{e}mios), alcan\c{c}ando alta capacidade discriminativa com pegada de mem\'{o}ria inferior a 500~MB de RAM e tempo de infer\^{e}ncia abaixo de 250~ms.
+\subsection{Pipeline H\'{i}brido de Dois Est\'{a}gios: Fast-Path com LAYA e Deep-Path com SLM}
+Para conciliar an\'{a}lise sem\^{a}ntica profunda com lat\^{e}ncia impercept\'{i}vel na navega\c{c}\~{a}o móvel, adota-se um pipeline h\'{i}brido executado 100\% \textit{on-device}:
+\begin{enumerate}
+    \item \textbf{Fast-Path com Modelo de Decis\~{a}o LAYA ($< 35\text{ms}$):} No instante do redirecionamento, um modelo n\~{a}o autorregressivo de Sistema~1 baseado em pesos abertos (\textit{LAYA}, com codificadores ModernBERT) processa o DOM e manifesto em paralelo, pontuando probabilidades estruturadas de golpe com pegada inferior a $100\text{MB}$ de RAM. Se o risco for inequ\'{i}voco ($> 90\%$), o alerta \'{e} disparado instantaneamente sem depend\^{e}ncia de nuvens propriet\'{a}rias (como JEV);
+    \item \textbf{Deep-Path com SLM Quantizado (Sob Demanda):} Em casos amb\'{i}guos ou sob solicita\c{c}\~{a}o de auditoria detalhada pelo usu\'{a}rio, um SLM quantizado em 4-bit (INT4, 1B--3B)~\cite{liu2024mobilellm} \'{e} acordado para dissecar as cl\'{a}usulas contratuais de pagamento em busca de armadilhas de \textbf{reten\c{c}\~{a}o il\'{i}cita de saques} (\textit{rollovers} abusivos e cobran\c{c}a de taxas pr\'{e}vias).
+\end{enumerate}
 
 \subsection{Inspe\c{c}\~{a}o de Código Polimórfico e Correla\c{c}\~{a}o em Grafos}
 Quando o evento envolve um pacote de aplica\c{c}\~{a}o Android:

@@ -5,14 +5,14 @@
 
 ## 0 · a minha ideia completa
 
-**Sentinela Clandestino (Vigilante de Espelhos e APKs)** — Uma ferramenta de proteção na borda voltada a cidadãos e apostadores frequentemente expostos a links piratas e promessas de ganhos fáceis em redes sociais e mensageria. Ao clicar em um link externo ou iniciar o download de um aplicativo fora da loja oficial, o sistema desperta um SLM quantizado local (1B–3B) que avalia a semântica da página de pouso (identificando promessas fraudulentas e cláusulas predatórias de retenção de saque) e audita o manifesto do APK, orquestrado por agentes locais via MCP que consultam representações comprimidas locais (filtros de Bloom/Cuckoo) de grafos de DNS passivo para correlacionar redes de laranjas e servidores espelhos em tempo real, sem expor nenhum dado de tráfego para fora do aparelho. Em vez de impor uma censura moral cega, o sistema expõe evidências técnicas de golpe (risco de saque travado, trojan bancário e operadores fantasmas), protegendo o patrimônio do usuário pelo seu próprio interesse de não sofrer calote, sem violar sua privacidade e sem depender de listas estáticas ineficazes.
+**Sentinela Clandestino (Vigilante de Espelhos e APKs)** — Uma ferramenta de proteção na borda voltada a cidadãos e apostadores frequentemente expostos a links piratas e promessas de ganhos fáceis em redes sociais e mensageria. Ao clicar em um link externo ou iniciar o download de um aplicativo fora da loja oficial, o sistema aciona um pipeline híbrido na borda: um modelo de decisão rápida de Sistema 1 (*LAYA* open-source, < 35ms) executa a triagem probabilística imediata da página de pouso e manifesto de APK, acoplado a agentes locais via MCP que consultam representações comprimidas locais (filtros de Bloom) de grafos de DNS passivo; em casos limítrofes, desperta sob demanda um SLM local quantizado (1B–3B) para auditoria detalhada de cláusulas predatórias de retenção de saque. Em vez de impor uma censura moral cega, o sistema expõe evidências técnicas de golpe (risco de saque travado, trojan bancário e operadores fantasmas), protegendo o patrimônio do usuário pelo seu próprio interesse de não sofrer calote, com latência quase nula e sem violar sua privacidade.
 
 ## 1 · a ficha da ideia
 
 - **cenário:** Navegação em smartphones no Brasil a partir de links externos e arquivos distribuídos em redes sociais e mensageria, onde espelhos mutantes e gateways dinâmicos de Pix driblam os bloqueios governamentais da Fazenda/Anatel.
 - **usuário:** Cidadãos e apostadores expostos a publicidades agressivas de "jogos que pagam" e salas de sinais, que desejam evitar golpes de cassinos falsos e roubo de saldos.
 - **problema do usuário:** Risco de calote financeiro por plataformas clandestinas que aceitam depósitos mas bloqueiam saques (*honeypots*), infecção do smartphone por APKs com trojans bancários e risco de bloqueio preventivo do próprio CPF no Mecanismo Especial de Devolução (MED) por transacionar com contas de laranjas investigadas.
-- **tecnologia:** SLM local *on-device* (1B–3B em INT4) para classificação semântica de páginas de pouso e termos de saque, acoplado a agentes locais via MCP que consultam um *digest* comprimido na borda (filtros de Bloom/Cuckoo) de grafos de ameaças de DNS passivo, operando com zero vazamento de telemetria.
+- **tecnologia:** Pipeline híbrido na borda: modelo de decisão rápida *LAYA* (System 1 não autoregressivo, pesos abertos, < 35ms) para triagem instantânea + SLM local *on-device* (1B–3B em INT4) para auditoria contratual profunda sob demanda, acoplado a agentes locais via MCP que consultam um *digest* comprimido (filtros de Bloom) de grafos de ameaças de DNS passivo, com soberania total de dados.
 
 ## 2 · catálogo de ferramentas
 
@@ -71,7 +71,7 @@ eixos tirados das tensões arquiteturais e operacionais dos 6 trabalhos; os trê
 | Muzakir et al., 2025 | ✘ | ✘ | ✘ | ✔ | ✘ | ? | ? | ✘ |
 | Álvarez-Ojeda et al., 2025 | ✘ | ✘ | ✘ | ✔ | ✘ | ? | ? | ✘ |
 | Nabeel et al., 2020 | ✘ | ✘ | ✔ | ✘ | ✘ | ? | ? | ✘ |
-| **a minha ideia** | ✔ | ✔ | ✔ | ✔ | ✔ | **✘** | **✘** | **✘** |
+| **a minha ideia** | ✔ | ✔ | ✔ | ✔ | ✔ | ◐ | **✘** | **✘** |
 
 **evidência:**
 - Trend Micro Check: heurística de reputação escaneia URLs suspeitas (◐), analisa mensagens de fraudes gerais em português (◐), roda em nuvem com app cliente leve e rápido (✔: [trendmicro.com](https://www.trendmicro.com)), com mais de 1 milhão de downloads em lojas oficiais (✔).
@@ -80,7 +80,7 @@ eixos tirados das tensões arquiteturais e operacionais dos 6 trabalhos; os trê
 - Muzakir et al., 2025: treinou modelo CNN sobre 15.286 textos e OCR de postagens de apostas em redes sociais (✔: [DOI: 10.1109/ICISIT.2025.10842131](https://doi.org/10.1109/ICISIT.2025.10842131)), capturando gírias e expressões persuasivas em língua indonésia.
 - Álvarez-Ojeda et al., 2025: corpus anotado de interações sociais e modelos de linguagem para detectar linguagem de persuasão e adicção a apostas (✔: [COLING 2025 / ACL Anthology](https://aclanthology.org/2025.coling-main.2/)).
 - Nabeel et al., 2020: algoritmo de inferência em grafos sobre traces de DNS passivo para identificar clusters de domínios maliciosos furtivos antes de entrarem em listas públicas (✔: [ACM TOPS](https://doi.org/10.1145/3401897)).
-- a minha ideia: intercepta redirecionamento e downloads no SO móvel (✔), audita manifestos de APKs e bytecode Dex (✔), correlaciona clusters de espelhos via grafo pDNS comprimido (✔), avalia promessas e regras predatórias de saque via SLM (✔), processamento e dados 100% on-device via filtros de Bloom locais sem tráfego externo (✔), perde em latência de abertura (< 50ms) por exigir 150–300ms de inferência neural (✘), perde em bateria/RAM por mobilizar NPU/CPU local frente a tabelas estáticas de rede (✘), e perde em prontidão de validação em escala por se tratar de investigação científica ainda em fase laboratorial (✘).
+- a minha ideia: intercepta redirecionamento e downloads no SO móvel (✔), audita manifestos de APKs e bytecode Dex (✔), correlaciona clusters de espelhos via grafo pDNS comprimido (✔), avalia promessas e regras predatórias de saque via LAYA e SLM (✔), processamento e dados 100% on-device via modelos locais e filtros de Bloom sem telemetria (✔), faz em parte na latência mínima (< 50ms) pois atinge < 35ms no Fast-Path via LAYA mas requer ~200ms na auditoria contratual profunda do SLM (◐), perde em consumo de bateria e RAM por mobilizar NPU/CPU local frente à leveza extrema dos filtros estáticos em C/C++ de rede (✘), e perde em prontidão de validação em escala real por ser investigação científica em fase de prototipagem (✘).
 
 ## 6 · a contribuição
 
@@ -99,11 +99,12 @@ o que eu mudei: refinei a contribuição demonstrando detalhadamente por que **a
    **Como a IA resolve (direto ao ponto):** o SLM *on-device* audita a semântica da *landing page* e termos de serviço, desmascarando cláusulas predatórias de retenção de saque (*rollover* abusivo de 50x e taxas de desbloqueio) e expondo o risco de *honeypot* (calote) antes que o usuário confirme o Pix no banco.
 3. **APKs recompilados em massa (*MAMF*):** criminosos usam compilação automatizada (*Automated Mass Malware Factory* - Li et al., NDSS 2025) que modifica hashes SHA-256 e ofusca código a cada download, tornando antivírus tradicionais por assinatura inúteis.  
    **Como a IA resolve (direto ao ponto):** o SLM *on-device* analisa semanticamente a discrepância funcional entre o manifesto e o fluxo de bytecode Dex descompilado (identificando abuso de *Accessibility Service*, leitura de SMS para 2FA e sobreposição de tela bancária), neutralizando o trojan independentemente do seu hash binário.
-4. **Canalização do interesse próprio do apostador:** a solução não é um bloqueador moralizante (que o usuário desinstalaria), mas um **auditor de integridade e risco**, protegendo o patrimônio do apostador pela sua própria vontade de não levar calote.
+4. **Canalização do interesse próprio do apostador:** a solução não é um bloqueador moralizante (que o usuário desinstalaria), mas um **auditor de integridade e risco**, protegendo o patrimônio do apostador pela sua própria vontade de não levar calote;
+5. **Confronto de Modelos de Decisão (JEV vs. LAYA):** Avaliou-se o uso de modelos de decisão rápida (*System 1 Models*). O **JEV (TypeSafe AI)** foi rejeitado por operar exclusivamente via API proprietária em nuvem, o que violaria o pilar de privacidade local ao expor URLs e tráfego a servidores de terceiros. Optou-se pelo **LAYA (Convai Innovations)**, modelo *open-weights* (licença Apache-2.0, baseado em ModernBERT), executado 100% *on-device* em < 35ms para triagem instantânea (*Fast-Path*), despertando o SLM local apenas sob demanda para auditoria contratual profunda (*Deep-Path*).
 
 ## 8 · resumo, sem IA
 
 Trend Micro, Gamban e filtros de teclado tentam conter fraudes por listas de domínios ou assinaturas estáticas.  
-Nenhum audita a semântica de calote de saque em espelhos mutantes nem inspeciona APKs polimórficos direto no celular.  
-A minha ideia une triagem semântica local a grafos de DNS na borda, protegendo o apostador do calote com privacidade total.  
-O trade-off técnico assumido é severo: rodar inferência de SLM e grafo no celular impõe latência de abertura e custo de bateria que filtros estáticos não têm.
+Nenhum combina modelo de decisão rápida de Sistema 1 e auditoria semântica de calote com grafos de DNS direto no celular.  
+A minha ideia une triagem instantânea via LAYA (< 35ms) e grafos na borda, protegendo o apostador do calote com privacidade total.  
+O trade-off técnico assumido é honesto: mobilizar inferência neural no aparelho consome mais bateria e RAM que filtros estáticos de rede.
