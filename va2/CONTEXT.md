@@ -11,6 +11,7 @@ Esta pasta centraliza **todos** os artefatos, documentos de ideação, referênc
 va2/
 ├── brw.md                           # Folha de Brainwriting Híbrido (Ideação, crise, usuário e solução)
 ├── cmp.md                           # Folha de Competidores e Contribuição (Catálogo, matriz de 8 eixos e frase canônica)
+├── PITCH.md                         # Guia de Defesa Oral sem a tela (Pitch de 2 minutos para checagem com o professor)
 ├── CONTEXT.md                       # Documentação canônica desta pasta
 ├── main.tex                         # Documento mestre LaTeX no padrão Springer LNCS
 ├── main.pdf                         # PDF compilado do relatório técnico da VA2 (290 KB)
@@ -37,6 +38,9 @@ va2/
 
 3. **`main.tex` e `main.pdf` (Relatório Técnico / Artigo da VA2):**  
    Artigo completo redigido no padrão Springer LNCS integrando as descobertas do `brw` e do `cmp` com formalização matemática, diagrama tabular de competidores e assunção rigorosa dos compromissos de engenharia.
+
+4. **`PITCH.md` (Roteiro de Defesa Oral sem a Tela):**  
+   Guia de sustentação oral em 4 blocos (2 minutos) com respostas prontas para as 5 perguntas críticas da banca sobre DGA, MAMF, canalização de interesse e modelos LAYA.
 
 ---
 
