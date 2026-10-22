@@ -59,7 +59,7 @@ marque os 6 em **negrito** nos catálogos, e diga por que cada um:
 
 ## 5 · a matriz
 
-eixos tirados das tensões arquiteturais e operacionais dos 6 trabalhos; os três últimos são onde a minha ideia perde categoricamente.
+eixos tirados das tensões arquiteturais e operacionais dos 6 trabalhos; os dois últimos são onde a minha ideia empata (◐) ou perde categoricamente (✘).
 
 **✔** faz · **◐** faz em parte · **✘** não faz · **?** não achei evidência
 
@@ -71,7 +71,7 @@ eixos tirados das tensões arquiteturais e operacionais dos 6 trabalhos; os trê
 | Muzakir et al., 2025 | ✘ | ✘ | ✘ | ✔ | ✘ | ? | ? | ✘ |
 | Álvarez-Ojeda et al., 2025 | ✘ | ✘ | ✘ | ✔ | ✘ | ? | ? | ✘ |
 | Nabeel et al., 2020 | ✘ | ✘ | ✔ | ✘ | ✘ | ? | ? | ✘ |
-| **a minha ideia** | ✔ | ✔ | ✔ | ✔ | ✔ | ◐ | **✘** | **✘** |
+| **a minha ideia** | ✔ | ✔ | ✔ | ✔ | ✔ | **✔** | **◐** | **✘** |
 
 **evidência:**
 - Trend Micro Check: heurística de reputação escaneia URLs suspeitas (◐), analisa mensagens de fraudes gerais em português (◐), roda em nuvem com app cliente leve e rápido (✔: [trendmicro.com](https://www.trendmicro.com)), com mais de 1 milhão de downloads em lojas oficiais (✔).
@@ -80,7 +80,7 @@ eixos tirados das tensões arquiteturais e operacionais dos 6 trabalhos; os trê
 - Muzakir et al., 2025: treinou modelo CNN sobre 15.286 textos e OCR de postagens de apostas em redes sociais (✔: [DOI: 10.1109/ICISIT.2025.10842131](https://doi.org/10.1109/ICISIT.2025.10842131)), capturando gírias e expressões persuasivas em língua indonésia.
 - Álvarez-Ojeda et al., 2025: corpus anotado de interações sociais e modelos de linguagem para detectar linguagem de persuasão e adicção a apostas (✔: [COLING 2025 / ACL Anthology](https://aclanthology.org/2025.coling-main.2/)).
 - Nabeel et al., 2020: algoritmo de inferência em grafos sobre traces de DNS passivo para identificar clusters de domínios maliciosos furtivos antes de entrarem em listas públicas (✔: [ACM TOPS](https://doi.org/10.1145/3401897)).
-- a minha ideia: intercepta redirecionamento e downloads no SO móvel (✔), audita manifestos de APKs e bytecode Dex (✔), correlaciona clusters de espelhos via grafo pDNS comprimido (✔), avalia promessas e regras predatórias de saque via LAYA e SLM (✔), processamento e dados 100% on-device via modelos locais e filtros de Bloom sem telemetria (✔), faz em parte na latência mínima (< 50ms) pois atinge < 35ms no Fast-Path via LAYA mas requer ~200ms na auditoria contratual profunda do SLM (◐), perde em consumo de bateria e RAM por mobilizar NPU/CPU local frente à leveza extrema dos filtros estáticos em C/C++ de rede (✘), e perde em prontidão de validação em escala real por ser investigação científica em fase de prototipagem (✘).
+- a minha ideia: intercepta redirecionamento e downloads no SO móvel (✔), audita manifestos de APKs e bytecode Dex (✔), correlaciona clusters de espelhos via grafo pDNS comprimido (✔), avalia promessas e regras predatórias de saque via LAYA e SLM (✔), processamento e dados 100% on-device via modelos locais e filtros de Bloom sem telemetria (✔), alcança latência mínima (< 50ms) operando em < 35ms no Fast-Path via LAYA (✔), empata/faz em parte no consumo de bateria e RAM com pegada leve (< 100MB de RAM) mas mobilizando NPU/CPU frente à extrema simplicidade de tabelas estáticas de rede em C/C++ (◐), e perde categoricamente em prontidão de validação em escala real por ser investigação científica acadêmica frente a produtos comerciais consolidados de milhões de usuários (✘).
 
 ## 6 · a contribuição
 
