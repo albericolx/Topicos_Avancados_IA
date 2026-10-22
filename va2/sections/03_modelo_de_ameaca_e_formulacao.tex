@@ -1,0 +1,70 @@
+\section{Modelo de Amea\c{c}a e Formula\c{c}\~{a}o Matem\'{a}tica}
+\label{sec:modelo_ameaca}
+
+\subsection{Modelo de Amea\c{c}a Advers\'{a}ria (Threat Model)}
+
+Modela-se o advers\'{a}rio como uma organiza\c{c}\~{a}o cibercriminosa distribu\'{i}da e financeiramente motivada, com capacidade de orquestrar infraestruturas ef\^{e}meras de alta rotatividade. O advers\'{a}rio visa contornar bloqueios judiciais e regulat\'{o}rios enquanto maximiza a capta\c{c}\~{a}o de dep\'{o}sitos e a infec\c{c}\~{a}o persistente de dispositivos m\'{o}veis. O espa\c{c}o de amea\c{c}as caracteriza-se por quatro vetores t\'{a}ticos complementares:
+
+\begin{enumerate}
+    \item \textbf{Gera\c{c}\~{a}o Algor\'{i}tmica de Espelhos Mutantes (DGA):} O atacante implementa um gerador pseudoaleat\'{o}rio temporalizado $d_t = \text{DGA}(\text{seed}_t, \text{epoch})$, gerando conjuntos di\'{a}rios de dom\'{i}nios $\mathcal{D}_{\text{dga}} = \{d_1, d_2, \dots, d_k\}$ sob Top-Level Domains (TLDs) de custo reduzido (\texttt{.xyz}, \texttt{.top}, \texttt{.online}). Cada dom\'{i}nio possui tempo de vida \'{u}til (\textit{Time-To-Live} -- TTL) inferior a poucas horas, invalidando listas de bloqueio est\'{a}ticas;
+    \item \textbf{Evas\~{a}o Financeira via Pix Din\^{a}mico:} Os pagamentos n\~{a}o s\~{a}o recebidos por chaves fixas (como CNPJs p\'{u}blicos), mas processados por chamadas \`{a}s APIs de Provedores de Servi\c{c}os de Pagamento (PSPs) integrados. O sistema gera c\'{o}digos de pagamento din\^{a}micos:
+    \begin{equation}
+        q_{\text{pix}} = \text{EMV}\big(\text{PSP}_i, \text{ID}_{\text{transacao}}, \text{Conta}_{\text{laranja}}\big)
+    \end{equation}
+    em que a conta benefici\'{a}ria \'{e} substitu\'{i}da a cada transa\c{c}\~{a}o, impedindo o bloqueio financeiro pr\'{e}vio pelo Banco Central em n\'{i}vel de chave \'{u}nica;
+    \item \textbf{Golpe de Reten\c{c}\~{a}o Il\'{i}cita de Saques (\textit{Honeypot} Contratual):} Para maximizar o lucro, a plataforma ilegal permite dep\'{o}sitos imediatos, por\'{e}m introduz regras predat\'{o}rias ocultas nos Termos de Uso (\textit{landing page}), tais como requisitos de apostas de volume impratic\'{a}vel (\textit{rollover} $> 50\times$), exig\^{e}ncia de pagamento pr\'{e}vio de ``taxas de libera\c{c}\~{a}o'' ou congelamento discricion\'{a}rio de contas lucrativas;
+    \item \textbf{F\'{a}bricas Automatizadas de Malware Polim\'{o}rfico (MAMF):} Conforme formalizado por Li et al.~\cite{li2025automated}, redes criminosas empregam t\'{e}cnicas de \textit{piggybacking} para fundir c\'{o}digo malicioso $\mathcal{P}_{\text{malware}}$ com pacotes leg\'{i}timos de aplica\c{c}\~{a}o $\mathcal{A}_{\text{benigno}}$. O processo de recompila\c{c}\~{a}o altera assinaturas SHA-256 e insere ru\'{i}do sint\'{a}tico no \textit{bytecode} Dex, contornando mecanismos convencionais de detec\c{c}\~{a}o por assinatura baseados em regras YARA~\cite{zhang2025fighting}.
+\end{enumerate}
+
+\subsection{Premissas de Isolamento e Limites Operacionais do SO}
+
+O projeto Sentinela Clandestino opera sob hip\'{o}teses r\'{i}gidas de compatibilidade com o modelo de seguran\c{c}a do sistema operacional m\'{o}vel (Android):
+\begin{itemize}
+    \item \textbf{Preserva\c{c}\~{a}o do \textit{Sandboxing}:} O sistema rejeita explicitamente abordagens invasivas baseadas em leitura cont\'{i}nua de telas (\textit{Screen Scraping}) ou inspe\c{c}\~{a}o de mem\'{o}ria interna de aplica\c{c}\~{a}o de terceiros (e.g., feeds do Instagram ou conversas do WhatsApp), que violariam os princ\'{i}pios de seguran\c{c}a do SO e seriam bloqueadas pelo \textit{Google Play Protect};
+    \item \textbf{Atua\c{c}\~{a}o na Transi\c{c}\~{a}o Leg\'{i}tima de Contexto:} A intercepta\c{c}\~{a}o restringe-se \`{a}s fronteiras de transi\c{c}\~{a}o interprocessos mediadas pelo sistema operacional: (i) despacho de \textit{Intents} expl\'{i}citas de navega\c{c}\~{a}o externa (\texttt{Intent.ACTION\_VIEW} e retorno de \textit{Chrome Custom Tabs}); e (ii) detec\c{c}\~{a}o de transfer\^{e}ncia de arquivos com extens\~{a}o \texttt{.apk} capturados pelo gerenciador de downloads (\texttt{DownloadManager});
+    \item \textbf{Soberania e Confinamento de Dados:} Toda e qualquer opera\c{c}\~{a}o de infer\^{e}ncia neural e busca estruturada ocorre localmente. O conjunto de telemetria externa \'{e} estritamente nulo:
+    \begin{equation}
+        \mathcal{X}_{\text{telemetria}} = \emptyset
+    \end{equation}
+    garantindo que o hist\'{o}rico de navega\c{c}\~{a}o do cidad\~{a}o jamais seja exfiltrado para servidores em nuvem.
+\end{itemize}
+
+\subsection{Formula\c{c}\~{a}o Matem\'{a}tica do Pipeline H\'{i}brido}
+
+Seja um evento de intera\c{c}\~{a}o do usu\'{a}rio representado pela tupla $x = (u, \mathcal{D}_{\text{dom}}, \mathcal{T}_{\text{meta}}, \mathcal{B}_{\text{apk}})$, onde $u$ \'{e} a URL de destino, $\mathcal{D}_{\text{dom}}$ o dom\'{i}nio totalmente qualificado (FQDN), $\mathcal{T}_{\text{meta}}$ o texto textual da \textit{landing page} obtido via \textit{headless parser} e $\mathcal{B}_{\text{apk}}$ o arquivo bin\'{a}rio baixado (quando aplic\'{a}vel).
+
+Define-se o grafo bipartido de infraestrutura de amea\c{c}as como:
+\begin{equation}
+    \mathcal{G} = \big(\mathcal{V}_{\text{dom}} \cup \mathcal{V}_{\text{ip}} \cup \mathcal{V}_{\text{psp}}, \mathcal{E}\big)
+\end{equation}
+onde arestas $e = (v_{\text{dom}}, v_{\text{ip}}) \in \mathcal{E}$ refletem resolu\c{c}\~{o}es de DNS passivo (pDNS) catalogadas~\cite{nabeel2020following}, e arestas $(v_{\text{dom}}, v_{\text{psp}})$ representam v\'{i}nculos com intermediadoras de pagamento investigadas.
+
+\subsubsection{Est\'{a}gio 1: Fast-Path com Modelo de Decis\~{a}o LAYA.}
+No momento do redirecionamento, os metadados superficiais $x_{\text{fast}} = (\mathcal{D}_{\text{dom}}, \text{lex}(u))$ s\~{a}o alimentados no modelo n\~{a}o autorregressivo de Sistema~1 \textit{LAYA}~\cite{convai2026laya}, gerando a probabilidade a priori de amea\c{c}a:
+\begin{equation}
+    P_{\text{fast}} = f_{\text{LAYA}}(x_{\text{fast}}; \Theta_{\text{LAYA}}) \in [0, 1]
+\end{equation}
+com tempo de computa\c{c}\~{a}o garantido $t(f_{\text{LAYA}}) \le 35\text{ms}$. A din\^{a}mica de despacho obedece \`{a} regra com dois limiares calibrados ($\tau_{\text{low}} = 0{,}15$, $\tau_{\text{high}} = 0{,}85$):
+\begin{equation}
+    \text{A\c{c}\~{a}o}(x) = 
+    \begin{cases}
+        \text{Permitir Navega\c{c}\~{a}o}, & \text{se } P_{\text{fast}} \le \tau_{\text{low}} \\
+        \text{Interromper e Alertar V\'{i}tima}, & \text{se } P_{\text{fast}} \ge \tau_{\text{high}} \\
+        \text{Acionar Deep-Path (SLM + MCP)}, & \text{se } \tau_{\text{low}} < P_{\text{fast}} < \tau_{\text{high}}
+    \end{cases}
+\end{equation}
+
+\subsubsection{Est\'{a}gio 2: Deep-Path com SLM Quantizado e Agente MCP.}
+Caso a infer\^{e}ncia r\'{a}pida seja inconclusiva ou haja transfer\^{e}ncia de APK, o agente MCP local consulta a proje\c{c}\~{a}o de vizinhan\c{c}a topol\'{o}gica do dom\'{i}nio no resumo de Bloom Filter do grafo de resolu\c{c}\~{a}o passiva:
+\begin{equation}
+    \mathcal{N}_{\mathcal{G}}(\mathcal{D}_{\text{dom}}) = \big\{v \in \mathcal{V} \mid (\mathcal{D}_{\text{dom}}, v) \in \mathcal{E}\big\}
+\end{equation}
+Simultaneamente, o modelo SLM quantizado em 4-bit (INT4, 1B--3B parâmetros)~\cite{liu2024mobilellm} avalia o texto contratual da p\'{a}gina e o manifesto descompilado do APK:
+\begin{equation}
+    S_{\text{deep}} = g_{\text{SLM}}\Big(\text{Prompt}\big(\mathcal{T}_{\text{meta}}, \text{Manifesto}(\mathcal{B}_{\text{apk}}), \mathcal{N}_{\mathcal{G}}(\mathcal{D}_{\text{dom}})\big); \Theta_{\text{SLM}}\Big)
+\end{equation}
+O escore sem\^{a}ntico integrado de risco contratual $R_{\text{fraude}} \in \{0, 1\}$ \'{e} determinado pela conjun\c{c}\~{a}o de evid\^{e}ncias de calote e sobreposi\c{c}\~{a}o maliciosa:
+\begin{equation}
+    R_{\text{fraude}} = \mathbb{I}\big(\text{Rollover} \ge 20\times\big) \lor \mathbb{I}\big(\text{Taxa de Saque} > 0\big) \lor \mathbb{I}\big(\text{Permiss\~{a}o Acessibilidade} \in \mathcal{B}_{\text{apk}}\big)
+\end{equation}
+onde $\mathbb{I}(\cdot)$ representa a fun\c{c}\~{a}o indicadora booleana. A converg\^{e}ncia dessa formaliza\c{c}\~{a}o assegura que apenas inst\^{a}ncias empiricamente fraudulentas resultem no bloqueio assistido pelo painel de evid\^{e}ncias.

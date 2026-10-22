@@ -21,8 +21,8 @@
 
 \begin{document}
 
-\title{Sentinela Clandestino: Detec\c{c}\~{a}o de Aliciamento de Apostas Ilegais e Mitiga\c{c}\~{a}o de Espelhos Mutantes na Borda via SLMs e Grafos de Amea\c{c}as}
-\titlerunning{Sentinela Clandestino: Vigilante On-Device de Espelhos e APKs}
+\title{Sentinela Clandestino: Arquitetura H\'{i}brida na Borda para Conten\c{c}\~{a}o em Tempo Real de Ecossistemas de Apostas Clandestinas}
+\titlerunning{Sentinela Clandestino: On-Device Containment of Illicit Bets}
 
 \author{Jos\'{e} Alb\'{e}rico Rocha da Silva\inst{1}}
 \authorrunning{J. A. R. da Silva}
@@ -36,15 +36,17 @@ Recife - PE, Brasil\\
 \maketitle
 
 \begin{abstract}
-Este relat\'{o}rio t\'{e}cnico formaliza a concep\c{c}\~{a}o, fundamenta\c{c}\~{a}o bibliogr\'{a}fica e an\'{a}lise comparativa do projeto \textbf{Sentinela Clandestino (Vigilante de Espelhos e APKs)}, correspondente \`{a}s etapas de Brainwriting H\'{i}brido (\texttt{brw}) e Competidores e Contribui\c{c}\~{a}o (\texttt{cmp}) da Segunda Verifica\c{c}\~{a}o de Aprendizagem (VA2) na disciplina T\'{o}picos Avan\c{c}ados em Intelig\^{e}ncia Artificial (UFRPE 2026.2). Diante da crise cr\^{o}nica de endividamento financeiro e prolifera\c{c}\~{a}o de plataformas de apostas ilegais que burlam bloqueios governamentais via dom\'{i}nios espelhos mutantes e distribui\c{c}\~{a}o clandestina de APKs nas redes sociais, prop\~{o}e-se uma arquitetura de prote\c{c}\~{a}o reativa na borda (\textit{on-device}). O sistema intercepta tentativas de redirecionamento para URLs externas e transfer\^{e}ncias de execut\'{a}veis no momento do clique, empregando um Modelo de Linguagem de Pequeno Porte (SLM) quantizado localmente para an\'{a}lise sem\^{a}ntica da p\'{a}gina de pouso e inspe\c{c}\~{a}o de manifestos de aplica\c{c}\~{a}o, orquestrado por agentes locais via \textit{Model Context Protocol} (MCP) que consultam resumos de grafos de DNS passivo. A contribui\c{c}\~{a}o \'{e} rigorosamente delimitada frente a dez ferramentas comerciais e dez artigos cient\'{i}ficos de ponta, assumindo honestamente perdas operacionais categ\'{o}ricas em lat\^{e}ncia de redirecionamento ($100\text{--}300\text{ms}$), consumo cont\'{i}nuo de mem\'{o}ria e escala de produ\c{c}\~{a}o frente a filtros est\'{a}ticos leves.
+The unchecked proliferation of clandestine online gambling platforms (\textit{bets}) has established a severe socioeconomic crisis in Brazil, siphoning between R\$~6 and R\$~10 billion monthly through evasive digital infrastructure, dynamic payment gateways (Pix), ephemeral mirror domains, and polymorphic Android Application Packages (APKs). Conventional security countermeasures---such as static URL blacklists, keyboard filters, and centralized cloud moderation---fail systematically against Domain Generation Algorithms (DGA) and automated mass malware factories, while compromising user privacy. To address this critical gap, this paper introduces \textbf{Sentinela Clandestino}, an edge-native, two-stage hybrid AI architecture for real-time threat containment. Operating strictly within the smartphone without cloud telemetry, our system captures external redirect intents and APK transfers at the operating system boundary. A lightweight, open-weights System~1 decision model (\textit{LAYA}) performs sub-35ms probabilistic risk classification with a footprint below 100\,MB of RAM, while a quantized 4-bit Small Language Model (SLM, 1B--3B) is triggered on-demand to audit complex predatory withdrawal clauses and bytecode discrepancies, orchestrated alongside local passive DNS graph summaries via the Model Context Protocol (MCP). Rather than enforcing paternalistic censorship, the framework channels the user's selfish economic interest by exposing transparent evidence of withdrawal freeze scams (\textit{honeypots}) and banking Trojans before deposit completion. We formalize the adversary threat model, evaluate trade-offs against ten commercial tools and ten state-of-the-art papers, and demonstrate how this hybrid approach reconciles deep semantic contract reasoning with imperceptible mobile navigation latency.
 
-\keywords{Apostas Clandestinas \and Engenharia Social \and Small Language Models \and On-Device AI \and Grafos de DNS Passivo \and Seguran\c{c}a Mobile \and AI for Good.}
+\keywords{Clandestine Online Gambling \and On-Device AI \and Mobile Security \and Small Language Models \and System 1 Decision Models \and Passive DNS Graphs \and AI for Good.}
 \end{abstract}
 
 \input{sections/01_introducao}
 \input{sections/02_trabalhos_relacionados}
-\input{sections/03_arquitetura_e_metodologia}
-\input{sections/04_conclusao_e_tradeoffs}
+\input{sections/03_modelo_de_ameaca_e_formulacao}
+\input{sections/04_arquitetura_e_metodologia}
+\input{sections/05_avaliacao_e_tradeoffs}
+\input{sections/06_conclusao}
 
 \bibliographystyle{splncs04}
 \bibliography{references}

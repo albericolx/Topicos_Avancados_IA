@@ -41,3 +41,7 @@
   - Citação formal e indexação no BibTeX de LAYA (`convai2026laya`) e ModernBERT (`warner2024modernbert`), com recompilação do relatório Springer LNCS ([`va2/main.pdf`](va2/main.pdf), 303 KB);
   - Inserção de diagramas de fluxo Mermaid nos artefatos [`va2/brw.md`](va2/brw.md) e [`va2/cmp.md`](va2/cmp.md);
   - Publicação do guia de sustentação oral sem a tela em [`va2/PITCH.md`](va2/PITCH.md).
+- [x] **Reestruturação para Artigo Científico Completo de Conferência (Springer LNCS standard):**
+  - Expansão integral para 6 seções formais com abstract acadêmico em inglês, formalização matemática de Threat Model e regras de decisão ($\mathcal{G} = (\mathcal{V}, \mathcal{E})$, $	au_{\text{low}}, 	au_{\text{high}}$, $\mathcal{X}_{\text{telemetria}} = \emptyset$);
+  - Seções modulares completas: 01 (Introdução com dados do BACEN, falha de abordagens sem IA e paradigma Waze), 02 (Trabalhos Relacionados com taxonomia, 3+3 e matriz calibrada), 03 (Modelo de Ameaça e Formulação Matemática), 04 (Arquitetura Híbrida LAYA + SLM MobileLLM + MCP), 05 (Avaliação de Desempenho e Trade-offs de Hardware) e 06 (Conclusão e Trabalhos Futuros com Aprendizado Federado);
+  - Compilação autônoma completa de 4 passos com resolução de referências via py va2/compile.py gerando [a2/main.pdf](va2/main.pdf) (396 KB) com 0 erros.
