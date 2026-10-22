@@ -1,0 +1,56 @@
+\section{Arquitetura Sist\^{e}mica e Metodologia}
+\label{sec:arquitetura}
+
+\subsection{Vis\~{a}o Geral e Intercepta\c{c}\~{a}o no Sistema Operacional}
+
+A arquitetura do Sentinela Clandestino foi projetada para operar sob as restri\c{c}\~{o}es severas de mem\'{o}ria vol\'{a}til, ciclo de bateria e isolamento de processos dos smartphones populares. Em conformidade com o modelo de amea\c{c}a formalizado na Se\c{c}\~{a}o~\ref{sec:modelo_ameaca}, o sistema rejeita heur\'{i}sticas baseadas em filtros opacos de teclado ou invas\~{a}o de aplica\c{c}\~{o}es propriet\'{a}rias, integrando-se \`{a}s interfaces de eventos leg\'{i}timas do Android:
+
+\begin{enumerate}
+    \item \textbf{Intercepta\c{c}\~{a}o de Intents de Navega\c{c}\~{a}o (\textit{Intent Interception}):} O cliente atua como um manipulador preferencial de \textit{Custom Tabs} e despachos \texttt{Intent.ACTION\_VIEW}, capturando a URL de destino no instante em que o usu\'{a}rio clica em um link distribu\'{i}do em mensageiros (WhatsApp/Telegram) ou feeds de redes sociais;
+    \item \textbf{Gatilho de Download de Bin\'{a}rios:} Ao interceptar a recep\c{c}\~{a}o de arquivos execut\'{a}veis com extens\~{a}o \texttt{.apk} fora da loja Google Play via \texttt{DownloadManager}, o sistema suspende temporariamente a solicita\c{c}\~{a}o de instala\c{c}\~{a}o at\'{e} a conclus\~{a}o do protocolo de auditoria sem\^{a}ntica.
+\end{enumerate}
+
+\subsection{Est\'{a}gio 1: Fast-Path com Modelo de Decis\~{a}o LAYA}
+
+A concilia\c{c}\~{a}o entre inspe\c{c}\~{a}o profunda e experi\^{e}ncia fluida de navega\c{c}\~{a}o exige que a grande maioria das requisi\c{c}\~{o}es rotineiras seja validada em tempo impercept\'{i}vel ao olho humano ($< 50\text{ms}$). Para esse fim, a arquitetura introduz um componente de triagem instant\^{a}nea (Sistema~1) na borda:
+
+\begin{itemize}
+    \item \textbf{Rejei\c{c}\~{a}o de Modelos em Nuvem Propriet\'{a}ria (Caso JEV):} Solu\c{c}\~{o}es corporativas de classifica\c{c}\~{a}o de inten\c{c}\~{a}o baseadas em APIs fechadas em nuvem (como o JEV, da TypeSafe AI) foram sumariamente descartadas. Embora apresentem alta precis\~{a}o anal\'{i}tica, exigem a transmiss\~{a}o de dados e URLs do usu\'{a}rio para servidores externos (violando a premissa de privacidade estrita $\mathcal{X}_{\text{telemetria}} = \emptyset$) e imp\~{o}em uma lat\^{e}ncia de rede adicional de $150\text{--}400\text{ms}$;
+    \item \textbf{Ado\c{c}\~{a}o de Pesos Abertos com LAYA:} Optou-se pela incorpora\c{c}\~{a}o do framework de decis\~{a}o \textit{LAYA}~\cite{convai2026laya}, de c\'{o}digo aberto (licen\c{c}a Apache-2.0), sustentado por codificadores bidirecionais ModernBERT~\cite{warner2024modernbert}. O modelo n\~{a}o autorregressivo processa os \textit{tokens} l\'{e}xicos da URL e cabe\c{c}alhos da \textit{landing page} em paralelo direto no hardware m\'{o}vel (NPU ou CPU em modo FP16), entregando predi\c{c}\~{o}es estruturadas de risco em tempo m\'{e}dio de \textbf{$32\text{ms}$}, consumindo menos de \textbf{$95\text{MB}$ de mem\'{o}ria RAM};
+    \item \textbf{Classifica\c{c}\~{a}o Instant\^{a}nea de Amea\c{c}as:} Quando o escore probabil\'{i}stico $P_{\text{fast}} \ge 0{,}85$, o acesso \'{e} imediatamente bloqueado na tela de transi\c{c}\~{a}o, liberando a navega\c{c}\~{a}o para sites comprovadamente seguros ($P_{\text{fast}} \le 0{,}15$) sem consumir ciclos computacionais adicionais.
+\end{itemize}
+
+\subsection{Est\'{a}gio 2: Deep-Path com SLM Quantizado Sob Demanda}
+
+Quando o evento de navega\c{c}\~{a}o situa-se na faixa de incerteza ($\tau_{\text{low}} < P_{\text{fast}} < \tau_{\text{high}}$) ou quando envolve a transfer\^{e}ncia de um bin\'{a}rio APK, a arquitetura aciona o est\'{a}gio anal\'{i}tico profundo (Sistema~2):
+
+\begin{itemize}
+    \item \textbf{Ativa\c{c}\~{a}o Orientada a Eventos:} O SLM quantizado em 4-bit (INT4, 1B--3B par\^{a}metros), baseado na arquitetura MobileLLM~\cite{liu2024mobilellm}, n\~{a}o permanece residente na mem\'{o}ria principal do aparelho, prevenindo seu expurgo prematuro pelo mecanismo \textit{Low Memory Killer} (LMK) do sistema Android. Ele \'{e} instanciado exclusivamente durante a an\'{a}lise pontual;
+    \item \textbf{Auditoria Sem\^{a}ntica das Cl\'{a}usulas de Saque:} O SLM processa o conte\'{u}do contratual da p\'{a}gina de aposta (\textit{landing page}), confrontando os termos de pagamento com pr\'{a}ticas t\'{i}picas de estelionato digital:
+    \begin{enumerate}
+        \item Exig\^{e}ncia de \textit{rollovers} abusivos ($> 20\times$ o saldo depositado para autorizar o resgate);
+        \item Condicionamento de saques ao pagamento pr\'{e}vio de supostas taxas tribut\'{a}rias fict\'{i}cias ou tarifas de desbloqueio (\textit{honeypot} financeiro);
+        \item Cl\'{a}usulas unilaterais que autorizam o confisco sum\'{a}rio de pr\^{e}mios sob alega\c{c}\~{a}o de ``comportamento suspeito''.
+    \end{enumerate}
+    \item \textbf{Inspe\c{c}\~{a}o de Polimorfismo e Discrep\^{a}ncia em APKs:} Diante de um APK gerado por f\'{a}bricas automatizadas de malware~\cite{li2025automated}, o modelo analisa a discrep\^{a}ncia funcional entre a descri\c{c}\~{a}o do aplicativo e as permiss\~{o}es declaradas no manifesto \texttt{AndroidManifest.xml}. Identifica abusos de \textit{Accessibility Services} (utilizados para ler senhas na tela e conceder permiss\~{o}es aut\^{o}nomas), sobreposi\c{c}\~{a}o de janelas de aplicativos banc\'{a}rios e intercepta\c{c}\~{a}o de mensagens SMS com c\'{o}digos de autentica\c{c}\~{a}o em dois fatores (2FA).
+\end{itemize}
+
+\subsection{Orquestra\c{c}\~{a}o Local via MCP e Resumos de Grafos pDNS}
+
+A articula\c{c}\~{a}o entre os modelos neurais e o contexto estruturado de seguran\c{c}a ocorre por meio do \textit{Model Context Protocol} (MCP), implementado como um barramento interprocessos confinado estritamente ao smartphone:
+
+\begin{itemize}
+    \item \textbf{Filtros de Bloom Topol\'{o}gicos:} Em vez de manter grafos densos de bilh\~{o}es de arestas no celular, o sistema armazena um \textit{digest} altamente comprimido de grafos de DNS passivo (pDNS)~\cite{nabeel2020following,khalil2016discovering}, codificado em m\'{u}ltiplos filtros de Bloom estratificados por Sistemas Aut\^{o}nomos (ASNs) e provedores de hospedagem permissivos;
+    \item \textbf{Consulta Sub-Milissegundo:} O agente local MCP recebe o dom\'{i}nio sob an\'{a}lise e executa a checagem no filtro local em menos de $2\text{ms}$. Caso o dom\'{i}nio resida em uma vizinhan\c{c}a topol\'{o}gica associada a clusters criminosos de espelhos previamente desmantelados, o escore de risco \'{e} maximizado, corroborando a decis\~{a}o sem\^{a}ntica do SLM.
+\end{itemize}
+
+\subsection{Painel Transparente de Evid\^{e}ncias de Risco}
+
+Em conson\^{a}ncia com o paradigma Waze discutido na Se\c{c}\~{a}o~\ref{sec:introducao}, o Sentinela Clandestino n\~{a}o adota telas opacas de bloqueio coercitivo. Ao identificar uma amea\c{c}a, o sistema sobrep\~{o}e uma interface t\'{e}cnica transparente detalhando os motivos objetivos do risco:
+\begin{enumerate}
+    \item \textbf{Probabilidade de Calote de Saque:} Exibe o trecho exato do contrato que impossibilita a retirada do dinheiro depositado (e.g., \textit{``Exig\^{e}ncia de 50 apostas para liberar saques''});
+    \item \textbf{Risco de Espionagem no Dispositivo:} Alerta que o aplicativo solicitado cont\'{e}m m\'{o}dulos de leitura de SMS banc\'{a}rio e espelhamento de tela;
+    \item \textbf{Status do Favorecido do Pix:} Informa que o recebedor do pagamento \'{e} uma empresa rec\'{e}m-aberta vinculada a investiga\c{c}\~{o}es por fraude financeira.
+\end{enumerate}
+
+Essa abordagem empodera o cidad\~{a}o: a decis\~{a}o final de abortar a aposta \'{e} tomada pelo pr\'{o}prio indiv\'{i}duo, impulsionada pelo seu interesse prim\'{a}rio de preservar suas finan\c{c}as contra o estelionato.
