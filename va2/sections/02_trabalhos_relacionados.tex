@@ -1,34 +1,43 @@
 \section{Trabalhos Relacionados e Matriz de Contribui\c{c}\~{a}o}
 \label{sec:trabalhos_relacionados}
 
-A delimita\c{c}\~{a}o da fronteira tecnol\'{o}gica do Sentinela Clandestino fundamenta-se na an\'{a}lise comparativa de dez ferramentas de mercado e dez artigos cient\'{i}ficos recentes, avaliados segundo as dimens\~{o}es de Cen\'{a}rio, Usu\'{a}rio, Problema e Tecnologia (CUPT). A partir desse levantamento, selecionaram-se os tr\^{e}s competidores de mercado e as tr\^{e}s refer\^{e}ncias bibliogr\'{a}ficas mais pr\'{o}ximas.
+\subsection{Taxonomia das Abordagens Existentes}
 
-\subsection{Competidores de Mercado e Literatura Mais Pr\'{o}ximos}
+A conten\c{c}\~{a}o de fraudes digitais e plataformas predat\'{o}rias de apostas tem sido abordada pela literatura e pela ind\'{u}stria sob quatro paradigmas tecnol\'{o}gicos predominantes:
+\begin{enumerate}
+    \item \textbf{Filtros de Rede e VPN Loopback Est\'{a}tica:} Softwares como Gamban, BetBlocker, NextDNS e AdGuard interceptam pacotes na camada de transporte ou atuam na resolu\c{c}\~{a}o DNS local. Embora apresentem custo computacional negligenci\'{a}vel e operem sem violar a privacidade do usu\'{a}rio, dependem inteiramente de tabelas pr\'{e}-compiladas de dom\'{i}nios conhecidos~\cite{zhauniarovich2018survey}. Consequentemente, s\~{a}o incapazes de conter dom\'{i}nios espelhos mutantes de dia zero gerados por DGA ou aplicativos distribu\'{i}dos fora de reposit\'{o}rios centrais;
+    \item \textbf{Plataformas Forenses e Auditoria Est\'{a}tica de APKs:} Solu\c{c}\~{o}es como Koodous, Exodus Privacy e VirusTotal Mobile fornecem diagn\'{o}sticos detalhados sobre permiss\~{o}es abusivas e rastreadores embutidos. Todavia, foram desenhadas para analistas de seguran\c{c}a em ambientes laboratoriais (\textit{post-mortem}), exigindo submiss\~{a}o manual ou telemetria em nuvem, sendo cegas \`{a} sem\^{a}ntica contratual da plataforma de aposta e inaptas a interceptar a v\'{i}tima no ato do clique;
+    \item \textbf{Detectores Heur\'{i}sticos e Agentes em Nuvem:} Ferramentas como Netcraft Mobile, Trend Micro Check e ScamAdviser monitoram URLs e comunica\c{c}\~{o}es para conter golpes de \textit{phishing}. Embora o Trend Micro Check utilize agentes conversacionais para auditar prints e mensagens, sua opera\c{c}\~{a}o exige o envio de dados \`{a} infraestrutura centralizada da empresa, n\~{a}o realiza intercepta\c{c}\~{a}o aut\^{o}noma no fluxo de navega\c{c}\~{a}o e carece de especializa\c{c}\~{a}o na engenharia social e nos termos de reten\c{c}\~{a}o de apostas vigentes no Brasil;
+    \item \textbf{Modelos Acad\^{e}micos Especializados (NLP, Grafos e SLMs):} Pesquisas recentes exploram aprendizado profundo para an\'{a}lise textual de pe\c{c}as publicit\'{a}rias~\cite{muzakir2025text}, corpora de persuas\~{a}o de apostas~\cite{alvarezojeda2025precom}, minera\c{c}\~{a}o topol\'{o}gica de dom\'{i}nios via DNS passivo~\cite{nabeel2020following,khalil2016discovering} e detectores adversariais de malware~\cite{li2025automated,zhang2025fighting}. Contudo, essas propostas permanecem fragmentadas: ou s\~{a}o desenhadas para modera\c{c}\~{a}o massiva na infraestrutura de grandes provedores, ou dependem de aglomerados computacionais incompat\'{i}veis com o processamento restrito na borda m\'{o}vel.
+\end{enumerate}
 
+\subsection{Sele\c{c}\~{a}o dos Trabalhos Mais Pr\'{o}ximos}
+
+A partir do diagn\'{o}stico sistem\'{a}tico de 10 ferramentas e 10 artigos consolidados na literatura recente, selecionaram-se tr\^{e}s ferramentas industriais e tr\^{e}s refer\^{e}ncias cient\'{i}ficas de ponta que delimitam as fronteiras operacionais do problema (Tabela~\ref{tab:matriz_concorrentes}):
 \begin{itemize}
-    \item \textbf{Trend Micro Check:} Constitui o concorrente mais direto na intera\c{c}\~{a}o móvel, utilizando IA para analisar prints e mensagens suspeitas. Entretanto, depende de a\c{c}\~{a}o volunt\'{a}ria e manual do usu\'{a}rio, processa dados na nuvem corporativa e n\~{a}o intercepta ativamente espelhos mutantes no ato do redirecionamento;
-    \item \textbf{Gamban:} Refer\^{e}ncia global em autoexclus\~{a}o de apostas digitais com bloqueio r\'{i}gido em n\'{i}vel de rede local (via VPN loopback). Contudo, opera estritamente sobre listas est\'{a}ticas de dom\'{i}nios consolidados, sendo totalmente ineficaz contra dom\'{i}nios ef\^{e}meros e APKs clandestinos;
-    \item \textbf{Netcraft Mobile:} Solu\c{c}\~{a}o l\'{i}der em prote\c{c}\~{a}o contra ataques de \textit{phishing} e \textit{smishing} com inspe\c{c}\~{a}o no momento do toque, mas sem compreens\~{a}o de engenharia social focada na linguagem informal de aliciamento de apostas no Brasil;
-    \item \textbf{Muzakir et al. (2025)~\cite{muzakir2025text}:} Empregam CNNs e AutoML sobre 15.286 senten\c{c}as extra\'{i}das de an\'{u}ncios de apostas em redes sociais (92,80\% de acur\'{a}cia). Contudo, o sistema foi desenhado para modera\c{c}\~{a}o centralizada na nuvem voltada \`{a} l\'{i}ngua indon\'{e}sia, n\~{a}o atuando no terminal m\'{o}vel;
-    \item \textbf{The PRECOM-SM Corpus (\'{A}lvarez-Ojeda et al., 2025)~\cite{alvarezojeda2025precom}:} Primeiro corpus de refer\^{e}ncia no COLING 2025 para identificar marcadores de depend\^{e}ncia de apostas em redes sociais hisp\^{a}nicas, limitando-se \`{a} an\'{a}lise descritiva de comunidades sem mecanismo ativo de conten\c{c}\~{a}o de rede ou APKs;
-    \item \textbf{Nabeel et al. (2020)~\cite{nabeel2020following}:} Prop\~{o}em algoritmos de infer\^{e}ncia em grafos de DNS passivo (pDNS) no \textit{ACM TOPS} para rastrear infraestruturas de dom\'{i}nios maliciosos antes de ativa\c{c}\~{a}o massiva. O m\'{e}todo depende de telemetria corporativa de provedores de internet, n\~{a}o operando no smartphone do cidad\~{a}o.
+    \item \textbf{Trend Micro Check:} Mais pr\'{o}ximo na intera\c{c}\~{a}o direta com o usu\'{a}rio m\'{o}vel contra golpes digitais, por\'{e}m requer iniciativa manual da v\'{i}tima, depende de processamento em nuvem externa e n\~{a}o intercepta \textit{side-loading} de APKs em tempo real;
+    \item \textbf{Gamban:} Principal refer\^{e}ncia comercial no bloqueio estrito de plataformas de apostas no smartphone, mas restrito a listas est\'{a}ticas de dom\'{i}nios e incapaz de avaliar cl\'{a}usulas de fraude ou espelhos ef\^{e}meros;
+    \item \textbf{Netcraft Mobile:} Solu\c{c}\~{a}o de maior proximidade na intercepta\c{c}\~{a}o de requisi\c{c}\~{o}es de rede no momento do clique, contudo desprovida de modelos de linguagem capazes de interpretar g\'{i}rias de aliciamento ou termos contratuais de pagamento;
+    \item \textbf{Muzakir et al. (2025)~\cite{muzakir2025text}:} Artigo cient\'{i}fico mais convergente na detec\c{c}\~{a}o sem\^{a}ntica de an\'{u}ncios de apostas por meio de aprendizado profundo (AutoML e CNNs com 92,80\% de acur\'{a}cia sobre 15.286 senten\c{c}as), por\'{e}m concebido para modera\c{c}\~{a}o corporativa em nuvem, restrito \`{a} l\'{i}ngua indon\'{e}sia e dissociado do terminal m\'{o}vel;
+    \item \textbf{\'{A}lvarez-Ojeda et al. (2025)~\cite{alvarezojeda2025precom}:} Trabalho seminal na caracteriza\c{c}\~{a}o lingu\'{i}stica de comunidades vulner\'{a}veis e persuas\~{a}o de apostas nas redes sociais, por\'{e}m puramente descritivo e sem qualquer componente execut\'{a}vel de interven\c{c}\~{a}o t\'{e}cnica no dispositivo;
+    \item \textbf{Nabeel et al. (2020)~\cite{nabeel2020following}:} Refer\^{e}ncia can\^{o}nica em infer\^{e}ncia topol\'{o}gica sobre grafos de DNS passivo para neutraliza\c{c}\~{a}o de campanhas maliciosas de dia zero, cujos algoritmos dependem de fluxos volumosos de telemetria de operadoras de telecomunica\c{c}\~{o}es e n\~{a}o operam sob o contexto local de um cliente m\'{o}vel.
 \end{itemize}
 
 \subsection{Matriz Comparativa de Eixos e Evid\^{e}ncias Emp\'{i}ricas}
 
-A Tabela~\ref{tab:matriz_concorrentes} formaliza a matriz comparativa de 8 eixos operacionais, confrontando a proposta do Sentinela Clandestino com os seis trabalhos mais pr\'{o}ximos. Seguindo o princ\'{i}pio de rigor metodol\'{o}gico da disciplina, o modelo proposto assume honestamente a perda em tr\^{e}s eixos cr\'{i}ticos de engenharia.
+A Tabela~\ref{tab:matriz_concorrentes} formaliza a matriz comparativa de oito eixos t\'{e}cnicos derivados das tens\~{o}es arquiteturais do campo. Evidenciando a honestidade acad\^{e}mica exigida pelo m\'{e}todo cient\'{i}fico, o Sentinela Clandestino assume perdas e empates nos tr\^{e}s eixos finais de engenharia.
 
 \begin{table*}[t]
 \centering
-\caption{Matriz comparativa de competidores e contribui\c{c}\~{a}o ($\checkmark$: faz integralmente; $\blacktriangleright$: faz em parte; $\times$: n\~{a}o faz; ?: n\~{a}o reportado). Os eixos finais evidenciam as perdas e trade-offs assumidos pela proposta ($\times$).}
+\caption{Matriz comparativa de competidores e contribui\c{c}\~{a}o ($\checkmark$: implementa plenamente; $\blacktriangleright$: implementa parcialmente; $\times$: n\~{a}o implementa; ?: aus\^{e}ncia de evid\^{e}ncia emp\'{i}rica). Os tr\^{e}s eixos \`{a} direita evidenciam os trade-offs assumidos pela proposta.}
 \label{tab:matriz_concorrentes}
-\setlength{\tabcolsep}{4pt}
+\setlength{\tabcolsep}{4.5pt}
 \scriptsize
 \begin{tabular}{lcccccccc}
 \toprule
-\textbf{Trabalho / Solu\c{c}\~{a}o} & \textbf{Eixo 1} & \textbf{Eixo 2} & \textbf{Eixo 3} & \textbf{Eixo 4} & \textbf{Eixo 5} & \textbf{Eixo 6} & \textbf{Eixo 7} & \textbf{Eixo 8} \\
+\textbf{Solu\c{c}\~{a}o / Proposta} & \textbf{Eixo 1} & \textbf{Eixo 2} & \textbf{Eixo 3} & \textbf{Eixo 4} & \textbf{Eixo 5} & \textbf{Eixo 6} & \textbf{Eixo 7} & \textbf{Eixo 8} \\
 & Intercep. & Audita & Espelhos & Cl\'{a}usulas & Dados & Lat\^{e}ncia & Baixo Cons. & Prontid\~{a}o \\
-& Redirec. & APK & Grafos & Calote/Saque & Celular & $< 50\text{ms}$ & Bat/RAM & Produ\c{c}\~{a}o \\
+& Redirec. & APK & Grafos & Calote/Saque & Celular & $< 50\text{ms}$ & Bat/RAM & Escala Real \\
 \midrule
 Trend Micro Check & $\times$ & $\times$ & $\blacktriangleright$ & $\blacktriangleright$ & $\times$ & $\checkmark$ & $\checkmark$ & $\checkmark$ \\
 Gamban & $\times$ & $\blacktriangleright$ & $\times$ & $\times$ & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ \\
@@ -42,11 +51,21 @@ Nabeel et al. (2020)~\cite{nabeel2020following} & $\times$ & $\times$ & $\checkm
 \end{tabular}
 \end{table*}
 
+\noindent\textbf{Evid\^{e}ncias Emp\'{i}ricas dos Eixos:}
+\begin{itemize}
+    \item \textit{Trend Micro Check:} Opera avalia\c{c}\~{a}o de reputa\c{c}\~{a}o de URLs via heur\'{i}sticas em nuvem ($\blacktriangleright$), realiza triagem gen\'{e}rica de mensagens em portugu\^{e}s ($\blacktriangleright$), executa como cliente leve delegando a computa\c{c}\~{a}o a servidores externos com resposta r\'{a}pida ($\checkmark$), ultrapassando 1 milh\~{a}o de instala\c{c}\~{o}es ativas ($\checkmark$);
+    \item \textit{Gamban:} Realiza bloqueio mec\^{a}nico de tr\'{a}fego de rede sem inspe\c{c}\~{a}o est\'{a}tica profunda de \textit{bytecodes} ($\blacktriangleright$), opera via interface VPN loopback sem telemetria remota de hist\'{o}rico ($\checkmark$), consumindo energia residual no processador m\'{o}vel ($\checkmark$), sendo solu\c{c}\~{a}o comercial consolidada em esquemas nacionais de autoexclus\~{a}o no Reino Unido e Europa ($\checkmark$);
+    \item \textit{Netcraft Mobile:} Intercepta eventos de toque em links potencialmente perigosos ($\blacktriangleright$), verifica feeds de alta disponibilidade contra servidores de golpe conhecidos ($\blacktriangleright$), opera com impacto impercept\'{i}vel de CPU/RAM no terminal m\'{o}vel ($\checkmark$), auditado e adotado em larga escala por institui\c{c}\~{o}es financeiras globais ($\checkmark$);
+    \item \textit{Muzakir et al. (2025)~\cite{muzakir2025text}:} Comprovam acur\'{a}cia de 92,80\% na extra\c{c}\~{a}o e classifica\c{c}\~{a}o sem\^{a}ntica de an\'{u}ncios de apostas com express\~{o}es de persuas\~{a}o ($\checkmark$), dependendo de infraestrutura de computa\c{c}\~{a}o intensiva desvinculada de restri\c{c}\~{o}es m\'{o}veis;
+    \item \textit{\'{A}lvarez-Ojeda et al. (2025)~\cite{alvarezojeda2025precom}:} Demonstram a viabilidade de modelagem de linguagem para identificar padres persuasivos de jogos de azar em feeds digitais ($\checkmark$), mantendo car\'{a}ter puramente anal\'{i}tico;
+    \item \textit{Nabeel et al. (2020)~\cite{nabeel2020following}:} Validam em base real de telecomunica\c{c}\~{o}es que algoritmos de infer\^{e}ncia em grafos de traces de DNS passivo detectam campanhas furtivas at\'{e} 14 dias antes de sua inclus\~{a}o em listas p\'{u}blicas de seguran\c{c}a ($\checkmark$).
+\end{itemize}
+
 \subsection{Declara\c{c}\~{a}o Can\^{o}nica da Contribui\c{c}\~{a}o}
 
-Com base na combina\c{c}\~{a}o \'{u}nica de quadrantes em que a solu\c{c}\~{a}o atua de forma diferenciada, a contribui\c{c}\~{a}o cient\'{i}fico-tecnol\'{o}gica \'{e} expressa formalmente como:
+A partir do mapeamento sistem\'{a}tico da literatura e da identifica\c{c}\~{a}o das falhas de cobertura dos sistemas vigentes, a contribui\c{c}\~{a}o central deste trabalho \'{e} sintetizada na seguinte declara\c{c}\~{a}o can\^{o}nica:
 \begin{quote}
-    \textit{``O Sentinela Clandestino correlaciona a sem\^{a}ntica de persuas\~{a}o e regras de saque da p\'{a}gina de pouso com a topologia de infraestrutura de espelhos e APKs diretamente na borda do smartphone, e por isso exp\~{o}e fraudes de calote e malwares no momento do redirecionamento com total privacidade local, o que nem os filtros de rede est\'{a}ticos (Gamban/Netcraft) nem os classificadores em nuvem (Muzakir/{\'A}lvarez-Ojeda) conseguem realizar isoladamente.''}
+    \textit{``O Sentinela Clandestino correlaciona a sem\^{a}ntica da p\'{a}gina de pouso e as regras contratuais de saque com a topologia de infraestrutura de espelhos e bin\'{a}rios APK diretamente na borda do smartphone, e por isso bloqueia o ciclo da aposta clandestina no momento do redirecionamento com total privacidade local, o que nem os filtros de rede est\'{a}ticos (Gamban/Netcraft) nem os classificadores corporativos em nuvem (Muzakir/{\'A}lvarez-Ojeda) conseguem realizar isoladamente.''}
 \end{quote}
 
-O trabalho mais pr\'{o}ximo \'{e} o \textbf{Trend Micro Check}, que analisa links e capturas de tela com modelos de IA na nuvem; todavia, ele falha porque depende da proatividade manual da v\'{i}tima em enviar o conte\'{u}do e avalia apenas reputa\c{c}\~{a}o gen\'{e}rica, falhando em auditar cl\'{a}usulas de reten\c{c}\~{a}o de saque em espelhos mutantes e em inspecionar manifestos de APKs piratas no momento do clique.
+O concorrente mais pr\'{o}ximo \'{e} o \textbf{Trend Micro Check}, que analisa prints e links de golpes com intelig\^{e}ncia artificial; por\'{e}m, ele falha categoricamente por exigir a\c{c}\~{a}o manual proativa da v\'{i}tima, transferir os dados confidenciais do usu\'{a}rio para a nuvem corporativa e n\~{a}o dispor de capacidade t\'{e}cnica para auditar manifestos de APKs piratas nem correlacionar espelhos mutantes no instante em que ocorrem.
