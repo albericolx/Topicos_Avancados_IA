@@ -1,4 +1,4 @@
-# Contexto: VA2 - Atividades de Avaliação (`va2/`)
+﻿# Contexto: VA2 - Atividades de Avaliação (`va2/`)
 
 > Módulo autocontido da 2ª Verificação de Aprendizagem (VA2) da disciplina de Tópicos Avançados de IA (UFRPE 2026.2).
 
@@ -29,6 +29,8 @@ va2/
 ├── exp.md                           # Folha de Desenho dos Experimentos (E1 Técnica Borda, E2 Decisão do Apostador, Pilotos e TCLE)
 ├── piloto_exp.py                    # Script autônomo do piloto experimental com cálculo de métricas e IC 95%
 ├── tcle.md                          # Termo de Consentimento Livre e Esclarecido (Res. CNS 510/2016 e LGPD)
+├── sem1.md                          # Folha do Seminário Preliminares (sem1: 4 frases, 5 slides, ensaio cético)
+├── slides.html                      # Deck interativo oficial de slides (16:9, notas de orador, fullscreen)
 
 ├── PITCH.md                         # Guia de Defesa Oral sem a tela (Pitch de 2 minutos para checagem com o professor)
 
