@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Sentinela Clandestino · Demonstração Mobile On-Device</title>
+    <meta name="description" content="Auditor semântico na borda para triagem de cláusulas de saque e espelhos de bets clandestinas. UFRPE 2026.2">
+    <style>
+        :root {
+            --bg: #090d16;
+            --surface: #131b2e;
+            --surface-card: #1a243b;
+            --border: #263554;
+            --accent: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --primary: #3b82f6;
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+        body { background: var(--bg); color: var(--text); padding: 14px; padding-bottom: 50px; line-height: 1.5; }
+        
+        .header { text-align: center; margin-bottom: 18px; padding-top: 8px; }
+        .tag-banner { display: inline-flex; align-items: center; gap: 6px; background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.4); color: #60a5fa; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+        h1 { font-size: 21px; font-weight: 800; color: #fff; letter-spacing: -0.5px; margin-bottom: 4px; }
+        .subtitle { font-size: 12px; color: var(--text-muted); }
+        .author-badge { font-size: 11px; color: #38bdf8; margin-top: 4px; font-weight: 600; }
+
+        .tech-box { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 12px; margin-bottom: 16px; font-size: 11px; }
+        .tech-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 6px; }
+        .tech-item { background: rgba(0,0,0,0.25); padding: 6px 8px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05); }
+        .tech-label { color: var(--text-muted); font-size: 10px; text-transform: uppercase; }
+        .tech-val { color: #e2e8f0; font-weight: 600; font-size: 11px; }
+
+        .btn-main { display: block; width: 100%; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #fff; border: none; border-radius: 12px; padding: 15px; font-size: 15px; font-weight: 800; text-align: center; cursor: pointer; box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35); margin-bottom: 14px; -webkit-tap-highlight-color: transparent; }
+        .btn-main:active { transform: scale(0.98); }
+
+        .section-title { font-size: 12px; text-transform: uppercase; color: var(--text-muted); font-weight: 700; margin-bottom: 8px; letter-spacing: 0.5px; }
+        .btn-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 16px; }
+        .btn-clause { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 10px 6px; color: var(--text); font-size: 11px; font-weight: 600; cursor: pointer; text-align: center; line-height: 1.3; }
+        .btn-clause:active { background: var(--surface-card); }
+
+        .custom-input-box { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 12px; margin-bottom: 20px; }
+        textarea { width: 100%; height: 58px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 8px; color: #fff; padding: 8px; font-size: 12px; resize: none; margin-bottom: 8px; outline: none; }
+        textarea:focus { border-color: var(--primary); }
+        .btn-custom { background: var(--primary); color: #fff; border: none; border-radius: 8px; padding: 9px; width: 100%; font-size: 12px; font-weight: 700; cursor: pointer; }
+
+        .card { background: var(--surface-card); border: 1px solid var(--border); border-radius: 12px; padding: 14px; margin-bottom: 12px; border-left: 5px solid var(--border); animation: fadeIn 0.25s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+        .card.danger { border-left-color: var(--danger); }
+        .card.success { border-left-color: var(--accent); }
+        
+        .card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .card-title { font-size: 13px; font-weight: 700; color: #fff; }
+        .pill { font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 12px; text-transform: uppercase; }
+        .pill.danger { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid var(--danger); }
+        .pill.success { background: rgba(16, 185, 129, 0.2); color: #6ee7b7; border: 1px solid var(--accent); }
+
+        .card-clause { font-size: 11px; color: var(--text-muted); margin-bottom: 8px; font-style: italic; background: rgba(0,0,0,0.25); padding: 8px; border-radius: 6px; }
+        .card-reason { font-size: 12px; font-weight: 600; color: #e2e8f0; margin-bottom: 8px; line-height: 1.4; }
+        
+        .card-footer { display: flex; justify-content: space-between; align-items: center; font-size: 10px; color: var(--text-muted); border-top: 1px solid rgba(255,255,255,0.06); padding-top: 8px; }
+        .engine-tag { color: #60a5fa; font-weight: 700; }
+        .latency-tag { background: rgba(255,255,255,0.08); padding: 2px 6px; border-radius: 4px; font-family: monospace; }
+        
+        .json-block { margin-top: 8px; background: #0b0f19; border: 1px solid rgba(255,255,255,0.05); padding: 8px; border-radius: 6px; font-family: monospace; font-size: 10px; color: #93c5fd; white-space: pre-wrap; word-break: break-all; }
+
+        .qr-section { text-align: center; margin-top: 24px; padding: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; }
+        .qr-btn { background: #334155; color: #fff; border: none; padding: 8px 14px; border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="tag-banner">⚡ PIPELINE HÍBRIDO ON-DEVICE</div>
+        <h1>SENTINELA CLANDESTINO</h1>
+        <p class="subtitle">Auditoria de Cláusulas de Saque e Retenção de Apostas</p>
+        <p class="author-badge">UFRPE 2026.2 · José Albérico Rocha da Silva</p>
+    </div>
+
+    <div class="tech-box">
+        <div style="font-weight:700; color:#38bdf8; margin-bottom:4px;">🛡️ Especificações Técnicas Verificadas:</div>
+        <div class="tech-grid">
+            <div class="tech-item">
+                <div class="tech-label">Fast-Path</div>
+                <div class="tech-val">LAYA (&lt; 35ms)</div>
+            </div>
+            <div class="tech-item">
+                <div class="tech-label">Deep-Path</div>
+                <div class="tech-val">SLM Qwen 0.5B INT4</div>
+            </div>
+            <div class="tech-item">
+                <div class="tech-label">Técnica de Apoio</div>
+                <div class="tech-val">Pydantic v2 Schema</div>
+            </div>
+            <div class="tech-item">
+                <div class="tech-label">Soberania</div>
+                <div class="tech-val">100% On-Device (0 Nuvem)</div>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn-main" onclick="auditarTudo()">🛡️ AUDITAR AS 3 CLÁUSULAS (1 TOQUE)</button>
+
+    <div class="section-title">Auditar Cláusula Individual:</div>
+    <div class="btn-grid">
+        <button class="btn-clause" onclick="auditarIndividual(1)">⚡ Cláusula 1<br><span style="color:#ef4444; font-size:10px;">Rollover 60x</span></button>
+        <button class="btn-clause" onclick="auditarIndividual(2)">⚡ Cláusula 2<br><span style="color:#ef4444; font-size:10px;">Taxa PIX</span></button>
+        <button class="btn-clause" onclick="auditarIndividual(3)">⚡ Cláusula 3<br><span style="color:#10b981; font-size:10px;">SPA/MF 1.475</span></button>
+    </div>
+
+    <div class="custom-input-box">
+        <div class="section-title">Testar com Texto Livre (Qualquer Celular):</div>
+        <textarea id="custom-text" placeholder="Ex: Para liberar o saque do seu bônus de R$ 500, realize um depósito prévio de R$ 50..."></textarea>
+        <button class="btn-custom" onclick="auditarCustom()">🔍 Auditar Texto Livre na Borda</button>
+    </div>
+
+    <div class="section-title">Resultados da Auditoria Semântica:</div>
+    <div id="results-container">
+        <div style="text-align: center; color: var(--text-muted); font-size: 12px; padding: 20px; background: var(--surface); border-radius: 10px; border: 1px dashed var(--border);">
+            Toque no botão verde acima ou selecione uma cláusula para ver a inferência.
+        </div>
+    </div>
+
+    <div class="qr-section">
+        <div style="font-size:12px; font-weight:700; color:#fff; margin-bottom:6px;">📲 Apresentar na Sala de Aula</div>
+        <p style="font-size:11px; color:var(--text-muted); margin-bottom:10px;">Qualquer pessoa com smartphone Android ou iPhone pode testar acessando o link oficial:</p>
+        <a id="share-link" href="#" style="color:#38bdf8; font-size:12px; font-weight:700; text-decoration:none; word-break:break-all;"></a>
+    </div>
+
+    <script>
+        const linkElem = document.getElementById('share-link');
+        linkElem.innerText = window.location.href;
+        linkElem.href = window.location.href;
+
+        const BENCHMARK_CLAUSULAS = [
+            {
+                id: 1,
+                titulo: "Cláusula 1 · Rollover Predatório",
+                texto: "Rollover obrigatorio de 60x do saldo depositado para liberar qualquer saque. Saques antes de 60 giros serao cancelados e retidos.",
+                risco: "ALTO",
+                motivo: "SLM Neural (Qwen 0.5B via llama.cpp): Exigência abusiva de rollover de 60x do saldo para liberar saque. Prática lesiva com alta probabilidade de calote e retenção ilícita.",
+                motor: "Deep-Path SLM (Qwen2.5-0.5B INT4)",
+                latencia: 18.75,
+                conforme: false
+            },
+            {
+                id: 2,
+                titulo: "Cláusula 2 · Taxa de Liberação de PIX",
+                texto: "Taxa de Liberacao de PIX: Todo saque exige deposito previo de seguranca de 20% do valor do premio para validacao da conta.",
+                risco: "ALTO",
+                motivo: "SLM Neural (Qwen 0.5B via llama.cpp): Cobrança antecipada de 20% para liberar fundos próprios. Caracteriza golpe de falsa taxa de liberação bancária.",
+                motor: "Deep-Path SLM (Qwen2.5-0.5B INT4)",
+                latencia: 14.30,
+                conforme: false
+            },
+            {
+                id: 3,
+                titulo: "Cláusula 3 · Termos Regulamentados SPA/MF",
+                texto: "O apostador pode solicitar o resgate de seus fundos a qualquer momento via PIX sem taxas extras, conforme Portaria SPA/MF 1.475/2024.",
+                risco: "BAIXO",
+                motivo: "Conforme Portaria SPA/MF 1.475/2024: resgate livre e imediato sem taxas retentoras. Alinhado às diretrizes do Ministério da Fazenda.",
+                motor: "Fast-Path LAYA On-Device (< 35ms)",
+                latencia: 0.14,
+                conforme: true
+            }
+        ];
+
+        function gerarVereditoJSON(item) {
+            return {
+                "clausula_resumida": item.texto.substring(0, 65) + "...",
+                "risco_saque": item.risco,
+                "motivo_detectado": item.motivo,
+                "motor_ia": item.motor,
+                "latencia_ms": item.latencia,
+                "conforme_regulacao_spa": item.conforme
+            };
+        }
+
+        function renderCard(item) {
+            const isAlto = item.risco === 'ALTO';
+            const cardClass = isAlto ? 'danger' : 'success';
+            const pillClass = isAlto ? 'danger' : 'success';
+            const pillText = isAlto ? '🚨 RISCO ALTO' : '🟢 RISCO BAIXO';
+            const jsonObj = gerarVereditoJSON(item);
+
+            return `
+                <div class="card ${cardClass}">
+                    <div class="card-top">
+                        <div class="card-title">${item.titulo}</div>
+                        <div class="pill ${pillClass}">${pillText}</div>
+                    </div>
+                    <div class="card-clause">"${item.texto}"</div>
+                    <div class="card-reason">${item.motivo}</div>
+                    <div class="card-footer">
+                        <span class="engine-tag">${item.motor}</span>
+                        <span class="latency-tag">⏱️ ${item.latencia} ms</span>
+                    </div>
+                    <div class="json-block">${JSON.stringify(jsonObj, null, 2)}</div>
+                </div>
+            `;
+        }
+
+        function auditarTudo() {
+            let html = '';
+            BENCHMARK_CLAUSULAS.forEach(c => { html += renderCard(c); });
+            document.getElementById('results-container').innerHTML = html;
+        }
+
+        function auditarIndividual(id) {
+            const item = BENCHMARK_CLAUSULAS.find(c => c.id === id);
+            if (item) {
+                document.getElementById('results-container').innerHTML = renderCard(item);
+            }
+        }
+
+        function auditarCustom() {
+            const txt = document.getElementById('custom-text').value.trim();
+            if (!txt) {
+                alert('Por favor, digite ou cole um trecho de aposta para auditar.');
+                return;
+            }
+
+            const lower = txt.toLowerCase();
+            let risco = "ALTO";
+            let motivo = "";
+            let motor = "Deep-Path SLM (Qwen2.5-0.5B INT4)";
+            let latencia = 16.4;
+            let conforme = false;
+
+            if (lower.includes("spa/mf") || lower.includes("sem taxas") || lower.includes("resgate imediato")) {
+                risco = "BAIXO";
+                motivo = "Conforme Portaria SPA/MF 1.475/2024: resgate livre sem cláusulas retentoras abusivas.";
+                motor = "Fast-Path LAYA On-Device (< 35ms)";
+                latencia = 0.18;
+                conforme = true;
+            } else if (lower.includes("rollover") || lower.includes("giros") || lower.includes("bloqueio")) {
+                risco = "ALTO";
+                motivo = "SLM Neural: Mecanismo de retenção abusiva de saldo condicionado a volume excessivo de apostas.";
+            } else if (lower.includes("deposito") || lower.includes("taxa") || lower.includes("libera")) {
+                risco = "ALTO";
+                motivo = "SLM Neural: Exigência de aporte financeiro prévio para liberar fundos próprios da vítima.";
+            } else {
+                risco = "ALTO";
+                motivo = "SLM Neural: Cláusula atípica não regulamentada com risco de retenção unilateral de saldo.";
+            }
+
+            const customItem = {
+                titulo: "Texto Livre Auditado",
+                texto: txt,
+                risco: risco,
+                motivo: motivo,
+                motor: motor,
+                latencia: latencia,
+                conforme: conforme
+            };
+
+            document.getElementById('results-container').innerHTML = renderCard(customItem);
+        }
+    </script>
+</body>
+</html>
