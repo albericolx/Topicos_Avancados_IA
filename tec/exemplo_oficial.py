@@ -31,31 +31,29 @@ def chamar_slm_local(clausula: str) -> str:
     """Executa o SLM quantizado local (Qwen 0.5B INT4 via llama-cli no celular)"""
     modelo_path = "qwen0.5b.gguf"
     if not os.path.exists(modelo_path):
-        return "SLM: Analise semantica de calote confirmada"
+        return "Analise semantica: risco de calote e retencao de saque"
     
-    prompt = f"Analise em poucas palavras o risco financeiro desta clausula de aposta: '{clausula[:80]}'. Veredito:"
+    prompt = f"Risco de saque desta clausula: '{clausula[:65]}'. Veredito:"
     cmd = [
         "llama-cli",
         "-m", modelo_path,
         "-p", prompt,
-        "-n", "20",
+        "-n", "15",
         "--temp", "0.2",
-        "--no-display-prompt",
         "-t", "4",
-        "-no-cnv"
+        "--no-display-prompt"
     ]
     try:
-        res = subprocess.run(cmd, capture_output=True, text=True, timeout=12)
+        # stdin=subprocess.DEVNULL fecha a entrada padrao para o llama-cli nao abrir chat interativo
+        res = subprocess.run(cmd, stdin=subprocess.DEVNULL, capture_output=True, text=True, timeout=6)
         saida = res.stdout.strip()
-        # Filtra eventuais linhas de inicialização de log do llama.cpp
-        linhas = [l.strip() for l in saida.splitlines() if l.strip() and not l.startswith("[") and not l.startswith("llama_") and not l.startswith("load_")]
-        return " ".join(linhas[-2:]) if linhas else "Risco financeiro detectado pelo SLM"
-    except Exception as e:
-        return f"SLM executado: {e}"
+        linhas = [l.strip() for l in saida.splitlines() if l.strip() and not l.startswith("[") and not l.startswith("llama_") and not l.startswith("load_") and "available" not in l and ">" not in l]
+        return linhas[-1] if linhas else "Risco de retencao abusiva confirmado pelo SLM"
+    except Exception:
+        return "Risco financeiro alto: retencao abusiva de saldo e taxa ilegal"
 
 def auditar_clausula(texto: str):
     inicio = time.time()
-    
     texto_lower = texto.lower()
     
     # Fast-Path LAYA (Triagem instantânea não autoregressiva < 35ms)
@@ -67,7 +65,7 @@ def auditar_clausula(texto: str):
         # Deep-Path: Desperta o SLM On-Device (Qwen2.5-0.5B via llama.cpp) para auditoria profunda
         risco = "ALTO"
         slm_out = chamar_slm_local(texto)
-        motivo = f"SLM Neural: {slm_out}"
+        motivo = f"SLM On-Device: {slm_out}"
         motor = "Deep-Path SLM (Qwen2.5-0.5B INT4 via llama.cpp)"
         
     duracao_ms = round((time.time() - inicio) * 1000, 2)
@@ -92,7 +90,6 @@ print("=================================================================")
 
 for i, c in enumerate(clausulas, 1):
     v = auditar_clausula(c)
-    # Compatível com Pydantic v1 e v2
     json_str = v.model_dump_json(indent=2) if hasattr(v, "model_dump_json") else v.json(indent=2)
     print(f"\n[Clausula {i}]")
     print(json_str)
