@@ -23,7 +23,9 @@ va2/
 ├── brw.md                           # Folha de Brainwriting Híbrido (Ideação, crise, usuário e solução)
 
 ├── cmp.md                           # Folha de Competidores e Contribuição (Catálogo, matriz de 8 eixos e frase canônica)
-├── tec.md                           # Folha de Tecnologia Base Demonstrável (Transformers CPU, alteração mínima, vídeo e auditoria)
+├── tec.md                           # Folha de Tecnologia Base Demonstrável (Transformers/Llama.cpp, vídeo e auditoria)
+├── flx.md                           # Folha de Fluxograma e Arquitetura (Passos IA/Regra/Pessoa, custos e privacidade)
+├── arquitetura.md                   # Diagrama Mermaid oficial do fluxo on-device e dados pessoais
 
 ├── PITCH.md                         # Guia de Defesa Oral sem a tela (Pitch de 2 minutos para checagem com o professor)
 
