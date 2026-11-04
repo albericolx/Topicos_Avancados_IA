@@ -26,6 +26,9 @@ va2/
 ├── tec.md                           # Folha de Tecnologia Base Demonstrável (Transformers/Llama.cpp, vídeo e auditoria)
 ├── flx.md                           # Folha de Fluxograma e Arquitetura (Passos IA/Regra/Pessoa, custos e privacidade)
 ├── arquitetura.md                   # Diagrama Mermaid oficial do fluxo on-device e dados pessoais
+├── exp.md                           # Folha de Desenho dos Experimentos (E1 Técnica Borda, E2 Decisão do Apostador, Pilotos e TCLE)
+├── piloto_exp.py                    # Script autônomo do piloto experimental com cálculo de métricas e IC 95%
+├── tcle.md                          # Termo de Consentimento Livre e Esclarecido (Res. CNS 510/2016 e LGPD)
 
 ├── PITCH.md                         # Guia de Defesa Oral sem a tela (Pitch de 2 minutos para checagem com o professor)
 
