@@ -21,13 +21,19 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
         body { background: var(--bg); color: var(--text); padding: 14px; padding-bottom: 50px; line-height: 1.5; }
         
-        .header { text-align: center; margin-bottom: 18px; padding-top: 8px; }
-        .tag-banner { display: inline-flex; align-items: center; gap: 6px; background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.4); color: #60a5fa; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .header { text-align: center; margin-bottom: 14px; padding-top: 6px; }
+        .tag-banner { display: inline-flex; align-items: center; gap: 6px; background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.4); color: #60a5fa; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
         h1 { font-size: 21px; font-weight: 800; color: #fff; letter-spacing: -0.5px; margin-bottom: 4px; }
         .subtitle { font-size: 12px; color: var(--text-muted); }
         .author-badge { font-size: 11px; color: #38bdf8; margin-top: 4px; font-weight: 600; }
 
-        .tech-box { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 12px; margin-bottom: 16px; font-size: 11px; }
+        .git-box { background: #010409; border: 1px solid #30363d; border-radius: 10px; padding: 12px; margin-bottom: 14px; font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; font-size: 11px; line-height: 1.45; }
+        .git-title { color: #58a6ff; font-weight: bold; font-size: 11px; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; display: flex; align-items: center; gap: 6px; }
+        .git-commit { margin-bottom: 4px; }
+        .commit-hash { color: #e3b341; font-weight: bold; }
+        .commit-msg { color: #7ee787; }
+
+        .tech-box { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 12px; margin-bottom: 14px; font-size: 11px; }
         .tech-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 6px; }
         .tech-item { background: rgba(0,0,0,0.25); padding: 6px 8px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05); }
         .tech-label { color: var(--text-muted); font-size: 10px; text-transform: uppercase; }
@@ -37,11 +43,11 @@
         .btn-main:active { transform: scale(0.98); }
 
         .section-title { font-size: 12px; text-transform: uppercase; color: var(--text-muted); font-weight: 700; margin-bottom: 8px; letter-spacing: 0.5px; }
-        .btn-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 16px; }
+        .btn-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 14px; }
         .btn-clause { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 10px 6px; color: var(--text); font-size: 11px; font-weight: 600; cursor: pointer; text-align: center; line-height: 1.3; }
         .btn-clause:active { background: var(--surface-card); }
 
-        .custom-input-box { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 12px; margin-bottom: 20px; }
+        .custom-input-box { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 12px; margin-bottom: 16px; }
         textarea { width: 100%; height: 58px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 8px; color: #fff; padding: 8px; font-size: 12px; resize: none; margin-bottom: 8px; outline: none; }
         textarea:focus { border-color: var(--primary); }
         .btn-custom { background: var(--primary); color: #fff; border: none; border-radius: 8px; padding: 9px; width: 100%; font-size: 12px; font-weight: 700; cursor: pointer; }
@@ -67,7 +73,6 @@
         .json-block { margin-top: 8px; background: #0b0f19; border: 1px solid rgba(255,255,255,0.05); padding: 8px; border-radius: 6px; font-family: monospace; font-size: 10px; color: #93c5fd; white-space: pre-wrap; word-break: break-all; }
 
         .qr-section { text-align: center; margin-top: 24px; padding: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; }
-        .qr-btn { background: #334155; color: #fff; border: none; padding: 8px 14px; border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -77,6 +82,13 @@
         <h1>SENTINELA CLANDESTINO</h1>
         <p class="subtitle">Auditoria de Cláusulas de Saque e Retenção de Apostas</p>
         <p class="author-badge">UFRPE 2026.2 · José Albérico Rocha da Silva</p>
+    </div>
+
+    <!-- BOX COM OS COMMITS DO GIT VERIFICADOS -->
+    <div class="git-box">
+        <div class="git-title">📦 Git Log Verificado (Código-Fonte no Aparelho):</div>
+        <div class="git-commit"><span class="commit-hash">2d0e65d</span> <span class="commit-msg">feat(tec): pipeline hibrido laya e slm on-device estavel e veloz</span></div>
+        <div class="git-commit"><span class="commit-hash">b72dac6</span> <span class="commit-msg">feat(tec): exemplo oficial do transformers com Qwen2.5 rodando em CPU</span></div>
     </div>
 
     <div class="tech-box">
