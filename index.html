@@ -82,9 +82,12 @@
         <h1>SENTINELA CLANDESTINO</h1>
         <p class="subtitle">Auditoria de Cláusulas de Saque e Retenção de Apostas</p>
         <p class="author-badge">UFRPE 2026.2 · José Albérico Rocha da Silva</p>
-        <div style="margin-top:8px;">
+        <div style="margin-top:8px; display:flex; justify-content:center; gap:8px; flex-wrap:wrap;">
             <a href="slides.html" style="display:inline-flex; align-items:center; gap:6px; background:rgba(56,189,248,0.15); border:1px solid #38bdf8; color:#38bdf8; padding:5px 12px; border-radius:20px; font-size:11px; text-decoration:none; font-weight:700;">
-                📽️ Slides do Seminário (sem1) ▶
+                📽️ Slides sem1 ▶
+            </a>
+            <a href="slides_sem2.html" style="display:inline-flex; align-items:center; gap:6px; background:rgba(16,185,129,0.15); border:1px solid #10b981; color:#10b981; padding:5px 12px; border-radius:20px; font-size:11px; text-decoration:none; font-weight:700;">
+                ⚡ Slides &amp; Demo sem2 ▶
             </a>
         </div>
     </div>
@@ -118,13 +121,14 @@
         </div>
     </div>
 
-    <button class="btn-main" onclick="auditarTudo()">🛡️ AUDITAR AS 3 CLÁUSULAS (1 TOQUE)</button>
+    <button class="btn-main" onclick="auditarTudo()">🛡️ AUDITAR O BENCHMARK COMPLETO (1 TOQUE)</button>
 
     <div class="section-title">Auditar Cláusula Individual:</div>
-    <div class="btn-grid">
+    <div class="btn-grid" style="grid-template-columns: 1fr 1fr 1fr 1fr;">
         <button class="btn-clause" onclick="auditarIndividual(1)">⚡ Cláusula 1<br><span style="color:#ef4444; font-size:10px;">Rollover 60x</span></button>
         <button class="btn-clause" onclick="auditarIndividual(2)">⚡ Cláusula 2<br><span style="color:#ef4444; font-size:10px;">Taxa PIX</span></button>
         <button class="btn-clause" onclick="auditarIndividual(3)">⚡ Cláusula 3<br><span style="color:#10b981; font-size:10px;">SPA/MF 1.475</span></button>
+        <button class="btn-clause" style="border-color:#f59e0b;" onclick="auditarIndividual(4)">⚠️ Falha sem2<br><span style="color:#f59e0b; font-size:10px;">Falso Positivo</span></button>
     </div>
 
     <div class="custom-input-box">
@@ -181,6 +185,16 @@
                 motor: "Fast-Path LAYA On-Device (< 35ms)",
                 latencia: 0.14,
                 conforme: true
+            },
+            {
+                id: 4,
+                titulo: "Cláusula 4 · Falha Mostrada no SEM2 (Falso-Positivo)",
+                texto: "Bônus de 100% até R$ 500 com rollover promocional padrão de 15x em 30 dias para apostas esportivas com odds mínimas de 1.70, autorização SPA/MF nº 1.475.",
+                risco: "ALTO",
+                motivo: "⚠️ FALHA DO MODELO (Falso-Positivo): O modelo leu 'rollover 15x' e disparou alerta de calote, ignorando a licença da Portaria SPA 1.475. (Gabarito correto: BAIXO).",
+                motor: "Deep-Path SLM (Qwen2.5-0.5B INT4)",
+                latencia: 17.85,
+                conforme: false
             }
         ];
 

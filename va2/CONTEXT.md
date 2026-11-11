@@ -30,7 +30,9 @@ va2/
 ├── piloto_exp.py                    # Script autônomo do piloto experimental com cálculo de métricas e IC 95%
 ├── tcle.md                          # Termo de Consentimento Livre e Esclarecido (Res. CNS 510/2016 e LGPD)
 ├── sem1.md                          # Folha do Seminário Preliminares (sem1: 4 frases, 5 slides, ensaio cético)
-├── slides.html                      # Deck interativo oficial de slides (16:9, notas de orador, fullscreen)
+├── slides.html                      # Deck interativo oficial de slides sem1 (16:9, notas de orador, fullscreen)
+├── sem2.md                          # Folha do Seminário Iteração 2 (sem2: demo ao vivo, custos, falha e evolução)
+├── slides_sem2.html                 # Deck interativo oficial de slides sem2 com notas e demo ao vivo
 
 ├── PITCH.md                         # Guia de Defesa Oral sem a tela (Pitch de 2 minutos para checagem com o professor)
 

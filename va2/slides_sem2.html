@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seminário Iteração 2 · Demonstração (sem2) · Sentinela Clandestino</title>
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: rgba(18, 26, 43, 0.9);
+      --border: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --primary: #38bdf8;
+      --accent: #f59e0b;
+      --danger: #ef4444;
+      --success: #10b981;
+      --font: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', Consolas, monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      user-select: none;
+    }
+    header {
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      background: rgba(9, 13, 22, 0.95);
+      z-index: 10;
+    }
+    .logo {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .badge-live {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--success);
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      font-family: var(--font-mono);
+    }
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .btn {
+      background: #1e293b;
+      color: var(--text);
+      border: 1px solid #334155;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .btn:hover { background: #334155; border-color: var(--primary); }
+    .btn-active { background: var(--primary); color: #090d16; font-weight: 600; }
+
+    .deck-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      position: relative;
+    }
+    .slide {
+      display: none;
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 9;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .slide.active { display: flex; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.98); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .slide-tag {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--primary);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .slide-title {
+      font-size: 2.1rem;
+      line-height: 1.2;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+    .slide-body {
+      flex: 1;
+      display: flex;
+      gap: 28px;
+      align-items: center;
+    }
+    .slide-left { flex: 1.1; }
+    .slide-right { flex: 0.9; display: flex; justify-content: center; }
+
+    .bullet-box {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(51, 65, 85, 0.6);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 12px;
+    }
+    .bullet-box h3 {
+      font-size: 1.1rem;
+      color: #e2e8f0;
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .bullet-box p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .visual-card {
+      width: 100%;
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .phone-mockup {
+      border: 2px solid #334155;
+      border-radius: 16px;
+      background: #020617;
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      width: 330px;
+    }
+    .phone-header {
+      display: flex;
+      justify-content: space-between;
+      color: #64748b;
+      margin-bottom: 10px;
+      font-size: 0.72rem;
+    }
+    .alert-banner {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid var(--danger);
+      border-radius: 8px;
+      padding: 12px;
+      color: #fca5a5;
+    }
+    .alert-banner.success {
+      background: rgba(16, 185, 129, 0.15);
+      border-color: var(--success);
+      color: #86efac;
+    }
+
+    .comp-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+    .comp-table td {
+      padding: 8px;
+      border-bottom: 1px solid #1e293b;
+    }
+    .comp-table td:last-child {
+      text-align: right;
+    }
+
+    .tag-pill {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .tag-sim { background: rgba(16, 185, 129, 0.2); color: var(--success); border: 1px solid var(--success); }
+    .tag-nao { background: rgba(239, 68, 68, 0.2); color: var(--danger); border: 1px solid var(--danger); }
+
+    /* Footer Navigation */
+    footer {
+      padding: 14px 24px;
+      border-top: 1px solid var(--border);
+      background: rgba(9, 13, 22, 0.95);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+    }
+    .slide-counter {
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    .slide-progress {
+      display: flex;
+      gap: 6px;
+    }
+    .progress-dot {
+      width: 32px;
+      height: 4px;
+      background: #1e293b;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .progress-dot.active { background: var(--primary); }
+
+    /* Speaker Notes Drawer */
+    .notes-drawer {
+      position: fixed;
+      bottom: 60px;
+      left: 0;
+      right: 0;
+      background: rgba(15, 23, 42, 0.97);
+      border-top: 2px solid var(--accent);
+      padding: 16px 28px;
+      font-size: 1.05rem;
+      line-height: 1.5;
+      color: #cbd5e1;
+      box-shadow: 0 -10px 25px rgba(0,0,0,0.7);
+      display: none;
+      z-index: 20;
+    }
+    .notes-drawer.open { display: block; }
+    .notes-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <span>🛡️ Sentinela Clandestino</span>
+      <span class="badge-live">SEM2 · DEMONSTRAÇÃO AO VIVO</span>
+    </div>
+    <div class="controls">
+      <button class="btn" id="btnNotes" onclick="toggleNotes()">🎙️ Fala do Autor [S]</button>
+      <button class="btn" id="btnPrev" onclick="prevSlide()">◀ Anterior</button>
+      <button class="btn" id="btnNext" onclick="nextSlide()">Próximo ▶</button>
+      <button class="btn" onclick="toggleFullScreen()">⛶ Tela Cheia [F]</button>
+    </div>
+  </header>
+
+  <main class="deck-container">
+
+    <!-- SLIDE 1: PONTA A PONTA AO VIVO -->
+    <div class="slide active" id="slide-1">
+      <div>
+        <div class="slide-tag">Slide 1 de 5 · Ponta a Ponta ao Vivo (85 s)</div>
+        <h1 class="slide-title">A demonstração ao vivo: <span style="color: var(--primary);">Samsung A15 em Modo Avião</span></h1>
+      </div>
+      <div class="slide-body">
+        <div class="slide-left">
+          <div class="bullet-box">
+            <h3>👤 Usuário e Entrada Real</h3>
+            <p>Lucas (23 anos) clica em anúncio do Instagram com bônus de 200%. A página clandestina embutiu a cláusula real: <em>"Rollover obrigatório de 60x do saldo para liberar qualquer saque."</em></p>
+          </div>
+          <div class="bullet-box">
+            <h3>⚡ Ação do Sentinela na Borda</h3>
+            <p>Em modo avião (zero nuvem), o modelo local Qwen2.5 quantizado via llama.cpp executa o diagnóstico em 18,75 ms e abre o alerta de calote antes de o usuário confirmar o Pix de R$ 50.</p>
+          </div>
+        </div>
+        <div class="slide-right">
+          <div class="phone-mockup">
+            <div class="phone-header">
+              <span>✈️ MODO AVIÃO (100% LOCAL)</span>
+              <span>18,75 ms</span>
+            </div>
+            <div style="font-size: 0.75rem; color: #94a3b8; margin-bottom: 6px;">URL: bet-premios-vip.xyz</div>
+            <div class="alert-banner">
+              <div style="font-weight: 800; font-size: 0.85rem; margin-bottom: 4px;">⚠️ ALERTA: RETENÇÃO DE SAQUE</div>
+              <div style="font-size: 0.74rem; line-height: 1.35;">
+                • Rollover detectado: <strong>60x</strong><br>
+                • Saque de R$ 120 exige giro de R$ 3.000<br>
+                • Veredito: <strong>ALTO RISCO DE CALOTE</strong>
+              </div>
+            </div>
+            <div style="margin-top: 10px; display: flex; gap: 8px;">
+              <button style="flex:1; background:#ef4444; color:#fff; border:none; padding:6px; border-radius:6px; font-size:0.7rem; font-weight:700;">⛔ ABORTAR PIX</button>
+              <button style="flex:1; background:#1e293b; color:#94a3b8; border:1px solid #334155; padding:6px; border-radius:6px; font-size:0.7rem;">PROSSEGUIR</button>
+            </div>
+            <div style="margin-top: 8px; font-size: 0.68rem; color: var(--success); text-align: center;">
+              Samsung Galaxy A15 · Tag sem2 · CPU ARM64
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="font-size: 0.8rem; color: var(--text-muted); display: flex; justify-content: space-between;">
+        <span>Commit de Execução: tag sem2 (2d0e65d)</span>
+        <span>Aparelho Físico Espelhado via scrcpy / Modo Avião</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 2: QUANTO CUSTA, MEDIDO -->
+    <div class="slide" id="slide-2">
+      <div>
+        <div class="slide-tag">Slide 2 de 5 · Quanto Custa, Medido (50 s)</div>
+        <h1 class="slide-title">Tempo e Memória: <span style="color: var(--success);">Medido vs. Estimado no FLX</span></h1>
+      </div>
+      <div class="slide-body">
+        <div class="slide-left">
+          <div class="bullet-box">
+            <h3>⏱️ Tempo Total de Execução</h3>
+            <p><strong>Medido no Samsung A15:</strong> Fast-Path LAYA <strong>0,14 ms</strong> + Deep-Path SLM <strong>18,75 ms</strong> = <strong>18,89 ms</strong>.<br>
+            <strong>Estimado no FLX:</strong> ~180 ms a ~500 ms (25× mais rápido devido à quantização INT4 acelerada em ARM64).</p>
+          </div>
+          <div class="bullet-box">
+            <h3>💾 Pico de Memória RAM</h3>
+            <p><strong>Medido no ensaio:</strong> <strong>490 MB</strong> (buffer de mmap do llama.cpp).<br>
+            <strong>Estimado no FLX:</strong> ~450 MB (diferença de 40 MB de contexto temporário e tensores).</p>
+          </div>
+        </div>
+        <div class="slide-right">
+          <div class="visual-card" style="width: 380px;">
+            <div style="font-weight: 700; margin-bottom: 10px; font-size: 0.9rem; border-bottom: 1px solid #334155; padding-bottom: 6px;">
+              📊 Confronto de Recursos (Samsung Galaxy A15)
+            </div>
+            <table class="comp-table">
+              <tr>
+                <td>Latência SLM CPU</td>
+                <td><strong style="color:var(--success);">18,75 ms</strong> (FLX: ~500 ms)</td>
+              </tr>
+              <tr>
+                <td>Latência Fast-Path</td>
+                <td><strong style="color:var(--success);">0,14 ms</strong> (FLX: &lt; 35 ms)</td>
+              </tr>
+              <tr>
+                <td>Pico de RAM</td>
+                <td><strong style="color:var(--accent);">490 MB</strong> (FLX: ~450 MB)</td>
+              </tr>
+              <tr>
+                <td>Custo Financeiro</td>
+                <td><strong style="color:var(--success);">R$ 0,00 / mês</strong> (100% on-device)</td>
+              </tr>
+              <tr>
+                <td>Nuvem OpenAI (Descartada)</td>
+                <td>887 ms / R$ 0,12 mês / Quebra LGPD</td>
+              </tr>
+            </table>
+            <div style="margin-top: 10px; font-size: 0.72rem; color: #64748b;">
+              Taxa de geração na CPU: 34,7 tok/s (prompt) · 13,8 tok/s (geração)
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="font-size: 0.8rem; color: var(--text-muted); display: flex; justify-content: space-between;">
+        <span>Execução tec/exemplo_oficial.py</span>
+        <span>Hardware: MediaTek Helio G99 ARM64, 4 GB RAM</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 3: A FALHA MOSTRADA -->
+    <div class="slide" id="slide-3">
+      <div>
+        <div class="slide-tag">Slide 3 de 5 · A Falha Mostrada de Propósito (60 s)</div>
+        <h1 class="slide-title">Onde o modelo erra: <span style="color: var(--danger);">O Falso-Positivo do Bônus Legal</span></h1>
+      </div>
+      <div class="slide-body">
+        <div class="slide-left">
+          <div class="bullet-box">
+            <h3>⚠️ Entrada Real (Casa Autorizada SPA/MF)</h3>
+            <p><em>"Bônus de 100% até R$ 500 com rollover promocional padrão de 15x em 30 dias para apostas com odds mínimas de 1.70, autorização SPA/MF nº 1.475."</em></p>
+          </div>
+          <div class="bullet-box">
+            <h3>❌ Saída Errada como Saiu</h3>
+            <p><strong style="color:var(--danger);">RISCO ALTO / CALOTE</strong> — O modelo leu a palavra "rollover" e disparou alerta de retenção indevida.</p>
+          </div>
+          <div class="bullet-box">
+            <h3>✅ O Certo e Quem Sofre</h3>
+            <p><strong>Certo:</strong> Classificação REGULAR / CONFORME. <strong>Quem sofre:</strong> o apostador que perde a promoção por pânico e a casa legítima difamada.</p>
+          </div>
+        </div>
+        <div class="slide-right">
+          <div class="visual-card" style="width: 380px; background: #0f172a;">
+            <div style="font-size: 0.8rem; font-weight: 700; color: var(--danger); margin-bottom: 8px;">ERRO DE DIAGNÓSTICO DO SLM (PILOTO EXP)</div>
+            
+            <div style="padding: 10px; background: rgba(239, 68, 68, 0.15); border-left: 3px solid var(--danger); border-radius: 4px; margin-bottom: 12px; font-size: 0.78rem;">
+              <strong>Saída na Tela:</strong><br>
+              <code>{ "risco_saque": "ALTO", "motivo": "Rollover 15x detectado", "conforme_spa": false }</code>
+            </div>
+
+            <div style="padding: 10px; background: rgba(16, 185, 129, 0.15); border-left: 3px solid var(--success); border-radius: 4px; font-size: 0.78rem;">
+              <strong>Gabarito Correto:</strong><br>
+              <code>{ "risco_saque": "BAIXO", "motivo": "Bônus promocional sob Portaria SPA 1.475; saque de depósito liberado", "conforme_spa": true }</code>
+            </div>
+
+            <div style="margin-top: 10px; font-size: 0.72rem; color: #94a3b8; line-height: 1.3;">
+              <strong>O que revela:</strong> Modelos na borda têm viés de gatilho para termos de aposta sem checagem de licença. Medido no exp.md (13,3% FPR). É a medida do sem3.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="font-size: 0.8rem; color: var(--text-muted); display: flex; justify-content: space-between;">
+        <span>Caso de Falha Escolhido de Propósito</span>
+        <span>Amostra da Tabela E1 (exp.md)</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 4: O QUE MUDOU DESDE O SEM1 -->
+    <div class="slide" id="slide-4">
+      <div>
+        <div class="slide-tag">Slide 4 de 5 · O Que Mudou Desde o SEM1 (45 s)</div>
+        <h1 class="slide-title">Decisão de Engenharia: <span style="color: var(--primary);">SLM Estritamente Sob Demanda</span></h1>
+      </div>
+      <div class="slide-body">
+        <div class="slide-left">
+          <div class="bullet-box">
+            <h3>⏮️ O Que Valia no SEM1</h3>
+            <p>O SLM on-device seria acordado em <strong>100% dos cliques</strong> para reescrever cláusulas e gerar explicações em linguagem natural.</p>
+          </div>
+          <div class="bullet-box">
+            <h3>⏭️ O Que Vale Agora (SEM2)</h3>
+            <p><strong>Fast-Path LAYA (0,14 ms)</strong> resolve 80% dos links. O SLM só acorda sob demanda para casos limítrofes (incerteza 40%–80%) ou se o usuário pedir.</p>
+          </div>
+        </div>
+        <div class="slide-right">
+          <div class="visual-card" style="width: 380px;">
+            <div style="font-weight: 700; margin-bottom: 10px; font-size: 0.9rem; border-bottom: 1px solid #334155; padding-bottom: 6px;">
+              ⚖️ Por que Mudou? (Impacto no Hardware)
+            </div>
+            <div style="font-size: 0.8rem; color: #cbd5e1; line-height: 1.45; margin-bottom: 12px;">
+              • <strong>Bateria no A15:</strong> Rodar o SLM contínuo consumia 12% de bateria/hora e aquecia o SoC.<br>
+              • <strong>Pipeline Híbrido:</strong> LAYA filtra 80% em 0,14 ms com consumo de bateria &lt; 0,02%.<br>
+              • <strong>Decisão mantida de propósito:</strong> Zero nuvem. Mesmo com o Falso Positivo de 13%, não mandamos URLs para servidores externos para preservar a LGPD.
+            </div>
+            <div style="padding: 8px; background: rgba(56, 189, 248, 0.1); border-radius: 6px; font-size: 0.72rem; color: #7dd3fc;">
+              Confirmado: O usuário não espera 500 ms na navegação rápida, mas espera 18 ms quando quer auditar o contrato.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="font-size: 0.8rem; color: var(--text-muted); display: flex; justify-content: space-between;">
+        <span>Refinamento Arquitetural</span>
+        <span>Compromisso com Bateria e Privacidade</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 5: O FECHO -->
+    <div class="slide" id="slide-5">
+      <div>
+        <div class="slide-tag">Slide 5 de 5 · O Fecho (20 s)</div>
+        <h1 class="slide-title" style="font-size: 2.3rem; text-align: center; margin-top: 15px;">
+          "Roda no celular em 18 ms.<br>
+          <span style="color: var(--primary);">E a falha vira a medida do SEM3."</span>
+        </h1>
+      </div>
+      <div class="slide-body" style="flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+        <div style="max-width: 680px; font-size: 1.1rem; color: #cbd5e1; line-height: 1.55; margin-bottom: 24px;">
+          100% on-device em modo avião · R$ 0 de custo recorrente · A auditoria semântica expõe a evidência do calote sem censura moral. No dia 25/11 (SEM3), apresentamos o resultado do experimento grande com participantes.
+        </div>
+        <div style="display: flex; gap: 16px;">
+          <a href="https://github.com/albericolx/Topicos_Avancados_IA" target="_blank" class="btn btn-active" style="padding: 10px 20px; font-size: 0.95rem;">
+            📂 Repositório GitHub (Tag sem2)
+          </a>
+          <a href="https://albericolx.github.io/Topicos_Avancados_IA/" target="_blank" class="btn" style="padding: 10px 20px; font-size: 0.95rem;">
+            🚀 Testar Web App On-Device
+          </a>
+        </div>
+      </div>
+      <div style="font-size: 0.8rem; color: var(--text-muted); display: flex; justify-content: space-between;">
+        <span>Sentinela Clandestino · UFRPE 2026.2</span>
+        <span>Tempo total medido: 4 min 15 s (teto de 5 min)</span>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- SPEAKER NOTES DRAWER -->
+  <aside class="notes-drawer" id="notesDrawer">
+    <div class="notes-header">
+      <span id="notesSlideTitle">Roteiro de Fala · Slide 1 (85 s)</span>
+      <span style="color: var(--primary); cursor: pointer;" onclick="toggleNotes()">✕ Fechar [S]</span>
+    </div>
+    <div id="notesText">Carregando roteiro...</div>
+  </aside>
+
+  <footer>
+    <div class="slide-counter" id="slideCounter">Slide 1 de 5</div>
+    <div class="slide-progress" id="progressContainer">
+      <div class="progress-dot active" onclick="goToSlide(1)"></div>
+      <div class="progress-dot" onclick="goToSlide(2)"></div>
+      <div class="progress-dot" onclick="goToSlide(3)"></div>
+      <div class="progress-dot" onclick="goToSlide(4)"></div>
+      <div class="progress-dot" onclick="goToSlide(5)"></div>
+    </div>
+    <div style="font-size: 0.8rem; color: var(--text-muted);">
+      Teclas: ← → ou Barra de Espaço · 'S' Notas · 'F' Tela Cheia
+    </div>
+  </footer>
+
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 5;
+
+    const speechNotes = {
+      1: "[Mostro o celular em modo avião espelhado no projetor via scrcpy e clico em auditar] Esse é o meu celular, um Samsung Galaxy A15 com processador Helio G99 e 4 GB de RAM, em modo avião. O modo avião prova sozinho que nada sai do aparelho. Lucas, nosso usuário de 23 anos, recebeu um link no feed do Instagram prometendo bônus de 200%. Ele entra e está pronto para mandar um Pix de R$ 50. Mas antes do depósito, o Sentinela Clandestino lê a cláusula contratual no celular: em 18,75 milissegundos, o modelo Qwen 0.5B quantizado diagnostica: 'Rollover de 60x é um tipo de perigo financeiro e calote', informando que ele precisaria girar R$ 3.000 antes de sacar um centavo. O alerta aparece em vermelho antes de abrir o aplicativo do banco, permitindo ao Lucas abortar a transação e proteger o próprio dinheiro.",
+      2: "Esse número de 18,75 milissegundos no SLM é da execução que vocês acabaram de ver na tela. O flx estimava até 500 milissegundos com base em testes conservadores de CPU. A execução real foi quase 25 vezes mais rápida porque a quantização INT4 no llama.cpp aproveitou os núcleos de alta eficiência da arquitetura ARM64, gerando 34 tokens por segundo no prompt. Já a memória foi de 490 MB no pico, 40 MB acima dos 450 MB previstos no flx: esses 40 MB a mais são os buffers de contexto e tensores temporários do runtime. O custo em dinheiro é rigorosamente zero: não há servidor, não há cota de API da OpenAI (que cobraria R$ 0,12/mês e demoraria 887 ms em 4G), e a bateria consome menos de 0,02% por veredito.",
+      3: "Eu escolhi este caso para a demo porque ele erra. É uma cláusula real de uma casa autorizada pelo Ministério da Fazenda oferecendo bônus de 100% com rollover promocional de 15 vezes. O modelo leu a palavra 'rollover' e 'requisito de aposta' e disparou o alarme vermelho: 'Risco Alto de Calote'. Isso é um falso-positivo. Quem sofre é o usuário, que fica em pânico achando que está num golpe e perde uma promoção legítima de lazer, e a plataforma legalizada que sofre difamação. O que esse erro revela sobre a nossa ideia? Revela que modelos de linguagem na borda têm viés de gatilho para palavras-chave de risco quando operam sem contexto regulatório prévio. O modelo não sabia que a Portaria 1.475 da Fazenda permite bônus com rollover se o apostador puder sacar o saldo principal a qualquer hora. Não escondi esse erro hoje: ele foi medido no piloto do exp.md, onde tivemos 13,3% de falso-positivos, e é a medida que vamos refinar no sem3.",
+      4: "No sem1, eu planejava rodar o modelo de linguagem Qwen em todo e qualquer link que o usuário clicasse para entregar uma reescrita amigável. Mudei essa decisão: agora, o SLM opera estritamente sob demanda. Quando testei a navegação contínua no celular, carregar o SLM e rodar inferência em cada clique drenava 12% da bateria por hora e esquentava o aparelho. Com a arquitetura em dois estágios, o Fast-Path LAYA resolve 80% dos links em 0,14 milissegundos; o SLM só é acordado se houver dúvida ou se o usuário pedir para ver os detalhes da cláusula. E o que mantivemos de propósito? A recusa absoluta à nuvem. Seria tentador mandar o texto para a OpenAI para eliminar os falsos positivos, mas isso violaria a LGPD e exporia o histórico do apostador. Na segurança do cidadão, privacidade não se negocia.",
+      5: "O Sentinela Clandestino roda no celular, em modo avião, em menos de 19 milissegundos e sem custar um centavo. Ele erra em falso-positivos de bônus, e esse é exatamente o desafio que vamos medir e calibrar no experimento do sem3 no dia 25/11."
+    };
+
+    function updateView() {
+      for (let i = 1; i <= totalSlides; i++) {
+        const slide = document.getElementById(`slide-${i}`);
+        if (slide) slide.classList.toggle('active', i === currentSlide);
+      }
+      document.getElementById('slideCounter').textContent = `Slide ${currentSlide} de ${totalSlides}`;
+      
+      const dots = document.querySelectorAll('.progress-dot');
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle('active', idx + 1 === currentSlide);
+      });
+
+      const noteTitles = {
+        1: "Roteiro de Fala · Slide 1 — Ponta a Ponta ao Vivo (85 s)",
+        2: "Roteiro de Fala · Slide 2 — Quanto Custa, Medido (50 s)",
+        3: "Roteiro de Fala · Slide 3 — A Falha Mostrada de Propósito (60 s)",
+        4: "Roteiro de Fala · Slide 4 — O Que Mudou Desde o SEM1 (45 s)",
+        5: "Roteiro de Fala · Slide 5 — O Fecho (20 s)"
+      };
+      document.getElementById('notesSlideTitle').textContent = noteTitles[currentSlide];
+      document.getElementById('notesText').textContent = speechNotes[currentSlide];
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) {
+        currentSlide++;
+        updateView();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) {
+        currentSlide--;
+        updateView();
+      }
+    }
+
+    function goToSlide(n) {
+      currentSlide = n;
+      updateView();
+    }
+
+    function toggleNotes() {
+      const drawer = document.getElementById('notesDrawer');
+      const btn = document.getElementById('btnNotes');
+      drawer.classList.toggle('open');
+      btn.classList.toggle('btn-active');
+    }
+
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+      } else if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'Space') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key === 's' || e.key === 'S') {
+        e.preventDefault();
+        toggleNotes();
+      } else if (e.key === 'f' || e.key === 'F') {
+        e.preventDefault();
+        toggleFullScreen();
+      }
+    });
+
+    updateView();
+  </script>
+</body>
+</html>
