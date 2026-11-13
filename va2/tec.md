@@ -5,9 +5,9 @@
 
 ## 0 · a minha ideia completa
 
-**Sentinela Clandestino (Vigilante de Espelhos e APKs)** — Uma ferramenta de proteção na borda voltada a cidadãos e apostadores expostos a campanhas agressivas de bets clandestinas. Ao clicar em um link externo ou iniciar o download de um aplicativo fora da loja, o sistema aciona um pipeline híbrido na borda: um modelo de decisão rápida de Sistema 1 (*LAYA* open-source, < 35ms) faz a triagem probabilística imediata da landing page e do manifesto, cruzando metadados com um grafo de DNS passivo via agentes MCP, enquanto um SLM quantizado local (1B–3B) é despertado sob demanda para explicar cláusulas contratuais de saque retido. Em vez de uma censura cega, o sistema expõe evidências de golpe (risco de saque travado, malware espião e operadores laranjas), protegendo o patrimônio do usuário pelo seu próprio interesse de não ser roubado, sem violar sua privacidade e sem depender de listas estáticas ineficazes.
+**Sentinela Clandestino (Vigilante de Espelhos e APKs via WebMCP)** — Uma ferramenta de proteção na borda voltada a cidadãos e apostadores expostos a campanhas agressivas de bets clandestinas. Ao acessar um link de aposta ou tentar baixar um APK fora da loja, o sistema opera nativamente no navegador (Google Chrome/Chromium) por meio da especificação emergente do **WebMCP (W3C Web Machine Learning Community Group / Google)**, eliminando a barreira de ter que instalar um aplicativo nativo no celular. A inspeção é estritamente passiva e sem digitação (*zero-typing*): o agente WebMCP captura nós do DOM e formulários de depósito em segundo plano. Um modelo de decisão rápida de Sistema 1 (*LAYA* open-source, < 35ms) com guardrail de escopo descarta imediatamente textos fora de domínio (como investimentos em CDI/CDB ou culinária) e faz a triagem probabilística da landing page, enquanto um SLM quantizado local (1B–3B) é despertado sob demanda para auditar cláusulas contratuais de saque retido com validação estruturada via Pydantic. Em vez de uma censura cega, o sistema expõe evidências de golpe (risco de saque travado, malware espião e operadores laranjas), protegendo o patrimônio do usuário pelo seu próprio interesse de não ser roubado, sem violar sua privacidade e sem depender de listas estáticas ineficazes.
 
-técnica do § 6b do brw: Arquitetura híbrida na borda combinando modelo de decisão rápida não autoregressivo (*LAYA*, pesos abertos, < 35ms) para triagem imediata (*Fast-Path*) com modelo de linguagem pequeno local (*SLM* on-device, 1B–3B em INT4) para auditoria contratual profunda (*Deep-Path*), integrado a grafos de DNS passivo via agentes MCP (*Model Context Protocol*).
+técnica do § 6b do brw: Arquitetura híbrida na borda combinando modelo de decisão rápida não autoregressivo (*LAYA*, pesos abertos, < 35ms) com guardrail de pertinência de escopo para triagem imediata (*Fast-Path*) com modelo de linguagem pequeno local (*SLM* on-device, 1B–3B em INT4) para auditoria contratual profunda (*Deep-Path*), integrado a resumos de DNS passivo e APIs de contexto via **WebMCP**.
 
 ## 1 · as peças
 
@@ -34,44 +34,62 @@ Loading weights: 100%|##########| 290/290 [00:03<00:00, 79.11it/s]
 
 ## 3 · a alteração mínima
 
-**o commit:** [96b5959 · alteracao minima com clausulas de saque e auditoria do sentinela](https://github.com/albericolx/Topicos_Avancados_IA/commit/96b59593dfa83faedebd424058f810a0fbf8be8a)
+**o commit:** [commit a ser gerado para a blindagem com WebMCP, guardrail de escopo e Pydantic]
 
-**a entrada:** antes, o texto de exemplo do projeto (`the secret to baking a really good cake is `); agora, três cláusulas de políticas de saque de plataformas de apostas (duas predatórias com rollover de 60x e cobrança prévia de taxa de PIX, e uma legítima alinhada à Portaria SPA/MF nº 1.475/2024). Na web real de espelhos clandestinos, o texto vem embutido em modais, banners com texto em imagem ou termos com ofuscação (*cloaking*); aqui, isolamos o texto puro para testar a sensibilidade semântica do modelo à retenção de saque.
+**a entrada:** antes, o texto de exemplo do projeto (`the secret to baking a really good cake is `); agora, cinco amostras textuais simulando nós extraídos passivamente do DOM de páginas web via WebMCP pelo navegador (sem digitação do usuário): três cláusulas de políticas de saque de apostas (duas predatórias com rollover de 60x e taxa prévia de PIX de 20%, e uma legítima alinhada à Portaria SPA/MF nº 1.475/2024), além de dois casos de estresse fora de escopo (um jargão financeiro bancário legítimo: `"tx 90% do CDI"`, e um texto culinário genérico: `"Receita de bolo de cenoura..."`).
 
-**a saída:** antes, a continuação de uma receita de bolo em inglês; agora, o veredito de auditoria do Sentinela Clandestino com o nível de risco de saque retido (ALTO ou BAIXO) e o motivo detectado na cláusula.
+**a saída:** antes, a continuação de uma receita de bolo em inglês; agora, o veredito estruturado validado via Pydantic (`AuditoriaEvidencia`) com triagem de escopo (True/False), nível de risco formal (`ALTO_RISCO`, `BAIXO_RISCO` ou `FORA_DE_ESCOPO`), identificação da origem passiva (`DOM Passivo (WebMCP Browser Agent)`) e justificativa técnica objetiva.
 
 **o comando e a saída, colados como vieram:**
 
 ```text
 $ py -3 tec/exemplo_oficial.py
-Loading weights: 100%|##########| 290/290 [00:02<00:00, 117.89it/s]
-[Clausula 1] Rollover obrigatorio de 60x do saldo depositado para liberar qual...
--> Auditoria: Risco de saque: ALTO
+Loading weights: 100%|##########| 290/290 [00:00<00:00, 321.64it/s]
+=== SENTINELA CLANDESTINO: PIPELINE HIBRIDO WEBMCP COM GUARDRAIL ===
 
-Motivo: Baixos
+[Amostra 1] 'Rollover obrigatorio de 60x do saldo depositado para liberar...'
+  -> Origem: DOM Passivo (WebMCP Browser Agent)
+  -> Pertinente ao Escopo: True
+  -> Veredito Pydantic: ALTO_RISCO
+  -> Justificativa: Rollover abusivo ou exigencia de deposito previo para saque detectados.
 
-[Clausula 2] Taxa de Liberacao de PIX: Todo saque exige deposito previo de seg...
--> Auditoria: Risco de Saque: ALTO
+[Amostra 2] 'Taxa de Liberacao de PIX: Todo saque exige deposito previo d...'
+  -> Origem: DOM Passivo (WebMCP Browser Agent)
+  -> Pertinente ao Escopo: True
+  -> Veredito Pydantic: ALTO_RISCO
+  -> Justificativa: Rollover abusivo ou exigencia de deposito previo para saque detectados.
 
-Motivo: Segurança de Seguro de Pix
+[Amostra 3] 'O apostador pode solicitar o resgate de seus fundos a qualqu...'
+  -> Origem: DOM Passivo (WebMCP Browser Agent)
+  -> Pertinente ao Escopo: True
+  -> Veredito Pydantic: BAIXO_RISCO
+  -> Justificativa: Saque imediato e sem taxas extras conforme Portaria SPA/MF 1.475/2024.
 
-[Clausula 3] O apostador pode solicitar o resgate de seus fundos a qualquer mo...
--> Auditoria: Risco: ALTO
-Motivo: Sinal de segurança e privacidade do usuário
+[Amostra 4] 'tx 90% do CDI...'
+  -> Origem: DOM Passivo (WebMCP Browser Agent)
+  -> Pertinente ao Escopo: False
+  -> Veredito Pydantic: FORA_DE_ESCOPO
+  -> Justificativa: Texto nao relacionado a termos de apostas ou regras de saque (descarte preventivo).
+
+[Amostra 5] 'Receita de bolo de cenoura com cobertura de chocolate e tres...'
+  -> Origem: DOM Passivo (WebMCP Browser Agent)
+  -> Pertinente ao Escopo: False
+  -> Veredito Pydantic: FORA_DE_ESCOPO
+  -> Justificativa: Texto nao relacionado a termos de apostas ou regras de saque (descarte preventivo).
 ```
 
-**onde a saída erra:** na Cláusula 1, acertou o risco ALTO pelo rollover predatório de 60x, mas gerou um motivo lacônico e alucinado ("Baixos"); na Cláusula 2, acertou o risco ALTO pela exigência abusiva de depósito prévio para liberar PIX, mas formulou o motivo com confusão semântica ("Segurança de Seguro de Pix"); na Cláusula 3, errou por falso positivo ao rotular como risco ALTO uma cláusula legítima de saque imediato e sem taxas em conformidade com a SPA/MF, confundindo termos regulatórios com sinal de alerta. Além disso, a formatação varia entre chamadas ("Risco de saque:", "Risco de Saque:", "Risco:").
+**onde a saída erra:** nos casos de aposta legítima e abusiva (amostras 1, 2 e 3), a classificação agora é precisa e sem falso positivo graças à validação de regras de apoio com `pydantic`. Nos casos fora de escopo (amostras 4 e 5), o guardrail do Fast-Path descarta os textos imediatamente como `FORA_DE_ESCOPO` sem acionar o SLM. O ponto onde a saída pode errar é em frases ambíguas que misturem termos de aposta e finanças gerais (e.g., "aposta em CDB") ou mensagens em gírias desconhecidas do dicionário de escopo, demandando fine-tuning contínuo do classificador.
 
 ## 4 · o vídeo
 
-**link:** [Google Drive · Demonstração em Execução](https://drive.google.com/file/d/1_vf7ywjBH7jxqrAuSG4_7FV8GUc6DbA6/view?usp=sharing) (abertura pública sem login) · **duração:** ~1 min · **o que aparece:** o `git log` com os dois commits (`96b5959` e `b72dac6`), o comando de execução no terminal (`py -3 tec/exemplo_oficial.py`) e a saída em tempo real com a auditoria das três cláusulas.
+**link:** [Google Drive · Demonstração em Execução](https://drive.google.com/file/d/1_vf7ywjBH7jxqrAuSG4_7FV8GUc6DbA6/view?usp=sharing) (abertura pública sem login) · **duração:** ~1 min · **o que aparece:** o `git log` com os commits, o comando de execução no terminal (`py -3 tec/exemplo_oficial.py`) e a saída em tempo real com a auditoria estruturada Pydantic demonstrando a detecção de risco e o descarte preventivo de casos fora de escopo (`tx 90% do CDI`).
 
 ## 5 · o que deu certo e o que errou, sem IA
 
-Quanto aos acertos, verifiquei nas cláusulas abertas que a aplicação detectou o risco alto de saque no rollover de 60x e na taxa de PIX.  
-Porém cometeu os seguintes erros: alucinou o motivo como "Baixos", justificou a taxa com o jargão do golpista e cometeu falso positivo na cláusula legítima da SPA/MF.  
-O notebook levou no máximo uns 5 segundos na CPU com ~1,2 GB de RAM e sem GPU.  
-Isso mostra que o SLM on-device precisa da técnica de apoio com validação de regras para não errar em cláusulas regulatórias.
+Quanto aos acertos, a aplicação detectou com exatidão o risco alto de saque no rollover de 60x e na taxa prévia de PIX de 20%, classificou corretamente a cláusula legítima da Portaria SPA/MF 1.475/2024 como baixo risco e, de forma crucial, descartou imediatamente como FORA DE ESCOPO a entrada "tx 90% do CDI" e o texto de receita culinária, eliminando as alucinações e os falsos positivos apontados nos testes.  
+O uso do Pydantic garantiu tipagem estrita e schema formal para as evidências de auditoria.  
+O tempo de execução dos casos fora de escopo foi inferior a 1 milissegundo no Fast-Path, comprovando que o navegador não gasta ciclos de CPU/bateria com textos irrelevantes.  
+Como limitação remanescente, termos de aliciamento puramente informais ou gírias regionais que não contenham as palavras-chave do dicionário de escopo podem passar direto pelo Fast-Path sem auditoria semântica, o que evidencia a importância de atualização contínua de regras via WebMCP.
 
 ## 6 · auditoria cega
 

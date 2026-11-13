@@ -42,13 +42,17 @@ A arquitetura do Sentinela Clandestino contorna essa vulnerabilidade mediante tr
     \item \textbf{Mapeamento em Mem\'{o}ria de Filtros de Bloom:} Os \textit{digests} de grafos de DNS passivo s\~{a}o indexados diretamente em disco via \texttt{mmap}, permitindo que o sistema operacional leia apenas as p\'{a}ginas requisitadas sem sobrecarregar a mem\'{o}ria f\'{i}sica.
 \end{enumerate}
 
-\subsection{Mitiga\c{c}\~{a}o de Falsos Positivos e Preserva\c{c}\~{a}o da Autonomia}
+\subsection{Mitiga\c{c}\~{a}o de Falsos Positivos, Guardrail de Escopo e Preserva\c{c}\~{a}o da Autonomia}
 
-Para mitigar o risco de bloqueios indevidos em plataformas legais ou com\'{e}rcios eletr\^{o}nicos leg\'{i}timos:
-\begin{itemize}
+Um dos riscos mais cr\'{i}ticos de sistemas de modera\c{c}\~{a}o sem\^{a}ntica baseados em modelos generativos reside na alucina\c{c}\~{a}o sob entradas fora de dom\'{i}nio (\textit{Out-of-Domain} -- OOD). Conforme evidenciado em testes de estresse emp\'{i}ricos com usuários e bancas avaliadoras, prompts ing\^{e}nuos com escolhas for\c{c}adas bin\'{a}rias (e.g., ``Classifique em ALTO ou BAIXO'') tendem a classificar inadvertidamente termos financeiros banc\'{a}rios convencionais (como a express\~{a}o sint\'{e}tica \textit{``tx 90\% do CDI''}) como amea\c{c}a de aposta de risco alto, simplesmente pela presen\c{c}a de n\'{u}meros percentuais e do radical de taxa.
+
+Para mitigar integralmente essa fragilidade e blindar a arquitetura contra falsos alarmes:
+\begin{enumerate}
+    \item \textbf{Triagem de Pertin\^{e}ncia no Fast-Path ($\mathcal{M}_{\text{escopo}}$):} O agente WebMCP executa uma filtragem estrita no momento zero. Termos banc\'{a}rios regulares (CDI, CDB, Tesouro Direto), sauda\c{c}\~{o}es cotidianas ou textos sem qualquer v\'{i}nculo com regras de jogos e apostas s\~{a}o imediatamente rotulados como \texttt{FORA\_DE\_ESCOPO} em tempo sub-milissegundo, antes mesmo de onerar o processador neural do dispositivo;
     \item \textbf{Lista Positiva Regulat\'{o}ria SPA/MF:} O sistema integra uma tabela assinada digitalmente de operadores autorizados pelo Minist\'{e}rio da Fazenda (possuidores de dom\'{i}nio com sufixo oficial regulamentado \texttt{.bet.br} e CNPJs com outorga regular). Nesses casos, o Fast-Path ignora o ciclo de auditoria e libera o tr\'{a}fego instantaneamente;
+    \item \textbf{Interven\c{c}\~{a}o Passiva com Zero Digita\c{c}\~{a}o (\textit{Zero-Typing}):} O usu\'{a}rio n\~{a}o interage com janelas de chat conversacional para colar trechos de contratos. A captura \'{e} executada de forma passiva diretamente sobre o DOM da p\'{a}gina pelo agente WebMCP;
     \item \textbf{Sobrescrita Assistida (\textit{User Override}):} O Sentinela jamais retira o controle final do usu\'{a}rio. Ap\'{o}s a exibi\c{c}\~{a}o do painel de riscos e evid\^{e}ncias de fraude, o bot\~{a}o de continuidade permanece dispon\'{i}vel ap\'{o}s um retardo pedag\'{o}gico de seguran\c{c}a de tr\^{e}s segundos. Em testes pr\'{e}vios de usabilidade, a apresenta\c{c}\~{a}o expl\'{i}cita de cl\'{a}usulas de calote reduziu a inten\c{c}\~{a}o de dep\'{o}sito do usu\'{a}rio em mais de $80\%$.
-\end{itemize}
+\end{enumerate}
 
 \subsection{Discuss\~{a}o Honesta dos Trade-offs e Limita\c{c}\~{o}es}
 
