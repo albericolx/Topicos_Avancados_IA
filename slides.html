@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seminário Preliminar (sem1) · Sentinela Clandestino</title>
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: rgba(18, 26, 43, 0.85);
+      --border: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --primary: #38bdf8;
+      --accent: #f59e0b;
+      --danger: #ef4444;
+      --success: #10b981;
+      --font: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', Consolas, monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      user-select: none;
+    }
+    /* Top Bar */
+    header {
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      background: rgba(9, 13, 22, 0.95);
+      z-index: 10;
+    }
+    .logo {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .badge-live {
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--primary);
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .btn {
+      background: #1e293b;
+      color: var(--text);
+      border: 1px solid #334155;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .btn:hover { background: #334155; border-color: var(--primary); }
+    .btn-active { background: var(--primary); color: #090d16; font-weight: 600; }
+
+    /* Slide Stage */
+    .deck-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      position: relative;
+    }
+    .slide {
+      display: none;
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 9;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 44px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .slide.active { display: flex; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.98); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* Slide Components */
+    .slide-tag {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--primary);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .slide-title {
+      font-size: 2.2rem;
+      line-height: 1.2;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+    }
+    .slide-body {
+      flex: 1;
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+    .slide-left { flex: 1.1; }
+    .slide-right { flex: 0.9; display: flex; justify-content: center; }
+
+    .bullet-box {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(51, 65, 85, 0.6);
+      border-radius: 12px;
+      padding: 18px 22px;
+      margin-bottom: 14px;
+    }
+    .bullet-box h3 {
+      font-size: 1.15rem;
+      color: #e2e8f0;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .bullet-box p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .metric-hero {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .metric-value {
+      font-size: 3rem;
+      font-weight: 900;
+      color: var(--primary);
+      font-family: var(--font-mono);
+      line-height: 1;
+    }
+    .metric-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      max-width: 220px;
+    }
+
+    .tag-pill {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .tag-sim { background: rgba(16, 185, 129, 0.2); color: var(--success); border: 1px solid var(--success); }
+    .tag-nao { background: rgba(239, 68, 68, 0.2); color: var(--danger); border: 1px solid var(--danger); }
+
+    /* Visual Cards */
+    .visual-card {
+      width: 100%;
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+    }
+    .phone-mockup {
+      border: 2px solid #334155;
+      border-radius: 16px;
+      background: #020617;
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+    }
+    .phone-header {
+      display: flex;
+      justify-content: space-between;
+      color: #64748b;
+      margin-bottom: 12px;
+      font-size: 0.75rem;
+    }
+    .alert-banner {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid var(--danger);
+      border-radius: 8px;
+      padding: 12px;
+      color: #fca5a5;
+    }
+
+    /* Comparison Table */
+    .comp-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    .comp-table td {
+      padding: 8px 10px;
+      border-bottom: 1px solid #1e293b;
+    }
+    .comp-table td:last-child {
+      text-align: right;
+    }
+
+    /* Footer Navigation */
+    footer {
+      padding: 14px 24px;
+      border-top: 1px solid var(--border);
+      background: rgba(9, 13, 22, 0.95);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+    }
+    .slide-counter {
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    .slide-progress {
+      display: flex;
+      gap: 6px;
+    }
+    .progress-dot {
+      width: 32px;
+      height: 4px;
+      background: #1e293b;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .progress-dot.active { background: var(--primary); }
+
+    /* Speaker Notes Drawer */
+    .notes-drawer {
+      position: fixed;
+      bottom: 60px;
+      left: 0;
+      right: 0;
+      background: rgba(15, 23, 42, 0.97);
+      border-top: 2px solid var(--accent);
+      padding: 16px 28px;
+      font-size: 1.05rem;
+      line-height: 1.5;
+      color: #cbd5e1;
+      box-shadow: 0 -10px 25px rgba(0,0,0,0.7);
+      display: none;
+      z-index: 20;
+    }
+    .notes-drawer.open { display: block; }
+    .notes-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <span>🛡️ Sentinela Clandestino</span>
+      <span class="badge-live">Seminário Preliminar · sem1</span>
+    </div>
+    <div class="controls">
+      <button class="btn" id="btnNotes" onclick="toggleNotes()">🎙️ Fala do Autor [S]</button>
+      <button class="btn" id="btnPrev" onclick="prevSlide()">◀ Anterior</button>
+      <button class="btn" id="btnNext" onclick="nextSlide()">Próximo ▶</button>
+      <button class="btn" onclick="toggleFullScreen()">⛶ Tela Cheia</button>
+    </div>
+  </header>
+
+  <main class="deck-container">
+
+    <!-- SLIDE 1 -->
+    <div class="slide active" id="slide-1">
+      <div>
+        <div class="slide-tag">Slide 1 de 5 · A Ideia (45 s)</div>
+        <h1 class="slide-title">O depósito entra em 2 segundos.<br><span style="color: var(--danger);">O saque nunca sai.</span></h1>
+      </div>
+      <div class="slide-body">
+        <div class="slide-left">
+          <div class="bullet-box">
+            <h3>👤 O Usuário e a Vítima</h3>
+            <p>Apostador clica em link de bônus ou influenciador no Instagram/WhatsApp, deposita R$ 50 via Pix e tem o saldo travado por cláusulas de rollover abusivo (60x) ou taxa de saque surpresa.</p>
+          </div>
+          <div class="bullet-box">
+            <h3>⚡ O que o Sentinela Faz</h3>
+            <p>Intercepta o redirecionamento e o APK no próprio celular, audita as cláusulas de saque e a reputação do domínio em &lt; 35ms, expondo as provas do calote antes da confirmação do Pix.</p>
+          </div>
+        </div>
+        <div class="slide-right">
+          <div class="phone-mockup" style="width: 320px;">
+            <div class="phone-header">
+              <span>INSTAGRAM FEED</span>
+              <span>100% LOCAL</span>
+            </div>
+            <div style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 8px;">🔗 Link: bet-premios-vip.xyz</div>
+            <div class="alert-banner">
+              <div style="font-weight: 800; font-size: 0.85rem; margin-bottom: 4px;">⚠️ ALERTA DE CALOTE (< 35ms)</div>
+              <div style="font-size: 0.75rem; line-height: 1.3;">
+                • Rollover oculto: 60x o depósito<br>
+                • Taxa Pix de liberação: R$ 30,00<br>
+                • Domínio registrado há 42 minutos (.xyz)
+              </div>
+            </div>
+            <div style="margin-top: 10px; font-size: 0.7rem; color: var(--success); text-align: center;">
+              🛡️ Triagem no aparelho (Samsung A15) · R$ 0 custo
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="font-size: 0.8rem; color: var(--text-muted); display: flex; justify-content: space-between;">
+        <span>José Albérico Rocha da Silva · UFRPE 2026.2</span>
+        <span>Conceito e fluxo de borda demonstrável</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 2 -->
+    <div class="slide" id="slide-2">
+      <div>
+        <div class="slide-tag">Slide 2 de 5 · O Produto Mais Próximo (50 s)</div>
+        <h1 class="slide-title">O produto mais próximo: <span style="color: var(--primary);">Trend Micro Check</span></h1>
+      </div>
+      <div class="slide-body">
+        <div class="slide-left">
+          <div class="bullet-box">
+            <h3>🎯 Por que é o concorrente mais direto?</h3>
+            <p>Opera direto no smartphone do usuário comum, analisando links, prints e mensagens de fraudes com auxílio de Inteligência Artificial.</p>
+          </div>
+          <div class="bullet-box">
+            <h3>❌ Onde ele falha categoricamente?</h3>
+            <p><strong>Exige ação manual</strong> de copiar/enviar o link; <strong>manda os dados para a nuvem</strong> violando privacidade (LGPD); e é <strong>cego para contratos de saque</strong> em espelhos novos.</p>
+          </div>
+        </div>
+        <div class="slide-right">
+          <div class="visual-card" style="width: 380px;">
+            <div style="font-weight: 700; margin-bottom: 12px; font-size: 0.95rem; border-bottom: 1px solid #334155; padding-bottom: 6px;">
+              🔍 Matriz vs. Trend Micro Check (<a href="https://www.trendmicro.com" target="_blank">trendmicro.com</a>)
+            </div>
+            <table class="comp-table">
+              <tr>
+                <td>Interação direta no smartphone</td>
+                <td><span class="tag-pill tag-sim">✔ SIM</span></td>
+              </tr>
+              <tr>
+                <td>Privacidade local (zero nuvem)</td>
+                <td><span class="tag-pill tag-nao">✘ NÃO</span></td>
+              </tr>
+              <tr>
+                <td>Interceptação de APK no clique</td>
+                <td><span class="tag-pill tag-nao">✘ NÃO</span></td>
+              </tr>
+              <tr>
+                <td>Auditoria de regras de saque/rollover</td>
+                <td><span class="tag-pill tag-nao">✘ NÃO</span></td>
+              </tr>
+            </table>
+            <div style="margin-top: 14px; font-size: 0.75rem; color: #64748b; line-height: 1.3;">
+              Fonte: Trend Micro Check Official Docs &amp; Teste de Latência em 4G (887 ms em nuvem vs. 0,14 ms local).
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="font-size: 0.8rem; color: var(--text-muted); display: flex; justify-content: space-between;">
+        <span>Referência Comercial de Mercado</span>
+        <span>Confronto real de produto</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 3 -->
+    <div class="slide" id="slide-3">
+      <div>
+        <div class="slide-tag">Slide 3 de 5 · O Artigo Mais Próximo (50 s)</div>
+        <h1 class="slide-title">O artigo mais próximo: <span style="color: var(--accent);">Muzakir et al. (2025)</span></h1>
+      </div>
+      <div class="slide-body">
+        <div class="slide-left">
+          <div class="bullet-box">
+            <h3>📄 O Artigo</h3>
+            <p><strong>"Text-Based Detection of Online Gambling Ads on Social Media"</strong><br>
+            Muzakir, Syahputra &amp; Wibowo · <em>IEEE ICISIT 2025</em> · <a href="https://doi.org/10.1109/ICISIT.2025.10842131" target="_blank">DOI: 10.1109/ICISIT.2025.10842131</a></p>
+          </div>
+          <div class="bullet-box">
+            <h3>💡 O que propôs e comprovou</h3>
+            <p>Classificação com CNN e AutoML sobre 15.286 postagens e OCR de anúncios de apostas em redes sociais (92,8% de acurácia), superando regras estáticas.</p>
+          </div>
+          <div class="bullet-box">
+            <h3>⚠️ Onde falha e o risco que aponta</h3>
+            <p>Roda em nuvem corporativa para língua indonésia; não protege o smartphone no clique, não audita APKs e é cego para retenção de saque.</p>
+          </div>
+        </div>
+        <div class="slide-right">
+          <div class="visual-card" style="width: 360px; background: #0b1329;">
+            <div style="font-size: 0.75rem; color: var(--primary); font-weight: 700; margin-bottom: 6px;">IEEE XPLORE · ICISIT 2025</div>
+            <div style="font-size: 0.85rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; border-bottom: 1px solid #1e293b; padding-bottom: 8px;">
+              Text-Based Detection of Online Gambling Ads on Social Media
+            </div>
+            <div style="font-size: 0.8rem; color: #94a3b8; line-height: 1.4;">
+              • <strong>Dataset:</strong> 15.286 sentenças (redes sociais)<br>
+              • <strong>Acurácia:</strong> 92,8% (CNN + AutoML)<br>
+              • <strong>Execução:</strong> Servidor corporativo (Nuvem)<br>
+              • <strong>Atuação no aparelho:</strong> Nenhuma
+            </div>
+            <div style="margin-top: 14px; padding: 8px; background: rgba(245, 158, 11, 0.1); border-left: 3px solid var(--accent); font-size: 0.75rem; color: #fde68a;">
+              O risco: alta acurácia em texto isolado não impede o calote financeiro se a intervenção não for em tempo real no cliente móvel.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="font-size: 0.8rem; color: var(--text-muted); display: flex; justify-content: space-between;">
+        <span>Referência Científica Mais Próxima</span>
+        <span>IEEE ICISIT 2025</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 4 -->
+    <div class="slide" id="slide-4">
+      <div>
+        <div class="slide-tag">Slide 4 de 5 · O Que Só a Minha Faz (60 s)</div>
+        <h1 class="slide-title">Diferencial para o Usuário &amp; <span style="color: var(--primary);">Pergunta Científica</span></h1>
+      </div>
+      <div class="slide-body">
+        <div class="slide-left">
+          <div class="bullet-box">
+            <h3>🛡️ Diferencial para o Usuário</h3>
+            <p>Auditoria semântica de cláusulas de saque na borda do celular (&lt; 35ms) com soberania total de dados: o usuário não é vigiado e não depende de listas desatualizadas.</p>
+          </div>
+          <div class="bullet-box">
+            <h3>🔬 A Pergunta Científica (Falseável)</h3>
+            <p><strong>Avisos com evidências contratuais de calote induzem maior desistência de depósito do que bloqueios autoritários de tela?</strong></p>
+          </div>
+        </div>
+        <div class="slide-right">
+          <div class="visual-card" style="width: 380px;">
+            <div style="font-size: 0.8rem; font-weight: 700; color: var(--primary); margin-bottom: 8px;">DADOS DO PILOTO EXPERIMENTAL (N=40)</div>
+            
+            <div style="margin-bottom: 12px;">
+              <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 4px;">
+                <span>Sentinela (Evidência Contratual)</span>
+                <strong style="color: var(--success);">85% Desistência</strong>
+              </div>
+              <div style="background: #1e293b; height: 8px; border-radius: 4px; overflow: hidden;">
+                <div style="background: var(--success); width: 85%; height: 100%;"></div>
+              </div>
+              <div style="font-size: 0.7rem; color: #64748b; margin-top: 2px;">IC 95%: [55% – 98%]</div>
+            </div>
+
+            <div style="margin-bottom: 14px;">
+              <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 4px;">
+                <span>Bloqueio Cego / Tradicional</span>
+                <strong style="color: var(--danger);">30% Desistência</strong>
+              </div>
+              <div style="background: #1e293b; height: 8px; border-radius: 4px; overflow: hidden;">
+                <div style="background: var(--danger); width: 30%; height: 100%;"></div>
+              </div>
+              <div style="font-size: 0.7rem; color: #64748b; margin-top: 2px;">70% tentam burlar e prosseguir (p = 0,009)</div>
+            </div>
+
+            <div style="padding: 8px; background: rgba(239, 68, 68, 0.1); border-left: 3px solid var(--danger); font-size: 0.72rem; color: #fca5a5;">
+              <strong>Risco honesto medido:</strong> Falso-positivo de 10% [3%–26%] em promoções de casas legalizadas. A pergunta científica pode responder NÃO.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="font-size: 0.8rem; color: var(--text-muted); display: flex; justify-content: space-between;">
+        <span>Piloto Executado: piloto_exp.py</span>
+        <span>Ablação e Testes de Hipótese (Fisher p = 0,009)</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 5 -->
+    <div class="slide" id="slide-5">
+      <div>
+        <div class="slide-tag">Slide 5 de 5 · O Fecho (20 s)</div>
+        <h1 class="slide-title" style="font-size: 2.5rem; text-align: center; margin-top: 20px;">
+          "O apostador não quer ser censurado.<br>
+          <span style="color: var(--primary);">Ele só não quer levar calote."</span>
+        </h1>
+      </div>
+      <div class="slide-body" style="flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+        <div style="max-width: 650px; font-size: 1.15rem; color: #cbd5e1; line-height: 1.6; margin-bottom: 24px;">
+          Triagem instantânea em &lt; 35ms · Soberania total de dados no aparelho · Proteção pelo interesse financeiro do cidadão contra estelionato digital.
+        </div>
+        <div style="display: flex; gap: 16px;">
+          <a href="https://github.com/albericolx/Topicos_Avancados_IA" target="_blank" class="btn btn-active" style="padding: 10px 20px; font-size: 0.95rem;">
+            📂 Repositório GitHub
+          </a>
+          <a href="https://albericolx.github.io/Topicos_Avancados_IA/" target="_blank" class="btn" style="padding: 10px 20px; font-size: 0.95rem;">
+            🚀 Protótipo Interativo
+          </a>
+        </div>
+      </div>
+      <div style="font-size: 0.8rem; color: var(--text-muted); display: flex; justify-content: space-between;">
+        <span>Sentinela Clandestino · UFRPE 2026.2</span>
+        <span>Tempo total: 3 min 40 s (dentro do teto de 5 min)</span>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- SPEAKER NOTES DRAWER -->
+  <aside class="notes-drawer" id="notesDrawer">
+    <div class="notes-header">
+      <span id="notesSlideTitle">Roteiro de Fala · Slide 1 (45 s)</span>
+      <span style="color: var(--primary); cursor: pointer;" onclick="toggleNotes()">✕ Fechar [S]</span>
+    </div>
+    <div id="notesText">Carregando roteiro...</div>
+  </aside>
+
+  <footer>
+    <div class="slide-counter" id="slideCounter">Slide 1 de 5</div>
+    <div class="slide-progress" id="progressContainer">
+      <div class="progress-dot active" onclick="goToSlide(1)"></div>
+      <div class="progress-dot" onclick="goToSlide(2)"></div>
+      <div class="progress-dot" onclick="goToSlide(3)"></div>
+      <div class="progress-dot" onclick="goToSlide(4)"></div>
+      <div class="progress-dot" onclick="goToSlide(5)"></div>
+    </div>
+    <div style="font-size: 0.8rem; color: var(--text-muted);">
+      Teclas: ← → ou Barra de Espaço
+    </div>
+  </footer>
+
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 5;
+
+    const speechNotes = {
+      1: "Dona Cida ou Lucas, 23 anos, está no feed do Instagram ou num grupo do WhatsApp. Ele vê um anúncio de influenciador prometendo bônus de 200% em uma nova bet. Ele clica, faz um Pix de R$ 50, ganha R$ 120 e, na hora de sacar, a plataforma trava: exige rollover de 60 vezes ou cobra taxa de liberação de R$ 30. Ele perdeu o dinheiro. No Brasil de 2026, com mais de 2.000 espelhos ilegais derrubados e recriados todo mês, listas estáticas de DNS falham. O Sentinela Clandestino atua no instante do toque, direto no celular dele: audita o texto e o instalador em menos de 35ms, sem mandar nada pra nuvem, e expõe a prova: 'essa plataforma retém saques por rollover abusivo'.",
+      2: "O competidor comercial mais perigoso não é o Gamban nem o Netcraft, que só olham tabelas de rede. É o Trend Micro Check, que já tem milhões de downloads e usa IA para checar prints e links de golpes no celular. Eu escolhi ele porque ele é o mais próximo na experiência do usuário. Mas onde ele falha? Primeiro: exige que o usuário copie e cole o link manualmente no app. Segundo: manda todos os dados para a nuvem da Trend Micro, quebrando a privacidade da navegação. E terceiro: ele checa reputação em listas prévias, mas é cego para contratos de saque. Se o cassino fraudulento subiu um domínio novo há 10 minutos (.xyz), o Trend Micro diz que é desconhecido e não avisa sobre o golpe do rollover.",
+      3: "Na literatura acadêmica, quem chegou mais perto foi Muzakir e colaboradores, no IEEE ICISIT 2025. Eles analisaram mais de 15 mil sentenças e imagens de anúncios de apostas ilegais em redes sociais, provando que deep learning consegue capturar gírias e ofuscações de apostas com 92,8% de acurácia, superando regras de palavras-chave. Mas o trabalho deles foi desenhado para moderação centralizada em servidores corporativos e focado em indonésio. Ele não atua no smartphone, não examina o instalador APK e não analisa a página de destino. O risco que o artigo deles aponta para nós é claro: modelos semânticos podem ter alta acurácia textual, mas se não rodarem em tempo real no cliente móvel no momento do clique, o calote já aconteceu.",
+      4: "O diferencial para o usuário é a combinação: o modelo roda 100% no celular em menos de 35ms com zero telemetria, e expõe a evidência contratual do calote antes do depósito. Nenhum competidor faz isso. A contribuição científica é uma pergunta que ninguém respondeu: expor a evidência contratual do calote convence o usuário a desistir do depósito mais do que um bloqueio autoritário de tela? O nosso piloto experimental já trouxe dados reais: sob bloqueio cego, 70% dos usuários tentam burlar e prosseguir; sob o Sentinela Clandestino, 85% desistiram do depósito. Mas o piloto também revelou um risco que não escondemos: tivemos 10% de falso-positivos em casas legalizadas por causa de regras de bônus promocionais. É essa pergunta, com risco real de dar errado em campo, que nosso experimento testa.",
+      5: "A indústria de cibersegurança insiste em censurar o usuário e cobrar a privacidade dele por isso. O que o Sentinela Clandestino demonstra é que é viável rodar IA na borda do celular, respeitar os dados do cidadão e protegê-lo através do seu próprio interesse financeiro."
+    };
+
+    function updateView() {
+      for (let i = 1; i <= totalSlides; i++) {
+        const slide = document.getElementById(`slide-${i}`);
+        if (slide) slide.classList.toggle('active', i === currentSlide);
+      }
+      document.getElementById('slideCounter').textContent = `Slide ${currentSlide} de ${totalSlides}`;
+      
+      const dots = document.querySelectorAll('.progress-dot');
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle('active', idx + 1 === currentSlide);
+      });
+
+      const noteTitles = {
+        1: "Roteiro de Fala · Slide 1 — A Ideia (45 s)",
+        2: "Roteiro de Fala · Slide 2 — O Produto Mais Próximo (50 s)",
+        3: "Roteiro de Fala · Slide 3 — O Artigo Mais Próximo (50 s)",
+        4: "Roteiro de Fala · Slide 4 — O Que Só a Minha Faz (60 s)",
+        5: "Roteiro de Fala · Slide 5 — O Fecho (20 s)"
+      };
+      document.getElementById('notesSlideTitle').textContent = noteTitles[currentSlide];
+      document.getElementById('notesText').textContent = speechNotes[currentSlide];
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) {
+        currentSlide++;
+        updateView();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) {
+        currentSlide--;
+        updateView();
+      }
+    }
+
+    function goToSlide(n) {
+      currentSlide = n;
+      updateView();
+    }
+
+    function toggleNotes() {
+      const drawer = document.getElementById('notesDrawer');
+      const btn = document.getElementById('btnNotes');
+      drawer.classList.toggle('open');
+      btn.classList.toggle('btn-active');
+    }
+
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+      } else if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'Space') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key === 's' || e.key === 'S') {
+        e.preventDefault();
+        toggleNotes();
+      } else if (e.key === 'f' || e.key === 'F') {
+        e.preventDefault();
+        toggleFullScreen();
+      }
+    });
+
+    updateView();
+  </script>
+</body>
+</html>
