@@ -44,11 +44,11 @@
 - **Aparece:** A frase do alvo em destaque visual:
   > *"Quero mostrar que a minha ideia melhora a detecção de cláusulas abusivas de saque e a eliminação de falsos alarmes em textos financeiros bancários, comparada à linha de base estática de bloqueio e a modelos em nuvem sem guardrail."*
   Embaixo, o painel com as 4 métricas do problema e os limiares de corte pré-estabelecidos:
-  1. *F1-Score no Benchmark Textual:* Alvo $\ge 0{,}85$.
-  2. *Acurácia Global Tri-Classe:* Alvo $\ge 85{,}0\%$.
-  3. *Falsos Positivos em Finanças/OOD (`tx 90% do CDI`):* Alvo $= 0{,}0\%$.
-  4. *Latência Média na CPU do Smartphone:* Alvo $\le 35\text{ ms}$.
-  Caixa de transparência com a regra pré-registrada: **PASSOU** ($\ge 0{,}85$), **CAIU** ($< 0{,}75$) e **INCONCLUSIVO** ($0{,}75\text{--}0{,}84$).
+  1. *F1-Score no Benchmark Textual:* Meta mínima de 0,85.
+  2. *Acurácia Global Tri-Classe:* Meta mínima de 85,0%.
+  3. *Falsos Positivos em Finanças (CDI):* Meta de 0,0% (Zero falso alarme).
+  4. *Latência Média no Smartphone:* Meta de até 35 ms na CPU.
+  Caixa de transparência com a regra pré-registrada: **PASSOU** (a partir de 0,85), **CAIU** (abaixo de 0,75) e **INCONCLUSIVO** (entre 0,75 e 0,84).
 - **Eu falo:** *"Para não cair na armadilha da 'medida de opinião' — perguntar para três colegas se acharam o app bonito —, definimos o alvo na mudança concreta do problema técnico: classificar com exatidão contratos de calote e nunca gerar falsos alarmes contra produtos financeiros legítimos. Seguindo o padrão de Muzakir et al., nossa métrica é o F1-Score e a Acurácia Global, combinados com a taxa de falsos positivos em dados fora de domínio. O nosso alvo é F1 maior ou igual a 0,85, acurácia acima de 85% e rigorosamente zero falsos alarmes quando entrar uma taxa bancária como o CDI. Se der menos de 0,75 de F1 ou mais de 10% de alarme falso no CDI, a hipótese caiu. O critério está escrito antes de ver o número e registrado no commit do repositório."*
 
 ---
