@@ -1,4 +1,4 @@
-# Contexto: VA2 - Atividades de Avaliação (`va2/`)
+﻿# Contexto: VA2 - Atividades de Avaliação (`va2/`)
 
 > Módulo autocontido da 2ª Verificação de Aprendizagem (VA2) da disciplina de Tópicos Avançados de IA (UFRPE 2026.2).
 
@@ -23,7 +23,16 @@ va2/
 ├── brw.md                           # Folha de Brainwriting Híbrido (Ideação, crise, usuário e solução)
 
 ├── cmp.md                           # Folha de Competidores e Contribuição (Catálogo, matriz de 8 eixos e frase canônica)
-├── tec.md                           # Folha de Tecnologia Base Demonstrável (Transformers CPU, alteração mínima, vídeo e auditoria)
+├── tec.md                           # Folha de Tecnologia Base Demonstrável (Transformers/Llama.cpp, vídeo e auditoria)
+├── flx.md                           # Folha de Fluxograma e Arquitetura (Passos IA/Regra/Pessoa, custos e privacidade)
+├── arquitetura.md                   # Diagrama Mermaid oficial do fluxo on-device e dados pessoais
+├── exp.md                           # Folha de Desenho dos Experimentos (E1 Técnica Borda, E2 Decisão do Apostador, Pilotos e TCLE)
+├── piloto_exp.py                    # Script autônomo do piloto experimental com cálculo de métricas e IC 95%
+├── tcle.md                          # Termo de Consentimento Livre e Esclarecido (Res. CNS 510/2016 e LGPD)
+├── sem1.md                          # Folha do Seminário Preliminares (sem1: 4 frases, 5 slides, ensaio cético)
+├── slides.html                      # Deck interativo oficial de slides sem1 (16:9, notas de orador, fullscreen)
+├── sem2.md                          # Folha do Seminário Iteração 2 (sem2: demo ao vivo, custos, falha e evolução)
+├── slides_sem2.html                 # Deck interativo oficial de slides sem2 com notas e demo ao vivo
 
 ├── PITCH.md                         # Guia de Defesa Oral sem a tela (Pitch de 2 minutos para checagem com o professor)
 
