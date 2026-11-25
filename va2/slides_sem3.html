@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seminário Iteração 3 · Como Vai Ser o Teste (sem3) · Sentinela Clandestino</title>
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: rgba(18, 26, 43, 0.9);
+      --border: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --primary: #38bdf8;
+      --accent: #f59e0b;
+      --danger: #ef4444;
+      --success: #10b981;
+      --info: #6366f1;
+      --font: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', Consolas, monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      user-select: none;
+    }
+    header {
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      background: rgba(9, 13, 22, 0.95);
+      z-index: 10;
+    }
+    .logo {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .meta {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    main {
+      flex: 1;
+      display: flex;
+      position: relative;
+      overflow: hidden;
+    }
+    .slide-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 30px;
+    }
+    .slide {
+      display: none;
+      width: 100%;
+      max-width: 1050px;
+      animation: fadeIn 0.3s ease;
+    }
+    .slide.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .slide-header {
+      margin-bottom: 24px;
+    }
+    .slide-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--primary);
+      background: rgba(56, 189, 248, 0.1);
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .slide-title {
+      font-size: 1.85rem;
+      font-weight: 800;
+      line-height: 1.2;
+      color: #fff;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .stat-box {
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 10px;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+    }
+    .stat-val {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-top: 4px;
+    }
+    .rule-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-weight: 800;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .rule-pass { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid var(--success); }
+    .rule-fail { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid var(--danger); }
+    .rule-inc { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid var(--accent); }
+
+    .speaker-notes-panel {
+      width: 320px;
+      background: #060911;
+      border-left: 1px solid var(--border);
+      padding: 20px;
+      display: none;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+    .speaker-notes-panel.active {
+      display: flex;
+    }
+    .notes-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .notes-content {
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #cbd5e1;
+      font-style: italic;
+    }
+
+    footer {
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border);
+      background: rgba(9, 13, 22, 0.95);
+      font-size: 0.85rem;
+    }
+    .controls {
+      display: flex;
+      gap: 8px;
+    }
+    .btn {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.8rem;
+      transition: all 0.15s;
+    }
+    .btn:hover { background: #1e293b; border-color: var(--primary); }
+    .btn-primary { background: var(--primary); color: #000; border-color: var(--primary); }
+    .btn-primary:hover { background: #7dd3fc; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <span>🛡️ SENTINELA CLANDESTINO</span>
+      <span style="color:var(--text-muted); font-weight:400;">| SEM3 · Como Vai Ser o Teste</span>
+    </div>
+    <div class="meta">
+      UFRPE 2026.2 · José Albérico Rocha da Silva · 5 a 7 min
+    </div>
+  </header>
+
+  <main>
+    <div class="slide-container">
+
+      <!-- SLIDE 1: O COMPETIDOR E O JEITO DE HOJE -->
+      <div class="slide active" id="slide-1">
+        <div class="slide-header">
+          <span class="slide-tag">Slide 1 · O Competidor &amp; Linha de Base</span>
+          <h2 class="slide-title">Contra Quem Comparamos: O Jeito de Hoje e o Estado da Arte</h2>
+        </div>
+        <div class="grid-2">
+          <div class="card" style="border-left: 4px solid var(--danger);">
+            <div class="card-title" style="color:#f87171;">🏛️ O Jeito de Hoje (Anatel / Fazenda)</div>
+            <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:12px;">
+              Listas estáticas e bloqueio de DNS nos provedores de telecomunicações.
+            </p>
+            <div class="stat-box">
+              <div>Falha contra Espelhos de Dia Zero (DGA):</div>
+              <div class="stat-val" style="color:var(--danger);">100% de Falha</div>
+              <div style="font-size:0.75rem; color:var(--text-muted); margin-top:4px;">Domínios mutantes (.xyz, .top) gerados horas antes da campanha.</div>
+            </div>
+          </div>
+          <div class="card" style="border-left: 4px solid var(--accent);">
+            <div class="card-title" style="color:#fbbf24;">📄 Competidor Acadêmico (Muzakir et al., 2025)</div>
+            <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:12px;">
+              <em>Text-Based Detection of Online Gambling Ads</em> (IEEE ICISIT 2025).
+            </p>
+            <div class="stat-box">
+              <div>Acurácia / F1 em Nuvem (15.286 textos):</div>
+              <div class="stat-val" style="color:#fbbf24;">92,8% · F1 0,91</div>
+              <div style="font-size:0.75rem; color:var(--danger); margin-top:4px;">⚠️ Limitações: 0 testes com pessoas · Nuvem pesada (> 800ms) · Sem Guardrail OOD.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 2: O QUE QUERO MOSTRAR E A MÉTRICA -->
+      <div class="slide" id="slide-2">
+        <div class="slide-header">
+          <span class="slide-tag">Slide 2 · O Que Quero Mostrar &amp; Critério Prévio</span>
+          <h2 class="slide-title">A Métrica do Problema: Decidida Antes de Ver o Número</h2>
+        </div>
+        <div class="card" style="margin-bottom:16px; background:rgba(56,189,248,0.06); border-color:rgba(56,189,248,0.3);">
+          <div style="font-size:1.05rem; font-weight:700; color:#fff; line-height:1.4;">
+            "Quero mostrar que a minha ideia melhora a detecção de cláusulas abusivas de saque e a eliminação de falsos alarmes em textos financeiros, comparada à linha de base estática e a modelos em nuvem sem guardrail."
+          </div>
+        </div>
+        <div class="grid-3">
+          <div class="card">
+            <span class="rule-badge rule-pass">Passou (Sucesso)</span>
+            <div style="font-size:0.85rem; color:#cbd5e1; margin-top:6px;">
+              • <strong>F1-Score:</strong> &ge; 0,85<br>
+              • <strong>Falso Negativo Crítico:</strong> &le; 10%<br>
+              • <strong>Falsos Positivos CDI/CDB:</strong> 0,0%<br>
+              • <strong>Taxa de Aborto Pix (TAR):</strong> &ge; 65%
+            </div>
+          </div>
+          <div class="card">
+            <span class="rule-badge rule-fail">Caiu (Hipótese Rejeitada)</span>
+            <div style="font-size:0.85rem; color:#cbd5e1; margin-top:6px;">
+              • <strong>Falso Negativo Crítico:</strong> &gt; 15% (golpes passam calados)<br>
+              • <strong>Taxa de Aborto Pix (TAR):</strong> &lt; 50% (usuário ignora evidências)
+            </div>
+          </div>
+          <div class="card">
+            <span class="rule-badge rule-inc">Inconclusivo (Honesto)</span>
+            <div style="font-size:0.85rem; color:#cbd5e1; margin-top:6px;">
+              • <strong>Taxa de Aborto:</strong> entre 50% e 64%<br>
+              • <strong>F1-Score:</strong> entre 0,75 e 0,84<br>
+              (Exige atrito em 2 etapas e ampliação do corpus).
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 3: O ESQUEMA DA COMPARAÇÃO -->
+      <div class="slide" id="slide-3">
+        <div class="slide-header">
+          <span class="slide-tag">Slide 3 · O Esquema da Comparação</span>
+          <h2 class="slide-title">Dois Testes Controlados: Benchmark de IA e Intervenção com Pessoas</h2>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title" style="color:var(--primary);">📊 1. Benchmark Sentinela-BR (120 Casos)</div>
+            <div style="font-size:0.85rem; color:#cbd5e1; line-height:1.45;">
+              • <strong>40 Alto Risco:</strong> Rollover &gt; 30x e taxas Pix da CPI / Reclame Aqui.<br>
+              • <strong>40 Baixo Risco:</strong> Termos oficiais da Portaria SPA/MF 1.475/2024.<br>
+              • <strong>40 Fora de Escopo:</strong> Cotações bancárias (CDI), notícias e culinária.<br>
+              <div style="margin-top:8px; font-size:0.8rem; color:var(--text-muted); border-top:1px solid rgba(255,255,255,0.08); padding-top:6px;">
+                Condições: Anatel estática vs SLM cru vs Sentinela WebMCP.
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title" style="color:var(--success);">👥 2. Intervenção Humana (30 Participantes)</div>
+            <div style="font-size:0.85rem; color:#cbd5e1; line-height:1.45;">
+              • Voluntários: Apostadores e Não-Apostadores (Latin Square).<br>
+              • <strong>Condição A:</strong> Aviso Genérico do Navegador ("Site Suspeito").<br>
+              • <strong>Condição B:</strong> Bloqueio Cego / Gamban (sem explicação).<br>
+              • <strong>Condição C:</strong> Sentinela com Evidências de Saque Travado.<br>
+              <div style="margin-top:8px; font-size:0.8rem; color:var(--text-muted); border-top:1px solid rgba(255,255,255,0.08); padding-top:6px;">
+                O que fica igual: Mesmo Pix (R$ 50), mesmo texto, mesmo celular.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 4: O CAMINHO ATÉ O PITCH -->
+      <div class="slide" id="slide-4">
+        <div class="slide-header">
+          <span class="slide-tag">Slide 4 · Calendário, Ética &amp; Contingência</span>
+          <h2 class="slide-title">Do SEM3 ao Pitch de 02/12: Cronograma e Plano B</h2>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title" style="color:var(--accent);">📅 Calendário de Execução</div>
+            <div style="font-size:0.85rem; color:#cbd5e1; line-height:1.6;">
+              • <strong>18/11 (Hoje):</strong> Protocolo e regra registrados no Git.<br>
+              • <strong>25/11 (Sala):</strong> Coleta com 30 voluntários e benchmark.<br>
+              • <strong>27/11:</strong> Intervalos de confiança Wilson 95% e F1.<br>
+              • <strong>02/12:</strong> Pitch Final com a tabela de resultados.<br>
+              • <strong>04/12:</strong> Entrega do Artigo Completo (Springer LNCS).
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title" style="color:var(--info);">🛡️ Ética na Pesquisa &amp; Plano B</div>
+            <div style="font-size:0.85rem; color:#cbd5e1; line-height:1.5;">
+              • <strong>Ética:</strong> Resolução CNS nº 510/2016 (art. 1º, VIII). Voluntários maiores de 18 anos, TCLE formal em <code>va2/tcle.md</code>, zero telemetria.<br>
+              • <strong>Plano B:</strong> Se a internet da sala cair, o runtime WebMCP e o script Python rodam <strong>100% offline na CPU local</strong> em 8 segundos.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 5: FECHO -->
+      <div class="slide" id="slide-5">
+        <div class="slide-header">
+          <span class="slide-tag">Slide 5 · Fecho</span>
+          <h2 class="slide-title">Um Teste Não Mede Opinião: Mede se o Calote Foi Evitado</h2>
+        </div>
+        <div class="card" style="text-align:center; padding:30px;">
+          <div style="font-size:1.3rem; font-weight:800; color:#fff; margin-bottom:12px;">
+            A regra está decidida antes do número.
+          </div>
+          <p style="font-size:0.95rem; color:var(--text-muted); max-width:650px; margin:0 auto 20px auto;">
+            No dia 25/11, em sala de aula, comprovamos se a IA on-device protege o patrimônio do cidadão sem alucinações.
+          </p>
+          <div style="display:inline-flex; gap:16px; font-family:var(--font-mono); font-size:0.85rem; color:var(--primary); background:rgba(0,0,0,0.4); padding:10px 20px; border-radius:8px; border:1px solid rgba(255,255,255,0.08);">
+            <span>🎯 TAR &ge; 65%</span>
+            <span>🎯 F1 &ge; 0,85</span>
+            <span>🎯 CDI = 0% FP</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- NOTAS DO ORADOR -->
+    <div class="speaker-notes-panel" id="notes-panel">
+      <div class="notes-title">🎙️ NOTAS DO ORADOR (Pressione 'S' para ocultar)</div>
+      <div class="notes-content" id="notes-content">
+        Carregando notas do slide...
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div style="color:var(--text-muted); font-size:0.8rem;">
+      Slide <span id="current-slide">1</span> de <span id="total-slides">5</span>
+    </div>
+    <div class="controls">
+      <button class="btn" onclick="toggleNotes()">[S] Notas</button>
+      <button class="btn" onclick="toggleFullScreen()">[F] Tela Cheia</button>
+      <button class="btn" onclick="prevSlide()">◀ Anterior</button>
+      <button class="btn btn-primary" onclick="nextSlide()">Próximo ▶</button>
+    </div>
+  </footer>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    let current = 0;
+
+    const notes = [
+      "como o mercado e a ciência tentam conter o golpe das apostas clandestinas hoje? por dois caminhos imperfeitos. o governo usa listas estáticas de DNS: a Anatel já derrubou mais de 2.000 sites, mas os operadores criminosos usam DGA que gera espelhos mutantes a cada duas horas. para novos domínios ativados no mesmo dia, a falha é de 100%. na academia, o trabalho mais próximo é Muzakir et al. (IEEE 2025), com 92,8% de acurácia sobre 15 mil sentenças em nuvem. mas onde ele falha? roda em nuvem com alta latência, viola a privacidade e comete um erro crítico: não tem guardrail de domínio. se alguém digitar uma taxa bancária legítima, ele não sabe descartar. e pior: Muzakir avaliou zero pessoas. nós comparamos contra a melhor IA publicada e contra o bloqueio oficial do Estado.",
+      "para não cair na armadilha da 'medida do gosto' — perguntar para três colegas se acharam o app bonito —, definimos o alvo na mudança concreta para a vítima: impedir que ela faça o Pix para o golpista. a nossa métrica não é satisfação; é a Taxa de Aborto da Transação (TAR) inspirada no estudo clássico de Felt et al. da USENIX Security. o aviso genérico de navegador ('site suspeito') é ignorado por 66% das pessoas por reflexo. quero provar que, ao exibir as evidências contratuais de saque travado — como o rollover de 60x ou a taxa de 20% —, pelo menos 65% dos usuários desistem do depósito. no benchmark textual, o alvo é F1 maior que 0,85 e rigorosamente zero falsos positivos em dados bancários legítimos como o CDI. se der menos de 50%, a hipótese caiu. o critério está escrito antes do teste e registrado no commit do repositório.",
+      "aqui está o desenho da comparação para garantir que não haja viés. na trilha de engenharia de IA, montamos o benchmark curado Sentinela-BR com 120 cláusulas e sentenças reais em português: 40 golpes de calote da CPI e do Reclame Aqui, 40 termos legais da Portaria 1.475 da Fazenda e 40 casos fora de escopo para estressar o guardrail contra alucinações. submetemos esse mesmo corpus a três condições: a lista da Anatel, o SLM sem guardrail e o Sentinela Clandestino. na trilha humana, 30 voluntários universitários avaliam cenários de pagamento com a mesma interface e o mesmo valor de Pix, alternando entre aviso genérico, bloqueio cego e o alerta com evidências do Sentinela. o gabarito de verdade é a lei da Secretaria de Prêmios e Apostas do Ministério da Fazenda. tudo o que varia entre os grupos é o tipo de proteção recebida.",
+      "como chegamos com o resultado no pitch de 2 de dezembro? o cronograma é estrito. hoje, dia 18, apresentamos o protocolo e a regra pré-registrada. no dia 25, executamos a coleta dos dados em sala de aula com os voluntários usando a nossa aplicação web via WebMCP no próprio celular. no dia 27, rodamos os scripts de inferência estatística com intervalos de Wilson a 95% para checar se a diferença é real ou ruído amostral. no dia 2 de dezembro, a tabela de resultados sobe para o slide do pitch. e na ética? seguimos a Resolução CNS 510 para pesquisas de ensino: participação voluntária, termo curto oral e escrito, e zero coleta de CPF, nome ou telemetria. se o Wi-Fi da UFRPE cair no dia 25? o nosso plano B já está compilado: a bateria de 120 casos roda 100% offline na CPU local via script Python em 8 segundos.",
+      "um teste de verdade não mede se o usuário achou o aplicativo bonito; mede se a tecnologia evitou que ele perdesse dinheiro num golpe de aposta clandestina. a nossa regra está decidida antes do número. no dia 25 de novembro, em sala, rodamos a prova real para o pitch final."
+    ];
+
+    function showSlide(index) {
+      slides.forEach(s => s.classList.remove('active'));
+      slides[index].classList.add('active');
+      document.getElementById('current-slide').innerText = index + 1;
+      document.getElementById('notes-content').innerText = notes[index];
+    }
+
+    function nextSlide() {
+      if (current < totalSlides - 1) {
+        current++;
+        showSlide(current);
+      }
+    }
+
+    function prevSlide() {
+      if (current > 0) {
+        current--;
+        showSlide(current);
+      }
+    }
+
+    function toggleNotes() {
+      document.getElementById('notes-panel').classList.toggle('active');
+    }
+
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+      } else if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        nextSlide();
+      } else if (e.key === 'ArrowLeft') {
+        prevSlide();
+      } else if (e.key === 's' || e.key === 'S') {
+        toggleNotes();
+      } else if (e.key === 'f' || e.key === 'F') {
+        toggleFullScreen();
+      }
+    });
+
+    showSlide(0);
+  </script>
+</body>
+</html>
