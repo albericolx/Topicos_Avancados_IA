@@ -34,7 +34,8 @@ def fast_path_guardrail(texto: str) -> bool:
         "spa/mf", "portaria", "1.475", "14.790", "codigo de defesa do consumidor",
         "operadora autorizada", "operador", "saldo", "fundos", "titular",
         "devolucao", "estorno", "certificado de autorizacao", "governo federal",
-        "secretaria de premios", "jogo responsavel", "lgpd", "extrato", "ouvidoria"
+        "secretaria de premios", "jogo responsavel", "lgpd", "extrato", "ouvidoria",
+        "tigrinho", "fortune tiger", "rodadas gratis"
     ]
     for termo in termos_aposta:
         if termo in t:
