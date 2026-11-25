@@ -443,13 +443,13 @@
         </div>
         <div class="grid-2">
           <div class="card card-accent">
-            <div class="card-title">💡 A Filosofia do Teste</div>
+            <div class="card-title">🎯 Critério Objetivo de Engenharia</div>
             <p style="font-size:1.1rem; font-weight:700; color:#fff; line-height:1.5; margin-bottom:12px;">
-              "Um teste em engenharia de IA mede métricas objetivas de classificação e latência na borda, e não opinião de conveniência."
+              "O sucesso da IA é medido por acertos matemáticos e velocidade no celular, e não por impressões visuais subjetivas."
             </p>
             <ul class="bullet-list">
-              <li>Alvos pré-registrados: <span class="stat-badge stat-accent">F1 a partir de 0,85</span> · <span class="stat-badge stat-accent">Acurácia a partir de 85%</span> · <span class="stat-badge stat-accent">Falso Positivo CDI = 0,0%</span>.</li>
-              <li>Soberania local: <span class="stat-badge stat-success">até 35 ms</span> no celular.</li>
+              <li>Metas pré-registradas no Git: <span class="stat-badge stat-accent">F1 a partir de 0,85</span> · <span class="stat-badge stat-accent">Acurácia a partir de 85%</span> · <span class="stat-badge stat-accent">Zero falsos alarmes no CDI (0,0%)</span>.</li>
+              <li>Execução local: <span class="stat-badge stat-success">até 35 ms</span> no celular sem depender de internet.</li>
             </ul>
           </div>
           <div class="card">
@@ -499,7 +499,7 @@
       "Para não cair na armadilha da 'medida de opinião' — perguntar para três colegas se acharam o app bonito —, definimos o alvo na mudança concreta do problema técnico: classificar com exatidão contratos de calote e nunca gerar falsos alarmes contra produtos financeiros legítimos. Seguindo o padrão de Muzakir et al., nossa métrica é o F1-Score e a Acurácia Global, combinados com a taxa de falsos positivos em dados fora de domínio. O nosso alvo é F1 maior ou igual a 0,85, acurácia acima de 85% e rigorosamente zero falsos alarmes quando entrar uma taxa bancária como o CDI. Se der menos de 0,75 de F1 ou mais de 10% de alarme falso no CDI, a hipótese caiu. O critério está escrito antes de ver o número e registrado no commit do repositório.",
       "Aqui está o desenho da comparação para garantir que não haja viés. Replicamos a metodologia de Muzakir et al., mas adaptada para o cenário regulatório brasileiro. Construímos o benchmark curado Sentinela-BR com 120 sentenças reais em português, rigorosamente balanceadas em três classes: 40 cláusulas de calote da CPI das Bets e Reclame Aqui, 40 regras de operadoras legalizadas pela Portaria 1.475 da Fazenda e 40 termos bancários legítimos como o CDI para testar o descarte do guardrail. Submetemos esse mesmo corpus às três condições: a lista da Anatel, o classificador sem guardrail e o Sentinela Clandestino. O gabarito formal de verdade é a lei da Secretaria de Prêmios e Apostas do Ministério da Fazenda. Tudo o que varia é a inteligência de cada solução.",
       "Como chegamos com o resultado no pitch de 2 de dezembro? O cronograma é estrito e transparente. Hoje apresentamos o protocolo e a regra pré-registrada. O teste é 100% computacional e reproduzível: roda sobre o dataset aberto de 120 casos em menos de 2 segundos na CPU local via script Python, sem depender de internet nem de dados voláteis. A nossa decisão metodológica foi utilizar exatamente a mesma metodologia de teste do competidor acadêmico mais próximo — Muzakir et al. —, permitindo uma comparação direta para evidenciar os diferenciais da nossa aplicação: o descarte preventivo de finanças legítimas (CDI) pelo Guardrail e a inferência ultrarrápida na CPU do celular em menos de 35ms, superando o modelo em nuvem dele. No dia 2 de dezembro, a tabela completa de acurácia e F1 sobe para o slide final.",
-      "Um teste de verdade não mede opinião subjetiva; mede se o modelo classifica com precisão o calote de saque e descarta falsos alarmes bancários em tempo real na CPU do smartphone. A nossa regra está decidida antes do número. No dia 2 de dezembro, no pitch final, apresentamos a prova real."
+      "O sucesso da nossa IA não se mede por impressões visuais subjetivas; mede-se por acertos matemáticos e velocidade no smartphone sem depender de internet. A nossa régua técnica e os alvos de corte foram pré-registrados no Git antes de rodar os testes definitivos: F1 mínimo de 0,85, acurácia acima de 85% e zero alarme falso no CDI. No dia 2 de dezembro, no pitch final, trazemos a comprovação completa desses números."
     ];
 
     function showSlide(index) {

@@ -83,11 +83,13 @@
 ## Slide 5 · O Fecho · 30 s
 
 - **Aparece:** Tela limpa e direta:
-  - *"Um teste em engenharia de IA mede métricas objetivas de classificação e latência na borda."*
-  - Metas decididas antes: `F1 >= 0,85` · `Acurácia >= 85%` · `Falsos Positivos CDI = 0,0%` · `Latência <= 35 ms`.
+  - *Card: 🎯 Critério Objetivo de Engenharia*
+  - Frase de impacto: *"O sucesso da IA é medido por acertos matemáticos e velocidade no celular, e não por impressões visuais subjetivas."*
+  - Metas pré-registradas no Git: `F1 a partir de 0,85` · `Acurácia a partir de 85%` · `Zero falsos alarmes no CDI (0,0%)`.
+  - Execução local: `até 35 ms` no celular sem depender de internet.
   - Link do repositório: `github.com/albericolx/Topicos_Avancados_IA`
   - Tag oficial do Git: `sem3`.
-- **Eu falo:** *"Um teste de verdade não mede opinião subjetiva; mede se o modelo classifica com precisão o calote de saque e descarta falsos alarmes bancários em tempo real na CPU do smartphone. A nossa regra está decidida antes do número. No dia 2 de dezembro, no pitch final, apresentamos a prova real."*
+- **Eu falo:** *"O sucesso da nossa IA não se mede por impressões visuais subjetivas; mede-se por acertos matemáticos e velocidade no smartphone sem depender de internet. A nossa régua técnica e os alvos de corte foram pré-registrados no Git antes de rodar os testes definitivos: F1 mínimo de 0,85, acurácia acima de 85% e zero alarme falso no CDI. No dia 2 de dezembro, no pitch final, trazemos a comprovação completa desses números."*
 
 ---
 
