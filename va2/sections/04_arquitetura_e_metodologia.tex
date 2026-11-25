@@ -50,3 +50,33 @@ Em total sintonia com o paradigma comportamental do Waze, a atua\c{c}\~{a}o do S
     \item Informa se o recebedor do Pix \'{e} uma empresa rec\'{e}m-aberta sob investiga\c{c}\~{a}o por opera\c{c}\~{a}o financeira clandestina;
     \item Confere autonomia \`{a} v\'{i}tima: o pr\'{o}prio cidad\~{a}o cancela o pagamento ou aposta ao constatar que est\'{a} sendo alvo de um golpe patrimonial deliberado.
 \end{enumerate}
+
+\subsection{Evidencia\c{c}\~{a}o Tecnol\'{o}gica e Reprodutibilidade pela Banca Avaliadora}
+\label{sec:evidenciacao_tecnologica}
+
+Para que o corpo docente e a comiss\~{a}o avaliadora possam inspecionar, auditar e reproduzir com total rigor a presen\c{c}a e o funcionamento das tecnologias centrais integradas ao Sentinela Clandestino, a Tabela~\ref{tab:evidencias_tecnologicas} sistematiza o mapa de evid\^{e}ncias verific\'{a}veis no c\'{o}digo-fonte, nos artefatos de teste e na demonstra\c{c}\~{a}o interativa em tempo real.
+
+\begin{table*}[t]
+\centering
+\caption{Matriz de Evidencia\c{c}\~{a}o Tecnol\'{o}gica, Reprodutibilidade e M\'{e}todos de Teste para a Banca Avaliadora.}
+\label{tab:evidencias_tecnologicas}
+\setlength{\tabcolsep}{3.5pt}
+\scriptsize
+\begin{tabular}{p{2.3cm}p{2.2cm}p{3.6cm}p{3.9cm}p{2.5cm}}
+\toprule
+\textbf{Tecnologia / Padr\~{a}o} & \textbf{Papel Arquitetural} & \textbf{Mecanismo de Opera\c{c}\~{a}o} & \textbf{Procedimento de Teste e Evidencia\c{c}\~{a}o pela Banca} & \textbf{Artefato / Evid\^{e}ncia no Reposit\'{o}rio} \\
+\midrule
+\textbf{WebMCP} (W3C WebML / Google)~\cite{w3c2025webmcp} & Agente de borda sem instala\c{c}\~{a}o (\textit{Zero-Installation}) & Opera diretamente no motor do navegador m\'{o}vel; intercepta passivamente n\'{o}s do DOM em formul\'{a}rios de saque Pix sem digita\c{c}\~{a}o do usu\'{a}rio (\textit{Zero-Typing}). & 1. Acessar o link web no celular ou desktop; \newline 2. Inspecionar via DevTools (\texttt{F12} $\rightarrow$ \textit{Network}): tr\'{a}fego de rede nulo para servidores externos (100\% local); \newline 3. Tocar em ``Simular DOM Passivo'' para verificar extra\c{c}\~{a}o autom\'{a}tica sem digita\c{c}\~{a}o. & \texttt{index.html}, \newline \texttt{docs/index.html}, \newline Link GitHub Pages ativo. \\
+\midrule
+\textbf{Fast-Path LAYA} (Convai Innovations)~\cite{convai2026laya} & Triagem de baix\'{i}ssima lat\^{e}ncia ($< 35\text{ms}$) & Modelo n\~{a}o autorregressivo leve baseado em ModernBERT~\cite{warner2024modernbert} para classifica\c{c}\~{a}o preliminar instant\^{a}nea de URLs, DGA e cabe\c{c}alhos. & Executar \texttt{python tec/exemplo\_oficial.py}: o console registra triagem em $0{,}14\text{ms}$ com ocupa\c{c}\~{a}o de RAM inferior a $95\text{MB}$. & \texttt{tec/exemplo\_oficial.py}, \newline \texttt{va2/sem2.md} (Slide 2), \newline \texttt{va2/exp.md} (E1). \\
+\midrule
+\textbf{Fast-Path Domain Guardrail} ($\mathcal{M}_{\text{escopo}}$) & Filtro anti-alucina\c{c}\~{a}o fora de dom\'{i}nio (OOD) & Avalia\c{c}\~{a}o de pertin\^{e}ncia l\'{e}xico-sem\^{a}ntica em $< 0{,}2\text{ms}$, descartando termos banc\'{a}rios leg\'{i}timos (CDI/CDB) e culin\'{a}ria como \texttt{FORA\_DE\_ESCOPO}. & No cliente web, acionar o bot\~{a}o ``Amostra 4 (tx 90\% do CDI)'' ou digitar termos cotidianos: o sistema emite veredito neutro com tag de \textit{Descarte Preventivo}, provando zero falso positivo. & \texttt{index.html} (fun\c{c}\~{a}o \texttt{fastPathGuardrail}), \newline \texttt{tec/exemplo\_oficial.py}. \\
+\midrule
+\textbf{Deep-Path SLM} (Qwen2.5-0.5B INT4)~\cite{liu2024mobilellm} & Auditoria sem\^{a}ntica contratual sob demanda & Quantiza\c{c}\~{a}o INT4 em 4-bit executada localmente via CPU/NPU m\'{o}vel para desmascarar \textit{rollovers} abusivos ($>20\times$) e taxas Pix fraudulentas. & 1. Smartphone em Modo Avi\~{a}o: reproduzir a infer\^{e}ncia de $18{,}75\text{ms}$ auditando \textit{rollover} de $60\times$; \newline 2. V\'{i}deo de ensaio cont\'{i}nuo anexado no reposit\'{o}rio comprovando execu\c{c}\~{a}o no Termux sem cortes. & \texttt{ensaio-sem2.mp4}, \newline \texttt{tec/exemplo\_oficial.py}, \newline \texttt{va2/piloto\_exp.py}. \\
+\midrule
+\textbf{Schema Pydantic v2} (\texttt{AuditoriaEvidencia}) & Valida\c{c}\~{a}o formal de tipos e integridade & Estrutura estrita do veredito em JSON tipado (\texttt{ALTO\_RISCO}, \texttt{BAIXO\_RISCO}, \texttt{FORA\_DE\_ESCOPO}), eliminando alucina\c{c}\~{o}es de formato. & Inspecionar o c\'{o}digo de \texttt{tec/exemplo\_oficial.py} (linhas 7--15) e conferir o bloco JSON padronizado renderizado nos cart\~{o}es de auditoria. & \texttt{tec/exemplo\_oficial.py}, \newline \texttt{va2/tec.md}. \\
+\midrule
+\textbf{Resumo de Grafo pDNS} (Filtros de Bloom)~\cite{nabeel2020following} & Detec\c{c}\~{a}o de espelhos mutantes de dia zero & Representa\c{c}\~{a}o vetorial comprimida de clusters e ASNs maliciosos em menos de $2\text{MB}$ de mem\'{o}ria na borda, com busca sub-milissegundo. & Avalia\c{c}\~{a}o anal\'{i}tica e experimental de taxa de colis\~{a}o $p \approx (1 - e^{-kn/m})^k \le 10^{-4}$ sem telemetria de hist\'{o}rico de navega\c{c}\~{a}o. & \texttt{va2/sections/04\_...}, \newline \texttt{va2/cmp.md} (Eixo 3). \\
+\bottomrule
+\end{tabular}
+\end{table*}
