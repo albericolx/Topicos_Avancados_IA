@@ -1,0 +1,844 @@
+[
+  {
+    "id": 1,
+    "texto": "Rollover obrigatorio de 60x do saldo depositado para liberar qualquer saque.",
+    "rotulo_esperado": "ALTO_RISCO",
+    "categoria": "rollover_predatorio",
+    "fonte": "CPI das Bets / Reclame Aqui"
+  },
+  {
+    "id": 2,
+    "texto": "Taxa de Liberacao de PIX: Todo saque exige deposito previo de seguranca de 20% do valor.",
+    "rotulo_esperado": "ALTO_RISCO",
+    "categoria": "taxa_desbloqueio_pix",
+    "fonte": "Reclame Aqui - Cassinos Ilicitos"
+  },
+  {
+    "id": 3,
+    "texto": "Saques condicionados ao giro de 50 vezes o montante de bonus em slots selecionados.",
+    "rotulo_esperado": "ALTO_RISCO",
+    "categoria": "rollover_predatorio",
+    "fonte": "CPI das Bets / Termos Ilicitos"
+  },
+  {
+    "id": 4,
+    "texto": "Retencao preventiva: primeiro resgate so e homologado apos aporte complementar de R$ 100.",
+    "rotulo_esperado": "ALTO_RISCO",
+    "categoria": "aporte_forcado",
+    "fonte": "Notificacoes Ciberlab"
+  },
+  {
+    "id": 5,
+    "texto": "O valor de premio ficara retido caso o apostador nao atinja volume de 70 ciclos no cassino.",
+    "rotulo_esperado": "ALTO_RISCO",
+    "categoria": "rollover_predatorio",
+    "fonte": "Termos de Uso Espelhos DGA"
+  },
+  {
+    "id": 6,
+    "texto": "Tarifa operacional de processamento bancario de R$ 50 para liberar chave PIX cadastrada.",
+    "rotulo_esperado": "ALTO_RISCO",
+    "categoria": "taxa_desbloqueio_pix",
+    "fonte": "Reclame Aqui - Golpes Pix"
+  },
+  {
+    "id": 7,
+    "texto": "Requisito de circulacao: necessario apostar 80 vezes o saldo antes de solicitar retirada.",
+    "rotulo_esperado": "ALTO_RISCO",
+    "categoria": "rollover_predatorio",
+    "fonte": "CPI das Bets"
+  },
+  {
+    "id": 8,
+    "texto": "Bonus de boas-vindas: saques bloqueados ate que ocorra 40x de giros em roleta ao vivo.",
+    "rotulo_esperado": "ALTO_RISCO",
+    "categoria": "rollover_predatorio",
+    "fonte": "Termos de Uso Espelhos DGA"
+  },
+  {
+    "id": 9,
+    "texto": "Validacao de seguranca antifraude exige pagamento de caucao de 15% sobre o saldo ganho.",
+    "rotulo_esperado": "ALTO_RISCO",
+    "categoria": "taxa_desbloqueio_pix",
+    "fonte": "Reclame Aqui"
+  },
+  {
+    "id": 10,
+    "texto": "Para resgates acima de R$ 500, o cliente devera transferir taxa de desbloqueio de R$ 75.",
+    "rotulo_esperado": "ALTO_RISCO",
+    "categoria": "taxa_desbloqueio_pix",
+    "fonte": "Reclame Aqui - Extorsao Pix"
+  },
+  {
+    "id": 11,
+    "texto": "Saque cancelado automaticamente se a conta nao mantiver giro diario minimo de 30 apostas.",
+    "rotulo_esperado": "ALTO_RISCO",
+    "categoria": "retencao_unilateral",
+    "fonte": "CPI das Bets"
+  },
+  {
+    "id": 12,
+    "texto": "Condicao promocional: todos os ganhos derivados de rodadas gratis exigem rollover de 65x.",
+    "rotulo_esperado": "ALTO_RISCO",
+    "categoria": "rollover_predatorio",
+    "fonte": "Termos de Uso Espelhos DGA"
+  },
+  {
+    "id": 13,
+    "texto": "Taxa de liberacao rapida: pague R$ 30 para receber o PIX em menos de 10 minutos.",
+    "rotulo_esperado": "ALTO_RISCO",
+    "categoria": "taxa_desbloqueio_pix",
+    "fonte": "Reclame Aqui"
+  },
+  {
+    "id": 14,
+    "texto": "O saque sera estornado caso o jogador solicite resgate antes de 50 jogadas completas.",
+    "rotulo_esperado": "ALTO_RISCO",
+    "categoria": "rollover_predatorio",
+    "fonte": "Termos de Uso Espelhos DGA"
+  },
+  {
+    "id": 15,
+    "texto": "O usuario concorda que a plataforma pode reter ate 90% do saldo em caso de inatividade de 3 dias.",
+    "rotulo_esperado": "ALTO_RISCO",
+    "categoria": "retencao_unilateral",
+    "fonte": "CPI das Bets"
+  },
+  {
+    "id": 16,
+    "texto": "Para validar a titularidade da chave PIX, realize uma transferencia de ativacao de R$ 40.",
+    "rotulo_esperado": "ALTO_RISCO",
+    "categoria": "taxa_desbloqueio_pix",
+    "fonte": "Reclame Aqui"
+  },
+  {
+    "id": 17,
+    "texto": "Bloqueio temporario de fundos ate auditoria interna manual sem prazo maximo determinado.",
+    "rotulo_esperado": "ALTO_RISCO",
+    "categoria": "retencao_unilateral",
+    "fonte": "Reclame Aqui"
+  },
+  {
+    "id": 18,
+    "texto": "Todo pedido de retirada esta sujeito a cobranca de taxa de conveniencia de 25% pelo gateway.",
+    "rotulo_esperado": "ALTO_RISCO",
+    "categoria": "taxa_desbloqueio_pix",
+    "fonte": "CPI das Bets"
+  },
+  {
+    "id": 19,
+    "texto": "Rollover de 55x sobre o valor combinado de deposito mais bonus concedido no cadastro.",
+    "rotulo_esperado": "ALTO_RISCO",
+    "categoria": "rollover_predatorio",
+    "fonte": "Termos de Uso Espelhos DGA"
+  },
+  {
+    "id": 20,
+    "texto": "A plataforma reserva-se o direito de cancelar apostas vencedoras sem aviso previo ou justificativa.",
+    "rotulo_esperado": "ALTO_RISCO",
+    "categoria": "retencao_unilateral",
+    "fonte": "CPI das Bets"
+  },
+  {
+    "id": 21,
+    "texto": "Taxa de seguro de custodia financeira de R$ 60 debitada previamente para liberar ordens de saque.",
+    "rotulo_esperado": "ALTO_RISCO",
+    "categoria": "taxa_desbloqueio_pix",
+    "fonte": "Reclame Aqui"
+  },
+  {
+    "id": 22,
+    "texto": "Exigencia de aposta minima cumulativa equivalente a 60 vezes o capital inicial para resgate.",
+    "rotulo_esperado": "ALTO_RISCO",
+    "categoria": "rollover_predatorio",
+    "fonte": "CPI das Bets"
+  },
+  {
+    "id": 23,
+    "texto": "Retencao obrigatoria de tributo ficticio de 30% recolhido antecipadamente via chave PIX externa.",
+    "rotulo_esperado": "ALTO_RISCO",
+    "categoria": "taxa_desbloqueio_pix",
+    "fonte": "Notificacoes SPA/MF"
+  },
+  {
+    "id": 24,
+    "texto": "Saque so e liberado apos o usuario convidar 5 amigos que realizem depositos validos.",
+    "rotulo_esperado": "ALTO_RISCO",
+    "categoria": "esquema_piramidal",
+    "fonte": "Reclame Aqui"
+  },
+  {
+    "id": 25,
+    "texto": "Rollover predatorio de 75x em jogos de explosao Crash com retencao de ganhos nao rolados.",
+    "rotulo_esperado": "ALTO_RISCO",
+    "categoria": "rollover_predatorio",
+    "fonte": "CPI das Bets"
+  },
+  {
+    "id": 26,
+    "texto": "Taxa de verificacao VIP: transfira R$ 100 via chave pix para destravar saldo premiado.",
+    "rotulo_esperado": "ALTO_RISCO",
+    "categoria": "taxa_desbloqueio_pix",
+    "fonte": "Reclame Aqui"
+  },
+  {
+    "id": 27,
+    "texto": "Para efetuar o resgate dos lucros, exige-se aposta de 45 vezes o valor do aporte inicial.",
+    "rotulo_esperado": "ALTO_RISCO",
+    "categoria": "rollover_predatorio",
+    "fonte": "Termos de Uso Espelhos DGA"
+  },
+  {
+    "id": 28,
+    "texto": "Bloqueio preventivo de saque por 30 dias uteis caso o apostador solicite retirada no final de semana.",
+    "rotulo_esperado": "ALTO_RISCO",
+    "categoria": "retencao_unilateral",
+    "fonte": "CPI das Bets"
+  },
+  {
+    "id": 29,
+    "texto": "Cobranca de tarifa de expedicao bancaria de 18% para liquidar transferencia via TED ou Pix.",
+    "rotulo_esperado": "ALTO_RISCO",
+    "categoria": "taxa_desbloqueio_pix",
+    "fonte": "Reclame Aqui"
+  },
+  {
+    "id": 30,
+    "texto": "O saldo fica congelado ate que sejam realizados pelo menos 60 giros adicionais nas maquinas de slot.",
+    "rotulo_esperado": "ALTO_RISCO",
+    "categoria": "rollover_predatorio",
+    "fonte": "Termos de Uso Espelhos DGA"
+  },
+  {
+    "id": 31,
+    "texto": "Caucao de conformidade de R$ 80 obrigatoria antes do envio de qualquer transferencia de premio.",
+    "rotulo_esperado": "ALTO_RISCO",
+    "categoria": "taxa_desbloqueio_pix",
+    "fonte": "Reclame Aqui"
+  },
+  {
+    "id": 32,
+    "texto": "Todos os valores ganhos no cassino ao vivo devem ser apostados 50 vezes antes da liberacao do saque.",
+    "rotulo_esperado": "ALTO_RISCO",
+    "categoria": "rollover_predatorio",
+    "fonte": "Termos de Uso Espelhos DGA"
+  },
+  {
+    "id": 33,
+    "texto": "Taxa de manutencao de conta vencedora: debito antecipado de R$ 50 para processar o resgate.",
+    "rotulo_esperado": "ALTO_RISCO",
+    "categoria": "taxa_desbloqueio_pix",
+    "fonte": "CPI das Bets"
+  },
+  {
+    "id": 34,
+    "texto": "Retencao total de ganhos obtidos com saldo promocional se nao for cumprido rollover de 85x.",
+    "rotulo_esperado": "ALTO_RISCO",
+    "categoria": "rollover_predatorio",
+    "fonte": "Termos de Uso Espelhos DGA"
+  },
+  {
+    "id": 35,
+    "texto": "Exigencia de deposito em dobro caso o usuario tente retirar fundos antes de completar 48 horas de cadastro.",
+    "rotulo_esperado": "ALTO_RISCO",
+    "categoria": "retencao_unilateral",
+    "fonte": "Reclame Aqui"
+  },
+  {
+    "id": 36,
+    "texto": "Taxa de liberacao de lote PIX: pagamento previo de R$ 45 para envio de saldo a instituicao financeira.",
+    "rotulo_esperado": "ALTO_RISCO",
+    "categoria": "taxa_desbloqueio_pix",
+    "fonte": "Reclame Aqui"
+  },
+  {
+    "id": 37,
+    "texto": "O cliente so podera solicitar resgate apos atingir rollover cumulativo de 60 vezes sobre todos os depositos.",
+    "rotulo_esperado": "ALTO_RISCO",
+    "categoria": "rollover_predatorio",
+    "fonte": "CPI das Bets"
+  },
+  {
+    "id": 38,
+    "texto": "Cancelamento unilateral de saldo caso o usuario tente retirar valores sem consentimento do suporte via Telegram.",
+    "rotulo_esperado": "ALTO_RISCO",
+    "categoria": "retencao_unilateral",
+    "fonte": "Reclame Aqui"
+  },
+  {
+    "id": 39,
+    "texto": "Cobranca antecipada de taxa de conformidade fiscal de 22% exigida via QR Code pix para envio do premio.",
+    "rotulo_esperado": "ALTO_RISCO",
+    "categoria": "taxa_desbloqueio_pix",
+    "fonte": "Notificacoes SPA/MF"
+  },
+  {
+    "id": 40,
+    "texto": "Retencao indefinida de saldo para averiguação de conduta caso o usuario tenha lucro superior a R$ 200.",
+    "rotulo_esperado": "ALTO_RISCO",
+    "categoria": "retencao_unilateral",
+    "fonte": "CPI das Bets"
+  },
+
+  {
+    "id": 41,
+    "texto": "O apostador pode solicitar o resgate de seus fundos a qualquer momento via PIX sem taxas extras, conf. Portaria SPA/MF 1.475/2024.",
+    "rotulo_esperado": "BAIXO_RISCO",
+    "categoria": "conformidade_spa_mf",
+    "fonte": "Portaria Normativa SPA/MF 1.475/2024"
+  },
+  {
+    "id": 42,
+    "texto": "Os saques de saldo real sao processados sem cobranca de taxas operacionais em ate 120 minutos.",
+    "rotulo_esperado": "BAIXO_RISCO",
+    "categoria": "operadora_autorizada",
+    "fonte": "Termos de Uso Operadora Autorizada"
+  },
+  {
+    "id": 43,
+    "texto": "Em conformidade com a Secretaria de Premios e Apostas do Ministerio da Fazenda, fundos proprios sao de livre resgate.",
+    "rotulo_esperado": "BAIXO_RISCO",
+    "categoria": "conformidade_spa_mf",
+    "fonte": "Portaria Normativa SPA/MF 1.475/2024"
+  },
+  {
+    "id": 44,
+    "texto": "Nenhuma tarifa ou caucao previa sera cobrada do apostador para transferencia de seus saldos liquidos.",
+    "rotulo_esperado": "BAIXO_RISCO",
+    "categoria": "operadora_autorizada",
+    "fonte": "Termos de Uso Betano Brasil"
+  },
+  {
+    "id": 45,
+    "texto": "O saldo depositado pode ser sacado para a mesma conta bancaria titular sem exigencia de giros forcados.",
+    "rotulo_esperado": "BAIXO_RISCO",
+    "categoria": "operadora_autorizada",
+    "fonte": "Termos de Uso KTO Brasil"
+  },
+  {
+    "id": 46,
+    "texto": "Resgate garantido em contas PIX de titularidade do proprio apostador, nos termos da Lei 14.790/2023.",
+    "rotulo_esperado": "BAIXO_RISCO",
+    "categoria": "conformidade_spa_mf",
+    "fonte": "Lei Federal nº 14.790/2023"
+  },
+  {
+    "id": 47,
+    "texto": "A operadora autorizada garante liquidacao financeira transparente sem retencao unilateral de saldo.",
+    "rotulo_esperado": "BAIXO_RISCO",
+    "categoria": "operadora_autorizada",
+    "fonte": "Portaria SPA/MF 1.475/2024"
+  },
+  {
+    "id": 48,
+    "texto": "O usuario tem direito a retirar seus rendimentos integrais sem custos de intermediacao financeira.",
+    "rotulo_esperado": "BAIXO_RISCO",
+    "categoria": "operadora_autorizada",
+    "fonte": "Termos de Uso Sportingbet Brasil"
+  },
+  {
+    "id": 49,
+    "texto": "Portaria Normativa SPA/MF nº 1.475/2024: prazos e diretrizes estritas de pagamento integral ao apostador.",
+    "rotulo_esperado": "BAIXO_RISCO",
+    "categoria": "conformidade_spa_mf",
+    "fonte": "Diario Oficial da Uniao"
+  },
+  {
+    "id": 50,
+    "texto": "Solicitacao de reembolso e saque sem restricao de horario ou volume minimo predeterminado.",
+    "rotulo_esperado": "BAIXO_RISCO",
+    "categoria": "operadora_autorizada",
+    "fonte": "Termos de Uso Betfair Brasil"
+  },
+  {
+    "id": 51,
+    "texto": "Condicoes de pagamento: pix direto na conta cadastrada sem intermediarios ou taxas ocultas.",
+    "rotulo_esperado": "BAIXO_RISCO",
+    "categoria": "operadora_autorizada",
+    "fonte": "Termos de Uso Bet365 Brasil"
+  },
+  {
+    "id": 52,
+    "texto": "Termos de devolucao de compras em conformidade com o Codigo de Defesa do Consumidor brasileiro.",
+    "rotulo_esperado": "BAIXO_RISCO",
+    "categoria": "codigo_defesa_consumidor",
+    "fonte": "CDC Lei 8.078/1990"
+  },
+  {
+    "id": 53,
+    "texto": "Cancelamento e estorno imediato no cartao ou pix sem taxa de desistencia do comprador.",
+    "rotulo_esperado": "BAIXO_RISCO",
+    "categoria": "codigo_defesa_consumidor",
+    "fonte": "CDC Lei 8.078/1990"
+  },
+  {
+    "id": 54,
+    "texto": "Politica de resgate transparente: valor creditado diretamente na instituicao financeira vinculada.",
+    "rotulo_esperado": "BAIXO_RISCO",
+    "categoria": "operadora_autorizada",
+    "fonte": "Termos de Uso Parimatch Brasil"
+  },
+  {
+    "id": 55,
+    "texto": "Certificado de autorizacao SPA/MF nº 001/2024: operacao legalizada e fiscalizada pelo governo federal.",
+    "rotulo_esperado": "BAIXO_RISCO",
+    "categoria": "conformidade_spa_mf",
+    "fonte": "Secretaria de Premios e Apostas"
+  },
+  {
+    "id": 56,
+    "texto": "Pagamento de premios realizado sem retencao abusiva em conta bancaria autorizada do proprio titular.",
+    "rotulo_esperado": "BAIXO_RISCO",
+    "categoria": "operadora_autorizada",
+    "fonte": "Portaria SPA/MF 1.475/2024"
+  },
+  {
+    "id": 57,
+    "texto": "Regras de jogo responsavel e autoexclusao voluntaria disponiveis a qualquer momento no perfil do usuario.",
+    "rotulo_esperado": "BAIXO_RISCO",
+    "categoria": "conformidade_spa_mf",
+    "fonte": "Portaria SPA/MF 1.475/2024"
+  },
+  {
+    "id": 58,
+    "texto": "Saques efetuados via Pix com chave CPF do titular cadastrado em prazo maximo de 2 horas.",
+    "rotulo_esperado": "BAIXO_RISCO",
+    "categoria": "operadora_autorizada",
+    "fonte": "Termos de Uso Superbet Brasil"
+  },
+  {
+    "id": 59,
+    "texto": "Garantia de integridade e auditoria de probabilidades por laboratorios internacionais certificados.",
+    "rotulo_esperado": "BAIXO_RISCO",
+    "categoria": "conformidade_spa_mf",
+    "fonte": "Portaria SPA/MF 1.475/2024"
+  },
+  {
+    "id": 60,
+    "texto": "Nenhum valor adicional e cobrado para validacao cadastral ou homologacao de chave de recebimento.",
+    "rotulo_esperado": "BAIXO_RISCO",
+    "categoria": "operadora_autorizada",
+    "fonte": "Termos de Uso Novibet Brasil"
+  },
+  {
+    "id": 61,
+    "texto": "Os fundos depositados pelo apostador permanecem segregados e protegidos contra insolvencia patrimonial.",
+    "rotulo_esperado": "BAIXO_RISCO",
+    "categoria": "conformidade_spa_mf",
+    "fonte": "Lei Federal 14.790/2023"
+  },
+  {
+    "id": 62,
+    "texto": "Retirada de lucros sem cobranca de pedagio ou taxas de conversao de moeda em territorio nacional.",
+    "rotulo_esperado": "BAIXO_RISCO",
+    "categoria": "operadora_autorizada",
+    "fonte": "Portaria SPA/MF 1.475/2024"
+  },
+  {
+    "id": 63,
+    "texto": "O apostador tem direito a consulta detalhada do extrato historico de todas as apostas liquidadas.",
+    "rotulo_esperado": "BAIXO_RISCO",
+    "categoria": "conformidade_spa_mf",
+    "fonte": "Portaria SPA/MF 1.475/2024"
+  },
+  {
+    "id": 64,
+    "texto": "Transferencia de saldos via Pix 24 horas por dia, 7 dias por semana sem custo ao apostador.",
+    "rotulo_esperado": "BAIXO_RISCO",
+    "categoria": "operadora_autorizada",
+    "fonte": "Termos de Uso EstrelaBet"
+  },
+  {
+    "id": 65,
+    "texto": "Cumprimento integral dos padroes de seguranca da informacao e protecao de dados pessoais sob a LGPD.",
+    "rotulo_esperado": "BAIXO_RISCO",
+    "categoria": "conformidade_spa_mf",
+    "fonte": "Lei 13.709/2018 (LGPD)"
+  },
+  {
+    "id": 66,
+    "texto": "O resgate de saldo disponivel e creditado sem intermediacao de contas de pessoas fisicas terceiras.",
+    "rotulo_esperado": "BAIXO_RISCO",
+    "categoria": "operadora_autorizada",
+    "fonte": "Portaria SPA/MF 1.475/2024"
+  },
+  {
+    "id": 67,
+    "texto": "Valores promocionais com regras de bonus claras, transparentes e limitadas aos padroes da Portaria SPA/MF.",
+    "rotulo_esperado": "BAIXO_RISCO",
+    "categoria": "conformidade_spa_mf",
+    "fonte": "Portaria SPA/MF 1.475/2024"
+  },
+  {
+    "id": 68,
+    "texto": "Em caso de encerramento de conta, todos os recursos remanescentes serao transferidos imediatamente ao cliente.",
+    "rotulo_esperado": "BAIXO_RISCO",
+    "categoria": "operadora_autorizada",
+    "fonte": "Termos de Uso GaleraBet"
+  },
+  {
+    "id": 69,
+    "texto": "Auditoria de sorteios por gerador de numeros pseudoaleatorios certificado pelas autoridades competentes.",
+    "rotulo_esperado": "BAIXO_RISCO",
+    "categoria": "conformidade_spa_mf",
+    "fonte": "Portaria SPA/MF 1.475/2024"
+  },
+  {
+    "id": 70,
+    "texto": "Liberacao de saldo para saque a partir de R$ 1,00 sem retencoes de valor minimo abusivo.",
+    "rotulo_esperado": "BAIXO_RISCO",
+    "categoria": "operadora_autorizada",
+    "fonte": "Termos de Uso PixBet"
+  },
+  {
+    "id": 71,
+    "texto": "Emissao automatica de comprovante de pagamento Pix emitido por instituicao financeira autorizada pelo BACEN.",
+    "rotulo_esperado": "BAIXO_RISCO",
+    "categoria": "operadora_autorizada",
+    "fonte": "Normas BACEN / Pix"
+  },
+  {
+    "id": 72,
+    "texto": "Os prazos de retirada respeitam estritamente o limite de liquidacao imediata fixado pelo Ministerio da Fazenda.",
+    "rotulo_esperado": "BAIXO_RISCO",
+    "categoria": "conformidade_spa_mf",
+    "fonte": "Portaria SPA/MF 1.475/2024"
+  },
+  {
+    "id": 73,
+    "texto": "O titular pode cancelar bonificacoes ativas a qualquer momento sem perda do saldo real depositado.",
+    "rotulo_esperado": "BAIXO_RISCO",
+    "categoria": "conformidade_spa_mf",
+    "fonte": "Portaria SPA/MF 1.475/2024"
+  },
+  {
+    "id": 74,
+    "texto": "Politica de atendimento ao consumidor com canal de ouvidoria oficial e registro no portal Consumidor.gov.br.",
+    "rotulo_esperado": "BAIXO_RISCO",
+    "categoria": "codigo_defesa_consumidor",
+    "fonte": "Secretaria Nacional do Consumidor"
+  },
+  {
+    "id": 75,
+    "texto": "Identificacao do operador com razao social publica, CNPJ ativo e sede em territorio brasileiro.",
+    "rotulo_esperado": "BAIXO_RISCO",
+    "categoria": "conformidade_spa_mf",
+    "fonte": "Lei Federal 14.790/2023"
+  },
+  {
+    "id": 76,
+    "texto": "Saques de ganhos auferidos em apostas de quota fixa processados conforme diretrizes da Portaria SPA/MF.",
+    "rotulo_esperado": "BAIXO_RISCO",
+    "categoria": "conformidade_spa_mf",
+    "fonte": "Portaria SPA/MF 1.475/2024"
+  },
+  {
+    "id": 77,
+    "texto": "Regras contratuais redigidas em portugues claro, sem termos ambíguos ou restricoes ocultas de retirada.",
+    "rotulo_esperado": "BAIXO_RISCO",
+    "categoria": "codigo_defesa_consumidor",
+    "fonte": "CDC Lei 8.078/1990"
+  },
+  {
+    "id": 78,
+    "texto": "A plataforma nao impoe cobranca de tarifas de TED ou DOC sobre valores resgatados pelo cliente.",
+    "rotulo_esperado": "BAIXO_RISCO",
+    "categoria": "operadora_autorizada",
+    "fonte": "Termos de Uso F12Bet"
+  },
+  {
+    "id": 79,
+    "texto": "Transparencia nas regras de desempate e liquidacao de eventos esportivos segundo a Portaria 1.475.",
+    "rotulo_esperado": "BAIXO_RISCO",
+    "categoria": "conformidade_spa_mf",
+    "fonte": "Portaria SPA/MF 1.475/2024"
+  },
+  {
+    "id": 80,
+    "texto": "Garantia de devolucao de valores caso o evento esportivo seja cancelado sem ocorrencia de partida oficial.",
+    "rotulo_esperado": "BAIXO_RISCO",
+    "categoria": "operadora_autorizada",
+    "fonte": "Portaria SPA/MF 1.475/2024"
+  },
+
+  {
+    "id": 81,
+    "texto": "tx 90% do CDI com liquidez diária para reserva de emergência.",
+    "rotulo_esperado": "FORA_DE_ESCOPO",
+    "categoria": "investimento_bancario",
+    "fonte": "Nubank / Banco Inter"
+  },
+  {
+    "id": 82,
+    "texto": "CDB prefixado a 115% com vencimento em 2028 garantido pelo FGC.",
+    "rotulo_esperado": "FORA_DE_ESCOPO",
+    "categoria": "investimento_bancario",
+    "fonte": "XP Investimentos"
+  },
+  {
+    "id": 83,
+    "texto": "Taxa Selic mantida em 10,75% ao ano pelo Copom em decisao recente.",
+    "rotulo_esperado": "FORA_DE_ESCOPO",
+    "categoria": "noticia_economica",
+    "fonte": "Valor Economico"
+  },
+  {
+    "id": 84,
+    "texto": "Tesouro Selic 2029 com rentabilidade pos-fixada e liquidez em D+1.",
+    "rotulo_esperado": "FORA_DE_ESCOPO",
+    "categoria": "investimento_bancario",
+    "fonte": "Tesouro Direto Oficial"
+  },
+  {
+    "id": 85,
+    "texto": "Receita de bolo de cenoura com cobertura de chocolate e tres ovos.",
+    "rotulo_esperado": "FORA_DE_ESCOPO",
+    "categoria": "culinaria_geral",
+    "fonte": "TudoGostoso"
+  },
+  {
+    "id": 86,
+    "texto": "Calculo de juros compostos sobre aporte mensal de R$ 500 durante dez anos.",
+    "rotulo_esperado": "FORA_DE_ESCOPO",
+    "categoria": "educacao_financeira",
+    "fonte": "Calculadora Financeira"
+  },
+  {
+    "id": 87,
+    "texto": "LCI de 92% do CDI isenta de Imposto de Renda para pessoa fisica.",
+    "rotulo_esperado": "FORA_DE_ESCOPO",
+    "categoria": "investimento_bancario",
+    "fonte": "BTG Pactual"
+  },
+  {
+    "id": 88,
+    "texto": "Como fazer arroz soltinho usando apenas alho, cebola e azeite de oliva.",
+    "rotulo_esperado": "FORA_DE_ESCOPO",
+    "categoria": "culinaria_geral",
+    "fonte": "Receitas Nestle"
+  },
+  {
+    "id": 89,
+    "texto": "Fundo imobiliario com dividend yield anual de 11,5% pago mensalmente.",
+    "rotulo_esperado": "FORA_DE_ESCOPO",
+    "categoria": "investimento_bancario",
+    "fonte": "Status Invest"
+  },
+  {
+    "id": 90,
+    "texto": "Previsao do tempo para Recife com chuva moderada no periodo da manha.",
+    "rotulo_esperado": "FORA_DE_ESCOPO",
+    "categoria": "noticia_cotidiana",
+    "fonte": "Climatempo"
+  },
+  {
+    "id": 91,
+    "texto": "Rendimento da poupanca antiga e nova regra baseada na Taxa Referencial.",
+    "rotulo_esperado": "FORA_DE_ESCOPO",
+    "categoria": "investimento_bancario",
+    "fonte": "Caixa Economica Federal"
+  },
+  {
+    "id": 92,
+    "texto": "Resumo do capitulo de ontem da novela das nove da TV Globo.",
+    "rotulo_esperado": "FORA_DE_ESCOPO",
+    "categoria": "entretenimento",
+    "fonte": "Gshow"
+  },
+  {
+    "id": 93,
+    "texto": "Financiamento imobiliario com amortizacao pela tabela SAC ou Price.",
+    "rotulo_esperado": "FORA_DE_ESCOPO",
+    "categoria": "credito_bancario",
+    "fonte": "Banco do Brasil"
+  },
+  {
+    "id": 94,
+    "texto": "Passo a passo para trocar o pneu do carro com seguranca no acostamento.",
+    "rotulo_esperado": "FORA_DE_ESCOPO",
+    "categoria": "utilidade_publica",
+    "fonte": "AutoEsporte"
+  },
+  {
+    "id": 95,
+    "texto": "Emprestimo consignado para aposentados e pensionistas do INSS com taxa reduzida.",
+    "rotulo_esperado": "FORA_DE_ESCOPO",
+    "categoria": "credito_bancario",
+    "fonte": "Portal Gov.br"
+  },
+  {
+    "id": 96,
+    "texto": "Horario de funcionamento dos bancos durante o feriado de Corpus Christi.",
+    "rotulo_esperado": "FORA_DE_ESCOPO",
+    "categoria": "utilidade_publica",
+    "fonte": "Febraban"
+  },
+  {
+    "id": 97,
+    "texto": "Cotacao do dolar comercial fechou em alta de 0,45% a R$ 5,72 nesta terca.",
+    "rotulo_esperado": "FORA_DE_ESCOPO",
+    "categoria": "noticia_economica",
+    "fonte": "G1 Economia"
+  },
+  {
+    "id": 98,
+    "texto": "Dicas de hidratacao capilar caseira com oleo de coco e babosa natural.",
+    "rotulo_esperado": "FORA_DE_ESCOPO",
+    "categoria": "saude_beleza",
+    "fonte": "Blog Vida Saudavel"
+  },
+  {
+    "id": 99,
+    "texto": "Debentures incentivadas de infraestrutura com isencao tributaria total.",
+    "rotulo_esperado": "FORA_DE_ESCOPO",
+    "categoria": "investimento_bancario",
+    "fonte": "InfoMoney"
+  },
+  {
+    "id": 100,
+    "texto": "Melhores pontos turisticos para visitar em Olinda no final de semana.",
+    "rotulo_esperado": "FORA_DE_ESCOPO",
+    "categoria": "turismo_recife",
+    "fonte": "Prefeitura de Olinda"
+  },
+  {
+    "id": 101,
+    "texto": "IPCA acumulado nos ultimos 12 meses fica em 4,42% dentro da meta de inflacao.",
+    "rotulo_esperado": "FORA_DE_ESCOPO",
+    "categoria": "noticia_economica",
+    "fonte": "IBGE"
+  },
+  {
+    "id": 102,
+    "texto": "Como fazer cafe coado perfeito na prensa francesa ou filtro de papel.",
+    "rotulo_esperado": "FORA_DE_ESCOPO",
+    "categoria": "culinaria_geral",
+    "fonte": "Melitta Blog"
+  },
+  {
+    "id": 103,
+    "texto": "Simulador de aposentadoria por idade e tempo de contribuicao no Meu INSS.",
+    "rotulo_esperado": "FORA_DE_ESCOPO",
+    "categoria": "utilidade_publica",
+    "fonte": "INSS Oficial"
+  },
+  {
+    "id": 104,
+    "texto": "Resultado do vestibular da UFRPE para os cursos de graduacao 2026.2.",
+    "rotulo_esperado": "FORA_DE_ESCOPO",
+    "categoria": "educacao_universitaria",
+    "fonte": "Portal UFRPE"
+  },
+  {
+    "id": 105,
+    "texto": "Nota de corte do SISU para Medicina e Engenharia da Computacao na UFPE.",
+    "rotulo_esperado": "FORA_DE_ESCOPO",
+    "categoria": "educacao_universitaria",
+    "fonte": "MEC"
+  },
+  {
+    "id": 106,
+    "texto": "Tabela de aliquotas progressivas do Imposto de Renda Retido na Fonte.",
+    "rotulo_esperado": "FORA_DE_ESCOPO",
+    "categoria": "tributacao_bancaria",
+    "fonte": "Receita Federal"
+  },
+  {
+    "id": 107,
+    "texto": "Guia de alimentacao saudavel para praticantes de corrida de rua matinal.",
+    "rotulo_esperado": "FORA_DE_ESCOPO",
+    "categoria": "saude_beleza",
+    "fonte": "Minha Vida"
+  },
+  {
+    "id": 108,
+    "texto": "Como plantar tomate cereja em vasos na varanda de apartamento pequeno.",
+    "rotulo_esperado": "FORA_DE_ESCOPO",
+    "categoria": "jardinagem",
+    "fonte": "Globo Rural"
+  },
+  {
+    "id": 109,
+    "texto": "Fundo de renda fixa com taxa de administracao zero e resgate automatico.",
+    "rotulo_esperado": "FORA_DE_ESCOPO",
+    "categoria": "investimento_bancario",
+    "fonte": "C6 Bank"
+  },
+  {
+    "id": 110,
+    "texto": "Horario dos trens do Metro do Recife para as linhas Centro e Sul.",
+    "rotulo_esperado": "FORA_DE_ESCOPO",
+    "categoria": "transporte_publico",
+    "fonte": "CBTU Recife"
+  },
+  {
+    "id": 111,
+    "texto": "Como formatar computador com Windows 11 utilizando pendrive bootavel.",
+    "rotulo_esperado": "FORA_DE_ESCOPO",
+    "categoria": "tecnologia_geral",
+    "fonte": "Tecnoblog"
+  },
+  {
+    "id": 112,
+    "texto": "Comparativo de autonomia de bateria entre carros eletricos e hibridos.",
+    "rotulo_esperado": "FORA_DE_ESCOPO",
+    "categoria": "automotivo",
+    "fonte": "Quatro Rodas"
+  },
+  {
+    "id": 113,
+    "texto": "Aplicativo para controle de gastos pessoais e planejamento orcamentario familiar.",
+    "rotulo_esperado": "FORA_DE_ESCOPO",
+    "categoria": "educacao_financeira",
+    "fonte": "Organizze"
+  },
+  {
+    "id": 114,
+    "texto": "Exercicios simples de alongamento para aliviar dores na lombar ao trabalhar sentado.",
+    "rotulo_esperado": "FORA_DE_ESCOPO",
+    "categoria": "saude_beleza",
+    "fonte": "Hospital Einstein"
+  },
+  {
+    "id": 115,
+    "texto": "Historico de rentabilidade do Ibovespa nas ultimas tres decadas de plano real.",
+    "rotulo_esperado": "FORA_DE_ESCOPO",
+    "categoria": "noticia_economica",
+    "fonte": "B3 Bolsa de Valores"
+  },
+  {
+    "id": 116,
+    "texto": "Como emitir a segunda via da conta de energia eletrica pela internet.",
+    "rotulo_esperado": "FORA_DE_ESCOPO",
+    "categoria": "utilidade_publica",
+    "fonte": "Neoenergia Pernambuco"
+  },
+  {
+    "id": 117,
+    "texto": "Diferenca entre juros nominais e juros reais na analise de investimentos de longo prazo.",
+    "rotulo_esperado": "FORA_DE_ESCOPO",
+    "categoria": "educacao_financeira",
+    "fonte": "Anbima"
+  },
+  {
+    "id": 118,
+    "texto": "Dicas para melhorar a velocidade da conexao Wi-Fi em casa sem trocar o roteador.",
+    "rotulo_esperado": "FORA_DE_ESCOPO",
+    "categoria": "tecnologia_geral",
+    "fonte": "Olhar Digital"
+  },
+  {
+    "id": 119,
+    "texto": "Calendario de pagamento do abono salarial PIS PASEP para o ano vigente.",
+    "rotulo_esperado": "FORA_DE_ESCOPO",
+    "categoria": "utilidade_publica",
+    "fonte": "Ministerio do Trabalho"
+  },
+  {
+    "id": 120,
+    "texto": "Como fazer manutencao preventiva de ar-condicionado residencial antes do verao.",
+    "rotulo_esperado": "FORA_DE_ESCOPO",
+    "categoria": "utilidade_publica",
+    "fonte": "Guia da Casa"
+  }
+]
