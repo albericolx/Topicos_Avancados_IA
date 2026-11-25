@@ -33,7 +33,11 @@ va2/
 ├── slides.html                      # Deck interativo oficial de slides sem1 (16:9, notas de orador, fullscreen)
 ├── sem2.md                          # Folha do Seminário Iteração 2 (sem2: demo ao vivo, custos, falha e evolução)
 ├── slides_sem2.html                 # Deck interativo oficial de slides sem2 com notas e demo ao vivo
-
+├── sem3.md                          # Folha do Seminário Iteração 3 (sem3: protocolo de teste pré-registrado e regras)
+├── slides_sem3.html                 # Deck interativo oficial de slides sem3 com notas de orador e tela cheia
+├── artigo.md                        # Folha de Registro Oficial do Artigo (6 marcos completos e auditoria cega)
+├── demo.md                          # Folha do Seminário Final & Demonstração (demo Nível 5 e pitch 4 blocos Nível 3)
+├── slides_demo.html                 # Deck interativo oficial de slides demo/pitch final (02/12) com notas e tela cheia
 ├── PITCH.md                         # Guia de Defesa Oral sem a tela (Pitch de 2 minutos para checagem com o professor)
 
 ├── CONTEXT.md                       # Documentação canônica desta pasta
