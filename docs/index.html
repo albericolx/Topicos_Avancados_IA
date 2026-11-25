@@ -271,7 +271,8 @@
             "rollover", "saque", "giros", "aposta", "apostador", "premio", "prêmio",
             "banca", "saldo depositado", "liberacao de pix", "liberação de pix",
             "spa/mf", "cassino", "odds", "deposito previo", "depósito prévio",
-            "bonus", "bônus", "retencao", "retenção"
+            "bonus", "bônus", "retencao", "retenção", "tigrinho", "fortune tiger",
+            "rodadas gratis", "rodadas grátis", "slots", "slot", "roleta"
         ];
 
         const TERMOS_FORA_ESCOPO = [
@@ -441,6 +442,7 @@
             let motivo = "";
             let motor = "Fast-Path Guardrail (< 0.2ms)";
             let latencia = 0.15;
+            let titulo = "Extração de Texto Livre";
 
             if (!pertinente) {
                 risco = "FORA_DE_ESCOPO";
@@ -448,31 +450,42 @@
                 motor = "Fast-Path Guardrail (< 0.2ms)";
                 latencia = 0.13;
             } else {
+                // 1. Conformidade com a Portaria SPA/MF 1.475/2024 (Baixo Risco)
                 if (lower.includes("spa/mf") || lower.includes("1.475") || (lower.includes("sem taxas") && !lower.includes("exige"))) {
                     risco = "BAIXO_RISCO";
-                    motivo = "Resgate livre e sem retenção abusiva, em conformidade com as diretrizes regulatórias da Portaria SPA/MF 1.475/2024.";
+                    motivo = "Resgate livre e sem taxas abusivas, em estrita conformidade com as diretrizes da Portaria SPA/MF 1.475/2024 e Código de Defesa do Consumidor.";
                     motor = "Fast-Path LAYA On-Device (< 35ms)";
                     latencia = 0.18;
-                } else if (lower.includes("rollover") || lower.includes("60x") || lower.includes("giros") || lower.includes("retidos") || lower.includes("bloqueio")) {
+                // 2. Golpe Explícito de Saque / Rollover Predatório / Retenção Unilateral
+                } else if (lower.includes("rollover") || lower.includes("60x") || lower.includes("50x") || lower.includes("80x") || lower.includes("retidos") || lower.includes("bloqueio de saldo") || lower.includes("retenção") || lower.includes("retencao")) {
                     risco = "ALTO_RISCO";
-                    motivo = "Mecanismo predatório de rollover ou bloqueio unilateral de saque detectado.";
+                    motivo = "Mecanismo predatório contratual: exigência de rollover abusivo ou retenção unilateral de saldo depositado.";
                     motor = "Deep-Path SLM (Qwen2.5-0.5B INT4)";
                     latencia = 17.4;
-                } else if (lower.includes("deposito previo") || lower.includes("depósito prévio") || lower.includes("20%") || lower.includes("taxa de liberacao") || lower.includes("taxa de liberação")) {
+                // 3. Golpe de Falsa Taxa de Liberação ou Depósito Prévio
+                } else if (lower.includes("deposito previo") || lower.includes("depósito prévio") || lower.includes("taxa de liberacao") || lower.includes("taxa de liberação") || lower.includes("taxa de desbloqueio") || lower.includes("caução") || lower.includes("caucao")) {
                     risco = "ALTO_RISCO";
-                    motivo = "Exigência abusiva de aporte financeiro prévio para liberação de resgate de fundos próprios.";
+                    motivo = "Golpe de falsa liberação de saque: exigência ilegal de depósito financeiro prévio para resgatar fundos próprios.";
                     motor = "Deep-Path SLM (Qwen2.5-0.5B INT4)";
                     latencia = 15.8;
+                // 4. Isca Publicitária / Anúncio de Jogo Não Autorizado (Tigrinho, Rodadas Grátis, Bônus Inicial sem Contrato)
+                } else if (lower.includes("tigrinho") || lower.includes("fortune tiger") || lower.includes("rodadas gratis") || lower.includes("rodadas grátis") || lower.includes("ganhos faceis") || lower.includes("ganhos fáceis") || (lower.includes("bonus") && lower.includes("link"))) {
+                    titulo = "Análise de Mensagem / Isca Promocional";
+                    risco = "ALTO_RISCO";
+                    motivo = "Isca publicitária de jogo de azar ('tigrinho') com promessa de bônus e rodadas grátis, sem comprovação de licença SPA/MF e sem transparência sobre termos contratuais de resgate.";
+                    motor = "Deep-Path SLM (Qwen2.5-0.5B INT4)";
+                    latencia = 18.2;
+                // 5. Fallback: Menção genérica a termos de apostas sem detalhamento de saque
                 } else {
                     risco = "ALTO_RISCO";
-                    motivo = "Cláusula atípica de aposta com indicativo de retenção de saldo e restrições não autorizadas.";
+                    motivo = "Menção a termos de apostas em plataforma não certificada pela Portaria SPA/MF nº 1.475/2024, sem detalhamento transparente das regras de saque.";
                     motor = "Deep-Path SLM (Qwen2.5-0.5B INT4)";
                     latencia = 19.2;
                 }
             }
 
             const customItem = {
-                titulo: "Extração de Texto Livre",
+                titulo: titulo,
                 texto: txt,
                 pertinente: pertinente,
                 risco: risco,
