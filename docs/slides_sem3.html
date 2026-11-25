@@ -313,10 +313,15 @@
           <div class="card card-danger">
             <div class="card-title">🚫 O Jeito de Hoje (Linha de Base do Estado)</div>
             <ul class="bullet-list">
-              <li><span class="highlight">Bloqueio Estático de DNS:</span> Notificação da Anatel e Fazenda derrubando 2.040 sites clandestinos.</li>
+              <li><span class="highlight">Bloqueio Estático de DNS:</span> Notificação formal Fazenda/Anatel com 2.040 sites ilegais notificados.</li>
               <li><span class="highlight">A Falha Ineludível:</span> Geradores de DGA criam espelhos mutantes (<code style="color:#60a5fa;">.xyz</code>, <code style="color:#60a5fa;">.top</code>) a cada 2h.</li>
               <li><span class="highlight">Taxa de Falha:</span> <span class="stat-badge stat-danger">100% de Falso Negativo</span> contra domínios ativados no mesmo dia da campanha.</li>
             </ul>
+            <div style="margin-top:12px; padding:8px 10px; background:rgba(239,68,68,0.12); border-left:3px solid #ef4444; border-radius:4px; font-size:0.75rem; color:#fca5a5; line-height:1.4;">
+              <strong>📌 Fontes Oficiais &amp; Acadêmicas:</strong><br>
+              • <em>SPA/Ministério da Fazenda &amp; Anatel:</em> Notificação Oficial de 11/10/2024 (2.040 domínios não autorizados).<br>
+              • <em>Zhauniarovich et al. (IEEE COMST, 2018) &amp; Nabeel et al. (ACM TOPS, 2020):</em> Ineficácia reativa de listas estáticas frente a DGA no D0.
+            </div>
           </div>
           <div class="card card-accent">
             <div class="card-title">🔬 O Competidor Acadêmico Mais Próximo</div>
@@ -325,6 +330,10 @@
               <li><span class="highlight">Métricas Deles:</span> Acurácia de 92,80% e F1 de 0,91 sobre 15.286 postagens na Indonésia.</li>
               <li><span class="highlight">Onde Eles Falham:</span> Execução em lote em servidores pesados de nuvem (&gt; 800 ms), violação de privacidade e <span class="highlight">ausência total de guardrail de domínio</span> para finanças legítimas.</li>
             </ul>
+            <div style="margin-top:12px; padding:8px 10px; background:rgba(245,158,11,0.12); border-left:3px solid #f59e0b; border-radius:4px; font-size:0.75rem; color:#fde68a; line-height:1.4;">
+              <strong>📌 Referência Canônica:</strong><br>
+              • <em>Muzakir et al. (IEEE ICISIT 2025):</em> DOI: <a href="https://doi.org/10.1109/ICISIT.2025.10842131" target="_blank" style="color:#38bdf8; text-decoration:none;">10.1109/ICISIT.2025.10842131</a> (Detecção de anúncios de aposta com CNN em nuvem).
+            </div>
           </div>
         </div>
       </div>
@@ -486,7 +495,7 @@
     let current = 0;
 
     const notes = [
-      "Como o mercado e a ciência tentam conter o golpe das apostas clandestinas hoje? Por dois caminhos imperfeitos. O governo usa listas estáticas de DNS: a Anatel já derrubou mais de 2.000 sites, mas os operadores criminosos usam algoritmos de DGA que geram espelhos mutantes a cada duas horas. Para novos domínios ativados no mesmo dia, a falha da lista estática é de rigorosamente 100%. Na academia, o trabalho mais próximo é o de Muzakir et al., publicado no IEEE este ano, que atingiu 92,8% de acurácia com CNNs sobre 15 mil sentenças de redes sociais. Mas onde ele falha? Ele roda em nuvem com alta latência, viola a privacidade do usuário e comete um erro metodológico crítico: não tem guardrail de domínio. Se alguém digitar uma taxa bancária legítima como 'tx 90% do CDI', o modelo dele não sabe descartar e gera alarme falso. Nós não viemos bater em espantalho: comparamos contra a melhor IA publicada e contra a infraestrutura oficial do Estado.",
+      "Como o mercado e a ciência tentam conter o golpe das apostas clandestinas hoje? Por dois caminhos imperfeitos. O governo usa listas estáticas de DNS: segundo a Notificação Oficial do Ministério da Fazenda e da Anatel de 11 de outubro de 2024, foram bloqueados 2.040 sites ilegais. Mas como comprovam Zhauniarovich et al. no IEEE e Nabeel et al. na ACM, listas de bloqueio estático são puramente reativas: se o criminoso usa DGA e ativa um espelho mutante hoje, esse domínio não consta na lista, gerando 100% de falso negativo no instante zero. Na academia, o trabalho mais próximo é o de Muzakir et al., publicado no IEEE este ano, que atingiu 92,8% de acurácia com CNNs sobre 15 mil sentenças de redes sociais. Mas onde ele falha? Ele roda em nuvem com alta latência, viola a privacidade do usuário e comete um erro crítico: não tem guardrail de domínio. Se alguém digitar uma taxa bancária legítima como 'tx 90% do CDI', o modelo dele não sabe descartar e gera alarme falso. Nós não viemos bater em espantalho: comparamos contra a melhor IA publicada e contra a infraestrutura oficial do Estado com fontes documentadas.",
       "Para não cair na armadilha da 'medida de opinião' — perguntar para três colegas se acharam o app bonito —, definimos o alvo na mudança concreta do problema técnico: classificar com exatidão contratos de calote e nunca gerar falsos alarmes contra produtos financeiros legítimos. Seguindo o padrão de Muzakir et al., nossa métrica é o F1-Score e a Acurácia Global, combinados com a taxa de falsos positivos em dados fora de domínio. O nosso alvo é F1 maior ou igual a 0,85, acurácia acima de 85% e rigorosamente zero falsos alarmes quando entrar uma taxa bancária como o CDI. Se der menos de 0,75 de F1 ou mais de 10% de alarme falso no CDI, a hipótese caiu. O critério está escrito antes de ver o número e registrado no commit do repositório.",
       "Aqui está o desenho da comparação para garantir que não haja viés. Replicamos a metodologia de Muzakir et al., mas adaptada para o cenário regulatório brasileiro. Construímos o benchmark curado Sentinela-BR com 120 sentenças reais em português, rigorosamente balanceadas em três classes: 40 cláusulas de calote da CPI das Bets e Reclame Aqui, 40 regras de operadoras legalizadas pela Portaria 1.475 da Fazenda e 40 termos bancários legítimos como o CDI para testar o descarte do guardrail. Submetemos esse mesmo corpus às três condições: a lista da Anatel, o classificador sem guardrail e o Sentinela Clandestino. O gabarito formal de verdade é a lei da Secretaria de Prêmios e Apostas do Ministério da Fazenda. Tudo o que varia é a inteligência de cada solução.",
       "Como chegamos com o resultado no pitch de 2 de dezembro? O cronograma é estrito e transparente. Hoje apresentamos o protocolo e a regra pré-registrada. O teste é 100% computacional e reproduzível: roda sobre o dataset aberto de 120 casos em menos de 2 segundos na CPU local via script Python, sem depender de internet nem de dados voláteis. Por que não fizemos teste com pessoas? Porque o objetivo é avaliar a capacidade técnica do modelo frente ao estado da arte de Muzakir et al., que também foi avaliado exclusivamente sobre benchmark textual. As próprias instruções da disciplina preveem expressamente que testes com dados montados e públicos são plenamente válidos para exercícios de engenharia de IA. No dia 2 de dezembro, a tabela completa de acurácia e F1 sobe para o slide final.",
