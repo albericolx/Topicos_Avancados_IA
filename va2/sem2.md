@@ -5,7 +5,7 @@
 
 **link dos slides:** [https://albericolx.github.io/Topicos_Avancados_IA/slides_sem2.html](https://albericolx.github.io/Topicos_Avancados_IA/slides_sem2.html) (Deck interativo com notas do orador `[S]` e tela cheia `[F]`)
 
-**a versão que roda:** a tag `sem2` (commit `071c1ad`) em [github.com/albericolx/Topicos_Avancados_IA](https://github.com/albericolx/Topicos_Avancados_IA)
+**a versão que roda:** a tag `sem2` em [github.com/albericolx/Topicos_Avancados_IA](https://github.com/albericolx/Topicos_Avancados_IA) (branch `main` / `gh-pages`)
 
 **a máquina:** smartphone Samsung Galaxy A15 (processador MediaTek Helio G99 ARM64 octa-core, 4 GB de RAM), em modo avião (zero nuvem), espelhado no projetor por cabo via scrcpy (com réplica web local idêntica no navegador).
 
