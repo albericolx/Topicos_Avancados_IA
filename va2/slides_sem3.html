@@ -62,7 +62,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 30px;
+      padding: 24px;
     }
     .slide {
       display: none;
@@ -78,7 +78,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
     .slide-header {
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
     .slide-tag {
       display: inline-block;
@@ -99,125 +99,203 @@
       line-height: 1.2;
       color: #fff;
     }
+    .slide-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
     .grid-2 {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 20px;
+      gap: 16px;
     }
     .grid-3 {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
-      gap: 16px;
+      gap: 14px;
     }
     .card {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 20px;
+      border-radius: 10px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
     }
     .card-title {
-      font-size: 1rem;
+      font-size: 1.05rem;
       font-weight: 700;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       display: flex;
       align-items: center;
       gap: 8px;
     }
-    .stat-box {
-      background: rgba(0,0,0,0.3);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 8px;
-      padding: 12px;
-      margin-top: 10px;
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
+    .card-danger { border-color: rgba(239, 68, 68, 0.3); background: rgba(239, 68, 68, 0.04); }
+    .card-danger .card-title { color: #f87171; }
+    .card-success { border-color: rgba(16, 185, 129, 0.3); background: rgba(16, 185, 129, 0.04); }
+    .card-success .card-title { color: #34d399; }
+    .card-accent { border-color: rgba(245, 158, 11, 0.3); background: rgba(245, 158, 11, 0.04); }
+    .card-accent .card-title { color: #fbbf24; }
+    .card-info { border-color: rgba(99, 102, 241, 0.3); background: rgba(99, 102, 241, 0.04); }
+    .card-info .card-title { color: #818cf8; }
+
+    ul.bullet-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 0.88rem;
+      line-height: 1.45;
     }
-    .stat-val {
-      font-size: 1.4rem;
-      font-weight: 800;
+    ul.bullet-list li {
+      position: relative;
+      padding-left: 18px;
+      color: #cbd5e1;
+    }
+    ul.bullet-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
       color: var(--primary);
-      margin-top: 4px;
+      font-weight: bold;
     }
-    .rule-badge {
+    .highlight {
+      color: #fff;
+      font-weight: 700;
+    }
+    .stat-badge {
       display: inline-block;
-      padding: 4px 10px;
-      border-radius: 6px;
-      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 4px;
       font-size: 0.8rem;
-      text-transform: uppercase;
-      margin-bottom: 6px;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      background: rgba(255, 255, 255, 0.08);
     }
-    .rule-pass { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid var(--success); }
-    .rule-fail { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid var(--danger); }
-    .rule-inc { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid var(--accent); }
+    .stat-danger { background: rgba(239, 68, 68, 0.2); color: #fca5a5; }
+    .stat-success { background: rgba(16, 185, 129, 0.2); color: #6ee7b7; }
+    .stat-accent { background: rgba(245, 158, 11, 0.2); color: #fde68a; }
+
+    .quote-box {
+      background: rgba(56, 189, 248, 0.06);
+      border-left: 4px solid var(--primary);
+      padding: 12px 16px;
+      border-radius: 0 8px 8px 0;
+      font-style: italic;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: #e2e8f0;
+      margin-bottom: 14px;
+    }
+
+    .table-container {
+      overflow-x: auto;
+      margin-top: 10px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      text-align: left;
+    }
+    th, td {
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    th {
+      color: var(--text-muted);
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      letter-spacing: 0.05em;
+      background: rgba(255, 255, 255, 0.02);
+    }
 
     .speaker-notes-panel {
-      width: 320px;
-      background: #060911;
-      border-left: 1px solid var(--border);
-      padding: 20px;
-      display: none;
-      flex-direction: column;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #0f172a;
+      border-top: 2px solid var(--accent);
+      padding: 14px 24px;
+      max-height: 170px;
       overflow-y: auto;
+      display: none;
+      z-index: 20;
+      box-shadow: 0 -8px 20px rgba(0, 0, 0, 0.6);
     }
     .speaker-notes-panel.active {
-      display: flex;
+      display: block;
     }
     .notes-title {
       font-size: 0.75rem;
-      font-weight: 700;
+      font-weight: 800;
       text-transform: uppercase;
+      letter-spacing: 0.05em;
       color: var(--accent);
-      margin-bottom: 10px;
+      margin-bottom: 6px;
       display: flex;
-      align-items: center;
-      gap: 6px;
+      justify-content: space-between;
     }
     .notes-content {
       font-size: 0.88rem;
       line-height: 1.5;
-      color: #cbd5e1;
-      font-style: italic;
+      color: #e2e8f0;
+      font-family: system-ui, sans-serif;
     }
 
     footer {
-      padding: 12px 24px;
+      padding: 10px 24px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       border-top: 1px solid var(--border);
       background: rgba(9, 13, 22, 0.95);
-      font-size: 0.85rem;
+      z-index: 10;
     }
     .controls {
       display: flex;
       gap: 8px;
     }
     .btn {
-      background: var(--card-bg);
+      background: rgba(255, 255, 255, 0.06);
       border: 1px solid var(--border);
       color: var(--text);
       padding: 6px 14px;
       border-radius: 6px;
       cursor: pointer;
-      font-weight: 600;
       font-size: 0.8rem;
-      transition: all 0.15s;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
     }
-    .btn:hover { background: #1e293b; border-color: var(--primary); }
-    .btn-primary { background: var(--primary); color: #000; border-color: var(--primary); }
-    .btn-primary:hover { background: #7dd3fc; }
+    .btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: var(--text-muted);
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: #090d16;
+      border-color: var(--primary);
+      font-weight: 700;
+    }
+    .btn-primary:hover {
+      background: #7dd3fc;
+    }
   </style>
 </head>
 <body>
 
   <header>
     <div class="logo">
-      <span>🛡️ SENTINELA CLANDESTINO</span>
-      <span style="color:var(--text-muted); font-weight:400;">| SEM3 · Como Vai Ser o Teste</span>
+      <span>🛡️</span>
+      <span>SENTINELA CLANDESTINO · SEMINÁRIO ITERAÇÃO 3 (SEM3)</span>
     </div>
     <div class="meta">
-      UFRPE 2026.2 · José Albérico Rocha da Silva · 5 a 7 min
+      <span>UFRPE 2026.2 · Tópicos Avançados de IA · José Albérico Rocha da Silva</span>
     </div>
   </header>
 
@@ -225,153 +303,153 @@
     <div class="slide-container">
 
       <!-- SLIDE 1: O COMPETIDOR E O JEITO DE HOJE -->
-      <div class="slide active" id="slide-1">
+      <div class="slide active">
         <div class="slide-header">
-          <span class="slide-tag">Slide 1 · O Competidor &amp; Linha de Base</span>
-          <h2 class="slide-title">Contra Quem Comparamos: O Jeito de Hoje e o Estado da Arte</h2>
+          <span class="slide-tag">Slide 1 · 80 Segundos</span>
+          <h1 class="slide-title">O Competidor e o Jeito de Hoje</h1>
+          <p class="slide-subtitle">A linha de base oficial do Estado e o competidor acadêmico mais próximo (Muzakir et al., IEEE 2025)</p>
         </div>
         <div class="grid-2">
-          <div class="card" style="border-left: 4px solid var(--danger);">
-            <div class="card-title" style="color:#f87171;">🏛️ O Jeito de Hoje (Anatel / Fazenda)</div>
-            <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:12px;">
-              Listas estáticas e bloqueio de DNS nos provedores de telecomunicações.
-            </p>
-            <div class="stat-box">
-              <div>Falha contra Espelhos de Dia Zero (DGA):</div>
-              <div class="stat-val" style="color:var(--danger);">100% de Falha</div>
-              <div style="font-size:0.75rem; color:var(--text-muted); margin-top:4px;">Domínios mutantes (.xyz, .top) gerados horas antes da campanha.</div>
-            </div>
+          <div class="card card-danger">
+            <div class="card-title">🚫 O Jeito de Hoje (Linha de Base do Estado)</div>
+            <ul class="bullet-list">
+              <li><span class="highlight">Bloqueio Estático de DNS:</span> Notificação da Anatel e Fazenda derrubando 2.040 sites clandestinos.</li>
+              <li><span class="highlight">A Falha Ineludível:</span> Geradores de DGA criam espelhos mutantes (<code style="color:#60a5fa;">.xyz</code>, <code style="color:#60a5fa;">.top</code>) a cada 2h.</li>
+              <li><span class="highlight">Taxa de Falha:</span> <span class="stat-badge stat-danger">100% de Falso Negativo</span> contra domínios ativados no mesmo dia da campanha.</li>
+            </ul>
           </div>
-          <div class="card" style="border-left: 4px solid var(--accent);">
-            <div class="card-title" style="color:#fbbf24;">📄 Competidor Acadêmico (Muzakir et al., 2025)</div>
-            <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:12px;">
-              <em>Text-Based Detection of Online Gambling Ads</em> (IEEE ICISIT 2025).
-            </p>
-            <div class="stat-box">
-              <div>Acurácia / F1 em Nuvem (15.286 textos):</div>
-              <div class="stat-val" style="color:#fbbf24;">92,8% · F1 0,91</div>
-              <div style="font-size:0.75rem; color:var(--danger); margin-top:4px;">⚠️ Limitações: 0 testes com pessoas · Nuvem pesada (> 800ms) · Sem Guardrail OOD.</div>
-            </div>
+          <div class="card card-accent">
+            <div class="card-title">🔬 O Competidor Acadêmico Mais Próximo</div>
+            <ul class="bullet-list">
+              <li><span class="highlight">Muzakir et al. (IEEE ICISIT 2025):</span> Detecção de anúncios de apostas com AutoML e CNN em redes sociais.</li>
+              <li><span class="highlight">Métricas Deles:</span> Acurácia de 92,80% e F1 de 0,91 sobre 15.286 postagens na Indonésia.</li>
+              <li><span class="highlight">Onde Eles Falham:</span> Execução em lote em servidores pesados de nuvem (&gt; 800 ms), violação de privacidade e <span class="highlight">ausência total de guardrail de domínio</span> para finanças legítimas.</li>
+            </ul>
           </div>
         </div>
       </div>
 
-      <!-- SLIDE 2: O QUE QUERO MOSTRAR E A MÉTRICA -->
-      <div class="slide" id="slide-2">
+      <!-- SLIDE 2: O QUE QUERO MOSTRAR E A MÉTRICA DO ALVO -->
+      <div class="slide">
         <div class="slide-header">
-          <span class="slide-tag">Slide 2 · O Que Quero Mostrar &amp; Critério Prévio</span>
-          <h2 class="slide-title">A Métrica do Problema: Decidida Antes de Ver o Número</h2>
+          <span class="slide-tag">Slide 2 · 90 Segundos</span>
+          <h1 class="slide-title">O que Quero Mostrar e a Métrica do Alvo</h1>
+          <p class="slide-subtitle">A mudança concreta no problema técnico e os números que decidem o sucesso antes do teste</p>
         </div>
-        <div class="card" style="margin-bottom:16px; background:rgba(56,189,248,0.06); border-color:rgba(56,189,248,0.3);">
-          <div style="font-size:1.05rem; font-weight:700; color:#fff; line-height:1.4;">
-            "Quero mostrar que a minha ideia melhora a detecção de cláusulas abusivas de saque e a eliminação de falsos alarmes em textos financeiros, comparada à linha de base estática e a modelos em nuvem sem guardrail."
-          </div>
+        <div class="quote-box">
+          "Quero mostrar que a minha ideia melhora a detecção de cláusulas abusivas de saque e a eliminação de falsos alarmes em textos financeiros bancários, comparada à linha de base estática de bloqueio e a modelos em nuvem sem guardrail."
         </div>
-        <div class="grid-3">
-          <div class="card">
-            <span class="rule-badge rule-pass">Passou (Sucesso)</span>
-            <div style="font-size:0.85rem; color:#cbd5e1; margin-top:6px;">
-              • <strong>F1-Score:</strong> &ge; 0,85<br>
-              • <strong>Falso Negativo Crítico:</strong> &le; 10%<br>
-              • <strong>Falsos Positivos CDI/CDB:</strong> 0,0%<br>
-              • <strong>Taxa de Aborto Pix (TAR):</strong> &ge; 65%
-            </div>
+        <div class="grid-2">
+          <div class="card card-success">
+            <div class="card-title">🎯 As Métricas e os Alvos de Corte</div>
+            <ul class="bullet-list">
+              <li><span class="highlight">F1-Score Global (Tri-Classe):</span> Meta $\ge$ <span class="stat-badge stat-success">0,85</span>.</li>
+              <li><span class="highlight">Acurácia Global no Benchmark:</span> Meta $\ge$ <span class="stat-badge stat-success">85,0%</span>.</li>
+              <li><span class="highlight">Falsos Positivos em Finanças/OOD (`tx 90% do CDI`):</span> Meta $=$ <span class="stat-badge stat-success">0,0%</span>.</li>
+              <li><span class="highlight">Latência Média na CPU do Smartphone:</span> Meta $\le$ <span class="stat-badge stat-success">35 ms</span>.</li>
+            </ul>
           </div>
-          <div class="card">
-            <span class="rule-badge rule-fail">Caiu (Hipótese Rejeitada)</span>
-            <div style="font-size:0.85rem; color:#cbd5e1; margin-top:6px;">
-              • <strong>Falso Negativo Crítico:</strong> &gt; 15% (golpes passam calados)<br>
-              • <strong>Taxa de Aborto Pix (TAR):</strong> &lt; 50% (usuário ignora evidências)
-            </div>
-          </div>
-          <div class="card">
-            <span class="rule-badge rule-inc">Inconclusivo (Honesto)</span>
-            <div style="font-size:0.85rem; color:#cbd5e1; margin-top:6px;">
-              • <strong>Taxa de Aborto:</strong> entre 50% e 64%<br>
-              • <strong>F1-Score:</strong> entre 0,75 e 0,84<br>
-              (Exige atrito em 2 etapas e ampliação do corpus).
-            </div>
+          <div class="card card-info">
+            <div class="card-title">⚖️ A Regra Decidida Antes (No Commit)</div>
+            <ul class="bullet-list">
+              <li><span class="highlight">PASSOU:</span> F1-Score $\ge 0{,}85$, Acurácia $\ge 85\%$, Falso Positivo em CDI $= 0{,}0\%$ e latência $\le 35\text{ ms}$.</li>
+              <li><span class="highlight">CAIU:</span> F1-Score $< 0{,}75$, Falsos Negativos Críticos $> 15\%$ ou Falso Positivo em CDI $> 10\%$.</li>
+              <li><span class="highlight">INCONCLUSIVO:</span> F1-Score entre $0{,}75$ e $0{,}84$, exigindo expansão das regras léxicas do Guardrail.</li>
+            </ul>
           </div>
         </div>
       </div>
 
       <!-- SLIDE 3: O ESQUEMA DA COMPARAÇÃO -->
-      <div class="slide" id="slide-3">
+      <div class="slide">
         <div class="slide-header">
-          <span class="slide-tag">Slide 3 · O Esquema da Comparação</span>
-          <h2 class="slide-title">Dois Testes Controlados: Benchmark de IA e Intervenção com Pessoas</h2>
+          <span class="slide-tag">Slide 3 · 100 Segundos</span>
+          <h1 class="slide-title">O Esquema da Comparação: Benchmark Sentinela-BR</h1>
+          <p class="slide-subtitle">Replicação da metodologia de Muzakir et al. com 120 sentenças reais em português balanceadas em 3 classes</p>
         </div>
-        <div class="grid-2">
-          <div class="card">
-            <div class="card-title" style="color:var(--primary);">📊 1. Benchmark Sentinela-BR (120 Casos)</div>
-            <div style="font-size:0.85rem; color:#cbd5e1; line-height:1.45;">
-              • <strong>40 Alto Risco:</strong> Rollover &gt; 30x e taxas Pix da CPI / Reclame Aqui.<br>
-              • <strong>40 Baixo Risco:</strong> Termos oficiais da Portaria SPA/MF 1.475/2024.<br>
-              • <strong>40 Fora de Escopo:</strong> Cotações bancárias (CDI), notícias e culinária.<br>
-              <div style="margin-top:8px; font-size:0.8rem; color:var(--text-muted); border-top:1px solid rgba(255,255,255,0.08); padding-top:6px;">
-                Condições: Anatel estática vs SLM cru vs Sentinela WebMCP.
-              </div>
-            </div>
+        <div class="grid-3">
+          <div class="card card-danger">
+            <div class="card-title">1. ALTO RISCO (40 Instâncias)</div>
+            <ul class="bullet-list">
+              <li>Cláusulas reais de calote de saque.</li>
+              <li>Rollovers predatórios (&gt; 30x até 85x).</li>
+              <li>Taxas prévias de desbloqueio Pix (15% a 30%).</li>
+              <li><span class="highlight">Origem:</span> Denúncias da CPI das Bets e Reclame Aqui.</li>
+            </ul>
           </div>
-          <div class="card">
-            <div class="card-title" style="color:var(--success);">👥 2. Intervenção Humana (30 Participantes)</div>
-            <div style="font-size:0.85rem; color:#cbd5e1; line-height:1.45;">
-              • Voluntários: Apostadores e Não-Apostadores (Latin Square).<br>
-              • <strong>Condição A:</strong> Aviso Genérico do Navegador ("Site Suspeito").<br>
-              • <strong>Condição B:</strong> Bloqueio Cego / Gamban (sem explicação).<br>
-              • <strong>Condição C:</strong> Sentinela com Evidências de Saque Travado.<br>
-              <div style="margin-top:8px; font-size:0.8rem; color:var(--text-muted); border-top:1px solid rgba(255,255,255,0.08); padding-top:6px;">
-                O que fica igual: Mesmo Pix (R$ 50), mesmo texto, mesmo celular.
-              </div>
-            </div>
+          <div class="card card-success">
+            <div class="card-title">2. BAIXO RISCO (40 Instâncias)</div>
+            <ul class="bullet-list">
+              <li>Termos de operadoras autorizadas pela Fazenda.</li>
+              <li>Livre resgate e saques sem taxas adicionais.</li>
+              <li>Conformidade com a Lei 14.790 e o CDC.</li>
+              <li><span class="highlight">Gabarito:</span> Portaria SPA/MF nº 1.475/2024.</li>
+            </ul>
+          </div>
+          <div class="card card-accent">
+            <div class="card-title">3. FORA DE ESCOPO (40 Instâncias)</div>
+            <ul class="bullet-list">
+              <li>Termos bancários legítimos (<code style="color:#fde68a;">tx 90% do CDI</code>, CDB 115%, Selic).</li>
+              <li>Notícias econômicas e frases do cotidiano.</li>
+              <li><span class="highlight">Objetivo:</span> Estressar o Guardrail contra alucinações e provar descarte em 0,14 ms.</li>
+            </ul>
           </div>
         </div>
       </div>
 
       <!-- SLIDE 4: O CAMINHO ATÉ O PITCH -->
-      <div class="slide" id="slide-4">
+      <div class="slide">
         <div class="slide-header">
-          <span class="slide-tag">Slide 4 · Calendário, Ética &amp; Contingência</span>
-          <h2 class="slide-title">Do SEM3 ao Pitch de 02/12: Cronograma e Plano B</h2>
+          <span class="slide-tag">Slide 4 · 60 Segundos</span>
+          <h1 class="slide-title">O Caminho até o Pitch: Execução e Reprodutibilidade</h1>
+          <p class="slide-subtitle">Cronograma transparente, conformidade com as regras da disciplina e execução offline</p>
         </div>
         <div class="grid-2">
-          <div class="card">
-            <div class="card-title" style="color:var(--accent);">📅 Calendário de Execução</div>
-            <div style="font-size:0.85rem; color:#cbd5e1; line-height:1.6;">
-              • <strong>18/11 (Hoje):</strong> Protocolo e regra registrados no Git.<br>
-              • <strong>25/11 (Sala):</strong> Coleta com 30 voluntários e benchmark.<br>
-              • <strong>27/11:</strong> Intervalos de confiança Wilson 95% e F1.<br>
-              • <strong>02/12:</strong> Pitch Final com a tabela de resultados.<br>
-              • <strong>04/12:</strong> Entrega do Artigo Completo (Springer LNCS).
-            </div>
+          <div class="card card-info">
+            <div class="card-title">📅 Linha do Tempo Estrita</div>
+            <ul class="bullet-list">
+              <li><span class="highlight">18/11 (Hoje):</span> SEM3 · Protocolo, benchmark de 120 casos e regras de corte commitados no Git.</li>
+              <li><span class="highlight">25/11:</span> Execução formal do script de avaliação computacional na CPU local.</li>
+              <li><span class="highlight">27/11:</span> Tabulação final da Matriz de Confusão 3x3 e métricas de F1.</li>
+              <li><span class="highlight">02/12:</span> Pitch Final com a tabela definitiva de resultados consolidados.</li>
+            </ul>
           </div>
-          <div class="card">
-            <div class="card-title" style="color:var(--info);">🛡️ Ética na Pesquisa &amp; Plano B</div>
-            <div style="font-size:0.85rem; color:#cbd5e1; line-height:1.5;">
-              • <strong>Ética:</strong> Resolução CNS nº 510/2016 (art. 1º, VIII). Voluntários maiores de 18 anos, TCLE formal em <code>va2/tcle.md</code>, zero telemetria.<br>
-              • <strong>Plano B:</strong> Se a internet da sala cair, o runtime WebMCP e o script Python rodam <strong>100% offline na CPU local</strong> em 8 segundos.
-            </div>
+          <div class="card card-success">
+            <div class="card-title">🔬 Por que Teste sem Pessoas?</div>
+            <ul class="bullet-list">
+              <li><span class="highlight">Regra Oficial da Disciplina:</span> <em>"Teste sem pessoas (dados sintéticos, públicos ou casos que você monta) também vale."</em></li>
+              <li><span class="highlight">Rigor Acadêmico:</span> Replicação do mesmo método do competidor (Muzakir et al., IEEE 2025).</li>
+              <li><span class="highlight">Reprodutibilidade 100%:</span> Script aberto (<code style="color:#6ee7b7;">py tec/avaliar_benchmark.py</code>) executável em menos de 2 segundos na CPU.</li>
+            </ul>
           </div>
         </div>
       </div>
 
-      <!-- SLIDE 5: FECHO -->
-      <div class="slide" id="slide-5">
+      <!-- SLIDE 5: O FECHO -->
+      <div class="slide">
         <div class="slide-header">
-          <span class="slide-tag">Slide 5 · Fecho</span>
-          <h2 class="slide-title">Um Teste Não Mede Opinião: Mede se o Calote Foi Evitado</h2>
+          <span class="slide-tag">Slide 5 · 30 Segundos</span>
+          <h1 class="slide-title">O Fecho: Regra Decidida Antes do Número</h1>
+          <p class="slide-subtitle">Engenharia de IA com critérios objetivos, sem medição de opinião subjetiva</p>
         </div>
-        <div class="card" style="text-align:center; padding:30px;">
-          <div style="font-size:1.3rem; font-weight:800; color:#fff; margin-bottom:12px;">
-            A regra está decidida antes do número.
+        <div class="grid-2">
+          <div class="card card-accent">
+            <div class="card-title">💡 A Filosofia do Teste</div>
+            <p style="font-size:1.1rem; font-weight:700; color:#fff; line-height:1.5; margin-bottom:12px;">
+              "Um teste em engenharia de IA mede métricas objetivas de classificação e latência na borda, e não opinião de conveniência."
+            </p>
+            <ul class="bullet-list">
+              <li>Alvos pré-registrados: <span class="stat-badge stat-accent">F1 $\ge$ 0,85</span> · <span class="stat-badge stat-accent">Acurácia $\ge$ 85%</span> · <span class="stat-badge stat-accent">CDI FP = 0,0%</span>.</li>
+              <li>Soberania local: <span class="stat-badge stat-success">&lt; 35 ms</span> no celular.</li>
+            </ul>
           </div>
-          <p style="font-size:0.95rem; color:var(--text-muted); max-width:650px; margin:0 auto 20px auto;">
-            No dia 25/11, em sala de aula, comprovamos se a IA on-device protege o patrimônio do cidadão sem alucinações.
-          </p>
-          <div style="display:inline-flex; gap:16px; font-family:var(--font-mono); font-size:0.85rem; color:var(--primary); background:rgba(0,0,0,0.4); padding:10px 20px; border-radius:8px; border:1px solid rgba(255,255,255,0.08);">
-            <span>🎯 TAR &ge; 65%</span>
-            <span>🎯 F1 &ge; 0,85</span>
-            <span>🎯 CDI = 0% FP</span>
+          <div class="card">
+            <div class="card-title">🔗 Repositório &amp; Auditoria Pública</div>
+            <ul class="bullet-list">
+              <li><span class="highlight">Repositório GitHub:</span> <a href="https://github.com/albericolx/Topicos_Avancados_IA" target="_blank" style="color:#38bdf8; text-decoration:none;">albericolx/Topicos_Avancados_IA</a></li>
+              <li><span class="highlight">Dataset Aberto:</span> <code style="color:#cbd5e1;">tec/dataset_benchmark_sentinela.json</code></li>
+              <li><span class="highlight">Tag Oficial do Git:</span> <span class="stat-badge">sem3</span> versionada no branch main.</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -380,7 +458,10 @@
 
     <!-- NOTAS DO ORADOR -->
     <div class="speaker-notes-panel" id="notes-panel">
-      <div class="notes-title">🎙️ NOTAS DO ORADOR (Pressione 'S' para ocultar)</div>
+      <div class="notes-title">
+        <span>🎙️ NOTAS DO ORADOR (Pressione 'S' para alternar)</span>
+        <span id="notes-timer">Fala estimada: ~60s</span>
+      </div>
       <div class="notes-content" id="notes-content">
         Carregando notas do slide...
       </div>
@@ -405,11 +486,11 @@
     let current = 0;
 
     const notes = [
-      "como o mercado e a ciência tentam conter o golpe das apostas clandestinas hoje? por dois caminhos imperfeitos. o governo usa listas estáticas de DNS: a Anatel já derrubou mais de 2.000 sites, mas os operadores criminosos usam DGA que gera espelhos mutantes a cada duas horas. para novos domínios ativados no mesmo dia, a falha é de 100%. na academia, o trabalho mais próximo é Muzakir et al. (IEEE 2025), com 92,8% de acurácia sobre 15 mil sentenças em nuvem. mas onde ele falha? roda em nuvem com alta latência, viola a privacidade e comete um erro crítico: não tem guardrail de domínio. se alguém digitar uma taxa bancária legítima, ele não sabe descartar. e pior: Muzakir avaliou zero pessoas. nós comparamos contra a melhor IA publicada e contra o bloqueio oficial do Estado.",
-      "para não cair na armadilha da 'medida do gosto' — perguntar para três colegas se acharam o app bonito —, definimos o alvo na mudança concreta para a vítima: impedir que ela faça o Pix para o golpista. a nossa métrica não é satisfação; é a Taxa de Aborto da Transação (TAR) inspirada no estudo clássico de Felt et al. da USENIX Security. o aviso genérico de navegador ('site suspeito') é ignorado por 66% das pessoas por reflexo. quero provar que, ao exibir as evidências contratuais de saque travado — como o rollover de 60x ou a taxa de 20% —, pelo menos 65% dos usuários desistem do depósito. no benchmark textual, o alvo é F1 maior que 0,85 e rigorosamente zero falsos positivos em dados bancários legítimos como o CDI. se der menos de 50%, a hipótese caiu. o critério está escrito antes do teste e registrado no commit do repositório.",
-      "aqui está o desenho da comparação para garantir que não haja viés. na trilha de engenharia de IA, montamos o benchmark curado Sentinela-BR com 120 cláusulas e sentenças reais em português: 40 golpes de calote da CPI e do Reclame Aqui, 40 termos legais da Portaria 1.475 da Fazenda e 40 casos fora de escopo para estressar o guardrail contra alucinações. submetemos esse mesmo corpus a três condições: a lista da Anatel, o SLM sem guardrail e o Sentinela Clandestino. na trilha humana, 30 voluntários universitários avaliam cenários de pagamento com a mesma interface e o mesmo valor de Pix, alternando entre aviso genérico, bloqueio cego e o alerta com evidências do Sentinela. o gabarito de verdade é a lei da Secretaria de Prêmios e Apostas do Ministério da Fazenda. tudo o que varia entre os grupos é o tipo de proteção recebida.",
-      "como chegamos com o resultado no pitch de 2 de dezembro? o cronograma é estrito. hoje, dia 18, apresentamos o protocolo e a regra pré-registrada. no dia 25, executamos a coleta dos dados em sala de aula com os voluntários usando a nossa aplicação web via WebMCP no próprio celular. no dia 27, rodamos os scripts de inferência estatística com intervalos de Wilson a 95% para checar se a diferença é real ou ruído amostral. no dia 2 de dezembro, a tabela de resultados sobe para o slide do pitch. e na ética? seguimos a Resolução CNS 510 para pesquisas de ensino: participação voluntária, termo curto oral e escrito, e zero coleta de CPF, nome ou telemetria. se o Wi-Fi da UFRPE cair no dia 25? o nosso plano B já está compilado: a bateria de 120 casos roda 100% offline na CPU local via script Python em 8 segundos.",
-      "um teste de verdade não mede se o usuário achou o aplicativo bonito; mede se a tecnologia evitou que ele perdesse dinheiro num golpe de aposta clandestina. a nossa regra está decidida antes do número. no dia 25 de novembro, em sala, rodamos a prova real para o pitch final."
+      "Como o mercado e a ciência tentam conter o golpe das apostas clandestinas hoje? Por dois caminhos imperfeitos. O governo usa listas estáticas de DNS: a Anatel já derrubou mais de 2.000 sites, mas os operadores criminosos usam algoritmos de DGA que geram espelhos mutantes a cada duas horas. Para novos domínios ativados no mesmo dia, a falha da lista estática é de rigorosamente 100%. Na academia, o trabalho mais próximo é o de Muzakir et al., publicado no IEEE este ano, que atingiu 92,8% de acurácia com CNNs sobre 15 mil sentenças de redes sociais. Mas onde ele falha? Ele roda em nuvem com alta latência, viola a privacidade do usuário e comete um erro metodológico crítico: não tem guardrail de domínio. Se alguém digitar uma taxa bancária legítima como 'tx 90% do CDI', o modelo dele não sabe descartar e gera alarme falso. Nós não viemos bater em espantalho: comparamos contra a melhor IA publicada e contra a infraestrutura oficial do Estado.",
+      "Para não cair na armadilha da 'medida de opinião' — perguntar para três colegas se acharam o app bonito —, definimos o alvo na mudança concreta do problema técnico: classificar com exatidão contratos de calote e nunca gerar falsos alarmes contra produtos financeiros legítimos. Seguindo o padrão de Muzakir et al., nossa métrica é o F1-Score e a Acurácia Global, combinados com a taxa de falsos positivos em dados fora de domínio. O nosso alvo é F1 maior ou igual a 0,85, acurácia acima de 85% e rigorosamente zero falsos alarmes quando entrar uma taxa bancária como o CDI. Se der menos de 0,75 de F1 ou mais de 10% de alarme falso no CDI, a hipótese caiu. O critério está escrito antes de ver o número e registrado no commit do repositório.",
+      "Aqui está o desenho da comparação para garantir que não haja viés. Replicamos a metodologia de Muzakir et al., mas adaptada para o cenário regulatório brasileiro. Construímos o benchmark curado Sentinela-BR com 120 sentenças reais em português, rigorosamente balanceadas em três classes: 40 cláusulas de calote da CPI das Bets e Reclame Aqui, 40 regras de operadoras legalizadas pela Portaria 1.475 da Fazenda e 40 termos bancários legítimos como o CDI para testar o descarte do guardrail. Submetemos esse mesmo corpus às três condições: a lista da Anatel, o classificador sem guardrail e o Sentinela Clandestino. O gabarito formal de verdade é a lei da Secretaria de Prêmios e Apostas do Ministério da Fazenda. Tudo o que varia é a inteligência de cada solução.",
+      "Como chegamos com o resultado no pitch de 2 de dezembro? O cronograma é estrito e transparente. Hoje apresentamos o protocolo e a regra pré-registrada. O teste é 100% computacional e reproduzível: roda sobre o dataset aberto de 120 casos em menos de 2 segundos na CPU local via script Python, sem depender de internet nem de dados voláteis. Por que não fizemos teste com pessoas? Porque o objetivo é avaliar a capacidade técnica do modelo frente ao estado da arte de Muzakir et al., que também foi avaliado exclusivamente sobre benchmark textual. As próprias instruções da disciplina preveem expressamente que testes com dados montados e públicos são plenamente válidos para exercícios de engenharia de IA. No dia 2 de dezembro, a tabela completa de acurácia e F1 sobe para o slide final.",
+      "Um teste de verdade não mede opinião subjetiva; mede se o modelo classifica com precisão o calote de saque e descarta falsos alarmes bancários em tempo real na CPU do smartphone. A nossa regra está decidida antes do número. No dia 2 de dezembro, no pitch final, apresentamos a prova real."
     ];
 
     function showSlide(index) {
