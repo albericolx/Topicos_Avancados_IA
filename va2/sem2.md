@@ -26,12 +26,13 @@
 
 ## slide 2 · quanto custa · 50 s
 
-- **aparece:** o terminal do celular com a saída real do script `tec/exemplo_oficial.py`:
-  - `Fast-Path LAYA: 0,14 ms` · `Deep-Path SLM: 18,75 ms` · `Pico de RAM: 490 MB` · `R$ 0,00/mês`.
-  - Ao lado, o que o `flx.md` estimou: `~180 ms a ~500 ms` · `~450 MB de RAM` · `Alternativa Nuvem OpenAI: 887 ms e R$ 0,12/mês`.
-- **medido:** 18,89 ms de tempo total (0,14 ms do LAYA + 18,75 ms da inferência INT4 no llama.cpp) e pico de 490 MB de RAM no Samsung Galaxy A15 no ensaio (e lido na tela em sala).
-- **estimado no flx:** ~500 ms de latência máxima e ~450 MB de RAM, baseados no tamanho do binário GGUF (468 MB).
-- **eu falo:** "esse número de 18,75 milissegundos no SLM é da execução que vocês acabaram de ver na tela. o flx estimava até 500 milissegundos com base em testes conservadores de CPU. a execução real foi quase 25 vezes mais rápida porque a quantização INT4 no llama.cpp aproveitou os núcleos de alta eficiência da arquitetura ARM64, gerando 34 tokens por segundo no prompt. já a memória foi de 490 MB no pico, 40 MB acima dos 450 MB previstos no flx: esses 40 MB a mais são os buffers de contexto e tensores temporários do runtime. o custo em dinheiro é rigorosamente zero: não há servidor, não há cota de API da OpenAI (que cobraria R$ 0,12/mês e demoraria 887 ms em 4G), e a bateria consome menos de 0,02% por veredito."
+- **aparece:** Painel comparativo de recursos: *Medido no Celular vs. Estimado no Projeto*:
+  - *O Tempo (Latência):* Medido no Samsung A15: **18,9 ms** no total (filtro inicial em 0,14 ms + IA em 18,75 ms). Estimado no projeto (FLX): até 500 ms. Quase 25× mais rápido devido à quantização INT4 acelerada nos núcleos ARM64.
+  - *A Memória RAM:* Medido no aparelho: **490 MB** no pico. Estimado no projeto (FLX): ~450 MB (tamanho do arquivo). A diferença de 40 MB é a memória temporária de trabalho (*buffer* de tensores).
+  - *Custo Financeiro:* **R$ 0,00 / mês (100% On-Device)**. Comparado à alternativa descartada de nuvem comercial (OpenAI: 887 ms / R$ 0,12 mês / quebra da LGPD).
+- **medido:** 18,89 ms de tempo total (0,14 ms do LAYA + 18,75 ms da inferência INT4 no llama.cpp) e pico de 490 MB de RAM no Samsung Galaxy A15 físico em modo avião via `tec/exemplo_oficial.py`.
+- **estimado no flx:** ~500 ms de latência máxima e ~450 MB de RAM no papel.
+- **eu falo:** "Quanto custa e quanto demora essa proteção no celular? Comparo aqui o que previmos no projeto com o que medimos na prática no Samsung Galaxy A15. No projeto, prevíamos até 500 milissegundos como teto tolerável; no celular real, o tempo total foi de apenas 18,9 milissegundos. Por que deu essa diferença? Porque o modelo comprimido em 4 bits aproveitou os núcleos de alta eficiência do processador ARM64, respondendo quase 25 vezes mais rápido. Na memória, prevíamos 450 megabytes pelo tamanho do arquivo do modelo; no teste medimos 490 megabytes no pico, sendo que esses 40 megabytes extras são apenas a memória temporária de trabalho do processador durante o cálculo. E o custo financeiro é rigorosamente zero reais por mês: não alugamos servidor e descartamos a nuvem comercial da OpenAI — que demoraria quase 1 segundo no 4G, cobraria doze centavos por mês e violaria a privacidade do cidadão enviando dados para servidores externos. Na borda móvel, é custo zero e privacidade absoluta."
 
 ## slide 3 · a falha · 60 s
 
